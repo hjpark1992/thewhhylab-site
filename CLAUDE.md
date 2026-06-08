@@ -120,3 +120,18 @@ thewhhylab 폴더에서 작업 이어서 할게.
   - 새 `git init -b main` + user(`thewhhylab`/`hjpark1992@naver.com`) 재설정 + 현재 파일 전체 첫 커밋(`e1f6257`, 228파일). `api/config.php` 등 비밀파일 추적 제외 확인.
 - **검증**: `node --test` 9 PASS(menu 3 + forms 6), shared/js `node --check` OK, `.htaccess` BOM 0건. (PHP는 이 세션 PATH 미탑재 → admin.php는 PHP 코드 미변경이라 lint 생략.)
 - **남은 것(사용자 직접)**: Cafe24에 `.htaccess` 재업로드해야 `/admin` 작동. git 이력은 새출발(과거 커밋 해시는 위 기록의 것으로만 참조 가능).
+
+### 관리자 페이지 기능 추가 (2026-06-08, 같은 날 후속)
+- **디스크 사용량 게이지 + 선택 삭제** `311fbc1` (api/admin.php)
+  - 게이지: 문서루트(`dirname(__DIR__)`=/www) 재귀 합산 ÷ **10GB**(`$DISK_LIMIT` 상수). 첨부폴더(`api/uploads`) 용량 별도 표기. 70%↑주황/90%↑빨강. 전체 렌더 시에만 계산(AJAX·다운로드는 조기 exit). Cafe24 계정 전체(메일·DB 포함)와는 근사치.
+  - 선택 삭제: 교육문의/강사지원 체크 → 삭제. **DB행 + 첨부파일(unlink) + admin_memos 동반 삭제**로 실제 용량 회수. PRG 리다이렉트, 강한 확인창, PDO prepared + tbl_of 화이트리스트 + safe_upload_path 검증.
+- **로그인 보안 강화** `0557708` (api/admin.php, config.sample.php)
+  - **아이디 + 비번**: `admin_user` 추가(기존 `admin_pass`와 함께 hash_equals). **⚠️ 서버 `api/config.php`에 `'admin_user' => '원하는아이디'` 추가 안 하면 로그인 차단됨**(현재 서버 config엔 admin_pass만 있음).
+  - **시도 잠금**: IP별 5회 실패 → 10분 잠금(`sys_get_temp_dir()/twl_admin_login.json` 파일 기반). 남은 시도 안내, 잠금 중엔 정상 비번도 차단.
+  - **세션 자동 로그아웃**: 비활성 기본 30분(`admin_session_timeout` 초 단위로 조정). 로그인 성공 시 `session_regenerate_id`.
+- **검증 도구**: 집 PC에 **PHP 8.3.31 설치**(winget `PHP.PHP.8.3`; php.exe = `%LOCALAPPDATA%\Microsoft\WinGet\Packages\PHP.PHP.8.3_*\php.exe`, 새 셸은 PATH에 `php` 별칭). `php -l` api 6파일 전부 통과 + `php -S` 격리환경(임시폴더 admin.php 사본+테스트 config) 스모크 테스트로 로그인/302/5회잠금/잠금중차단/세션타임아웃/타임아웃전유지 **전부 PASS**.
+- **⚠️ 배포 시 필수(api/admin.php 올릴 때)**:
+  1. 서버 `api/config.php`에 **`admin_user` 키 추가** (없으면 로그인 불가).
+  2. (선택) `admin_session_timeout` 조정. 미설정 시 1800초(30분).
+  3. 잠금 파일은 서버 임시폴더에 자동 생성됨(쓰기 권한 필요 — 보통 OK).
+  4. 게이지가 0/비정상이면 `open_basedir`/권한 문제 → 확인.
