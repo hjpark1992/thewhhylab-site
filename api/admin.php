@@ -107,7 +107,7 @@ if (!$authed) {
     *{box-sizing:border-box}
     body{font-family:system-ui,'Pretendard',-apple-system,sans-serif;background:linear-gradient(160deg,#10121c,#191c2e);color:#e7e9f3;display:grid;place-items:center;min-height:100vh;margin:0}
     .box{background:rgba(255,255,255,.04);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);padding:34px 30px;border-radius:18px;width:min(92vw,350px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
-    .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:grid;place-items:center;font-weight:800;color:#fff;margin-bottom:16px}
+    .logo-img{display:block;width:100%;max-width:200px;height:auto;margin:0 0 18px}
     h1{font-size:18px;margin:0 0 4px;letter-spacing:-.02em}p.sub{margin:0 0 20px;color:#9aa0bf;font-size:13px}
     input{width:100%;padding:13px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:#fff;font-size:15px;outline:none}
     input:focus{border-color:#6366f1}
@@ -117,8 +117,8 @@ if (!$authed) {
     .err{color:#ff9a9a;font-size:13px;margin-top:11px;min-height:16px}
   </style></head><body>
   <form class="box" method="post" autocomplete="off">
-    <div class="logo">W</div>
-    <h1>더와이랩 관리자</h1><p class="sub">접수내역 조회·관리</p>
+    <img class="logo-img" src="/shared/img/logo-blue.png" alt="더와이랩 THE WHHY LAB">
+    <h1>관리자 로그인</h1><p class="sub">접수내역 조회·관리</p>
     <input type="text" name="user" placeholder="관리자 아이디" autocomplete="username" autofocus required>
     <input type="password" name="pw" placeholder="관리자 비밀번호" autocomplete="current-password" required>
     <button type="submit"<?= $loginLocked ? ' disabled' : '' ?>>로그인</button>
