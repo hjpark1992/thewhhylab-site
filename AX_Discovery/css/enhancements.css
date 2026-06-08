@@ -1,0 +1,2093 @@
+/* =========================================================
+   AX Discovery — Interaction Enhancements (v2)
+   원본 디자인 유지 + 인터랙션 강화 + 신규 섹션
+   ========================================================= */
+
+/* -----------------------------
+   A. Scroll Progress Bar
+   ----------------------------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-neon-blue), var(--color-cyan-glow));
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    transition: width 0.05s linear;
+    will-change: width;
+}
+
+/* -----------------------------
+   B. Hero Cursor Glow
+   ----------------------------- */
+.cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0, 112, 243, 0.08) 30%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    opacity: 0;
+    mix-blend-mode: screen;
+    filter: blur(40px);
+    will-change: transform, opacity;
+}
+
+.cursor-glow.is-active { opacity: 1; }
+
+@media (pointer: coarse) {
+    .cursor-glow { display: none; }
+}
+
+/* -----------------------------
+   C. Enhanced Reveal Animations
+   ----------------------------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    filter: blur(6px);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+
+.split-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) rotate(2deg);
+    filter: blur(8px);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+}
+
+.split-word.visible {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+    filter: blur(0);
+}
+
+/* -----------------------------
+   D. Card Tilt 3D
+   ----------------------------- */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    will-change: transform;
+}
+
+.tilt-card.is-tilting {
+    transition: transform 0.1s linear;
+    transform:
+        perspective(1000px)
+        rotateX(var(--rx, 0))
+        rotateY(var(--ry, 0))
+        translateZ(var(--tz, 0));
+}
+
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--mx, 50%) var(--my, 50%),
+        rgba(0, 240, 255, 0.15) 0%,
+        transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tilt-card.is-tilting::after { opacity: 1; }
+.tilt-card > * { position: relative; z-index: 2; }
+
+@media (pointer: coarse) {
+    .tilt-card.is-tilting { transform: none; }
+    .tilt-card::after { display: none; }
+}
+
+/* -----------------------------
+   E. Magnetic Button
+   ----------------------------- */
+.btn-magnetic {
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+@media (pointer: coarse) {
+    .btn-magnetic { transform: none !important; }
+}
+
+/* -----------------------------
+   F. Number Counter Style
+   ----------------------------- */
+.counter {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+}
+
+.counter-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.counter-wrap::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-cyan-glow), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s ease 0.5s;
+}
+
+.counter-wrap.counted::after { transform: scaleX(1); }
+
+@keyframes counter-pulse {
+    0%, 100% { text-shadow: 0 0 0 transparent; }
+    50% { text-shadow: 0 0 24px rgba(0, 240, 255, 0.6); }
+}
+
+.counter-wrap.counted .counter {
+    animation: counter-pulse 1.2s ease-out;
+}
+
+/* -----------------------------
+   G. Keyword Marquee
+   ----------------------------- */
+.marquee {
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(0, 240, 255, 0.18);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.18);
+    background: linear-gradient(90deg, rgba(0, 112, 243, 0.04), rgba(0, 240, 255, 0.04));
+    padding: 22px 0;
+}
+
+.marquee::before,
+.marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--color-navy), transparent);
+}
+
+.marquee::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--color-navy), transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 56px;
+    width: max-content;
+    animation: marquee-scroll 50s linear infinite;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 0.8rem + 0.8vw, 1.4rem);
+    font-weight: 500;
+    color: var(--color-gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 56px;
+}
+
+.marquee-item .sep {
+    color: var(--color-cyan-glow);
+    font-weight: 700;
+    opacity: 0.7;
+}
+
+@keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* -----------------------------
+   H. Scroll-To-Top Button
+   ----------------------------- */
+.to-top {
+    position: fixed;
+    right: clamp(16px, 3vw, 32px);
+    bottom: clamp(16px, 3vw, 32px);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(10, 17, 34, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 90;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    color: var(--color-cyan-glow);
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.to-top:hover {
+    border-color: var(--color-cyan-glow);
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.4);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.to-top svg { width: 18px; height: 18px; }
+
+/* -----------------------------
+   I. Nav Enhanced
+   ----------------------------- */
+.nav {
+    transition: padding 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.nav.scrolled {
+    background: rgba(5, 11, 20, 0.85);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.12);
+}
+
+.nav.scrolled .nav-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* -----------------------------
+   J. Card Glow on Hover
+   ----------------------------- */
+.pain-card, .solution-card, .feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.pain-card::before, .solution-card::before, .feature-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at var(--mx, 50%) var(--my, 50%),
+        rgba(0, 240, 255, 0.12),
+        transparent 30%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.pain-card:hover::before,
+.solution-card:hover::before,
+.feature-card:hover::before { opacity: 1; }
+
+/* -----------------------------
+   K. Reduced motion
+   ----------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .split-word {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+    .cursor-glow, .scroll-progress { display: none; }
+    .marquee-track { animation: none; }
+    .tilt-card.is-tilting { transform: none !important; }
+}
+
+/* -----------------------------
+   L. CTA shimmer
+   ----------------------------- */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-primary:hover::after { left: 130%; }
+
+@media (max-width: 640px) {
+    .marquee-item { gap: 40px; }
+    .marquee-track { gap: 40px; }
+}
+
+/* =============================================================
+   ★ HERO COVER IMAGE — 배경 색상 매칭
+   이미지 가장자리가 떠보이지 않도록 마스크로 페이드
+   ============================================================= */
+.hero-cover-img {
+    mask-image: radial-gradient(
+        ellipse 80% 75% at center,
+        rgba(0, 0, 0, 1) 30%,
+        rgba(0, 0, 0, 0.7) 55%,
+        rgba(0, 0, 0, 0.3) 75%,
+        rgba(0, 0, 0, 0) 95%
+    );
+    -webkit-mask-image: radial-gradient(
+        ellipse 80% 75% at center,
+        rgba(0, 0, 0, 1) 30%,
+        rgba(0, 0, 0, 0.7) 55%,
+        rgba(0, 0, 0, 0.3) 75%,
+        rgba(0, 0, 0, 0) 95%
+    );
+    opacity: 0.65;
+}
+
+.hero-cover-veil {
+    background:
+        radial-gradient(ellipse at center, transparent 0%, rgba(5, 11, 20, 0.3) 45%, rgba(5, 11, 20, 0.9) 80%, rgba(5, 11, 20, 1) 100%),
+        linear-gradient(180deg, rgba(5, 11, 20, 0.5) 0%, transparent 25%, transparent 70%, rgba(5, 11, 20, 1) 100%) !important;
+}
+
+/* =============================================================
+   ★ NEW: WHY 섹션 — 95% vs 5%
+   ============================================================= */
+.section-why {
+    position: relative;
+    overflow: hidden;
+}
+
+.why-hook {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.why-hook-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.08);
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fca5a5;
+    margin-bottom: 24px;
+}
+
+.why-hook-eyebrow .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-danger);
+    border-radius: 50%;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    50% { opacity: 0.7; transform: scale(1.15); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+}
+
+.why-hook-headline {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3.75rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-white);
+    word-break: keep-all;
+    max-width: 920px;
+    margin: 0 auto 20px;
+}
+
+.why-hook-headline em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--color-neon-blue) 0%, var(--color-cyan-glow) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.why-hook-source {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    letter-spacing: 0.05em;
+}
+
+/* 95% vs 5% 시각화 */
+.why-stat-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 0 auto 80px;
+    max-width: 1080px;
+}
+
+@media (min-width: 720px) {
+    .why-stat-split {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.why-stat-card {
+    padding: clamp(28px, 4vw, 48px);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.why-stat-card.fail {
+    background: linear-gradient(145deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.02));
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.why-stat-card.success {
+    background: linear-gradient(145deg, rgba(0, 240, 255, 0.1), rgba(0, 240, 255, 0.02));
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 60px rgba(0, 240, 255, 0.08);
+}
+
+.why-stat-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.why-stat-card.fail .why-stat-tag {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+.why-stat-card.success .why-stat-tag {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--color-cyan-glow);
+}
+
+.why-stat-number {
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 3rem + 6vw, 8rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+}
+
+.why-stat-card.fail .why-stat-number { color: #ef4444; }
+.why-stat-card.success .why-stat-number {
+    background: linear-gradient(135deg, var(--color-neon-blue), var(--color-cyan-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.why-stat-headline {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-white);
+    margin-bottom: 12px;
+    word-break: keep-all;
+}
+
+.why-stat-desc {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-gray-400);
+    word-break: keep-all;
+}
+
+/* HBS/BCG 데이터 박스 */
+.why-data-row {
+    margin-top: 48px;
+    padding: 32px;
+    border: 1px solid rgba(0, 240, 255, 0.18);
+    border-radius: var(--radius-lg);
+    background: rgba(0, 240, 255, 0.03);
+}
+
+.why-data-row-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-cyan-glow);
+    margin-bottom: 8px;
+}
+
+.why-data-row-quote {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-white);
+    margin-bottom: 28px;
+    word-break: keep-all;
+}
+
+.why-data-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 720px) {
+    .why-data-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.why-data-stat {
+    padding-left: 20px;
+    border-left: 2px solid rgba(0, 240, 255, 0.4);
+}
+
+.why-data-stat-num {
+    font-family: var(--font-mono);
+    font-size: clamp(2.2rem, 1.8rem + 1.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-cyan-glow);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+}
+
+.why-data-stat-num .unit {
+    font-size: 0.5em;
+    color: var(--color-gray-400);
+    margin-left: 4px;
+}
+
+.why-data-stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-300);
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.why-data-source {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    letter-spacing: 0.05em;
+}
+
+/* =============================================================
+   ★ NEW: AI vs AX 비교 (기존 AI 교육과의 차이)
+   ============================================================= */
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+@media (min-width: 880px) {
+    .compare-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.compare-col {
+    padding: clamp(32px, 4vw, 56px);
+    position: relative;
+}
+
+.compare-col.left {
+    background: linear-gradient(145deg, rgba(107, 114, 128, 0.08), rgba(107, 114, 128, 0.02));
+}
+
+.compare-col.right {
+    background: linear-gradient(145deg, rgba(0, 240, 255, 0.08), rgba(0, 112, 243, 0.03));
+}
+
+.compare-grid::after {
+    content: "VS";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    color: var(--color-cyan-glow);
+    z-index: 3;
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.3);
+}
+
+@media (max-width: 879px) {
+    .compare-col.left {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+.compare-col-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.compare-col.left .compare-col-tag {
+    background: rgba(107, 114, 128, 0.2);
+    color: var(--color-gray-300);
+}
+
+.compare-col.right .compare-col-tag {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--color-cyan-glow);
+}
+
+.compare-col-title {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-white);
+    margin-bottom: 12px;
+    word-break: keep-all;
+}
+
+.compare-col.left .compare-col-title { opacity: 0.7; }
+
+.compare-col-subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    line-height: 1.5;
+    margin-bottom: 28px;
+    word-break: keep-all;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+}
+
+.compare-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.compare-list li {
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    border-left: 3px solid;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: var(--text-base);
+    line-height: 1.55;
+    word-break: keep-all;
+}
+
+.compare-col.left .compare-list li {
+    border-left-color: rgba(107, 114, 128, 0.5);
+    color: var(--color-gray-400);
+}
+
+.compare-col.right .compare-list li {
+    border-left-color: var(--color-cyan-glow);
+    color: var(--color-gray-100);
+    background: rgba(0, 240, 255, 0.04);
+}
+
+.compare-list li .ico {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.compare-col.left .compare-list li .ico {
+    background: rgba(107, 114, 128, 0.2);
+    color: var(--color-gray-400);
+}
+
+.compare-col.right .compare-list li .ico {
+    background: rgba(0, 240, 255, 0.2);
+    color: var(--color-cyan-glow);
+}
+
+/* =============================================================
+   ★ NEW: 큰 통계 박스 (1인 100 에이전트 등)
+   ============================================================= */
+.big-stat-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 64px;
+}
+
+@media (min-width: 720px) {
+    .big-stat-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.big-stat {
+    text-align: center;
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+
+.big-stat:hover {
+    border-color: rgba(0, 240, 255, 0.3);
+    background: rgba(0, 240, 255, 0.03);
+    transform: translateY(-4px);
+}
+
+.big-stat-value {
+    font-family: var(--font-mono);
+    font-size: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--color-neon-blue), var(--color-cyan-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.big-stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-300);
+    line-height: 1.5;
+    word-break: keep-all;
+    font-weight: 500;
+}
+
+.big-stat-source {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    letter-spacing: 0.05em;
+}
+
+/* =============================================================
+   ★ NEW: Pull Quote
+   ============================================================= */
+.pull-quote {
+    margin: 80px auto;
+    max-width: 900px;
+    padding: clamp(32px, 4vw, 56px);
+    border-left: 3px solid var(--color-cyan-glow);
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.04), transparent);
+    position: relative;
+}
+
+.pull-quote::before {
+    content: "“";
+    position: absolute;
+    top: -20px;
+    left: 16px;
+    font-family: Georgia, serif;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--color-cyan-glow);
+    opacity: 0.4;
+}
+
+.pull-quote-text {
+    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.65rem);
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--color-white);
+    word-break: keep-all;
+    margin-bottom: 16px;
+}
+
+.pull-quote-text em {
+    color: var(--color-cyan-glow);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.pull-quote-author {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    letter-spacing: 0.05em;
+}
+
+/* =============================================================
+   ★ v3 추가: 폰트 통일 + 임팩트 강화 + 95%/5% 카운터
+   ============================================================= */
+
+/* 1. 모든 mono/캡션류 텍스트가 한글에서 시스템 폰트로 떨어지지 않도록
+   강제로 sans-serif 스택 우선 (Pretendard) */
+.why-hook-source,
+.why-data-row-quote,
+.why-stat-headline,
+.why-stat-desc,
+.why-data-stat-label,
+.big-stat-label,
+.pull-quote-text,
+.pull-quote-author,
+.compare-col-subtitle,
+.testimonial-text,
+.testimonial-credit {
+    font-family: var(--font-sans);
+}
+
+/* 2. 임팩트 카드 숫자 — 폰트 사이즈 대폭 강화 */
+.impact-card-value {
+    font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem) !important;
+    font-weight: 900 !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+}
+
+.impact-card-unit {
+    font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem) !important;
+    font-weight: 700 !important;
+    color: var(--color-cyan-glow) !important;
+    margin-left: 4px;
+}
+
+.impact-card-stat-label {
+    font-size: var(--text-xs) !important;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gray-500) !important;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+
+.impact-card-stat-row {
+    margin-bottom: 28px;
+}
+.impact-card-stat-row:last-child {
+    margin-bottom: 0;
+}
+
+.impact-card-label {
+    font-size: var(--text-base) !important;
+    font-weight: 700 !important;
+    color: var(--color-white) !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 24px !important;
+    letter-spacing: -0.01em;
+}
+
+/* 3. 95% / 5% 카운터 처리
+   카운터 텍스트가 들어갈 공간 — 그라데이션을 카운터에도 동일하게 적용 */
+.why-stat-number .stat-counter {
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 95% 카드는 빨강이라 background-clip 해제 (이미 단색이므로) */
+.why-stat-card.fail .why-stat-number {
+    color: #ef4444;
+    -webkit-text-fill-color: #ef4444;
+}
+
+.why-stat-card.fail .why-stat-number .stat-counter {
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+    background: none;
+}
+
+/* 4. 풀쿼트 텍스트 강화 — 한글이 어색하지 않게 */
+.pull-quote-text {
+    font-family: var(--font-sans) !important;
+    letter-spacing: -0.015em;
+}
+
+.pull-quote-author {
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+/* 5. WHY hook source / data source — 한글 부분 폰트 명시 */
+.why-hook-source {
+    font-size: var(--text-base) !important;
+    line-height: 1.65 !important;
+    color: var(--color-gray-300) !important;
+    letter-spacing: -0.005em;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.why-data-source {
+    font-family: var(--font-sans);
+    color: var(--color-gray-500);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+}
+
+/* big-stat label/source — 한글 깔끔하게 */
+.big-stat-label {
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+}
+.big-stat-source {
+    font-family: var(--font-sans);
+    letter-spacing: 0.02em;
+}
+
+/* compare 부제 — 한글 따옴표 표현 깔끔하게 */
+.compare-col-subtitle {
+    font-family: var(--font-sans) !important;
+    font-style: italic;
+    letter-spacing: -0.01em;
+}
+
+
+/* =============================================================
+   ★ v3 마무리: 모바일 줄바꿈 처리 + 영역별 디테일
+   ============================================================= */
+
+/* 모든 long-text는 모바일에서 줄바꿈을 자연스럽게 */
+.hero-subtitle,
+.section-subtitle,
+.feature-card-desc,
+.pain-card-desc,
+.solution-card-desc,
+.outcome-item-desc,
+.why-hook-source,
+.why-stat-desc,
+.why-data-row-quote,
+.compare-list li,
+.big-stat-label,
+.pull-quote-text {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+/* 모바일에서도 hero-title의 br는 유지 (두 줄 그대로 보이게)
+   대신 폰트 크기를 더 작게 조정해서 화면에 맞춤 */
+@media (max-width: 640px) {
+    .hero-title {
+        font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+        line-height: 1.15 !important;
+    }
+    .hero-title-accent {
+        display: inline-block;
+    }
+}
+
+/* outcome quote가 두 줄 들어가도록 line-height */
+.outcome-col-quote {
+    line-height: 1.4;
+}
+
+/* WHY hook headline의 95% 강조가 카운터로 바뀌면서 width 흔들리는 거 방지 */
+.why-hook-headline em {
+    display: inline-block;
+    min-width: 1.5em;
+}
+
+/* impact 임팩트 카드 듀얼(시간/비용) 더 큼직하게 */
+.impact-card-dual {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* =============================================================
+   ★ v3.1 FIX: 임팩트 카드 숫자 크기 강제 확실히 적용
+   ============================================================= */
+
+/* 카운터에 들어간 .impact-card-value를 최우선 적용 */
+.counter.impact-card-value,
+span.impact-card-value {
+    font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem) !important;
+    font-weight: 900 !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+    font-family: var(--font-mono) !important;
+    background: linear-gradient(135deg, var(--color-cyan-glow), var(--color-neon-blue)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: inline-block;
+}
+
+/* 단위(시간, 억 원) — 숫자보다 훨씬 작게, 옆에 baseline 정렬 */
+.impact-card-unit {
+    font-size: clamp(0.95rem, 0.8rem + 0.4vw, 1.15rem) !important;
+    font-weight: 600 !important;
+    color: var(--color-gray-300) !important;
+    margin-left: 8px;
+    letter-spacing: -0.01em !important;
+    font-family: var(--font-sans) !important;
+    align-self: flex-end;
+    padding-bottom: 0.3em;
+}
+
+/* 라벨(연간 절감 시간, 비용 절감) — 한글에 어울리는 자간으로 */
+.impact-card-stat-label {
+    font-size: var(--text-sm) !important;
+    letter-spacing: 0.04em !important;  /* 기존 0.15em 너무 벌어짐 → 줄임 */
+    text-transform: none !important;     /* 한글이라 uppercase 무의미 */
+    color: var(--color-gray-400) !important;
+    margin-bottom: 12px !important;
+    font-family: var(--font-sans) !important;
+    font-weight: 500 !important;
+    display: block;
+}
+
+/* 카드 안 stat row 간격 + stat 자체 정렬 */
+.impact-card-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+}
+
+.impact-card-stat-row {
+    margin-bottom: 32px;
+}
+.impact-card-stat-row:last-child {
+    margin-bottom: 0;
+}
+
+/* 카드 타이틀(현황 조사·진단 보고 자동화) — 더 임팩트 있게 */
+.impact-card-label {
+    font-size: var(--text-lg) !important;
+    font-weight: 800 !important;
+    color: var(--color-white) !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 24px !important;
+    letter-spacing: -0.015em !important;
+    line-height: 1.3 !important;
+}
+
+
+/* impact-card 안의 counter-wrap underline은 큰 폰트에 어울리지 않아 숨김 */
+.impact-card-stat .counter-wrap::after {
+    display: none;
+}
+
+
+/* =============================================================
+   ★ v3.2 PDF 피드백 수정
+   ============================================================= */
+
+/* 1. Hero 영역 — 모바일/세로 화면에서 잘리지 않게 padding/min-height 조정 */
+.hero {
+    padding-top: clamp(40px, 8vw, 100px);
+    padding-bottom: clamp(60px, 8vw, 120px);
+}
+
+/* hero 안 컨텐츠가 viewport보다 큰 경우 잘 보이도록 */
+.hero-content {
+    min-height: auto;
+}
+
+/* hero-title을 좀 더 컴팩트하게 (특히 모바일) */
+.hero-title {
+    line-height: 1.05 !important;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(2rem, 6vw, 3rem) !important;
+    }
+}
+
+/* 2. 풀쿼트(Pull Quote) 큰따옴표 — Georgia 한글에 안 어울리므로 다른 방식으로 */
+.pull-quote::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -3px;
+    width: 56px;
+    height: 56px;
+    background:
+        linear-gradient(135deg,
+            transparent 0%, transparent 30%,
+            var(--color-cyan-glow) 30%, var(--color-cyan-glow) 32%,
+            transparent 32%, transparent 50%,
+            var(--color-cyan-glow) 50%, var(--color-cyan-glow) 52%,
+            transparent 52%);
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: 8px 12px, 24px 12px;
+    opacity: 0;
+}
+
+/* 더 깔끔한 큰따옴표 — SVG로 가는 게 한글 무드에 잘 어울림 */
+.pull-quote {
+    position: relative;
+    padding-top: clamp(48px, 5vw, 64px) !important;
+}
+
+.pull-quote::before {
+    content: "";
+    position: absolute;
+    top: clamp(16px, 2vw, 24px);
+    left: clamp(20px, 3vw, 32px);
+    width: 36px;
+    height: 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 28' fill='none'><path d='M14 4 Q 14 0 10 0 L 4 0 Q 0 0 0 4 L 0 14 Q 0 18 4 18 L 8 18 Q 12 18 12 22 L 12 24 Q 12 28 8 28 L 6 28' stroke='%2300f0ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M34 4 Q 34 0 30 0 L 24 0 Q 20 0 20 4 L 20 14 Q 20 18 24 18 L 28 18 Q 32 18 32 22 L 32 24 Q 32 28 28 28 L 26 28' stroke='%2300f0ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.7;
+}
+
+/* 3. pain-quote 양옆 따옴표 — 너무 멀어 보이므로 더 가깝게 + 작게 */
+.pain-quote {
+    position: relative;
+    padding: 0 clamp(20px, 4vw, 40px) !important;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.pain-quote::before,
+.pain-quote::after {
+    font-size: clamp(1.5rem, 2vw, 2rem) !important;
+    opacity: 0.5;
+}
+
+/* 4. CERTIFICATION 박스 강화 */
+.cert-panel {
+    border: 1px solid rgba(0, 240, 255, 0.25) !important;
+    background: linear-gradient(145deg, rgba(0, 240, 255, 0.05), rgba(0, 112, 243, 0.02)) !important;
+    box-shadow: 0 0 80px rgba(0, 240, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    padding: clamp(48px, 6vw, 80px) clamp(32px, 4vw, 56px) !important;
+}
+
+.cert-badge {
+    background: rgba(0, 240, 255, 0.12) !important;
+    border: 1px solid rgba(0, 240, 255, 0.4) !important;
+    color: var(--color-cyan-glow) !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    letter-spacing: 0.15em !important;
+}
+
+.cert-title {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem) !important;
+    font-weight: 900 !important;
+    margin: 16px 0 12px !important;
+    line-height: 1.1 !important;
+}
+
+.cert-meta {
+    color: var(--color-gray-400) !important;
+    font-size: var(--text-sm) !important;
+    margin-bottom: clamp(32px, 4vw, 56px) !important;
+    padding-bottom: clamp(24px, 3vw, 40px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* cert-grid의 각 항목을 더 위계 있게 */
+.cert-item {
+    text-align: left;
+    padding: clamp(20px, 2.5vw, 28px);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cert-item-label {
+    color: var(--color-cyan-glow) !important;
+    font-size: var(--text-xs) !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase;
+    margin-bottom: 10px !important;
+    font-weight: 700 !important;
+    display: block;
+}
+
+.cert-item-value {
+    color: var(--color-gray-100) !important;
+    font-size: var(--text-base) !important;
+    line-height: 1.55 !important;
+    word-break: keep-all;
+}
+
+/* 5. OUTCOMES 두 컬럼 — 위계 강화 */
+.outcome-col {
+    padding: clamp(32px, 4vw, 48px) !important;
+}
+
+.outcome-col-quote {
+    font-size: var(--text-xl) !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+    color: var(--color-white) !important;
+    margin-bottom: clamp(28px, 4vw, 40px) !important;
+    padding-bottom: clamp(20px, 3vw, 28px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    word-break: keep-all;
+}
+
+.outcome-col-label {
+    font-size: var(--text-xs) !important;
+    letter-spacing: 0.2em !important;
+    font-weight: 700 !important;
+    padding: 6px 14px !important;
+    border-radius: 100px;
+    display: inline-block;
+}
+
+.outcome-col-label.org {
+    background: rgba(0, 240, 255, 0.12);
+    color: var(--color-cyan-glow);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.outcome-col-label.ind {
+    background: rgba(0, 112, 243, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 112, 243, 0.4);
+}
+
+.outcome-item {
+    padding: 18px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.outcome-item:last-child {
+    border-bottom: 0;
+}
+
+.outcome-item-title {
+    font-size: var(--text-base) !important;
+    font-weight: 700 !important;
+    color: var(--color-white) !important;
+    margin-bottom: 6px !important;
+    line-height: 1.35;
+    word-break: keep-all;
+}
+
+.outcome-item-desc {
+    font-size: var(--text-sm) !important;
+    line-height: 1.6 !important;
+    color: var(--color-gray-400) !important;
+    word-break: keep-all;
+}
+
+.outcome-item-check {
+    color: var(--color-cyan-glow) !important;
+    font-size: var(--text-base) !important;
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(0, 240, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+/* 6. 수강 신청 카드 — 디자인 강화 */
+.register-card {
+    padding: clamp(32px, 4vw, 48px) !important;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, box-shadow 0.4s;
+}
+
+.register-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 240, 255, 0.4) !important;
+    box-shadow: 0 12px 40px rgba(0, 240, 255, 0.12);
+}
+
+.register-card.featured {
+    border: 1px solid rgba(0, 240, 255, 0.3) !important;
+    background: linear-gradient(145deg, rgba(0, 240, 255, 0.06), rgba(0, 112, 243, 0.02)) !important;
+    box-shadow: 0 0 60px rgba(0, 240, 255, 0.08) !important;
+}
+
+.register-card-tag {
+    position: absolute !important;
+    top: 0 !important;
+    left: clamp(24px, 3vw, 36px) !important;
+    transform: translateY(-50%) !important;
+    background: linear-gradient(135deg, var(--color-neon-blue), var(--color-cyan-glow)) !important;
+    color: var(--color-navy) !important;
+    font-weight: 800 !important;
+    padding: 6px 14px !important;
+    border-radius: 100px !important;
+    font-size: var(--text-xs) !important;
+    letter-spacing: 0.06em !important;
+    box-shadow: 0 4px 16px rgba(0, 240, 255, 0.3) !important;
+}
+
+.register-card-title {
+    font-size: var(--text-xl) !important;
+    font-weight: 800 !important;
+    margin-top: 8px !important;
+    margin-bottom: clamp(24px, 3vw, 32px) !important;
+    line-height: 1.3 !important;
+    word-break: keep-all;
+}
+
+.register-card-price-current {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem) !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, var(--color-cyan-glow), var(--color-neon-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    display: block;
+    margin: 4px 0;
+}
+
+.register-card-price-original {
+    font-size: var(--text-sm) !important;
+    color: var(--color-gray-500) !important;
+    text-decoration: line-through;
+    display: block;
+}
+
+.register-card-price-note {
+    font-size: var(--text-xs) !important;
+    color: var(--color-gray-400) !important;
+    margin-top: 4px;
+    display: block;
+}
+
+.register-info-row {
+    padding: 12px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: baseline;
+}
+
+.register-info-row:last-of-type {
+    border-bottom: 0;
+}
+
+.register-info-label {
+    font-size: var(--text-xs) !important;
+    color: var(--color-cyan-glow) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+}
+
+.register-info-value {
+    font-size: var(--text-sm) !important;
+    color: var(--color-gray-100) !important;
+    line-height: 1.55;
+    word-break: keep-all;
+}
+
+.register-info-value small {
+    display: block;
+    color: var(--color-gray-500);
+    font-size: var(--text-xs);
+    margin-top: 2px;
+}
+
+/* 7. FAQ — 카드 느낌 강화 */
+.faq-item {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--radius-lg) !important;
+    margin-bottom: 12px !important;
+    transition: border-color 0.3s, background 0.3s;
+    overflow: hidden;
+}
+
+.faq-item:hover {
+    border-color: rgba(0, 240, 255, 0.2) !important;
+    background: rgba(0, 240, 255, 0.03) !important;
+}
+
+.faq-item.open {
+    border-color: rgba(0, 240, 255, 0.35) !important;
+    background: rgba(0, 240, 255, 0.04) !important;
+}
+
+.faq-question {
+    padding: clamp(18px, 2.5vw, 24px) clamp(20px, 3vw, 28px) !important;
+    font-size: var(--text-base) !important;
+    font-weight: 600 !important;
+    color: var(--color-gray-100) !important;
+}
+
+.faq-toggle {
+    color: var(--color-cyan-glow) !important;
+    font-weight: 700 !important;
+}
+
+.faq-answer-inner {
+    padding: 0 clamp(20px, 3vw, 28px) clamp(20px, 2.5vw, 24px) !important;
+    line-height: 1.7 !important;
+    color: var(--color-gray-300) !important;
+    font-size: var(--text-sm) !important;
+}
+
+/* 8. 푸터 마무리 — 페이지 끝이 갑자기 끊기지 않도록 */
+.footer {
+    position: relative;
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.02) 30%, var(--color-navy-deeper) 100%) !important;
+    padding-top: clamp(80px, 10vw, 120px) !important;
+    padding-bottom: clamp(40px, 5vw, 64px) !important;
+    margin-top: clamp(40px, 6vw, 80px);
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+}
+
+
+/* =============================================================
+   ★ v3.3 안전망: JS 실패/PDF 캡쳐 대비 fallback
+   ============================================================= */
+
+/* 인쇄/PDF 출력 시에는 모든 reveal/split-word를 즉시 보이게 */
+@media print {
+    .reveal,
+    .split-word {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+}
+
+/* JS가 1초 이상 안 도는 경우 — 그래도 텍스트가 보이도록 fallback
+   (no-js 환경 또는 JS 로딩 실패 시) */
+html.no-js .reveal,
+html.no-js .split-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+
+/* =============================================================
+   ★ v3.4 핵심 수정
+   ============================================================= */
+
+/* 1. 등록 카드 태그 잘림 수정 — overflow: hidden 해제 + 카드 위쪽 여유 공간 확보 */
+.register-card {
+    overflow: visible !important;
+    padding-top: clamp(40px, 5vw, 56px) !important;
+}
+
+.register-card-tag {
+    top: -1px !important;
+    transform: translateY(-50%) !important;
+    z-index: 5;
+}
+
+/* 카드들이 들어있는 grid도 위쪽 여유 공간 */
+.register-grid {
+    padding-top: 20px;
+}
+
+/* 2. Hero 타이틀 그라데이션 텍스트 명시적으로 보장 (data-split 제거했지만 안전망) */
+.hero-title-accent,
+.hero-title .hero-title-accent {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-cyan-glow) 70%, var(--color-neon-blue) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+}
+
+/* split-word가 그라데이션 부모 안에 들어갔을 때도 텍스트 보이게 (혹시 모를 케이스) */
+.hero-title-accent .split-word {
+    background: inherit !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+}
+
+/* 3. Hero title 자체에 fallback color — 그라데이션 미지원 브라우저 대비 */
+.hero-title {
+    color: var(--color-white);
+}
+
+
+/* =============================================================
+   ★ v4 — 신규 요소 + 가독성·임팩트 강화
+   ============================================================= */
+
+/* -----------------------------
+   1. Hero 신뢰 칩 (Trust chips)
+   ----------------------------- */
+.hero-trust-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 36px;
+    max-width: 720px;
+}
+
+.trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 100px;
+    font-size: var(--text-sm);
+    color: var(--color-gray-200);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.trust-chip .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-cyan-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+@media (max-width: 640px) {
+    .hero-trust-chips {
+        gap: 8px;
+    }
+    .trust-chip {
+        font-size: var(--text-xs);
+        padding: 6px 12px;
+    }
+}
+
+/* -----------------------------
+   2. Hero subtitle 더 강하게 (USP 명확화)
+   ----------------------------- */
+.hero-subtitle {
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.65 !important;
+    color: var(--color-gray-200) !important;
+    max-width: 680px !important;
+    margin: 28px auto 28px !important;
+}
+
+.hero-subtitle strong {
+    color: var(--color-white) !important;
+    font-weight: 800 !important;
+    background: linear-gradient(180deg, transparent 60%, rgba(0, 240, 255, 0.2) 60%);
+    padding: 0 4px;
+}
+
+/* -----------------------------
+   3. 골든타임 박스 (Why Now)
+   ----------------------------- */
+.urgency-block {
+    margin: clamp(56px, 8vw, 96px) 0 clamp(40px, 6vw, 72px);
+    padding: clamp(32px, 5vw, 64px) clamp(24px, 4vw, 48px);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    background:
+        radial-gradient(ellipse at top, rgba(239, 68, 68, 0.06), transparent 70%),
+        rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+    position: relative;
+}
+
+.urgency-head {
+    text-align: center;
+    margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.urgency-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 100px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #fca5a5;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.dot-pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--color-danger);
+    border-radius: 50%;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.urgency-title {
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--color-white);
+    letter-spacing: -0.025em;
+    word-break: keep-all;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.urgency-title em {
+    font-style: normal;
+    color: #fca5a5;
+}
+
+.urgency-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 720px) {
+    .urgency-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(20px, 2.5vw, 32px);
+    }
+}
+
+.urgency-card {
+    padding: clamp(24px, 3vw, 32px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+
+.urgency-card:hover {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.04);
+    transform: translateY(-3px);
+}
+
+.urgency-num {
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 1.5rem + 1vw, 2.4rem);
+    font-weight: 700;
+    color: #fca5a5;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.03em;
+    opacity: 0.7;
+}
+
+.urgency-card-title {
+    font-size: var(--text-xl);
+    font-weight: 800;
+    color: var(--color-white);
+    line-height: 1.3;
+    margin-bottom: 14px;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+}
+
+.urgency-card-desc {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--color-gray-300);
+    word-break: keep-all;
+}
+
+/* -----------------------------
+   4. 중간 CTA 섹션
+   ----------------------------- */
+.mid-cta-section {
+    padding: clamp(48px, 6vw, 80px) 0;
+    position: relative;
+    z-index: 2;
+}
+
+.mid-cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 3vw, 40px);
+    padding: clamp(32px, 4vw, 56px);
+    background:
+        radial-gradient(ellipse at top right, rgba(0, 240, 255, 0.06), transparent 70%),
+        linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(0, 112, 243, 0.02));
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: var(--radius-lg);
+    align-items: center;
+}
+
+@media (min-width: 880px) {
+    .mid-cta {
+        grid-template-columns: 1fr auto;
+    }
+}
+
+.mid-cta.featured {
+    background:
+        radial-gradient(ellipse at top right, rgba(0, 240, 255, 0.1), transparent 70%),
+        linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(0, 112, 243, 0.04));
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    box-shadow: 0 0 80px rgba(0, 240, 255, 0.1);
+}
+
+.mid-cta-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-cyan-glow);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.mid-cta-title {
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--color-white);
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+    margin-bottom: 0;
+}
+
+.mid-cta-title em {
+    font-style: normal;
+    color: var(--color-cyan-glow);
+    background: linear-gradient(135deg, var(--color-cyan-glow), var(--color-neon-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mid-cta-desc {
+    margin-top: 12px;
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    line-height: 1.5;
+}
+
+/* -----------------------------
+   5. 포함 내역 박스 (Includes)
+   ----------------------------- */
+.includes-box {
+    margin: 0 0 clamp(20px, 2.5vw, 28px);
+    padding: clamp(20px, 2.5vw, 28px);
+    background: rgba(0, 240, 255, 0.04);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.includes-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-cyan-glow);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.includes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.includes-list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-gray-200);
+    word-break: keep-all;
+}
+
+.includes-list li strong {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.ico-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(0, 240, 255, 0.18);
+    color: var(--color-cyan-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* =============================================================
+   ★ v4 — 가독성·임팩트 글로벌 강화
+   ============================================================= */
+
+/* 1. 모든 본문 행간 넓혀서 호흡 확보 */
+.section-subtitle,
+.feature-card-desc,
+.pain-card-desc,
+.solution-card-desc,
+.outcome-item-desc,
+.why-stat-desc,
+.cert-item-value,
+.faq-answer-inner,
+.urgency-card-desc {
+    line-height: 1.75 !important;
+}
+
+/* 2. 섹션 간 호흡 더 넉넉하게 */
+.section {
+    padding: clamp(72px, 10vw, 144px) 0 !important;
+}
+
+/* 3. 섹션 헤더 아래 여백 강화 */
+.section-header {
+    margin-bottom: clamp(48px, 7vw, 96px) !important;
+}
+
+/* 4. 섹션 타이틀 더 임팩트 */
+.section-title {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em !important;
+    margin-top: 16px !important;
+}
+
+/* 5. 섹션 부제 약간 축소해서 본문과의 위계 만들기 */
+.section-subtitle {
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem) !important;
+    max-width: 760px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 6. WHY hook headline — 핵심 후크 더 크게 */
+.why-hook-headline {
+    font-size: clamp(2.2rem, 1.5rem + 3vw, 4.25rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 24px !important;
+}
+
+/* 7. pain-quote 임팩트 강화 */
+.pain-quote {
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.4rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.025em !important;
+    color: var(--color-white) !important;
+    max-width: 800px;
+    margin: 0 auto !important;
+}
+
+/* 8. 카드 패딩 더 넉넉하게 (호흡) */
+.pain-card,
+.solution-card,
+.feature-card,
+.outcome-col {
+    padding: clamp(28px, 4vw, 48px) !important;
+}
+
+/* 9. 카드 타이틀 더 강하게 */
+.pain-card-title,
+.solution-card-title {
+    font-size: var(--text-xl) !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+    color: var(--color-white) !important;
+}
+
+.feature-card-title {
+    font-size: var(--text-2xl) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 20px !important;
+}
+
+/* 10. 본문 카드 desc — 한 줄 더 짧게 보이도록 */
+.pain-card-desc,
+.solution-card-desc {
+    font-size: var(--text-base) !important;
+    color: var(--color-gray-300) !important;
+}
+
+.feature-card-desc {
+    font-size: var(--text-base) !important;
+    color: var(--color-gray-200) !important;
+}
+
+/* 11. 카드 hover 시 살짝 떠오르는 효과 - 모든 카드 일관성 */
+.pain-card, .solution-card, .feature-card, .outcome-col, .badge-feat, .why-stat-card {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s !important;
+}
+
+.pain-card:hover, .feature-card:hover, .outcome-col:hover, .badge-feat:hover {
+    transform: translateY(-4px) !important;
+}
+
+/* 12. Hero subtitle strong 가시성 */
+.hero-subtitle strong {
+    color: var(--color-white) !important;
+    font-weight: 800 !important;
+    position: relative;
+}
+
+/* 13. 모바일에서 hero 영역 빡빡함 줄이기 */
+@media (max-width: 640px) {
+    .hero {
+        padding: 100px 0 60px !important;
+    }
+    .hero-subtitle {
+        font-size: var(--text-base) !important;
+        line-height: 1.65 !important;
+        margin: 24px auto 20px !important;
+    }
+    .section {
+        padding: 60px 0 !important;
+    }
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    }
+    .pain-quote {
+        font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+    }
+    .why-hook-headline {
+        font-size: clamp(1.7rem, 7vw, 2.4rem) !important;
+    }
+}
+
+/* 14. 임팩트 강화 — 큰 통계 영역에 background glow */
+.big-stat:hover {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+}
+
+/* 15. 첫 화면 hero subtitle의 형광펜 효과 (강조 underline) */
+.hero-subtitle strong {
+    box-shadow: inset 0 -0.45em 0 rgba(0, 240, 255, 0.25);
+    background: transparent !important;
+}
+

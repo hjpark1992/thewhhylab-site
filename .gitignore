@@ -1,0 +1,20 @@
+# 서버 설정(실제 비밀값) — 저장소에 올리지 않음
+api/config.php
+
+# 업로드된 파일 (사용자 제출 프로필 등)
+api/uploads/*
+!api/uploads/.htaccess
+
+# 작업 중 백업본
+*.bak
+
+# 손상된 구 .git 백업(2026-06-08, 복구용 보관 — 추적 제외)
+.git_corrupt_backup/
+
+# 의존성
+node_modules/
+test/node_modules/
+
+# OS / 에디터
+.DS_Store
+Thumbs.db

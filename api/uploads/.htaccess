@@ -1,0 +1,8 @@
+# 업로드된 파일(프로필 등) 외부 직접 접근 차단 — Apache 2.4 / 2.2 모두 대응
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

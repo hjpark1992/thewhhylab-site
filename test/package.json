@@ -1,0 +1,7 @@
+{
+  "name": "thewhhylab-tests",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "devDependencies": { "jsdom": "^24.0.0" }
+}
