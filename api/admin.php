@@ -12,17 +12,86 @@ $base = __DIR__;
 $cfgFile = $base . '/config.php';
 if (!is_file($cfgFile)) { http_response_code(500); exit('config.php 가 필요합니다.'); }
 $cfg = require $cfgFile;
+$adminUser = (string)($cfg['admin_user'] ?? '');
 $adminPass = (string)($cfg['admin_pass'] ?? '');
 $self = strtok($_SERVER['REQUEST_URI'] ?? 'admin.php', '?'); if ($self === '') $self = 'admin.php';
 
 if (isset($_GET['logout'])) { $_SESSION = []; session_destroy(); header('Location: ' . $self); exit; }
 
+/* ---------- 로그인 보안: 로그인 시도 잠금 (IP별, 파일 기반) ---------- */
+$LOGIN_MAX = 5;        // 허용 실패 횟수
+$LOGIN_LOCK_MIN = 10;  // 초과 시 잠금 시간(분)
+$loginLockFile = sys_get_temp_dir() . '/twl_admin_login.json';
+$loginKey = hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'x');
+
+function login_attempts_load($file) {
+  if (!is_file($file)) return [];
+  $j = json_decode((string)@file_get_contents($file), true);
+  return is_array($j) ? $j : [];
+}
+function login_attempts_save($file, $data) {
+  @file_put_contents($file, json_encode($data), LOCK_EX);
+}
+/* 반환: [잠김여부(bool), 남은분(int), 누적실패(int)] */
+function login_lock_state($file, $key) {
+  $d = login_attempts_load($file);
+  $e = isset($d[$key]) ? $d[$key] : null;
+  if (!$e) return [false, 0, 0];
+  $until = isset($e['until']) ? (int)$e['until'] : 0;
+  if ($until > time()) return [true, (int)ceil(($until - time()) / 60), (int)($e['fails'] ?? 0)];
+  return [false, 0, (int)($e['fails'] ?? 0)];
+}
+function login_lock_fail($file, $key, $max, $lockMin) {
+  $d = login_attempts_load($file);
+  $e = isset($d[$key]) ? $d[$key] : ['fails' => 0, 'until' => 0];
+  $until = isset($e['until']) ? (int)$e['until'] : 0;
+  if ($until > 0 && $until <= time()) $e = ['fails' => 0, 'until' => 0]; // 잠금 만료 → 카운터 리셋
+  $e['fails'] = (int)($e['fails'] ?? 0) + 1;
+  if ($e['fails'] >= $max) $e['until'] = time() + $lockMin * 60;
+  $d[$key] = $e;
+  login_attempts_save($file, $d);
+  return (int)$e['fails'];
+}
+function login_lock_clear($file, $key) {
+  $d = login_attempts_load($file);
+  if (isset($d[$key])) { unset($d[$key]); login_attempts_save($file, $d); }
+}
+
+list($loginLocked, $loginLockLeft, $loginFails) = login_lock_state($loginLockFile, $loginKey);
+
 $err = '';
 if (isset($_POST['pw'])) {
-  if ($adminPass !== '' && hash_equals($adminPass, (string)$_POST['pw'])) {
-    $_SESSION['twl_admin'] = true; header('Location: ' . $self); exit;
+  if ($loginLocked) {
+    $err = "시도가 많아 잠겼습니다. 약 {$loginLockLeft}분 후 다시 시도하세요.";
+    usleep(600000);
+  } elseif ($adminUser !== '' && $adminPass !== ''
+            && hash_equals($adminUser, (string)($_POST['user'] ?? ''))
+            && hash_equals($adminPass, (string)$_POST['pw'])) {
+    login_lock_clear($loginLockFile, $loginKey);
+    session_regenerate_id(true);
+    $_SESSION['twl_admin'] = true;
+    $_SESSION['twl_last'] = time();
+    header('Location: ' . $self); exit;
+  } else {
+    $fails = login_lock_fail($loginLockFile, $loginKey, $LOGIN_MAX, $LOGIN_LOCK_MIN);
+    $left = $LOGIN_MAX - $fails;
+    $err = $left > 0
+      ? "아이디 또는 비밀번호가 올바르지 않습니다. (남은 시도 {$left}회)"
+      : "시도 횟수를 초과하여 {$LOGIN_LOCK_MIN}분간 잠겼습니다.";
+    usleep(600000);
+    list($loginLocked, $loginLockLeft, $loginFails) = login_lock_state($loginLockFile, $loginKey);
   }
-  $err = '비밀번호가 올바르지 않습니다.'; usleep(600000);
+}
+
+/* ---------- 세션 비활성 타임아웃 (자동 로그아웃) ---------- */
+$SESSION_TIMEOUT = (int)($cfg['admin_session_timeout'] ?? 1800); // 기본 30분
+$sessionTimedOut = false;
+if (!empty($_SESSION['twl_admin'])) {
+  if (isset($_SESSION['twl_last']) && (time() - (int)$_SESSION['twl_last']) > $SESSION_TIMEOUT) {
+    $_SESSION = []; $sessionTimedOut = true; // 만료 → 로그아웃 처리
+  } else {
+    $_SESSION['twl_last'] = time();
+  }
 }
 $authed = !empty($_SESSION['twl_admin']);
 
@@ -42,15 +111,23 @@ if (!$authed) {
     h1{font-size:18px;margin:0 0 4px;letter-spacing:-.02em}p.sub{margin:0 0 20px;color:#9aa0bf;font-size:13px}
     input{width:100%;padding:13px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:#fff;font-size:15px;outline:none}
     input:focus{border-color:#6366f1}
+    input + input{margin-top:10px}
     button{width:100%;margin-top:12px;padding:13px;border:0;border-radius:11px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+    button:disabled{opacity:.5;cursor:not-allowed}
     .err{color:#ff9a9a;font-size:13px;margin-top:11px;min-height:16px}
   </style></head><body>
   <form class="box" method="post" autocomplete="off">
     <div class="logo">W</div>
     <h1>더와이랩 관리자</h1><p class="sub">접수내역 조회·관리</p>
-    <input type="password" name="pw" placeholder="관리자 비밀번호" autofocus required>
-    <button type="submit">로그인</button>
-    <div class="err"><?= h($err) ?><?php if ($adminPass === '') echo 'config.php에 admin_pass 가 설정되지 않았습니다.'; ?></div>
+    <input type="text" name="user" placeholder="관리자 아이디" autocomplete="username" autofocus required>
+    <input type="password" name="pw" placeholder="관리자 비밀번호" autocomplete="current-password" required>
+    <button type="submit"<?= $loginLocked ? ' disabled' : '' ?>>로그인</button>
+    <div class="err"><?php
+      if ($adminUser === '' || $adminPass === '') echo 'config.php에 admin_user / admin_pass 를 설정하세요.';
+      elseif ($loginLocked) echo h("로그인이 잠겼습니다. 약 {$loginLockLeft}분 후 다시 시도하세요.");
+      elseif ($sessionTimedOut) echo '세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요.';
+      else echo h($err);
+    ?></div>
   </form></body></html><?php
   exit;
 }
