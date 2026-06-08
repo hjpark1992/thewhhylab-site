@@ -112,3 +112,11 @@ thewhhylab 폴더에서 작업 이어서 할게.
   - 커스텀 inline 레이아웃 페이지(mission/learnies/workshop-tools/AX_Discovery)는 자체 @media로 이미 모바일 양호 — 미변경. 오버플로 회귀 0건 확인.
 - 남은 것은 **사용자 직접**: ① 로컬/실서버 육안 확인(특히 GROWTH 각주 위치, 모바일 정돈) ② Cafe24 배포(PHP버전·config.php·DB·SSL) ③ 브랜치 머지(`main`).
 - 미적용(판단 보류): career-test 로컬판이 외부 `.com`판과 중복일 수 있음(현재 self-canonical+sitemap 포함 처리). 구형 브라우저용 그라데이션 텍스트 fallback color는 외형 영향이라 보류. 모바일은 핵심 공유 레이아웃 위주로 정돈했고, 개별 페이지의 미세 튜닝은 사용자 확인 후 추가 가능.
+
+## 작업 기록 (2026-06-08)
+- **`/admin` 단축 경로 추가** — 관리자 페이지가 `/api/admin.php`로만 들어가지던 것을 `.htaccess`에 `RewriteRule ^admin/?$ api/admin.php [L]` 추가(HTTPS 강제 블록 내, 조건부 HTTPS 규칙 뒤 → 루프 없음). 이제 `thewhhylab.com/admin`으로 접속 가능. admin.php 6번 줄 주석엔 `/admin` 의도가 적혀 있었으나 실제 규칙은 누락 상태였음. ⚠️ **Cafe24 실서버에 `.htaccess` 재업로드해야 실제 작동**(현재 서버엔 미반영).
+- **git 저장소 재초기화** — 기존 `.git` object DB 광범위 손상(loose object 633개 중 `git fsck` corrupt 845줄, packfile·원격 없음, index도 `0x72650000` 손상) → 이력 복구 불가. 원인 추정: 회사→집 폴더 이동 시 바이너리 git 객체가 텍스트(CRLF) 변환으로 깨짐(ref 끝 `0d0a`). 작업 트리 파일은 전부 무손상.
+  - 손상본은 **`.git_corrupt_backup/`** 로 rename 보관(삭제 안 함, `.gitignore`에 추가). 회사 PC 원본 `.git`이 멀쩡하면 추후 병합 가능(옮길 땐 **반드시 zip 압축** 후 전송 — 또 깨짐 방지).
+  - 새 `git init -b main` + user(`thewhhylab`/`hjpark1992@naver.com`) 재설정 + 현재 파일 전체 첫 커밋(`e1f6257`, 228파일). `api/config.php` 등 비밀파일 추적 제외 확인.
+- **검증**: `node --test` 9 PASS(menu 3 + forms 6), shared/js `node --check` OK, `.htaccess` BOM 0건. (PHP는 이 세션 PATH 미탑재 → admin.php는 PHP 코드 미변경이라 lint 생략.)
+- **남은 것(사용자 직접)**: Cafe24에 `.htaccess` 재업로드해야 `/admin` 작동. git 이력은 새출발(과거 커밋 해시는 위 기록의 것으로만 참조 가능).
