@@ -2,7 +2,7 @@
 /**
  * 더와이랩 관리자 — 교육문의 / 강사지원 조회·관리.
  * 비번 로그인 · 핵심컬럼 목록 + 행클릭 상세 · 상태 저장 · 메모 히스토리(시간기록·누적·삭제) ·
- * 미확인 강조 · 검색/필터 · 선택/전체 다운로드(CSV) · 첨부 단건/ZIP · 모바일.
+ * 미확인 강조 · 검색/필터 · 선택/전체 다운로드(CSV) · 첨부 단건/ZIP · 디스크 사용량 게이지 · 선택 삭제(행+첨부+메모) · 모바일.
  * 스키마(상태컬럼·메모테이블) 자동생성. 접속: /admin 또는 /api/admin.php (config.php의 admin_pass)
  */
 if (isset($_GET['debug'])) { ini_set('display_errors', '1'); error_reporting(E_ALL); }
@@ -105,6 +105,26 @@ function safe_upload_path($dir, $stored) {
   $rd = realpath($dir); $rp = realpath($path);
   if ($rp === false || $rd === false || strpos($rp, $rd) !== 0 || !is_file($rp)) return null;
   return $rp;
+}
+
+/* 폴더 용량 합산(재귀) / 바이트 표기 — 디스크 게이지용 */
+function dir_size($dir) {
+  if (!is_dir($dir)) return 0;
+  $total = 0;
+  try {
+    $it = new RecursiveIteratorIterator(
+      new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
+      RecursiveIteratorIterator::LEAVES_ONLY
+    );
+    foreach ($it as $f) { $total += $f->getSize(); }
+  } catch (Throwable $e) {}
+  return $total;
+}
+function fmt_bytes($b) {
+  if ($b >= 1073741824) return number_format($b / 1073741824, 2) . ' GB';
+  if ($b >= 1048576)    return number_format($b / 1048576, 1) . ' MB';
+  if ($b >= 1024)       return number_format($b / 1024, 0) . ' KB';
+  return $b . ' B';
 }
 
 /* ---------- 상태 저장 (AJAX) ---------- */
@@ -237,6 +257,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['export'])) {
   }
 }
 
+/* ---------- 선택 삭제 (행 + 첨부파일 + 메모) ---------- */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['bulk_delete'])) {
+  $which = tbl_of($_POST['tab'] ?? '');
+  $ids = array_values(array_filter(array_map('intval', (array)($_POST['ids'] ?? [])), function ($v) { return $v > 0; }));
+  if ($ids) {
+    $in = implode(',', array_fill(0, count($ids), '?'));
+    if ($which === 'member_applications') {
+      $st = $pdo->prepare("SELECT profile_file FROM member_applications WHERE id IN ($in)");
+      $st->execute($ids);
+      foreach ($st->fetchAll(PDO::FETCH_COLUMN) as $pf) {
+        $p = safe_upload_path($uploadDir, $pf);
+        if ($p) @unlink($p);
+      }
+    }
+    try { $pdo->prepare("DELETE FROM admin_memos WHERE ref_type = ? AND ref_id IN ($in)")->execute(array_merge([$which], $ids)); } catch (Throwable $e) {}
+    $pdo->prepare("DELETE FROM {$which} WHERE id IN ($in)")->execute($ids);
+  }
+  $tabParam = ($_POST['tab'] ?? '') === 'app' ? 'app' : 'inq';
+  header('Location: ' . $self . '?tab=' . $tabParam);
+  exit;
+}
+
 /* ---------- 목록 조회 ---------- */
 $inq = $pdo->query('SELECT * FROM inquiries ORDER BY id DESC LIMIT 300')->fetchAll();
 $app = $pdo->query('SELECT * FROM member_applications ORDER BY id DESC LIMIT 300')->fetchAll();
@@ -248,6 +290,13 @@ $statusOpts = $STATUS[$tblKey];
 $memosByRow = memos_for($pdo, $tblKey, array_column($rows, 'id'));
 $newOf = function ($list) { return count(array_filter($list, function ($r) { return ($r['status'] ?: '신규') === '신규'; })); };
 $newInq = $newOf($inq); $newApp = $newOf($app); $newCount = $isApp ? $newApp : $newInq;
+
+/* 디스크 사용량 (문서 루트 합산 ÷ 10GB 제한) — 10GB는 아래 상수만 바꾸면 됨 */
+$DISK_LIMIT = 10 * 1073741824; // 10 GB
+$diskUsed = dir_size(dirname($base));
+$uploadsUsed = dir_size($uploadDir);
+$diskPct = $DISK_LIMIT > 0 ? min(100, $diskUsed / $DISK_LIMIT * 100) : 0;
+$diskLevel = $diskPct >= 90 ? 'crit' : ($diskPct >= 70 ? 'warn' : 'ok');
 
 function fld($label, $val) { $val = ($val === '' || $val === null) ? '-' : $val; return '<div class="d"><dt>' . h($label) . '</dt><dd>' . h($val) . '</dd></div>'; }
 function lng($label, $val) { $val = ($val === '' || $val === null) ? '-' : $val; return '<div class="d long"><dt>' . h($label) . '</dt><dd>' . h($val) . '</dd></div>'; }
@@ -274,6 +323,17 @@ header('Content-Type: text/html; charset=UTF-8');
   .seg .nd{min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#f43f5e;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
   .sp{flex:1}
   .out{color:var(--mut);text-decoration:none;font-size:13px;padding:7px 13px;border-radius:9px;border:1px solid var(--bd);transition:.15s}.out:hover{background:#fff;color:var(--tx)}
+  .diskbar{margin:14px 22px 0;padding:13px 16px;background:var(--card);border:1px solid var(--bd);border-radius:13px}
+  .disk-row{display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:9px;flex-wrap:wrap}
+  .disk-label{font-weight:700;color:var(--tx)}
+  .disk-num{color:var(--mut)}.disk-num b{color:var(--tx);font-variant-numeric:tabular-nums}
+  .disk-pct{font-weight:700;font-variant-numeric:tabular-nums}
+  .disk-up{margin-left:auto;color:var(--mut);font-size:12.5px}
+  .disk-track{height:8px;border-radius:6px;background:#eef0f4;overflow:hidden}
+  .disk-fill{height:100%;border-radius:6px;transition:width .3s}
+  .disk-ok{color:#047857}.disk-fill.disk-ok{background:#10b981}
+  .disk-warn{color:#c2410c}.disk-fill.disk-warn{background:#fb923c}
+  .disk-crit{color:#be123c}.disk-fill.disk-crit{background:#f43f5e}
   .alert{display:flex;align-items:center;gap:10px;margin:14px 22px 0;padding:13px 16px;background:linear-gradient(90deg,#fff5f6,#fff);border:1px solid #ffdfe3;border-radius:13px;color:#be123c;font-size:13.5px;font-weight:600}
   .alert .dot{width:8px;height:8px;border-radius:50%;background:#f43f5e;box-shadow:0 0 0 4px #fde2e5}
   .alert button{margin-left:auto;border:0;background:#f43f5e;color:#fff;border-radius:9px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer}
@@ -288,6 +348,7 @@ header('Content-Type: text/html; charset=UTF-8');
   .btn{border:0;border-radius:10px;padding:9px 15px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s}
   .btn-ghost{background:#fff;color:#4b5163;border:1px solid var(--bd)}.btn-ghost:hover{border-color:#cfd3de;background:#fafbfc}
   .btn-pri{background:var(--pri);color:#fff}.btn-pri:hover{background:#4338ca}
+  .btn-danger{background:#fff;color:#be123c;border:1px solid #f3c2c8}.btn-danger:hover{background:#fff1f2;border-color:#f43f5e}
   .wrap{padding:14px 22px 36px}
   .tcard{background:var(--card);border:1px solid var(--bd);border-radius:15px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.03)}
   table{border-collapse:collapse;width:100%;font-size:13.5px;table-layout:fixed}
@@ -346,7 +407,7 @@ header('Content-Type: text/html; charset=UTF-8');
   .memo-input:focus{border-color:var(--pri)}
   .memo-addbtn{background:var(--tx);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:600;cursor:pointer;white-space:nowrap}
   @media(max-width:760px){
-    header{padding:11px 15px}.wrap{padding:12px 14px 30px}.bar,.actions{padding-left:15px;padding-right:15px}.alert{margin-left:15px;margin-right:15px}
+    header{padding:11px 15px}.wrap{padding:12px 14px 30px}.bar,.actions{padding-left:15px;padding-right:15px}.alert{margin-left:15px;margin-right:15px}.diskbar{margin-left:15px;margin-right:15px}
     col.cdt{width:0}.cdt{display:none}.hide-sm{display:none}.dl{grid-template-columns:1fr}.flbl{display:none}
     col.catt{width:46px}td.catt{overflow:hidden}
   }
@@ -360,6 +421,16 @@ header('Content-Type: text/html; charset=UTF-8');
   <span class="sp"></span>
   <a class="out" href="?logout=1">로그아웃</a>
 </header>
+
+<div class="diskbar">
+  <div class="disk-row">
+    <span class="disk-label">웹 용량</span>
+    <span class="disk-num"><b><?= fmt_bytes($diskUsed) ?></b> / 10 GB</span>
+    <span class="disk-pct disk-<?= $diskLevel ?>"><?= round($diskPct, 1) ?>%</span>
+    <span class="disk-up">첨부파일 <?= fmt_bytes($uploadsUsed) ?></span>
+  </div>
+  <div class="disk-track"><div class="disk-fill disk-<?= $diskLevel ?>" style="width:<?= round($diskPct, 1) ?>%"></div></div>
+</div>
 
 <?php if ($newCount > 0): ?>
 <div class="alert"><span class="dot"></span>확인하지 않은 신규 <b><?= $newCount ?></b>건이 있습니다.
@@ -381,6 +452,7 @@ header('Content-Type: text/html; charset=UTF-8');
   <span class="meta-sel"><b id="selcount">0</b>개 선택 · <b id="viewcount"><?= count($rows) ?></b>건 표시</span>
   <button class="btn btn-ghost" type="submit" name="export" value="csv_sel">선택 항목 다운로드</button>
   <?php if ($isApp): ?><button class="btn btn-ghost" type="submit" name="export" value="zip_sel">선택 첨부 다운로드</button><?php endif; ?>
+  <button class="btn btn-danger" type="submit" name="bulk_delete" value="1">선택 삭제</button>
   <span class="sp"></span>
   <button class="btn btn-pri" type="submit" name="export" value="csv_all">전체 다운로드</button>
 </div>
@@ -497,6 +569,14 @@ header('Content-Type: text/html; charset=UTF-8');
       var what=(mode==='zip_sel')?'첨부파일':'데이터';
       if(!confirm(n+'건 '+what+'을(를) 다운로드할까요?')){ e.preventDefault(); }
     });
+  });
+
+  // 선택 삭제 (되돌릴 수 없음)
+  var delBtn=document.querySelector('button[name=bulk_delete]');
+  if(delBtn)delBtn.addEventListener('click',function(e){
+    var sel=selCount();
+    if(sel===0){ e.preventDefault(); alert('먼저 삭제할 항목을 체크하세요.'); return; }
+    if(!confirm(sel+'건을 영구 삭제합니다.\n첨부파일·메모도 함께 삭제되며 되돌릴 수 없습니다.\n계속할까요?')){ e.preventDefault(); }
   });
 
   var curF='all', q='';
