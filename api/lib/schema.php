@@ -15,7 +15,6 @@ function ensure_event_columns(PDO $pdo): void {
     'company'          => 'VARCHAR(255) NULL',
     'dept'             => 'VARCHAR(255) NULL',
     'job_title'        => 'VARCHAR(120) NULL',
-    'postal_address'   => 'VARCHAR(500) NULL',
     'role_work'        => 'VARCHAR(500) NULL',
     'org_size'         => 'VARCHAR(60) NULL',
     'interests'        => 'VARCHAR(500) NULL',

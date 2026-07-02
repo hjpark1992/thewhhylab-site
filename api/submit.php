@@ -113,8 +113,7 @@ try {
       'name' => $_POST['name'] ?? '', 'company' => $_POST['company'] ?? '',
       'dept' => $_POST['dept'] ?? '', 'job_title' => $_POST['job_title'] ?? '',
       'phone' => $_POST['phone'] ?? '', 'email' => $_POST['email'] ?? '',
-      'postal_address' => $_POST['postal_address'] ?? '', 'org_size' => $_POST['org_size'] ?? '',
-      'story' => $_POST['story'] ?? '',
+      'org_size' => $_POST['org_size'] ?? '', 'story' => $_POST['story'] ?? '',
     ];
     foreach ($f as $k => $v) { if (!v_required($v)) fail('모든 필수 항목을 입력해주세요.'); }
     if (!v_email($f['email'])) fail('이메일 형식이 올바르지 않습니다.');
@@ -146,7 +145,7 @@ try {
       'kind' => 'event',
       'name' => $f['name'], 'phone' => $f['phone'], 'email' => $f['email'],
       'company' => $f['company'], 'dept' => $f['dept'], 'job_title' => $f['job_title'],
-      'postal_address' => $f['postal_address'], 'org_size' => $f['org_size'],
+      'org_size' => $f['org_size'],
       'role_work' => $joinEtc($_POST['role_work'] ?? [], $_POST['role_work_etc'] ?? ''),
       'interests' => $joinEtc($_POST['interests'] ?? [], $_POST['interests_etc'] ?? ''),
       'story' => $f['story'],
@@ -161,15 +160,15 @@ try {
     $ph = ':' . implode(',:', array_keys($row));
     $pdo->prepare("INSERT INTO inquiries ($cols) VALUES ($ph)")->execute($row);
 
-    $body = "[AX DISCOVERY 이벤트 신청]\n";
-    foreach (['name'=>'이름','company'=>'회사명','dept'=>'부서','job_title'=>'직책','phone'=>'연락처','email'=>'이메일','postal_address'=>'우편주소','role_work'=>'담당업무','org_size'=>'조직규모','interests'=>'관심분야','story'=>'AX 고민 사연'] as $k=>$lbl) {
+    $body = "[AX 고민 사연 이벤트 신청]\n";
+    foreach (['name'=>'이름','company'=>'회사명','dept'=>'부서','job_title'=>'직책','phone'=>'연락처','email'=>'이메일','role_work'=>'담당업무','org_size'=>'조직규모','interests'=>'관심분야','story'=>'AX 고민 사연'] as $k=>$lbl) {
       $body .= "{$lbl}: {$row[$k]}\n";
     }
     $body .= '상담희망: ' . ($row['consult_wanted'] ? '예' : '아니오') . "\n";
     $body .= '마케팅동의: ' . ($row['marketing_agreed'] ? '예' : '아니오') . "\n";
     $body .= '명함파일: ' . ($cardOriginal ? "{$cardOriginal} (저장명 {$cardStored})" : '없음') . "\n";
-    send_notification($cfg, '[더와이랩] AX DISCOVERY 이벤트 신청 접수', $body, $f['email']);
-    ok('신청이 정상 접수되었습니다. 도서 발송 및 후속 안내를 드리겠습니다.');
+    send_notification($cfg, '[더와이랩] AX 고민 사연 이벤트 신청 접수', $body, $f['email']);
+    ok('신청이 정상 접수되었습니다. 심사 후 개별 안내드리겠습니다.');
   }
 
   fail('알 수 없는 폼 유형입니다.');

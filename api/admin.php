@@ -254,7 +254,7 @@ function memos_for($pdo, $refType, $ids) {
 
 /* CSV 컬럼 (관리메모는 누적메모를 합쳐서) */
 $COLS = [
-  'inquiries' => ['ID'=>'id','구분'=>'kind','상태'=>'status','접수일시'=>'created_at','이름'=>'name','연락처'=>'phone','이메일'=>'email','소속'=>'affiliation','교육주제'=>'topic','교육목적'=>'purpose','교육대상'=>'audience','교육장소'=>'location','문의내용/RFP'=>'message','회사명'=>'company','부서'=>'dept','직책'=>'job_title','우편주소'=>'postal_address','담당업무'=>'role_work','조직규모'=>'org_size','관심분야'=>'interests','AX사연'=>'story','상담희망'=>'consult_wanted','마케팅동의'=>'marketing_agreed','명함원본'=>'card_original','관리메모'=>'__memos__','IP'=>'ip'],
+  'inquiries' => ['ID'=>'id','구분'=>'kind','상태'=>'status','접수일시'=>'created_at','이름'=>'name','연락처'=>'phone','이메일'=>'email','소속'=>'affiliation','교육주제'=>'topic','교육목적'=>'purpose','교육대상'=>'audience','교육장소'=>'location','문의내용/RFP'=>'message','회사명'=>'company','부서'=>'dept','직책'=>'job_title','담당업무'=>'role_work','조직규모'=>'org_size','관심분야'=>'interests','AX사연'=>'story','상담희망'=>'consult_wanted','마케팅동의'=>'marketing_agreed','명함원본'=>'card_original','관리메모'=>'__memos__','IP'=>'ip'],
   'member_applications' => ['ID'=>'id','상태'=>'status','접수일시'=>'created_at','성함'=>'name','연락처'=>'phone','성별'=>'gender','출생년도'=>'birth_year','거주지역'=>'region','경력기간'=>'career_years','주요경력'=>'prev_career','강의분야'=>'fields','강의스타일'=>'styles','소개'=>'intro','출강기관'=>'client_types','최소섭외비'=>'min_fee','신청경로'=>'referral','첨부원본파일명'=>'profile_original','관리메모'=>'__memos__','IP'=>'ip'],
 ];
 
@@ -600,10 +600,9 @@ header('Content-Type: text/html; charset=UTF-8');
     <tr class="detail"><td colspan="<?= $colspan ?>">
       <div class="panel">
         <?php if (!$isApp && $isEvent): ?>
-          <div class="sec"><div class="sec-t">AX DISCOVERY 이벤트 신청</div><div class="dl">
+          <div class="sec"><div class="sec-t">AX 고민 사연 이벤트 신청</div><div class="dl">
             <?= fld('이름',$r['name']) ?><?= fld('회사/기관',$r['company']) ?><?= fld('부서',$r['dept']) ?><?= fld('직책',$r['job_title']) ?>
             <?= fld('연락처',$r['phone']) ?><?= fld('이메일',$r['email']) ?><?= fld('조직규모',$r['org_size']) ?>
-            <?= lng('우편주소(도서 발송)',$r['postal_address']) ?>
           </div></div>
           <div class="sec"><div class="sec-t">담당·관심·사연</div><div class="dl">
             <?= fld('담당업무',$r['role_work']) ?><?= fld('관심분야',$r['interests']) ?>
