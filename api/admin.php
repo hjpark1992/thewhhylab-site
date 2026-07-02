@@ -134,6 +134,7 @@ if (!$authed) {
 
 /* ---------- DB 연결 ---------- */
 require $base . '/lib/db.php';
+require $base . '/lib/schema.php';
 try { $pdo = db_connect($cfg['db']); }
 catch (Throwable $e) { http_response_code(500); exit('DB 접속 오류: ' . h($e->getMessage())); }
 
@@ -164,6 +165,7 @@ function ensure_schema($pdo) {
   } catch (Throwable $e) {}
 }
 ensure_schema($pdo);
+ensure_event_columns($pdo); // inquiries에 AX 이벤트(kind='event') 컬럼 보장
 
 $STATUS = [
   'inquiries' => ['신규', '진행중', '답변완료', '보류'],
@@ -252,7 +254,7 @@ function memos_for($pdo, $refType, $ids) {
 
 /* CSV 컬럼 (관리메모는 누적메모를 합쳐서) */
 $COLS = [
-  'inquiries' => ['ID'=>'id','상태'=>'status','접수일시'=>'created_at','이름'=>'name','연락처'=>'phone','이메일'=>'email','소속'=>'affiliation','교육주제'=>'topic','교육목적'=>'purpose','교육대상'=>'audience','교육장소'=>'location','문의내용/RFP'=>'message','관리메모'=>'__memos__','IP'=>'ip'],
+  'inquiries' => ['ID'=>'id','구분'=>'kind','상태'=>'status','접수일시'=>'created_at','이름'=>'name','연락처'=>'phone','이메일'=>'email','소속'=>'affiliation','교육주제'=>'topic','교육목적'=>'purpose','교육대상'=>'audience','교육장소'=>'location','문의내용/RFP'=>'message','회사명'=>'company','부서'=>'dept','직책'=>'job_title','우편주소'=>'postal_address','담당업무'=>'role_work','조직규모'=>'org_size','관심분야'=>'interests','AX사연'=>'story','상담희망'=>'consult_wanted','마케팅동의'=>'marketing_agreed','명함원본'=>'card_original','관리메모'=>'__memos__','IP'=>'ip'],
   'member_applications' => ['ID'=>'id','상태'=>'status','접수일시'=>'created_at','성함'=>'name','연락처'=>'phone','성별'=>'gender','출생년도'=>'birth_year','거주지역'=>'region','경력기간'=>'career_years','주요경력'=>'prev_career','강의분야'=>'fields','강의스타일'=>'styles','소개'=>'intro','출강기관'=>'client_types','최소섭외비'=>'min_fee','신청경로'=>'referral','첨부원본파일명'=>'profile_original','관리메모'=>'__memos__','IP'=>'ip'],
 ];
 
@@ -264,6 +266,22 @@ if (isset($_GET['dl'])) {
   $path = $r ? safe_upload_path($uploadDir, $r['profile_file']) : null;
   if (!$path) { http_response_code(404); exit('파일을 찾을 수 없습니다.'); }
   $fn = $r['profile_original'] ?: basename($path);
+  $fnAscii = preg_replace('/[\r\n"]/', '', $fn);
+  header('Content-Type: application/octet-stream');
+  header('Content-Length: ' . filesize($path));
+  header("Content-Disposition: attachment; filename=\"{$fnAscii}\"; filename*=UTF-8''" . rawurlencode($fn));
+  header('X-Content-Type-Options: nosniff');
+  readfile($path); exit;
+}
+
+/* ---------- 명함 다운로드 (AX 이벤트, inquiries.card_file) ---------- */
+if (isset($_GET['cdl'])) {
+  $id = (int)$_GET['cdl'];
+  $st = $pdo->prepare('SELECT card_file, card_original FROM inquiries WHERE id = ?');
+  $st->execute([$id]); $r = $st->fetch();
+  $path = $r ? safe_upload_path($uploadDir, $r['card_file']) : null;
+  if (!$path) { http_response_code(404); exit('파일을 찾을 수 없습니다.'); }
+  $fn = $r['card_original'] ?: basename($path);
   $fnAscii = preg_replace('/[\r\n"]/', '', $fn);
   header('Content-Type: application/octet-stream');
   header('Content-Length: ' . filesize($path));
@@ -347,6 +365,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['bulk_delete'])) {
         $p = safe_upload_path($uploadDir, $pf);
         if ($p) @unlink($p);
       }
+    } else { // inquiries — AX 이벤트 명함 파일 정리
+      try {
+        $st = $pdo->prepare("SELECT card_file FROM inquiries WHERE id IN ($in)");
+        $st->execute($ids);
+        foreach ($st->fetchAll(PDO::FETCH_COLUMN) as $pf) {
+          $p = safe_upload_path($uploadDir, $pf);
+          if ($p) @unlink($p);
+        }
+      } catch (Throwable $e) {}
     }
     try { $pdo->prepare("DELETE FROM admin_memos WHERE ref_type = ? AND ref_id IN ($in)")->execute(array_merge([$which], $ids)); } catch (Throwable $e) {}
     $pdo->prepare("DELETE FROM {$which} WHERE id IN ($in)")->execute($ids);
@@ -445,6 +472,9 @@ header('Content-Type: text/html; charset=UTF-8');
   .p-prog{background:#fff7ed;color:#c2410c}.p-prog i{background:#fb923c}
   .p-done{background:#ecfdf5;color:#047857}.p-done i{background:#10b981}
   .p-hold{background:#f1f5f9;color:#64748b}.p-hold i{background:#94a3b8}
+  .p-event{background:#f3e8ff;color:#7c3aed;margin-left:5px}
+  tr.main.evrow>td.cid{box-shadow:inset 3px 0 0 #a855f7}
+  .chips button.chip-event{color:#7c3aed}.chips button.chip-event.on{background:#7c3aed;color:#fff;border-color:#7c3aed}
   .memoicon{margin-left:6px;color:var(--mut2);vertical-align:middle}
   .filelink{display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;color:#15803d;text-decoration:none;padding:5px 10px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid #c7f0d4;white-space:normal;word-break:break-all}
   .filelink:hover{background:#dcfce7}
@@ -519,6 +549,7 @@ header('Content-Type: text/html; charset=UTF-8');
   <div class="chips" id="filters">
     <button data-f="all" class="on">전체</button>
     <?php foreach ($statusOpts as $s): ?><button data-f="<?= h($s) ?>"><?= h($s) ?></button><?php endforeach; ?>
+    <?php if (!$isApp): ?><button data-kind="event" class="chip-event">AX이벤트</button><?php endif; ?>
   </div>
   <input class="search" id="search" type="search" placeholder="이름·소속·연락처·내용 검색">
 </div>
@@ -548,14 +579,19 @@ header('Content-Type: text/html; charset=UTF-8');
       <?php else: ?><th>성함</th><th>연락처</th><th class="hide-sm">강의분야</th><th>첨부</th><?php endif; ?>
     </tr></thead>
     <tbody>
-    <?php foreach ($rows as $r): $st = $r['status'] ?: $statusOpts[0]; $cls = status_class($st); $new = ($st === '신규'); $mc = count($memosByRow[$r['id']] ?? []); ?>
-    <tr class="main<?= $new?' isnew':'' ?>" data-id="<?= (int)$r['id'] ?>" data-status="<?= h($st) ?>">
+    <?php foreach ($rows as $r): $st = $r['status'] ?: $statusOpts[0]; $cls = status_class($st); $new = ($st === '신규'); $mc = count($memosByRow[$r['id']] ?? []);
+      $rk = $r['kind'] ?? 'contact'; $isEvent = ($rk === 'event'); ?>
+    <tr class="main<?= $new?' isnew':'' ?><?= $isEvent?' evrow':'' ?>" data-id="<?= (int)$r['id'] ?>" data-status="<?= h($st) ?>" data-kind="<?= h($rk) ?>">
       <td class="chk"><input type="checkbox" class="rowchk" name="ids[]" value="<?= (int)$r['id'] ?>" onclick="event.stopPropagation()"></td>
       <td class="cid"><span class="caret"></span><?= (int)$r['id'] ?></td>
-      <td><span class="pill p-<?= $cls ?>"><i></i><?= h($st) ?></span><span class="memoicon" title="메모 있음" style="<?= $mc?'':'display:none' ?>"><?= $ICON_MEMO ?></span></td>
+      <td><span class="pill p-<?= $cls ?>"><i></i><?= h($st) ?></span><?php if ($isEvent): ?><span class="pill p-event">AX이벤트</span><?php endif; ?><span class="memoicon" title="메모 있음" style="<?= $mc?'':'display:none' ?>"><?= $ICON_MEMO ?></span></td>
       <td class="cdt"><?= h(substr($r['created_at'],0,16)) ?></td>
       <?php if (!$isApp): ?>
-        <td class="tx"><?= h($r['name']) ?></td><td class="tx"><?= h($r['phone']) ?></td><td class="tx hide-sm"><?= h($r['affiliation']) ?></td><td class="tx"><?= h($r['topic']) ?></td>
+        <?php if ($isEvent): ?>
+          <td class="tx"><?= h($r['name']) ?></td><td class="tx"><?= h($r['phone']) ?></td><td class="tx hide-sm"><?= h($r['company']) ?></td><td class="tx">AX 도서 이벤트<?= $r['org_size'] ? ' · '.h($r['org_size']) : '' ?></td>
+        <?php else: ?>
+          <td class="tx"><?= h($r['name']) ?></td><td class="tx"><?= h($r['phone']) ?></td><td class="tx hide-sm"><?= h($r['affiliation']) ?></td><td class="tx"><?= h($r['topic']) ?></td>
+        <?php endif; ?>
       <?php else: ?>
         <td class="tx"><?= h($r['name']) ?></td><td class="tx"><?= h($r['phone']) ?></td><td class="tx hide-sm"><?= h($r['fields']) ?></td>
         <td class="catt"><?php if ($r['profile_file']): ?><a class="filelink" href="?dl=<?= (int)$r['id'] ?>" onclick="event.stopPropagation();return confirm('첨부파일을 다운로드할까요?');"><?= $ICON_DL ?><span class="flbl">파일</span></a><?php else: ?><span class="none">없음</span><?php endif; ?></td>
@@ -563,7 +599,20 @@ header('Content-Type: text/html; charset=UTF-8');
     </tr>
     <tr class="detail"><td colspan="<?= $colspan ?>">
       <div class="panel">
-        <?php if (!$isApp): ?>
+        <?php if (!$isApp && $isEvent): ?>
+          <div class="sec"><div class="sec-t">AX DISCOVERY 이벤트 신청</div><div class="dl">
+            <?= fld('이름',$r['name']) ?><?= fld('회사/기관',$r['company']) ?><?= fld('부서',$r['dept']) ?><?= fld('직책',$r['job_title']) ?>
+            <?= fld('연락처',$r['phone']) ?><?= fld('이메일',$r['email']) ?><?= fld('조직규모',$r['org_size']) ?>
+            <?= lng('우편주소(도서 발송)',$r['postal_address']) ?>
+          </div></div>
+          <div class="sec"><div class="sec-t">담당·관심·사연</div><div class="dl">
+            <?= fld('담당업무',$r['role_work']) ?><?= fld('관심분야',$r['interests']) ?>
+            <?= fld('상담희망',!empty($r['consult_wanted'])?'예':'아니오') ?><?= fld('마케팅동의',!empty($r['marketing_agreed'])?'예':'아니오') ?>
+            <?= lng('AX 고민 사연',$r['story']) ?>
+            <div class="d long"><dt>명함</dt><dd><?php if (!empty($r['card_file'])): ?><a class="filelink" href="?cdl=<?= (int)$r['id'] ?>" onclick="return confirm('명함 파일을 다운로드할까요?');"><?= $ICON_DL ?><?= h($r['card_original'] ?: '다운로드') ?></a><?php else: ?>없음<?php endif; ?></dd></div>
+          </div></div>
+          <div class="metaline">접수 <?= h($r['created_at']) ?> · IP <?= h($r['ip']) ?> · #<?= (int)$r['id'] ?></div>
+        <?php elseif (!$isApp): ?>
           <div class="sec"><div class="sec-t">문의자</div><div class="dl">
             <?= fld('이름',$r['name']) ?><?= fld('연락처',$r['phone']) ?><?= fld('이메일',$r['email']) ?><?= fld('소속',$r['affiliation']) ?>
           </div></div>
@@ -656,7 +705,7 @@ header('Content-Type: text/html; charset=UTF-8');
     if(!confirm(sel+'건을 영구 삭제합니다.\n첨부파일·메모도 함께 삭제되며 되돌릴 수 없습니다.\n계속할까요?')){ e.preventDefault(); }
   });
 
-  var curF='all', q='';
+  var curF='all', curKind='', q='';
   var fbtns=document.querySelectorAll('#filters button');
   var search=document.getElementById('search');
   var viewcount=document.getElementById('viewcount');
@@ -664,14 +713,14 @@ header('Content-Type: text/html; charset=UTF-8');
     var shown=0;
     document.querySelectorAll('tr.main').forEach(function(row){
       var d=row.nextElementSibling;
-      var okF=curF==='all'||row.dataset.status===curF;
+      var okF=curKind ? (row.dataset.kind===curKind) : (curF==='all'||row.dataset.status===curF);
       var okQ=q===''||(row.textContent+' '+d.textContent).toLowerCase().indexOf(q)>=0;
       var show=okF&&okQ; row.style.display=show?'':'none';
       if(!show){ d.style.display='none'; d.classList.remove('show'); row.classList.remove('open'); var c=row.querySelector('.caret'); if(c)c.style.transform=''; } else { d.style.display=''; shown++; }
     });
     if(viewcount)viewcount.textContent=shown; refresh();
   }
-  fbtns.forEach(function(b){ b.addEventListener('click',function(){ fbtns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); curF=b.dataset.f; applyFilter(); }); });
+  fbtns.forEach(function(b){ b.addEventListener('click',function(){ fbtns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); if(b.dataset.kind){ curKind=b.dataset.kind; curF='all'; } else { curKind=''; curF=b.dataset.f; } applyFilter(); }); });
   if(search)search.addEventListener('input',function(){ q=search.value.trim().toLowerCase(); applyFilter(); });
   var onlyNew=document.getElementById('onlyNew');
   if(onlyNew)onlyNew.addEventListener('click',function(){ var t=Array.prototype.slice.call(fbtns).filter(function(b){return b.dataset.f==='신규';})[0]; if(t)t.click(); window.scrollTo({top:0,behavior:'smooth'}); });

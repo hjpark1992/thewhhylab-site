@@ -8,6 +8,7 @@ $cfg = require $cfgFile;
 require $base . '/lib/db.php';
 require $base . '/lib/validate.php';
 require $base . '/lib/mailer.php';
+require $base . '/lib/schema.php';
 
 function fail($msg, $code = 400) { http_response_code($code); echo json_encode(['ok'=>false,'message'=>$msg]); exit; }
 function ok($msg) { echo json_encode(['ok'=>true,'message'=>$msg]); exit; }
@@ -104,6 +105,71 @@ try {
     $body .= '프로필파일: ' . ($originalName ? "{$originalName} (저장명 {$storedName})" : '없음') . "\n";
     send_notification($cfg, '[더와이랩] 교육 멤버 지원 접수', $body);
     ok('지원이 정상 접수되었습니다. 검토 후 개별 연락드리겠습니다.');
+  }
+
+  if ($type === 'event') {
+    // AX DISCOVERY 도서 증정 이벤트 — 기업/기관 담당자 신청 (inquiries 테이블에 kind='event'로 저장)
+    $f = [
+      'name' => $_POST['name'] ?? '', 'company' => $_POST['company'] ?? '',
+      'dept' => $_POST['dept'] ?? '', 'job_title' => $_POST['job_title'] ?? '',
+      'phone' => $_POST['phone'] ?? '', 'email' => $_POST['email'] ?? '',
+      'postal_address' => $_POST['postal_address'] ?? '', 'org_size' => $_POST['org_size'] ?? '',
+      'story' => $_POST['story'] ?? '',
+    ];
+    foreach ($f as $k => $v) { if (!v_required($v)) fail('모든 필수 항목을 입력해주세요.'); }
+    if (!v_email($f['email'])) fail('이메일 형식이 올바르지 않습니다.');
+    if (!v_phone($f['phone'])) fail('연락처 형식이 올바르지 않습니다.');
+    if (empty($_POST['role_work'])) fail('담당 업무를 1개 이상 선택해주세요.');
+    if (empty($_POST['interests'])) fail('AX 관심 분야를 1개 이상 선택해주세요.');
+    if (empty($_POST['privacy_agreed'])) fail('개인정보 수집·이용에 동의해주세요.');
+
+    // 명함 사진 (필수)
+    $chk = v_file($cfg, $_FILES['card'] ?? null);
+    if (!$chk['ok']) fail($chk['error']);
+    if (!empty($chk['skip'])) fail('명함 사진을 첨부해주세요.');
+    $dir = $cfg['upload_dir'] !== '' ? rtrim($cfg['upload_dir'],'/\\') : ($base . '/uploads');
+    if (!is_dir($dir)) @mkdir($dir, 0750, true);
+    $cardOriginal = $_FILES['card']['name'];
+    $cardStored = bin2hex(random_bytes(16)) . '.' . $chk['ext'];
+    if (!move_uploaded_file($_FILES['card']['tmp_name'], $dir . '/' . $cardStored)) fail('파일 저장에 실패했습니다.', 500);
+
+    ensure_event_columns($pdo);
+
+    // 다중선택 + '기타' 자유입력 병합
+    $joinEtc = function ($vals, $etc) {
+      $vals = (array)$vals; $etc = trim((string)$etc);
+      if ($etc !== '') { $vals = array_filter($vals, function ($v) { return $v !== '기타'; }); $vals[] = $etc; }
+      return v_join(array_values($vals));
+    };
+
+    $row = [
+      'kind' => 'event',
+      'name' => $f['name'], 'phone' => $f['phone'], 'email' => $f['email'],
+      'company' => $f['company'], 'dept' => $f['dept'], 'job_title' => $f['job_title'],
+      'postal_address' => $f['postal_address'], 'org_size' => $f['org_size'],
+      'role_work' => $joinEtc($_POST['role_work'] ?? [], $_POST['role_work_etc'] ?? ''),
+      'interests' => $joinEtc($_POST['interests'] ?? [], $_POST['interests_etc'] ?? ''),
+      'story' => $f['story'],
+      'card_file' => $cardStored, 'card_original' => $cardOriginal,
+      'consult_wanted' => !empty($_POST['consult_wanted']) ? 1 : 0,
+      'marketing_agreed' => !empty($_POST['marketing_agreed']) ? 1 : 0,
+      // contact 전용 NOT NULL 컬럼은 이벤트 행에서 빈 값
+      'affiliation' => '', 'topic' => '', 'purpose' => '', 'audience' => '', 'location' => '', 'message' => '',
+      'privacy_agreed' => 1, 'created_at' => $now, 'ip' => $ip,
+    ];
+    $cols = implode(',', array_keys($row));
+    $ph = ':' . implode(',:', array_keys($row));
+    $pdo->prepare("INSERT INTO inquiries ($cols) VALUES ($ph)")->execute($row);
+
+    $body = "[AX DISCOVERY 이벤트 신청]\n";
+    foreach (['name'=>'이름','company'=>'회사명','dept'=>'부서','job_title'=>'직책','phone'=>'연락처','email'=>'이메일','postal_address'=>'우편주소','role_work'=>'담당업무','org_size'=>'조직규모','interests'=>'관심분야','story'=>'AX 고민 사연'] as $k=>$lbl) {
+      $body .= "{$lbl}: {$row[$k]}\n";
+    }
+    $body .= '상담희망: ' . ($row['consult_wanted'] ? '예' : '아니오') . "\n";
+    $body .= '마케팅동의: ' . ($row['marketing_agreed'] ? '예' : '아니오') . "\n";
+    $body .= '명함파일: ' . ($cardOriginal ? "{$cardOriginal} (저장명 {$cardStored})" : '없음') . "\n";
+    send_notification($cfg, '[더와이랩] AX DISCOVERY 이벤트 신청 접수', $body, $f['email']);
+    ok('신청이 정상 접수되었습니다. 도서 발송 및 후속 안내를 드리겠습니다.');
   }
 
   fail('알 수 없는 폼 유형입니다.');
