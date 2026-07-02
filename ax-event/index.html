@@ -20,6 +20,13 @@
 <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
 <link rel="stylesheet" href="../shared/css/site.css"/>
+<style>
+  .consent-box{max-height:172px;overflow-y:auto;margin:4px 0 12px;padding:14px 16px;border:1px solid rgba(20,30,50,.14);border-radius:12px;background:#f8fafc;font-size:13px;line-height:1.62;color:#4a5568}
+  .consent-box p{margin:0 0 6px}
+  .consent-box .c-h{font-weight:700;color:#1f2a3a;margin:11px 0 3px}
+  .consent-box ul{margin:0;padding-left:17px}
+  .consent-box li{margin:2px 0}
+</style>
 </head>
 <body data-page="ax-event">
 
@@ -107,13 +114,56 @@
       <fieldset class="form-field"><legend>기업교육 상담 희망</legend>
         <label class="check-item"><input type="checkbox" name="consult_wanted" value="1"> 예, 기업교육 상담을 받고 싶습니다.</label></fieldset>
 
-      <!-- 동의 -->
-      <fieldset class="form-field"><legend>개인정보 수집·이용 동의<span class="req">*</span>
-        <span class="hint">수집 항목(이름·연락처·이메일·명함·소속 정보 등)은 이벤트 심사·운영 및 후속 안내 목적으로만 이용되며, 목적 달성 후 파기됩니다.</span></legend>
-        <label class="check-item"><input type="checkbox" name="privacy_agreed" value="1" required> 예, 개인정보 수집·이용에 동의합니다.</label>
+      <!-- 개인정보 수집·이용 동의 (필수) -->
+      <fieldset class="form-field"><legend>개인정보 수집·이용 동의<span class="req">*</span></legend>
+        <div class="consent-box">
+          <p>더와이랩은 「AX 전략기획 전문가 과정」 신청 및 운영을 위해 아래와 같이 개인정보를 수집·이용합니다.</p>
+          <p class="c-h">1. 수집 목적</p>
+          <ul>
+            <li>과정 신청자 확인</li>
+            <li>과정 참여 대상자 선정 및 개별 안내</li>
+            <li>과정 입과 안내 및 교육 운영 관리</li>
+            <li>과정 관련 사전·사후 안내</li>
+          </ul>
+          <p class="c-h">2. 수집 항목</p>
+          <ul>
+            <li>성명, 소속 기업/기관명, 부서명, 직함/직책</li>
+            <li>휴대폰 번호, 이메일 주소</li>
+            <li>명함 이미지(소속·담당자 확인용)</li>
+            <li>AX 추진 고민 및 신청 사유</li>
+            <li>기타 과정 참여 확인에 필요한 신청서 기재 정보</li>
+          </ul>
+          <p class="c-h">3. 보유 및 이용 기간</p>
+          <ul>
+            <li>과정 운영 및 사후 안내 종료 후 30일 이내 파기</li>
+          </ul>
+          <p class="c-h">4. 동의 거부 권리 및 불이익</p>
+          <ul>
+            <li>개인정보 수집·이용에 대한 동의를 거부할 수 있습니다.</li>
+            <li>미동의 시 과정 신청자 확인 및 입과 안내가 어려워 과정 참여가 제한될 수 있습니다.</li>
+          </ul>
+        </div>
+        <label class="check-item"><input type="checkbox" name="privacy_agreed" value="1" required> 위 내용을 확인했으며, 개인정보 수집·이용에 동의합니다.</label>
         <span class="err-msg">개인정보 수집·이용에 동의해주세요.</span></fieldset>
+
+      <!-- 마케팅 정보 수신 동의 (선택) -->
       <fieldset class="form-field"><legend>마케팅 정보 수신 동의 <span class="hint">(선택)</span></legend>
-        <label class="check-item"><input type="checkbox" name="marketing_agreed" value="1"> AX 관련 인사이트·교육 안내 등 마케팅 정보 수신에 동의합니다.</label></fieldset>
+        <div class="consent-box">
+          <p>더와이랩은 AX 관련 인사이트 제공, 교육 프로그램 안내 및 홍보, 이벤트 등 관련 정보를 안내드리기 위해, 귀하의 동의 하에 마케팅 정보를 발송할 수 있습니다.</p>
+          <p class="c-h">1. 수집 항목</p>
+          <ul><li>성명, 휴대폰 번호, 이메일 주소</li></ul>
+          <p class="c-h">2. 이용 목적</p>
+          <ul>
+            <li>AX 관련 인사이트 제공</li>
+            <li>교육 프로그램 안내 및 홍보</li>
+            <li>이벤트 등 마케팅 정보 안내</li>
+          </ul>
+          <p class="c-h">3. 보유 및 이용 기간</p>
+          <ul><li>수집일로부터 1년까지</li></ul>
+          <p class="c-h">4. 동의 거부 권리</p>
+          <ul><li>본 동의는 선택사항이며, 동의하지 않더라도 「AX 전략기획 전문가 과정」 신청 및 참여 대상자 선정에는 영향을 미치지 않습니다.</li></ul>
+        </div>
+        <label class="check-item"><input type="checkbox" name="marketing_agreed" value="1"> 위 마케팅 정보 수신에 동의합니다.</label></fieldset>
 
       <button type="submit" class="form-submit">이벤트 신청하기</button>
       <div class="form-status" role="status" aria-live="polite"></div>
