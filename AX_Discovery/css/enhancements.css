@@ -2091,3 +2091,112 @@ html.no-js .split-word {
     background: transparent !important;
 }
 
+/* =========================================================
+   16. EVENT BANNER — AX 전환 실무자 응원 이벤트 (2 이벤트)
+   nav(fixed) 바로 아래, hero 앞. 다크 글래스 + 책/배지 이미지.
+   ========================================================= */
+.event-banner {
+    position: relative;
+    padding: 112px 0 44px;
+    overflow: hidden;
+    background:
+        radial-gradient(1200px 400px at 50% -10%, rgba(0, 112, 243, 0.14), transparent 70%),
+        linear-gradient(180deg, var(--color-navy-deeper), var(--color-navy));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+/* 배너가 hero 위 고정 nav 여백을 이미 확보하므로 hero 상단 여백 축소 */
+.event-banner + .hero { padding-top: 60px; }
+
+.eb-bg-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(600px 300px at 82% 42%, rgba(0, 240, 255, 0.10), transparent 65%);
+}
+
+.event-banner-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+}
+
+/* 미디어(책 + 자격 배지) */
+.eb-media { position: relative; display: grid; place-items: center; min-height: 260px; }
+.eb-media-glow {
+    position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 112, 243, 0.35), transparent 68%);
+    filter: blur(18px);
+}
+.eb-book {
+    position: relative; width: clamp(158px, 20vw, 232px); height: auto;
+    filter: drop-shadow(0 24px 44px rgba(0, 0, 0, 0.6));
+    transform: rotate(-3deg);
+    transition: transform .5s var(--ease-out-quart, ease);
+}
+.event-banner:hover .eb-book { transform: rotate(-3deg) translateY(-4px); }
+.eb-badge {
+    position: absolute; right: 2%; bottom: 4%;
+    width: clamp(96px, 12vw, 136px); height: auto;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
+    transform: rotate(8deg);
+}
+
+/* 본문 */
+.eb-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--glass-bg); border: var(--glass-border);
+    color: var(--color-cyan-glow);
+    font-size: var(--text-xs); font-weight: 700; letter-spacing: .02em;
+}
+.eb-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-cyan-glow); box-shadow: 0 0 10px var(--color-cyan-glow); }
+.eb-title { margin: 14px 0 20px; font-size: var(--text-3xl); line-height: 1.25; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+.eb-title-accent {
+    background: linear-gradient(135deg, var(--color-neon-blue), var(--color-cyan-glow));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+}
+
+.eb-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.eb-card {
+    position: relative; text-align: left;
+    padding: 18px 18px 20px; border-radius: var(--radius-lg);
+    background: var(--glass-bg); border: var(--glass-border);
+    display: flex; flex-direction: column;
+}
+.eb-card-featured { border: var(--glass-border-strong); box-shadow: var(--shadow-glow-cyan); }
+.eb-num { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; color: var(--color-cyan-glow); letter-spacing: .08em; }
+.eb-card-title { margin: 8px 0 6px; font-size: var(--text-lg); font-weight: 700; color: #fff; line-height: 1.35; }
+.eb-card-desc { margin: 0 0 16px; font-size: var(--text-sm); line-height: 1.6; color: var(--color-gray-400); flex: 1; }
+.eb-card-desc strong { color: var(--color-gray-100); font-weight: 700; }
+
+.eb-btn {
+    display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
+    padding: 10px 18px; border-radius: var(--radius-md);
+    font-size: var(--text-sm); font-weight: 700; text-decoration: none;
+    transition: transform .2s var(--ease-out-quart, ease), box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.eb-btn svg { transition: transform .2s ease; }
+.eb-btn:hover svg { transform: translateX(3px); }
+.eb-btn-primary {
+    background: linear-gradient(135deg, var(--color-neon-blue), var(--color-cyan-glow));
+    color: var(--color-navy);
+    box-shadow: 0 0 26px rgba(0, 240, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.eb-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 44px rgba(0, 240, 255, 0.6); }
+.eb-btn-ghost { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.16); }
+.eb-btn-ghost:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.1); border-color: rgba(0, 240, 255, 0.4); }
+
+@media (max-width: 860px) {
+    .event-banner { padding: 96px 0 36px; }
+    .event-banner-inner { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+    .eb-media { min-height: 200px; }
+    .eb-cards { grid-template-columns: 1fr; }
+    .eb-btn { align-self: stretch; justify-content: center; }
+    .eb-card-desc { flex: none; }
+}
+@media (max-width: 480px) {
+    .event-banner { padding: 86px 0 30px; }
+    .eb-title { font-size: var(--text-2xl); }
+}
+
