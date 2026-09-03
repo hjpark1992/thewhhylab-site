@@ -6,6 +6,14 @@
 (function () {
     'use strict';
 
+    /* 현재 모집 단계 정보 (js/dday.js 에서 계산해 window 에 노출) */
+    function phase() {
+        return window.AX_PHASE || { name: '일반 수강료', price: 1600000, priceText: '1,600,000원', closed: false };
+    }
+    function course() {
+        return window.AX_COURSE || { cohort: '4기', scheduleText: '2026년 10월 15일(목) ~ 10월 16일(금), 10:00~18:00 (총 14시간)' };
+    }
+
     // 신청서 본문 HTML (워드/인쇄 공용)
     function buildFormBody() {
         return [
@@ -19,8 +27,8 @@
 
             '<h2 class="doc-h2">2. 교육 상세 정보</h2>',
             '<table class="doc-table">',
-            '  <tr><th class="lbl">교육과정명</th><td colspan="3">AX Discovery l AX 전략기획 전문가 2급 자격증 과정 (2기)</td></tr>',
-            '  <tr><th class="lbl">교육기간 및 시간</th><td colspan="3">2026년 7월 18일(토) ~ 7월 19일(일) 10:00~18:00 (총 14시간)</td></tr>',
+            '  <tr><th class="lbl">교육과정명</th><td colspan="3">AX Discovery l AX 전략기획 전문가 2급 자격증 과정 (' + course().cohort + ')</td></tr>',
+            '  <tr><th class="lbl">교육기간 및 시간</th><td colspan="3">' + course().scheduleText + '</td></tr>',
             '  <tr><th class="lbl">교육장소</th><td colspan="3">더와이랩 (서울 성동구 성수일로99, 1004호)</td></tr>',
             '  <tr><th class="lbl">주최기관</th><td colspan="3">주식회사 더와이랩</td></tr>',
             '  <tr><th class="lbl">자격증 정보</th><td colspan="3">AX 전략기획 전문가 2급 (과학기술정보통신부 정식 등록 민간자격: 2026-003156)</td></tr>',
@@ -36,8 +44,10 @@
                 '- AI 에이전트 프로토타입 만들기 및 해커톤 발표<br>' +
                 '- <em>교육 종료 후 60분간 온라인 자격시험 진행</em>' +
                 '</td></tr>',
-            '  <tr><th class="lbl">교육비 (수강료)</th><td colspan="3"><strong>1,000,000원</strong> (2기 특별 할인가, VAT 포함)<br>' +
-                '<span class="doc-small">※ 실습 강의 14시간, 실물 산출물 3종, 자격증 응시료 10만 원 포함</span></td></tr>',
+            '  <tr><th class="lbl">교육비 (수강료)</th><td colspan="3"><strong>' + phase().priceText + '</strong> (VAT 포함)' +
+                (phase().closed ? '' : ' &nbsp;<span class="doc-small">— ' + phase().name + ' 적용가</span>') + '<br>' +
+                '<span class="doc-small">※ 실습 강의 14시간, 실물 산출물 3종, 교재 및 자격증 응시료 포함</span><br>' +
+                '<span class="doc-small">※ 단계별 수강료 : 슈퍼 얼리버드 1,200,000원(~9/11) / 얼리버드 1,400,000원(~10/5) / 일반 1,600,000원(~10/13)</span></td></tr>',
             '  <tr><th class="lbl">신청사유 (예시)</th><td colspan="3">당사 업무 프로세스 중 발생하는 비효율적인 반복 업무를 분석하고, 데이터 기반의 우선순위 결정(IFV 매트릭스) 및 인간-AI 협업(HITL) 구조를 설계하여 부서의 실질적인 업무 생산성과 ROI를 향상시키고자 함.</td></tr>',
             '</table>',
 
@@ -76,7 +86,7 @@
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'AX_Discovery_2기_사외교육_참가신청서.doc';
+        a.download = 'AX_Discovery_' + course().cohort + '_사외교육_참가신청서.doc';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

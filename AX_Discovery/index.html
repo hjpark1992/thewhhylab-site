@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#050b14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <title>AX Discovery | AX 전략기획 전문가 2급 자격증 과정 - 더와이랩</title>
-    <meta name="description" content="단순 프롬프트 작성을 넘어, 조직의 페인포인트를 발굴하고 워크플로우를 해체하여 AI 에이전트로 조립하는 실전 마스터 클래스. 과학기술정보통신부 정식 등록 민간자격(2026-003156).">
-    <meta name="keywords" content="AX, AI전환, AI에이전트, 자격증, 더와이랩, 전략기획">
+    <meta name="description" content="AI 도구 학습을 넘어, 내 업무의 본질을 재정의하고 일하는 방식 자체를 재설계하는 2일 14시간 과정. 과학기술정보통신부 정식 등록 민간자격(2026-003156). 4기 2026년 10월 15일~16일.">
+    <meta name="keywords" content="AX, AI전환, AX교육, 기업교육, AI에이전트, 자격증, 더와이랩, 전략기획, HTA">
     <meta name="author" content="더와이랩">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="AX Discovery | AX 전략기획 전문가 2급 자격증 과정">
-    <meta property="og:description" content="AI 도구만 배우다 끝날 것인가, 비즈니스를 혁신할 것인가?">
+    <meta property="og:description" content="도구를 배우는 교육이 아닙니다. 일하는 방식 자체를 다시 설계합니다. 4기 10/15(목)~10/16(금) · 선착순 12명.">
     <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="img/og-image.jpg">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AX Discovery | AX 전략기획 전문가 2급 자격증 과정">
+    <meta name="twitter:description" content="도구를 배우는 교육이 아닙니다. 일하는 방식 자체를 다시 설계합니다. 4기 10/15(목)~10/16(금) · 선착순 12명.">
+    <meta name="twitter:image" content="img/og-image.jpg">
 
     <!-- Favicon (inline SVG) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230070f3'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='%23050b14' font-family='Arial' font-weight='900' font-size='16'%3EAX%3C/text%3E%3C/svg%3E">
@@ -33,12 +43,13 @@
     <!-- Cursor Glow -->
     <div class="cursor-glow" aria-hidden="true"></div>
 
-
     <!-- Background Atmosphere -->
     <div class="bg-gradient" aria-hidden="true"></div>
     <div class="bg-grid" aria-hidden="true"></div>
 
-    <!-- Navigation -->
+    <!-- ===========================
+         NAV + 단계별 D-day 타이머
+    ============================ -->
     <nav class="nav" id="nav">
         <div class="container nav-inner">
             <a href="#" class="nav-logo">
@@ -46,75 +57,83 @@
                 <span class="nav-logo-text">Discovery</span>
             </a>
 
-            <!-- 모집마감 D-day 타이머 (2기·3기 동시 노출) -->
-            <a href="#register" class="nav-timer nav-timer--dual" id="navTimer" aria-label="2기·3기 모집 마감 카운트다운">
-                <span class="nav-timer-unit" data-gi="2">
+            <a href="#register" class="nav-timer nav-timer--withclock" id="navTimer" aria-label="모집 마감 카운트다운">
+                <span class="nav-timer-unit">
                     <span class="nav-timer-pulse" aria-hidden="true"></span>
-                    <span class="nav-timer-label">2기<span class="lbl-full"> 마감</span></span>
-                    <span class="nav-timer-dday" data-dday="0">D-00</span>
+                    <span class="nav-timer-label" id="navTimerLabel">모집중</span>
+                    <span class="nav-timer-dday" id="navTimerDday">D-</span>
                 </span>
-                <span class="nav-timer-div" aria-hidden="true"></span>
-                <span class="nav-timer-unit" data-gi="1">
-                    <span class="nav-timer-pulse nav-timer-pulse--soft" aria-hidden="true"></span>
-                    <span class="nav-timer-label">3기<span class="lbl-full"> 마감</span></span>
-                    <span class="nav-timer-dday" data-dday="1">D-00</span>
-                </span>
+                <span class="nav-timer-clock" id="navTimerClock" aria-hidden="true"></span>
             </a>
 
-            <a href="#register" class="nav-cta">
-                <span>신청하기</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <a href="#register" class="nav-apply" id="navApply">
+                <span class="nav-apply-full">수강 신청</span>
+                <span class="nav-apply-short">신청</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>
     </nav>
 
     <!-- ===========================
-         HERO
+         01. HERO
     ============================ -->
     <header class="hero">
         <div class="hero-cover" aria-hidden="true">
-            <img src="img/ax-cover.png" alt="" class="hero-cover-img">
+            <img src="img/ax-cover.jpg" alt="" class="hero-cover-img" fetchpriority="high" decoding="async">
             <div class="hero-cover-veil"></div>
         </div>
         <div class="hero-blob" aria-hidden="true"></div>
         <div class="container hero-content">
-            <div class="badge reveal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-                <span>AX Discovery l AX 전략기획 전문가 2급 자격증 과정</span>
-            </div>
 
             <h1 class="hero-title reveal reveal-delay-1">
-                AI 도구만 배우다 끝날 것인가,<br>
-                <span class="hero-title-accent">비즈니스를 혁신할 것인가?</span>
+                AX Discovery<br>
+                <span class="hero-title-accent">AX 전략기획 전문가 2급 자격증 과정</span>
             </h1>
 
             <p class="hero-subtitle reveal reveal-delay-2">
-                AI 도구 강의는 끝났습니다.<br>
-                이제, <strong style="color:#fff;">AI 워크플로우 설계</strong>를 배웁니다.
+                내 업무의 본질을 재정의하고, 사람과 AI의 역할을 재배치해<br class="br-pc">
+                새로운 비즈니스 가치를 만드는 <strong style="color:#fff;">2일 14시간, <span class="nowrap">업(業)의 전환 과정</span></strong>.
             </p>
 
-            <div class="hero-trust-chips reveal reveal-delay-2">
-                <span class="trust-chip"><span class="dot"></span>14시간 · 2일 완성</span>
-                <span class="trust-chip"><span class="dot"></span>과기정통부 등록 민간자격</span>
-                <span class="trust-chip"><span class="dot"></span>코딩 지식 불필요</span>
+            <!-- 첫 화면 3가지 -->
+            <div class="hero-three reveal reveal-delay-2">
+                <div class="hero-three-item">
+                    <span class="hero-three-num">01</span>
+                    <h3 class="hero-three-title">무엇을 배우는가</h3>
+                    <p class="hero-three-desc">내 업무를 최소 단위로 해체(HTA)하고,<br class="br-pc">어떤 업무를 AI에 맡길지<br class="br-pc">숫자로 결정하는 방법론</p>
+                </div>
+                <div class="hero-three-item">
+                    <span class="hero-three-num">02</span>
+                    <h3 class="hero-three-title">무엇을 만드는가</h3>
+                    <p class="hero-three-desc">내 업무의 문제를 정의하고 재설계한<br class="br-pc">TO-BE 워크플로우와 AI 에이전트 프로토타입</p>
+                </div>
+                <div class="hero-three-item">
+                    <span class="hero-three-num">03</span>
+                    <h3 class="hero-three-title">무엇을 증명하는가</h3>
+                    <p class="hero-three-desc">내 업무에 AI 전환을 적용할 수 있는<br class="br-pc">실무 역량과 AX 전략기획 전문가 2급 자격<br class="br-pc">(링크드인 연동 디지털배지)</p>
+                </div>
             </div>
 
             <div class="hero-cta-group reveal reveal-delay-3">
-                <a href="#register" class="btn btn-primary btn-large btn-magnetic">
-                    수강 신청하기
+                <a href="#register" class="btn btn-primary btn-large btn-magnetic" data-apply-btn>
+                    수강 신청
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="#curriculum" class="btn btn-outline btn-large">커리큘럼 보기</a>
+                <a href="#twodays" class="btn btn-outline btn-large">커리큘럼 보기</a>
             </div>
 
-            <div class="hero-meta hero-meta--center reveal reveal-delay-4">
-                <div class="hero-meta-item is-highlight">
-                    <span class="hero-meta-label">2기 교육일정</span>
-                    <span class="hero-meta-value">7/18(토)-7/19(일)<br>10:00~18:00</span>
+            <div class="hero-facts reveal reveal-delay-4">
+                <div class="hero-fact">
+                    <span class="hero-fact-label">4기 교육일정</span>
+                    <span class="hero-fact-value">10/15(목) – 10/16(금)<small>10:00 ~ 18:00 · 총 14시간</small></span>
                 </div>
-                <div class="hero-meta-item is-highlight">
-                    <span class="hero-meta-label">3기 교육일정</span>
-                    <span class="hero-meta-value">8/8(토)-8/9(일)<br>10:00~18:00</span>
+                <div class="hero-fact">
+                    <span class="hero-fact-label">모집 정원</span>
+                    <span class="hero-fact-value">선착순 12명<small>소수정예 실습형 교육</small></span>
+                </div>
+                <div class="hero-fact">
+                    <span class="hero-fact-label">교육 장소</span>
+                    <span class="hero-fact-value">더와이랩 (성수)<small>성동구 성수일로99, 1004호</small></span>
                 </div>
             </div>
         </div>
@@ -129,571 +148,282 @@
     </div>
 
     <!-- ===========================
-         WHY (왜 이 자격증인가)
-         책 기반: MIT NANDA, McKinsey, HBS/BCG 데이터
+         07. 왜 도구가 아니라 설계인가
     ============================ -->
     <section class="section section-why" id="why">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// WHY AX DISCOVERY</span>
-                <h2 class="section-title">왜 지금, AX 전략기획 전문가인가</h2>
+                <h2 class="section-title">왜 도구가 아니라 설계인가</h2>
             </div>
 
-            <!-- HOOK -->
-            <div class="why-hook reveal reveal-delay-1">
-                <span class="why-hook-eyebrow">
-                    <span class="pulse-dot"></span>
-                    MIT NANDA Research · 300개 기업 분석
-                </span>
-                <h3 class="why-hook-headline">
-                    AI를 도입한 기업의 <em>95%</em>는<br>
-                    수익을 내지 못했습니다.
-                </h3>
-                <p class="why-hook-source">
-                    챗봇을 붙이고, ChatGPT 계정을 나눠줬을 뿐, 일하는 방식 자체는 그대로였기 때문입니다.<br>
-                    조직도, 개인도 같은 함정에 빠집니다. <strong style="color:var(--color-cyan-glow);">AI 도구를 쓰는 것</strong>과 <strong style="color:var(--color-cyan-glow);">AI로 일하는 방식을 바꾸는 것</strong>은 전혀 다릅니다.
-                </p>
+            <div class="why-line reveal">
+                <p>AI 도구를 쓰는 것과 <em>AI로 일하는 방식을 바꾸는 것</em>은 전혀 다릅니다.</p>
             </div>
 
-            <!-- 95% vs 5% 시각화 -->
-            <div class="why-stat-split">
-                <article class="why-stat-card fail reveal">
-                    <span class="why-stat-tag">FAILURE · 95%</span>
-                    <div class="why-stat-number"><span class="counter stat-counter" data-target="95" data-decimals="0" data-suffix="%">0%</span></div>
-                    <h4 class="why-stat-headline">AI 투자에서 수익을 내지 못한 기업</h4>
-                    <p class="why-stat-desc">McKinsey에 따르면 AI 도입 기업의 64%가 "혁신 동력을 확보했다"고 말하지만, 실제 영업이익 기여도는 평균 <strong style="color:#fca5a5;">단 5%</strong>에 그쳤습니다. 도구는 도입됐지만 성과는 없습니다.</p>
-                </article>
-                <article class="why-stat-card success reveal reveal-delay-1">
-                    <span class="why-stat-tag">SUCCESS · 5%</span>
-                    <div class="why-stat-number"><span class="counter stat-counter" data-target="5" data-decimals="0" data-suffix="%">0%</span></div>
-                    <h4 class="why-stat-headline">실질적 성과를 만든 5%의 비밀</h4>
-                    <p class="why-stat-desc">성과를 낸 기업들의 공통점은 단 하나. 특정 AI 도구에 의존한 것이 아니라, <strong style="color:var(--color-cyan-glow);">업무 구조를 재설계할 수 있는 인재</strong>를 육성했습니다. 도구는 6개월이면 바뀌지만, 설계 역량은 어떤 도구가 와도 통합니다.</p>
-                </article>
-            </div>
 
-            <!-- HBS/BCG 개인 베네핏 데이터 -->
-            <div class="why-data-row reveal">
-                <div class="why-data-row-title">// HARVARD BUSINESS SCHOOL × BCG · 컨설턴트 758명 실험</div>
-                <p class="why-data-row-quote">
-                    "회사에서 시키니까 배운다"가 아닙니다.<br>
-                    <strong style="color:var(--color-cyan-glow);">개인의 격차</strong>가 이미 벌어지고 있습니다.<br>
-                    같은 직무, 같은 연차여도 AI를 제대로 활용하는 사람의 결과물이 <strong style="color:#fff;">측정 가능한 차이</strong>로 앞서갑니다.
-                </p>
-                <div class="why-data-grid">
-                    <div class="why-data-stat">
-                        <div class="why-data-stat-num"><span class="counter" data-target="40" data-decimals="0" data-prefix="+" data-suffix="%">+0%</span></div>
-                        <div class="why-data-stat-label">결과물 품질 향상</div>
+            <div class="rrr reveal">
+                <div class="rrr-head">
+                    <span class="rrr-tag">AX Discovery의 핵심 관점</span>
+                    <h3 class="rrr-title">효율화가 목적이 아닙니다.<br class="br-mobile"> <em>자원을 옮겨 10배를 만드는 일</em>입니다.</h3>
+                </div>
+                <div class="rrr-grid">
+                    <div class="rrr-item">
+                        <span class="rrr-step">STEP 1</span>
+                        <h4 class="rrr-name">줄이기 <span>Reduce</span></h4>
+                        <p class="rrr-desc">반복 업무를 AI에 맡겨 기존에 100을 쓰던 일을 10으로 줄입니다. 무엇을 줄일지 찾는 것이 HTA와 IFV의 역할입니다.</p>
                     </div>
-                    <div class="why-data-stat">
-                        <div class="why-data-stat-num"><span class="counter" data-target="25.1" data-decimals="1" data-prefix="+" data-suffix="%">+0%</span></div>
-                        <div class="why-data-stat-label">작업 속도 향상</div>
+                    <div class="rrr-item">
+                        <span class="rrr-step">STEP 2</span>
+                        <h4 class="rrr-name">재배치 <span>Reallocate</span></h4>
+                        <p class="rrr-desc">확보한 90의 자원을 어디에 투입할지 정합니다. 인원 감축이 아닌 고부가가치 업무로 재배치합니다.</p>
                     </div>
-                    <div class="why-data-stat">
-                        <div class="why-data-stat-num"><span class="counter" data-target="12.2" data-decimals="1" data-prefix="+" data-suffix="%">+0%</span></div>
-                        <div class="why-data-stat-label">과제 완료율 향상</div>
+                    <div class="rrr-item">
+                        <span class="rrr-step">STEP 3</span>
+                        <h4 class="rrr-name">재창출 <span>Reinvent</span></h4>
+                        <p class="rrr-desc">재배치한 자원으로 어떤 10배의 가치를 만들지 설계합니다. 여기서 비로소 AX가 실질적인 성과로 이어집니다.</p>
                     </div>
                 </div>
-                <div class="why-data-source">— Harvard Business School × Boston Consulting Group, 전략 컨설턴트 758명 대상 실험 결과</div>
-            </div>
-
-            <!-- ★ 골든타임 3가지 이유 (책 1.3 핵심) -->
-            <div class="urgency-block reveal">
-                <div class="urgency-head">
-                    <span class="urgency-tag"><span class="dot-pulse"></span>왜 지금인가</span>
-                    <h3 class="urgency-title">
-                        AX는 언젠가 해야 할 일이 아닙니다.<br>
-                        <em>지금 하지 않으면 늦는 일</em>입니다.
-                    </h3>
-                </div>
-                <div class="urgency-grid">
-                    <article class="urgency-card">
-                        <div class="urgency-num">01</div>
-                        <h4 class="urgency-card-title">진입 비용 역대 최저</h4>
-                        <p class="urgency-card-desc">5년 전엔 수억 원이 들던 AI를, 지금은 월 2~3만 원에 씁니다. 성능은 매달 향상되고 있습니다. 완벽해진 다음 시작하겠다는 전략은, 그 무렵엔 모두가 능숙하다는 뜻입니다.</p>
-                    </article>
-                    <article class="urgency-card">
-                        <div class="urgency-num">02</div>
-                        <h4 class="urgency-card-title">격차는 기하급수적</h4>
-                        <p class="urgency-card-desc">인터넷이 1억 사용자에 7년 걸렸지만, ChatGPT는 2개월입니다. 작년의 1년 격차가 올해는 3년이 됩니다. AX는 늦게 따라잡을 수 있는 변화가 아닙니다.</p>
-                    </article>
-                    <article class="urgency-card">
-                        <div class="urgency-num">03</div>
-                        <h4 class="urgency-card-title">인구 감소 = 생존 전략</h4>
-                        <p class="urgency-card-desc">사람을 더 뽑아 성장하는 모델은 끝났습니다. 인건비는 오르고 숙련 인력은 더 빨리 은퇴합니다. 사람을 늘리지 않고 산출을 늘리는 유일한 수단이 AX입니다.</p>
-                    </article>
-                </div>
-            </div>
-
-            <!-- Pull Quote: 젠슨 황 -->
-            <blockquote class="pull-quote reveal">
-                <p class="pull-quote-text">
-                    가까운 미래에 모든 기업은 수십만 개의 AI 에이전트를 보유하게 될 것이고,<br>
-                    <em>각 직원은 수많은 에이전트를 운용하는 AI 오케스트레이터</em>가 될 것이다.
-                </p>
-                <div class="pull-quote-author">— Jensen Huang, NVIDIA CEO · GTC 2024</div>
-            </blockquote>
-
-            <!-- 큰 통계 박스 3종 -->
-            <div class="big-stat-row reveal">
-                <div class="big-stat">
-                    <div class="big-stat-value">1 : 100</div>
-                    <div class="big-stat-label">1인 100 에이전트 시대<br>(Hybrid Resource)</div>
-                    <div class="big-stat-source">NVIDIA Jensen Huang, GTC 2024</div>
-                </div>
-                <div class="big-stat">
-                    <div class="big-stat-value">10×</div>
-                    <div class="big-stat-label">10% 효율화가 아닌<br>10배 성장의 구조</div>
-                    <div class="big-stat-source">Larry Page / Peter Thiel · 10x Mindset</div>
-                </div>
-                <div class="big-stat">
-                    <div class="big-stat-value">2개월</div>
-                    <div class="big-stat-label">ChatGPT가 1억 사용자에<br>도달한 시간 (인터넷은 7년)</div>
-                    <div class="big-stat-source">기술 전환 속도, 역대 최단</div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ===========================
-         COMPARE (기존 AI 교육과의 차이)
-    ============================ -->
-    <section class="section" id="difference">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-eyebrow">// THE DIFFERENCE</span>
-                <h2 class="section-title">기존 AI 교육과 무엇이 다른가</h2>
-                <p class="section-subtitle">
-                    AI 도구는 6개월이면 구버전이 됩니다. <strong style="color:var(--color-cyan-glow);">설계 역량</strong>은 어떤 도구가 와도 통합니다.
-                </p>
             </div>
 
             <div class="compare-grid reveal">
                 <div class="compare-col left">
                     <span class="compare-col-tag">기존 AI 교육</span>
                     <h3 class="compare-col-title">도구 사용법 중심</h3>
-                    <p class="compare-col-subtitle">"ChatGPT를 잘 쓰는 법"</p>
                     <ul class="compare-list">
-                        <li><span class="ico">✕</span><span>프롬프트 작성 기술</span></li>
-                        <li><span class="ico">✕</span><span>특정 AI 툴 메뉴 조작</span></li>
-                        <li><span class="ico">✕</span><span>일반론적 사용 사례 소개</span></li>
-                        <li><span class="ico">✕</span><span>강사가 보여주는 시연 위주</span></li>
+                        <li><span class="ico">✕</span><span>프롬프트 작성 기술과 툴 메뉴 조작</span></li>
+                        <li><span class="ico">✕</span><span>강사가 보여주는 일반론적 시연</span></li>
                         <li><span class="ico">✕</span><span>도구가 바뀌면 다시 처음부터</span></li>
-                        <li><span class="ico">✕</span><span>"AI 써봤다"는 경험만 남음</span></li>
+                        <li><span class="ico">✕</span><span>“AI 써봤다”는 경험만 남음</span></li>
                     </ul>
                 </div>
                 <div class="compare-col right">
                     <span class="compare-col-tag">AX Discovery</span>
                     <h3 class="compare-col-title">워크플로우 설계 중심</h3>
-                    <p class="compare-col-subtitle">"내 업무에 AI를 어떻게 끼워넣을 것인가"</p>
                     <ul class="compare-list">
-                        <li><span class="ico">✓</span><span>현업 페인포인트 발굴 방법론(HTA · IFV)</span></li>
-                        <li><span class="ico">✓</span><span>업무를 최소 Task로 분해하는 구조적 사고</span></li>
+                        <li><span class="ico">✓</span><span>현업 페인포인트 발굴 방법론 (HTA · IFV)</span></li>
                         <li><span class="ico">✓</span><span>내 직무 데이터로 직접 실습 · 캔버스 작성</span></li>
-                        <li><span class="ico">✓</span><span>현장에서 즉시 적용 가능한 산출물 보유</span></li>
-                        <li><span class="ico">✓</span><span>도구가 바뀌어도 통하는 설계 역량 축적</span></li>
-                        <li><span class="ico">✓</span><span>AI 에이전트 매뉴얼을 들고 돌아감</span></li>
+                        <li><span class="ico">✓</span><span>도구가 바뀌어도 통하는 설계 역량</span></li>
+                        <li><span class="ico">✓</span><span>산출물 3종을 들고 현장으로 복귀</span></li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Pull Quote: McKinsey 인용 -->
-            <blockquote class="pull-quote reveal">
-                <p class="pull-quote-text">
-                    AI 도입 성과를 내는 기업들의 공통점은,<br>
-                    특정 AI 도구를 잘 쓰는 것이 아니라<br>
-                    <em>워크플로우를 근본적으로 재설계하는 역량</em>을 가진 인재를 육성한 것이었다.
-                </p>
-                <div class="pull-quote-author">— McKinsey & Company, AI 도입 성과 분석 연구</div>
-            </blockquote>
-
         </div>
     </section>
 
-
     <!-- ===========================
-         PAIN POINTS
+         04. 2일 동안 하는 일
     ============================ -->
-    <section class="section" id="problem">
+    <section class="section" id="twodays">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// THE REAL PROBLEM</span>
-                <p class="pain-quote">"AI 도입했습니다"<br>그래서 무엇이 달라졌습니까?</p>
-                <p class="section-subtitle">
-                    조직과 개인 모두 같은 벽에 부딪힙니다. 도구는 들였지만 일하는 방식은 그대로입니다.<br>
-                    AX Discovery는 기술이 아닌 <strong style="color:var(--color-cyan-glow)">"내 업무의 진짜 페인포인트"</strong>에서 출발합니다.
-                </p>
+                <h2 class="section-title">커리큘럼</h2>
             </div>
 
-            <div class="pain-grid">
-                <div class="glass-card pain-card tilt-card reveal">
-                    <div class="pain-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    </div>
-                    <h3 class="pain-card-title">"어디서부터 시작해야 할지 모르겠어요"</h3>
-                    <p class="pain-card-desc">막연한 AI 도입. 형식적인 전환 시도. 시작점을 못 찾아 결국 멈춰버리는 프로젝트.</p>
+            <!-- 여정 다이어그램 -->
+            <div class="journey reveal">
+                <ol class="journey-list">
+                    <li class="journey-step">
+                        <span class="journey-dot">1</span>
+                        <h3 class="journey-title">내 업무를 꺼내놓기</h3>
+                        <p class="journey-desc">일반 사례가 아니라 본인이 매주 실제로 하는 업무를 캔버스에 올립니다.</p>
+                    </li>
+                    <li class="journey-step">
+                        <span class="journey-dot">2</span>
+                        <h3 class="journey-title">HTA로 업무 해체</h3>
+                        <p class="journey-desc">Work → Activity → Task. 최소 단위까지 쪼개 시간이 새는 지점을 찾습니다.</p>
+                    </li>
+                    <li class="journey-step">
+                        <span class="journey-dot">3</span>
+                        <h3 class="journey-title">IFV로 우선순위 결정</h3>
+                        <p class="journey-desc">강도 · 빈도 · 중요도 매트릭스로 무엇부터 전환할지 감이 아닌 숫자로 정합니다.</p>
+                    </li>
+                    <li class="journey-step">
+                        <span class="journey-dot">4</span>
+                        <h3 class="journey-title">TO-BE 워크플로우 설계</h3>
+                        <p class="journey-desc">HITL 원칙으로 AI가 할 일과 사람이 판단할 지점을 분리해 새 흐름을 그립니다.</p>
+                    </li>
+                    <li class="journey-step">
+                        <span class="journey-dot">5</span>
+                        <h3 class="journey-title">에이전트 프로토타입 제작</h3>
+                        <p class="journey-desc">코딩 없이, 자체 개발 캔버스보드와 생성형 AI로 내 업무용 에이전트를 직접 만듭니다.</p>
+                    </li>
+                    <li class="journey-step">
+                        <span class="journey-dot">6</span>
+                        <h3 class="journey-title">해커톤 발표 · 자격시험</h3>
+                        <p class="journey-desc">조별 시뮬레이션 발표와 상호 심사 후, 그 자리에서 2급 자격시험을 치릅니다.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- 타임테이블 -->
+            <div class="tt reveal">
+                <div class="tt-head">
+                    <h3 class="tt-head-title">AX Discovery 타임테이블</h3>
+                    <span class="tt-legend">
+                        <span class="tt-chip tt-chip--lecture">강의</span>
+                        <span class="tt-chip tt-chip--work">실습</span>
+                        <span class="tt-chip tt-chip--present">발표 · 시험</span>
+                    </span>
                 </div>
-                <div class="glass-card pain-card tilt-card reveal reveal-delay-1">
-                    <div class="pain-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+
+                <div class="tt-grid">
+                    <div class="tt-day">
+                        <header class="tt-day-head">
+                            <span class="tt-day-tag">DAY 1</span>
+                            <h4 class="tt-day-title">현업의 문제를 AX 과제로 구조화</h4>
+                            <span class="tt-day-out">산출물 : 문제정의서</span>
+                        </header>
+                        <ul class="tt-rows">
+                            <li class="tt-row is-lecture">
+                                <span class="tt-time">10:00<i>11:30</i></span>
+                                <span class="tt-body"><b>M01 · AX 인사이트</b>AX의 정의와 성공 · 실패 사례. Quick Win 과제 선정 실습</span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">11:30<i>12:30</i></span>
+                                <span class="tt-body"><b>M02 · 리스크와 보안</b>도입 저항요인 진단, 보안 가이드라인. 5대 걸림돌 점검</span>
+                            </li>
+                            <li class="tt-row is-break">
+                                <span class="tt-time">12:30<i>13:30</i></span>
+                                <span class="tt-body"><b>점심</b></span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">13:30<i>15:00</i></span>
+                                <span class="tt-body"><b>M03 · AX 목표수립</b>현업 문제점 분석 → 우선순위 평가 → 실행 과제 도출</span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">15:00<i>16:30</i></span>
+                                <span class="tt-body"><b>M04 · 성과 정량화</b>시간 · 비용 절감 환산, KPI 연계. ROI 설정 및 문제정의서 작성</span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">16:30<i>18:00</i></span>
+                                <span class="tt-body"><b>M05 · 업무 분해(HTA)</b>전체 업무 범위 정의 및 단계별 구조화</span>
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="pain-card-title">"성과는 없는데<br class="br-pc">비용만 늘어요"</h3>
-                    <p class="pain-card-desc">조직에는 AI 솔루션 구독료가, 개인에게는 강의·툴 결제가 쌓여가는데 결과물은 그대로.</p>
+
+                    <div class="tt-day">
+                        <header class="tt-day-head">
+                            <span class="tt-day-tag">DAY 2</span>
+                            <h4 class="tt-day-title">업무를 해체하고 AI 에이전트로 조립</h4>
+                            <span class="tt-day-out">산출물 : TO-BE 워크플로우 · 에이전트 매뉴얼</span>
+                        </header>
+                        <ul class="tt-rows">
+                            <li class="tt-row is-lecture">
+                                <span class="tt-time">10:00<i>11:30</i></span>
+                                <span class="tt-body"><b>M06 · 데이터 전략</b>데이터 준비 수준 진단, 비정형 데이터 자산화</span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">11:30<i>12:30</i></span>
+                                <span class="tt-body"><b>M07 · AI 전환가능성 진단</b>업무별 전환 기준 설정, 우선순위 매트릭스 작성</span>
+                            </li>
+                            <li class="tt-row is-break">
+                                <span class="tt-time">12:30<i>13:30</i></span>
+                                <span class="tt-body"><b>점심</b></span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">13:30<i>14:30</i></span>
+                                <span class="tt-body"><b>M08 · AI 전환 Task 결정</b>실행 과제 분류 및 TO-BE 워크플로우 재설계</span>
+                            </li>
+                            <li class="tt-row is-work">
+                                <span class="tt-time">14:30<i>16:00</i></span>
+                                <span class="tt-body"><b>M09 · 프로토타입 만들기</b>에이전트 설계 → HITL 보완 → 파일럿 테스트 → 매뉴얼화</span>
+                            </li>
+                            <li class="tt-row is-present">
+                                <span class="tt-time">16:00<i>17:00</i></span>
+                                <span class="tt-body"><b>M10 · 해커톤 발표</b>조별 AX 구현 시뮬레이션 발표 및 상호 심사</span>
+                            </li>
+                            <li class="tt-row is-present">
+                                <span class="tt-time">17:00<i>18:00</i></span>
+                                <span class="tt-body"><b>자격시험</b>개인 노트북 온라인 응시 · 60분 / 50문항</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="glass-card pain-card tilt-card reveal reveal-delay-2">
-                    <div class="pain-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-                    </div>
-                    <h3 class="pain-card-title">"예전과 크게 다른 게 없어요"</h3>
-                    <p class="pain-card-desc">AI를 도입했지만 일하는 방식은 그대로. 도구를 끼워 넣었을 뿐 워크플로우가 바뀌지 않았습니다.</p>
+
+                <div class="tt-foot">
+                    총 <strong>14시간</strong> = 13H 강의 · 실습 + 1H 자격시험
                 </div>
             </div>
 
-            <div class="solution-arrow reveal">
-                <span class="solution-arrow-line"></span>
-                <span class="solution-arrow-text">SOLUTION</span>
-                <span class="solution-arrow-line"></span>
+            <!-- 현장 사진 -->
+            <div class="gallery reveal">
+                <h3 class="gallery-title">교육 현장</h3>
+                <div class="gallery-grid">
+                    <figure class="gallery-item">
+                        <img src="img/site-01.jpg" alt="AX Discovery 교육 현장 — 개인 실습" loading="lazy" onerror="this.closest('.gallery-item').classList.add('is-empty');">
+                        <figcaption>내 업무를 캔버스에 올리는 개인 실습</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="img/site-03.jpg" alt="AX Discovery 교육 현장 — 강의" loading="lazy" onerror="this.closest('.gallery-item').classList.add('is-empty');">
+                        <figcaption>사례와 방법론을 잇는 강의</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="img/site-04.jpg" alt="AX Discovery 교육 현장 — 프로토타입 제작" loading="lazy" onerror="this.closest('.gallery-item').classList.add('is-empty');">
+                        <figcaption>캔버스보드로 만드는 에이전트 프로토타입</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="img/site-05.jpg" alt="AX Discovery 교육 현장 — 발표와 공유" loading="lazy" onerror="this.closest('.gallery-item').classList.add('is-empty');">
+                        <figcaption>각자의 AX 고민을 꺼내 놓는 시간</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="img/site-06.jpg" alt="AX Discovery 수료 단체사진" loading="lazy" onerror="this.closest('.gallery-item').classList.add('is-empty');">
+                        <figcaption>수료, 그리고 이어지는 네트워크</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         03. 이런 분께
+    ============================ -->
+    <section class="section" id="whofor">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">추천 대상</h2>
             </div>
 
-            <div class="solution-grid">
-                <div class="glass-card solution-card tilt-card reveal">
-                    <div class="solution-card-icon">
+            <div class="who-grid">
+                <article class="glass-card who-card tilt-card reveal">
+                    <div class="who-card-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3 class="who-card-title">HR · 교육 담당자</h3>
+                    <p class="who-card-desc">전사 AX 교육을 도입하기 전, 소수 인원을 먼저 보내 커리큘럼과 산출물을 직접 검증하고 싶은 분.</p>
+                </article>
+                <article class="glass-card who-card tilt-card reveal reveal-delay-1">
+                    <div class="who-card-ico" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                     </div>
-                    <h3 class="solution-card-title">업무를 최소 Task로 분해</h3>
-                    <p class="solution-card-desc">HTA 기법으로 큰 업무를 작은 단위로 해체하고, 어디서 시간이 새는지 진짜 페인포인트를 찾습니다.</p>
-                </div>
-                <div class="glass-card solution-card tilt-card reveal reveal-delay-1">
-                    <div class="solution-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <h3 class="who-card-title">AX · DX 추진팀</h3>
+                    <p class="who-card-desc">“무엇부터 AI로 바꿔야 하는가”를 정하는 과제 발굴 · 우선순위 결정 방법론이 필요한 분.</p>
+                </article>
+                <article class="glass-card who-card tilt-card reveal reveal-delay-2">
+                    <div class="who-card-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     </div>
-                    <h3 class="solution-card-title">데이터 기반 우선순위 결정</h3>
-                    <p class="solution-card-desc">IFV 매트릭스(강도·빈도·중요도)로<br class="br-pc">어떤 업무부터 AI로 전환할지<br class="br-pc">숫자로 결정합니다.</p>
-                </div>
-                <div class="glass-card solution-card tilt-card reveal reveal-delay-2">
-                    <div class="solution-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                    <h3 class="who-card-title">현업 팀장 · 실무자</h3>
+                    <p class="who-card-desc">반복 업무는 쌓여가는데, 내 팀 업무의 어디부터 AI를 붙여야 할지 판단이 서지 않는 분.</p>
+                </article>
+                <article class="glass-card who-card tilt-card reveal reveal-delay-3">
+                    <div class="who-card-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
                     </div>
-                    <h3 class="solution-card-title">사람과 AI의 역할 재설계</h3>
-                    <p class="solution-card-desc">HITL(Human-in-the-Loop)로<br class="br-pc">AI가 초안을 만들고 사람이 판단합니다.<br class="br-pc">책임 소재가 명확한 협업 구조.</p>
-                </div>
+                    <h3 class="who-card-title">경영진 · 사업 리더</h3>
+                    <p class="who-card-desc">AI 구독료는 늘었는데 손익에 잡히는 성과가 없어, 투자 대비 효과를 구조적으로 점검하고 싶은 분.</p>
+                </article>
             </div>
+
         </div>
     </section>
 
     <!-- ===========================
-         FEATURES (과정 특장점)
-    ============================ -->
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-eyebrow">// COURSE HIGHLIGHTS</span>
-                <h2 class="section-title">과정 특장점</h2>
-                <p class="section-subtitle">
-                    AX의 본질 이해 → 현업 페인포인트 발굴 → 업무 분해 → AI 전환 설계 → 프로토타입 제작까지,<br>
-                    14시간 동안 끊김 없이 이어지는 하나의 흐름.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <article class="glass-card feature-card tilt-card reveal">
-                    <div class="feature-card-num">01 / FEATURE</div>
-                    <h3 class="feature-card-title">"도구 교육이 아닌,<br class="br-mobile">성과 중심 설계"</h3>
-                    <p class="feature-card-desc">
-                        AI 도구 사용법을 가르치지 않습니다.<br class="br-pc">도구는 바뀌어도 통하는 <strong style="color:var(--color-cyan-glow)">설계 역량</strong>을 기릅니다.<br class="br-pc">실패한 95%와 성공한 5%의 차이가 무엇인지,<br class="br-pc">MIT NANDA·McKinsey 데이터로 본질을 짚습니다.
-                    </p>
-                </article>
-
-                <article class="glass-card feature-card tilt-card reveal reveal-delay-1">
-                    <div class="feature-card-num">02 / FEATURE</div>
-                    <h3 class="feature-card-title">"현업의 진짜<br class="br-mobile">문제에서 출발"</h3>
-                    <p class="feature-card-desc">
-                        강사가 일반적인 사례를 보여주는 교육이 아닙니다. <strong style="color:var(--color-cyan-glow)">내 업무, 내 직무</strong>를
-                        직접 캔버스에 올리고 페인포인트를 발굴 → ROI 설계 → 문제정의서 작성까지 직접 만듭니다.
-                    </p>
-                </article>
-
-                <article class="glass-card feature-card tilt-card reveal reveal-delay-2">
-                    <div class="feature-card-num">03 / FEATURE</div>
-                    <h3 class="feature-card-title">"분석에서 끝나지 않고<br class="br-mobile">직접 만들어본다"</h3>
-                    <p class="feature-card-desc">
-                        업무를 HTA로 분해하고, IFV 매트릭스로 전환 대상을 선정한 뒤, 생성형 AI로 프로토타입을 제작합니다.
-                        2일차 종료 시점에 <strong style="color:var(--color-cyan-glow)">현장에 즉시 적용 가능한 AI 에이전트 매뉴얼</strong>을 들고 돌아갑니다.
-                    </p>
-                </article>
-
-                <article class="glass-card feature-card tilt-card reveal reveal-delay-3">
-                    <div class="feature-card-num">04 / FEATURE</div>
-                    <h3 class="feature-card-title">"민간자격 검정 기준에<br class="br-mobile">부합하는 콘텐츠"</h3>
-                    <p class="feature-card-desc">
-                        과학기술정보통신부 정식 등록 민간자격(2026-003156). 14시간 과정 자체가 검정 기준을 모두 포괄하므로,
-                        <strong style="color:var(--color-cyan-glow)">2일차 마지막 시간에 그 자리에서 자격시험</strong>을 봅니다.
-                    </p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         CURRICULUM
-    ============================ -->
-    <section class="section" id="curriculum">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-eyebrow">// CURRICULUM</span>
-                <h2 class="section-title">AX Discovery 커리큘럼</h2>
-                <p class="section-subtitle">
-                    10개 모듈로 구성된 <strong style="color:var(--color-cyan-glow)">14시간(13H 강의·실습 + 1H 자격시험) 2일 집중 과정</strong>.<br>
-                    모든 모듈은 실습 산출물 — <strong style="color:var(--color-cyan-glow)">문제정의서 · TO-BE 워크플로우 · AI 에이전트 매뉴얼</strong>로 연결됩니다.
-                </p>
-            </div>
-
-            <div class="curriculum-wrap reveal">
-                <div class="curriculum-meta">
-                    <span class="curriculum-meta-text">
-                        <span class="curriculum-meta-highlight">l 13H(이론+실습) + 1H(AX 전략기획 전문가 2급 자격 시험)</span>
-                    </span>
-                    <span class="curriculum-meta-text"><strong style="color:var(--color-cyan-glow)">총 14H · 2일 과정</strong></span>
-                </div>
-
-                <!-- Desktop Table -->
-                <table class="curriculum-table">
-                    <thead>
-                        <tr>
-                            <th>모듈</th>
-                            <th>모듈명</th>
-                            <th>내용</th>
-                            <th>핵심 산출물</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="day-header-row">
-                            <td colspan="4" class="day-header">
-                                <span class="day-header-label">DAY 1</span>
-                                <span class="day-header-title">현업의 문제를 AX 과제로 구조화</span>
-                                <span class="day-header-sub">M01 ~ M05 · 핵심 산출물: 문제정의서</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M01</td>
-                            <td class="cell-name">AX 인사이트</td>
-                            <td class="cell-content"><strong>[강의]</strong> AX 개념 정의, 성공/실패 사례 분석, 개인·조직 관점의 AX 베네핏<br><strong>[실습]</strong> Quick Win 과제 선정</td>
-                            <td class="cell-output">문제정의서</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M02</td>
-                            <td class="cell-name">리스크와 보안</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> AX 도입 저항요인 진단, 보안 가이드라인 수립<br><strong>[실습]</strong> 도입 전 5대 걸림돌 점검</td>
-                            <td class="cell-output">문제정의서</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M03</td>
-                            <td class="cell-name">AX 목표수립</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> 현업 문제점 분석 및 핵심 과제 선정<br><strong>[실습]</strong> 우선순위 평가 및 실행 과제 도출</td>
-                            <td class="cell-output">문제정의서</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M04</td>
-                            <td class="cell-name">성과 정량화</td>
-                            <td class="cell-content"><strong>[강의]</strong> 시간/비용 절감 환산, KPI 연계 전략<br><strong>[실습]</strong> ROI 목표 설정 및 문제정의서 작성</td>
-                            <td class="cell-output">문제정의서</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M05</td>
-                            <td class="cell-name">업무 분해</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> 전체 업무 범위 정의 및 핵심 프로세스 분석<br><strong>[실습]</strong> 업무 단계별 구조화</td>
-                            <td class="cell-output">TO-BE 워크플로우</td>
-                        </tr>
-                        <tr class="day-header-row">
-                            <td colspan="4" class="day-header">
-                                <span class="day-header-label">DAY 2</span>
-                                <span class="day-header-title">업무를 해체하고 AI 에이전트로 조립</span>
-                                <span class="day-header-sub">M06 ~ M10 · 핵심 산출물: TO-BE 워크플로우 / AI 에이전트 매뉴얼</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M06</td>
-                            <td class="cell-name">데이터 전략</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> AI 활용을 위한 데이터 준비 수준 진단, 비정형 데이터 자산화<br><strong>[실습]</strong> 데이터 활용 가능성 검토</td>
-                            <td class="cell-output">TO-BE 워크플로우</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M07</td>
-                            <td class="cell-name">AI전환가능성 진단</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> 업무별 AI 전환 기준 설정<br><strong>[실습]</strong> AI전환 우선순위 결정 매트릭스 작성</td>
-                            <td class="cell-output">TO-BE 워크플로우</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M08</td>
-                            <td class="cell-name">AI 전환 Task 결정</td>
-                            <td class="cell-content"><strong>[강의/실습]</strong> 실행 과제 분류 및 추진 전략 수립<br><strong>[실습]</strong> TO-BE 워크플로우 재설계</td>
-                            <td class="cell-output">TO-BE 워크플로우</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M09</td>
-                            <td class="cell-name">프로토타입 만들기</td>
-                            <td class="cell-content"><strong>[실습]</strong> 에이전트 후보 선정 → 컨셉 설계 → HITL 수정보완 → 파일럿 테스트 → 매뉴얼 문서화</td>
-                            <td class="cell-output">AI 에이전트 매뉴얼</td>
-                        </tr>
-                        <tr>
-                            <td class="cell-module">M10</td>
-                            <td class="cell-name">해커톤 발표</td>
-                            <td class="cell-content"><strong>[발표]</strong> 조별 AX 구현 시뮬레이션 발표 및 상호 심사</td>
-                            <td class="cell-output">AI 에이전트 매뉴얼</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Mobile Cards -->
-                <div class="curriculum-mobile">
-                    <div class="curr-mobile-day-header">
-                        <span class="curr-day-label">DAY 1</span>
-                        <span class="curr-day-title">현업의 문제를 AX 과제로 구조화</span>
-                        <span class="curr-day-sub">M01 ~ M05 · 핵심 산출물: 문제정의서</span>
-                    </div>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M01</span>
-                            <span class="curr-mobile-name">AX 인사이트</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의]</strong> AX 개념 정의, 성공/실패 사례 분석, 개인·조직 관점의 AX 베네핏<br><strong>[실습]</strong> Quick Win 과제 선정</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>문제정의서</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M02</span>
-                            <span class="curr-mobile-name">리스크와 보안</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> AX 도입 저항요인 진단, 보안 가이드라인 수립<br><strong>[실습]</strong> 도입 전 5대 걸림돌 점검</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>문제정의서</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M03</span>
-                            <span class="curr-mobile-name">AX 목표수립</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> 현업 문제점 분석 및 핵심 과제 선정<br><strong>[실습]</strong> 우선순위 평가 및 실행 과제 도출</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>문제정의서</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M04</span>
-                            <span class="curr-mobile-name">성과 정량화</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의]</strong> 시간/비용 절감 환산, KPI 연계 전략<br><strong>[실습]</strong> ROI 목표 설정 및 문제정의서 작성</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>문제정의서</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M05</span>
-                            <span class="curr-mobile-name">업무 분해</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> 전체 업무 범위 정의 및 핵심 프로세스 분석<br><strong>[실습]</strong> 업무 단계별 구조화</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>TO-BE 워크플로우</span></p>
-                    </article>
-                    <div class="curr-mobile-day-header">
-                        <span class="curr-day-label">DAY 2</span>
-                        <span class="curr-day-title">업무를 해체하고 AI 에이전트로 조립</span>
-                        <span class="curr-day-sub">M06 ~ M10 · 핵심 산출물: TO-BE 워크플로우 / AI 에이전트 매뉴얼</span>
-                    </div>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M06</span>
-                            <span class="curr-mobile-name">데이터 전략</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> AI 활용을 위한 데이터 준비 수준 진단, 비정형 데이터 자산화<br><strong>[실습]</strong> 데이터 활용 가능성 검토</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>TO-BE 워크플로우</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M07</span>
-                            <span class="curr-mobile-name">AI전환가능성 진단</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> 업무별 AI 전환 기준 설정<br><strong>[실습]</strong> AI전환 우선순위 결정 매트릭스 작성</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>TO-BE 워크플로우</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M08</span>
-                            <span class="curr-mobile-name">AI 전환 Task 결정</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[강의/실습]</strong> 실행 과제 분류 및 추진 전략 수립<br><strong>[실습]</strong> TO-BE 워크플로우 재설계</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>TO-BE 워크플로우</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M09</span>
-                            <span class="curr-mobile-name">프로토타입 만들기</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[실습]</strong> 에이전트 후보 선정 → 컨셉 설계 → HITL 수정보완 → 파일럿 테스트 → 매뉴얼 문서화</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>AI 에이전트 매뉴얼</span></p>
-                    </article>
-                    <article class="glass-card curr-mobile-card">
-                        <div class="curr-mobile-header">
-                            <span class="curr-mobile-num">M10</span>
-                            <span class="curr-mobile-name">해커톤 발표</span>
-                        </div>
-                        <p class="curr-mobile-content"><strong>[발표]</strong> 조별 AX 구현 시뮬레이션 발표 및 상호 심사</p>
-                        <p class="curr-mobile-output">핵심 산출물 :<span>AI 에이전트 매뉴얼</span></p>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ★ 중간 CTA #1 -->
-    <section class="mid-cta-section">
-        <div class="container">
-            <div class="mid-cta reveal">
-                <div class="mid-cta-text">
-                    <div class="mid-cta-eyebrow">14시간이 끝나면</div>
-                    <h3 class="mid-cta-title">현장에 즉시 적용할 <em>실물 산출물 3종</em>이<br>당신 손에 남습니다.</h3>
-                </div>
-                <a href="#register" class="btn btn-primary btn-large btn-magnetic">
-                    수강 신청하기
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         CERTIFICATION
-    ============================ -->
-    <section class="section" id="certification">
-        <div class="container">
-            <div class="glass-card cert-panel reveal">
-                <span class="cert-badge">CERTIFICATION</span>
-                <p class="section-subtitle" style="margin-bottom:8px">비즈니스 성과 창출을 위한</p>
-                <h2 class="cert-title gradient-text">AX 전략기획 전문가 2급</h2>
-                <p class="cert-meta">과학기술정보통신부 정식 등록 민간자격 (등록번호: 2026-003156)</p>
-
-                <div class="cert-grid">
-                    <div class="cert-item">
-                        <div class="cert-item-label">시험 방식</div>
-                        <div class="cert-item-value">2일차 교육 종료 후 개인 노트북을 활용한 '온라인 자격시험'으로 즉시 진행<br>(60분 / 50문항)</div>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-item-label">합격 기준</div>
-                        <div class="cert-item-value">100점 만점 기준 60점 이상</div>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-item-label">자격 증명</div>
-                        <div class="cert-item-value">수강률 80% 이상 달성 시<br>수료증 별도 발급</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         OUTCOMES
+         05. 이 과정을 마치면
     ============================ -->
     <section class="section" id="outcomes">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// AFTER COMPLETION</span>
-                <h2 class="section-title">이 과정을 마치면..</h2>
+                <h2 class="section-title">이 과정을 마치면.</h2>
                 <p class="section-subtitle">
                     AX는 <strong style="color:var(--color-cyan-glow)">조직 차원의 전략인 동시에 개인 차원의 역량</strong>입니다.<br>
                     14시간 후, 회사도 나도 달라집니다.
@@ -772,205 +502,345 @@
     </section>
 
     <!-- ===========================
-         IMPACT
+         06. 리얼 스토리
     ============================ -->
-    <section class="section" id="impact">
+    <section class="section section-story" id="story">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// VALIDATED IMPACT</span>
-                <h2 class="section-title">주요 대기업·공공기관 현장에서 이미 검증된 성과</h2>
-                <div class="impact-intro">
-                    <span class="impact-intro-tag">실제 참여자들이 본인의 업무에서 도출한 정량적 기대효과</span>
+                <h2 class="section-title">2일 뒤, 이 사람의 업무는<br>이렇게 바뀌었습니다</h2>
+                <p class="section-subtitle" style="color:#00f0ff">현직 인사 담당자의 실제 사례</p>
+            </div>
+
+            <!-- 화자: 김 과장 -->
+            <div class="speaker reveal">
+                <div class="speaker-avatar">
+                    <img src="img/kim-manager.png" alt="AX Discovery 수료생 김 과장" loading="lazy">
+                </div>
+                <div class="speaker-bubble">
+                    <p class="speaker-quote">“AI 툴을 배우지 않았습니다.<br class="br-pc">내 업무를 재설계했을 뿐입니다.”</p>
+                    <p class="speaker-name">제조업 A사 인사팀 <strong>김 과장</strong> · 3기 수료</p>
                 </div>
             </div>
 
-            <div class="impact-grid">
-                <div class="glass-card impact-card tilt-card reveal">
-                    <div class="impact-card-label">현황 조사·진단 보고 자동화</div>
-                    <div class="impact-card-dual">
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">연간 절감 시간</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="7680" data-decimals="0">0</span></span>
-                                <span class="impact-card-unit">시간</span>
-                            </div>
-                        </div>
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">비용 절감</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="5.76" data-decimals="2">0</span></span>
-                                <span class="impact-card-unit">억 원</span>
-                            </div>
-                        </div>
+            <div class="story-flow">
+                <!-- STEP 1 : 2일간 무엇을 했나 -->
+                <article class="glass-card story-card story-card--during reveal">
+                    <span class="story-stage">AX Discovery 수강</span>
+                    <h3 class="story-title">프롬프트를 배우는 대신, 업무를 해체했다</h3>
+                    <p class="story-text">
+                        김 과장은 AI 사용법을 배우는 대신 자신의 취합 업무를 5단계로 쪼개는 작업(HTA)부터 시작했습니다.<br>
+                        그리고 알게 됐습니다. <strong>데이터를 모으고 양식에 맞추는 단순 작업은 AI에게</strong>,<br>
+                        <strong>누락된 일정의 맥락을 파악해 조율하는 업무는 사람이 해야 한다</strong>는 것을.
+                    </p>
+                </article>
+
+                <div class="story-divider reveal">
+                    <span class="story-divider-line" aria-hidden="true"></span>
+                    <span class="story-divider-text">그래서 무엇이 달라졌나</span>
+                    <span class="story-divider-line" aria-hidden="true"></span>
+                </div>
+
+                <!-- STEP 2 : Before → After 대비 -->
+                <div class="ba-grid">
+                    <article class="glass-card story-card story-card--before reveal">
+                        <span class="story-stage">BEFORE · 교육 전</span>
+                        <h3 class="story-title">매주 목요일 오후는 ‘복붙 지옥’</h3>
+                        <ul class="story-list">
+                            <li>4개 사업부가 제각각 메신저 · 엑셀 · 이메일로 현황을 보냄</li>
+                            <li>표준 양식에 옮겨 붙이는 데만 <strong>매주 2시간</strong> (연 104시간)</li>
+                            <li>“면접 진행 중”처럼 모호한 정보를 확인하러 부서장에게 3~5통씩 전화</li>
+                            <li>확인 대기로 매번 30분 이상 지연 → 채용 일정 딜레이</li>
+                        </ul>
+                    </article>
+
+                    <div class="ba-arrow" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+
+                    <article class="glass-card story-card story-card--after reveal">
+                        <span class="story-stage">AFTER · 교육 후</span>
+                        <h3 class="story-title">코딩 없이 만든 나만의 인사 비서</h3>
+                        <ol class="story-steps">
+                            <li><span class="story-steps-tag">AI</span><div><b>데이터 자동 정제</b>줄글로 온 텍스트를 부서 · 직무 · 진행상태 · 이슈 열로 즉시 파싱</div></li>
+                            <li><span class="story-steps-tag">AI</span><div><b>누락 정보 자동 감지</b>모호한 표현이나 빈 일정에 “검토 필요” 경고 표시</div></li>
+                            <li><span class="story-steps-tag human">사람</span><div><b>최종 판단과 승인 (HITL)</b>경고가 뜬 항목 + 사람의 판단이 필요한 부분 확인 후 승인 → 주간 보고서 완성</div></li>
+                        </ol>
+                    </article>
+                </div>
+
+                <!-- STEP 3 : 결과 -->
+                <div class="story-metrics reveal">
+                    <div class="story-metric">
+                        <div class="story-metric-num"><span class="counter" data-target="75" data-decimals="0" data-suffix="%">0%</span></div>
+                        <div class="story-metric-label">취합 업무 시간 단축<small>주 120분 → 30분</small></div>
+                    </div>
+                    <div class="story-metric">
+                        <div class="story-metric-num"><span class="counter" data-target="104" data-decimals="0" data-suffix="h">0h</span></div>
+                        <div class="story-metric-label">연간 회수한 시간<small>핵심 업무로 재배치</small></div>
+                    </div>
+                    <div class="story-metric">
+                        <div class="story-metric-num"><span class="counter" data-target="1350" data-decimals="0">0</span><span class="story-metric-unit">만원</span></div>
+                        <div class="story-metric-label">연간 기회비용 절감<small>회수 시간의 인건비 환산</small></div>
                     </div>
                 </div>
-                <div class="glass-card impact-card tilt-card reveal reveal-delay-1">
-                    <div class="impact-card-label">견적·예산 산출 자동화</div>
-                    <div class="impact-card-dual">
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">연간 절감 시간</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="8000" data-decimals="0">0</span></span>
-                                <span class="impact-card-unit">시간</span>
-                            </div>
-                        </div>
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">비용 절감</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="4.60" data-decimals="2">0</span></span>
-                                <span class="impact-card-unit">억 원</span>
-                            </div>
-                        </div>
+
+                <blockquote class="story-quote reveal">
+                    “예전에 엑셀 매크로로 자동화를 시도했을 땐 결국 포기했습니다. 이번엔 코딩 한 줄 없이 내 업무를 설계할 수 있었습니다.
+                    제 역할이 데이터를 붙여 넣는 일에서, 인사 이슈를 고민하는 일로 바뀌었습니다.”
+                    <cite>— 제조업 A사 인사팀 김 과장</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         02. 후기 하이라이트
+    ============================ -->
+    <section class="section section-reviews-top" id="reviews-top">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">수강생이 직접 증명한 <span class="nowrap">AX Discovery</span></h2>
+                <p class="section-subtitle">수료 직후 진행한 만족도 조사 결과입니다.</p>
+            </div>
+
+            <div class="score-row reveal">
+                <div class="score-item">
+                    <div class="score-num"><span class="counter" data-target="4.9" data-decimals="1">0.0</span><span class="score-unit">/ 5.0</span></div>
+                    <div class="score-label">교육 전반 만족도</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-num"><span class="counter" data-target="100" data-decimals="0" data-suffix="%">0%</span></div>
+                    <div class="score-label">동료 · 지인 추천 의향</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-num"><span class="counter" data-target="5.0" data-decimals="1">0.0</span><span class="score-unit">/ 5.0</span></div>
+                    <div class="score-label">강사 강의 만족도</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-num"><span class="counter" data-target="98" data-decimals="0" data-suffix="%">0%</span></div>
+                    <div class="score-label">현업 적용 자신감</div>
+                </div>
+            </div>
+            <p class="score-note reveal">※ AX Discovery 수료생 대상 자체 만족도 조사 결과 (5점 척도)</p>
+
+            <!-- 대표 후기 슬라이더 -->
+            <div class="rslider reveal" id="rslider">
+                <div class="rslider-viewport">
+                    <div class="rslider-track" id="rsliderTrack">
+                        <blockquote class="rslide">
+                            <p class="rslide-text">늘 따라가기만 했습니다. 적지 않은 나이에 “이제 더는 못 갈지도 모른다”는 생각을 많이 했는데, 이번 교육을 받고 처음으로 <em>“따라가는 게 아니라 앞서갈 수도 있겠다”</em>는 희망을 봤습니다. 이게 가장 큰 수확입니다.</p>
+                            <footer class="rslide-author">연구소 소장</footer>
+                        </blockquote>
+                        <blockquote class="rslide">
+                            <p class="rslide-text">AX를 어떻게 해야 성공할까에 대한 답을 찾고 있었는데, 마치고 나니 <em>내가 무엇을 놓치지 않아야 하는지</em>가 선명해졌습니다. 기술이 목적이 아니라, 진짜 풀어야 할 문제를 보고 안 풀리면 일하는 방식 자체를 다시 생각하는 것이었습니다.</p>
+                            <footer class="rslide-author">에듀테크 기업 AX팀 파트장</footer>
+                        </blockquote>
+                        <blockquote class="rslide">
+                            <p class="rslide-text">2일간 밤하늘의 별을 올려다보는 느낌이었습니다. 도구도 사례도 개념도 이미 수없이 떠 있는데, <em>그것을 ‘내 업무’라는 선으로 연결하지 않으면 흩어진 빛으로 남을 뿐</em>이더군요.</p>
+                            <footer class="rslide-author">벤처투자사 대표</footer>
+                        </blockquote>
+                        <blockquote class="rslide">
+                            <p class="rslide-text">수많은 키워드가 떨어진 지식이 아니라 하나의 흐름으로 연결돼 있었습니다. <em>AX의 출발점은 AI가 아니라 “우리의 일은 어떻게 바뀌어야 하는가”라는 질문</em>이라는 걸 알게 됐습니다.</p>
+                            <footer class="rslide-author">기업교육 전문 강사</footer>
+                        </blockquote>
                     </div>
                 </div>
-                <div class="glass-card impact-card tilt-card reveal reveal-delay-2">
-                    <div class="impact-card-label">운영관리·리스크 모니터링</div>
-                    <div class="impact-card-dual">
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">연간 절감 시간</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="9800" data-decimals="0">0</span></span>
-                                <span class="impact-card-unit">시간</span>
-                            </div>
-                        </div>
-                        <div class="impact-card-stat-row">
-                            <span class="impact-card-stat-label">비용 절감</span>
-                            <div class="impact-card-stat">
-                                <span class="counter-wrap"><span class="counter impact-card-value" data-target="4.90" data-decimals="2">0</span></span>
-                                <span class="impact-card-unit">억 원</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="rslider-ctrl">
+                    <button type="button" class="rslider-arrow" data-rslide="prev" aria-label="이전 후기">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <div class="rslider-dots" id="rsliderDots"></div>
+                    <button type="button" class="rslider-arrow" data-rslide="next" aria-label="다음 후기">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
                 </div>
             </div>
 
-            <div class="testimonials">
-                <div class="glass-card testimonial tilt-card reveal">
-                    <p class="testimonial-text">워킹 플로우와 일하는 방식 자체를 다시 정의했습니다. 작은 Task부터 시작해 업무 효율화를 이어갈 수 있는 가능성을 확인했습니다.</p>
+            <!-- 개별 수강생 후기 -->
+            <div class="rev-grid">
+                <blockquote class="glass-card rev-card reveal">
+                    <p class="rev-text">조직과 업무의 문제를 어떻게 재정의할 것인가, <em>무엇을 줄이고 무엇에 집중할 것인가를 직접 설계해 본 시간</em>이었습니다. 2일차 마지막 자격시험까지 치르고 나니 학습 효과가 확실히 남았고, 제가 하는 HRD · 경력개발 영역에 바로 접목해 보려 합니다.</p>
+                </blockquote>
+
+
+                <blockquote class="glass-card rev-card reveal reveal-delay-2">
+                    <p class="rev-text">AX에서 온톨로지가 갖는 의미를 ‘참여 주체의 확대’로 이해하게 되었습니다. <em>현업 실무자가 자신의 업무를 직접 들여다보고 구조화하며 변화의 주체가 된다는 점</em>이 인상적이었습니다. 처음엔 어렵던 개념이 스스로 되짚는 과정에서 한결 명확해졌습니다.</p>
+                </blockquote>
+
+                <blockquote class="glass-card rev-card reveal">
+                    <p class="rev-text">‘나는 현장에서 AX를 어떻게 이야기하고 있는가’를 스스로에게 다시 묻게 됐습니다. 많은 내용을 전달하고 끝나는 게 아니라 <em>계속 질문하게 하고, 연결하게 하고, 결국 스스로 생각하게 만드는 과정</em>이었습니다. 쉬는 시간 대화에서도 인사이트를 얻었습니다.</p>
+                </blockquote>
+            </div>
+
+            <!-- 기업 교육 후기 -->
+            <div class="corp-rev reveal">
+                <h3 class="corp-rev-title">기업 교육 후기</h3>
+
+                <!-- 대표 후기 3건 (항상 노출) -->
+                <div class="corp-rev-grid">
+                    <div class="corp-rev-item">
+                        <p>업무를 빠르게 하는 것이 아니라, <em>업무 자체를 다시 정의하는 것</em>이라는 점을 체감했습니다.</p>
+                        <span>사업기획 담당</span>
+                    </div>
+                    <div class="corp-rev-item">
+                        <p>AI가 성공하려면 <em>문제정의가 가장 중요</em>하고, 결국 일하는 방법의 근본적인 변화가 필요하다는 것을 확인했습니다.</p>
+                        <span>영업 / 부사장</span>
+                    </div>
+                    <div class="corp-rev-item">
+                        <p>AI에게 100% 위임하는 것이 아니라, <em>AI가 초안을 만들고 사람이 최종 검토·결정하는</em> TO-BE 워크플로우 구조를 알게 되었습니다.</p>
+                        <span>운영 담당</span>
+                    </div>
                 </div>
-                <div class="glass-card testimonial tilt-card reveal reveal-delay-1">
-                    <p class="testimonial-text">막연했던 AI 활용을 실행 가능한 AX로 구체화했습니다.</p>
-                </div>
-                <div class="glass-card testimonial tilt-card reveal reveal-delay-2">
-                    <p class="testimonial-text">생산성을 높이고 원가를 절감할 수 있었습니다.</p>
+
+                <!-- 부서별 토글 -->
+                <p class="corp-rev-more-label">부서를 눌러 해당 직군의 후기를 확인하세요</p>
+                <div class="dept-list">
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">AI · DX 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>AX 도입 이전에 현행 업무 Flow를 상세히 정리하고 매뉴얼화 해두는 것이 매우 중요하다는 생각이 들었습니다.</p>
+                            <p>역할을 나누어 페르소나를 잘 작성하는 것이 중요하다는 것을 알았습니다. 모든 것을 다 하는 전문가는 없으니까요.</p>
+                        </div></div>
+                    </article>
+
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">IT 인프라 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>가장 도움이 된 것은 문제선정 → 목표수립 → AS-IS 워크플로우 → Impact-Effort Matrix → TO-BE 워크플로우로 이어지는 흐름이었습니다. MECE, Human in the Loop 같은 개념도 새로 알게 되었고, 생각보다 준비해야 할 것이 많다는 것을 깨달았습니다.</p>
+                            <p>사용자가 AI로 생산성을 향상시키는 방법을 Bottom-up 방식으로 직접 배울 수 있었던 점이 인상적이었습니다.</p>
+                        </div></div>
+                    </article>
+
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">경영혁신 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>작은 task로 쪼개서 에이전트를 만들어 연결하면 하나의 큰 흐름을 갖는 에이전트가 된다는 것을 알았습니다. 작은 task부터 시작해 혁신을 이어나갈 수 있는 가능성을 본 것 같습니다.</p>
+                            <p>업무의 단계별 구성을 상세하게 진행하면서 얼마나 많은 일을 하고 있는지 새삼 느꼈고, AX 전환으로 상당 부분 효율화할 수 있겠다고 생각했습니다.</p>
+                            <p>AI가 잘할 수 있는 영역과 사람이 개입해야 하는 영역의 구분이 필요하고, AI가 정확한 업무를 수행하도록 배경지식과 명확한 조건을 주는 것이 중요함을 인지했습니다.</p>
+                        </div></div>
+                    </article>
+
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">영업 · 영업전략 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>현재의 문제를 바탕으로 AX 과제를 찾아가는 방법을 알 수 있었습니다. 기존에는 AI가 큰 도움이 되지 못한다고 느꼈는데, 단순히 시간을 잡아먹는 업무를 해결할 방법이 많다는 것을 알게 됐습니다. 모든 팀에 비슷한 문제점이 있다는 것도 알 수 있었습니다.</p>
+                            <p>AX는 단순히 AI를 도입하는 것이 아니라, 기존 업무의 구조와 병목을 먼저 명확히 정의하는 과정이 선행되어야 한다는 점을 알게 되었습니다. 비즈니스 임팩트가 큰 영역에 전략적으로 적용하는 것이 더 중요하다는 것을 체감했습니다.</p>
+                        </div></div>
+                    </article>
+
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">그룹웨어 · 정보시스템 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>업무를 TASK 단위로 쪼개고, 각 TASK별로 에이전트를 구성해야 한다는 방법론이 많은 도움이 되었습니다.</p>
+                            <p>문제 인식은 늘 갖고 있었지만 대략적인 방향성만 있었는데, 워크플로우 분석을 통해 AX 방향성을 구체화할 수 있어 좋았습니다.</p>
+                        </div></div>
+                    </article>
+
+                    <article class="dept-item">
+                        <button type="button" class="dept-q" aria-expanded="false">
+                            <span class="dept-name">생산 · 품질 담당</span>
+                            <span class="dept-toggle" aria-hidden="true">+</span>
+                        </button>
+                        <div class="dept-a"><div class="dept-a-inner">
+                            <p>생소함은 있었지만 천천히 따라가며 실무에 즉시 적용할 나만의 에이전트를 만들 수 있어 흥미롭고 혁신적인 수업이었습니다.</p>
+                            <p>막연하게 알던 AI와 AX의 기본 개념을 알게 되었습니다. 배운 것을 토대로 현업에 적용해 볼 필요를 느꼈습니다.</p>
+                        </div></div>
+                    </article>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===========================
-         OPEN BADGE
+         09. 자격증 + 디지털 배지
     ============================ -->
-    <section class="section badge-section" id="badge">
+    <section class="section badge-section" id="certification">
         <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">14시간의 혁신 여정,<br><span class="gradient-text">글로벌 표준 디지털 배지로 증명하십시오.</span></h2>
+                <p class="section-subtitle">
+                    <strong style="color:var(--color-cyan-glow)">AX 전략기획 전문가 2급</strong><br class="br-mobile">
+                    과학기술정보통신부 정식 등록 민간자격 (등록번호 2026-003156)
+                </p>
+            </div>
+
+            <div class="cert-row reveal">
+                <div class="cert-item"><div class="cert-item-label">시험 방식</div><div class="cert-item-value">2일차 종료 후 개인 노트북 온라인 응시<br>60분 / 50문항</div></div>
+                <div class="cert-item"><div class="cert-item-label">합격 기준</div><div class="cert-item-value">100점 만점 기준<br>60점 이상</div></div>
+                <div class="cert-item"><div class="cert-item-label">자격 증명</div><div class="cert-item-value">수강률 80% 이상 시<br>수료증 별도 발급</div></div>
+            </div>
+
+            <div class="badge-showcase reveal">
+                <div class="badge-showcase-glow" aria-hidden="true"></div>
+                <div class="badge-tilt" data-tilt>
+                    <img src="img/digital-badge.png" alt="AX Discovery 디지털 배지 — THE WHHY LAB 발급" class="badge-showcase-img" loading="lazy" decoding="async">
+                </div>
+            </div>
+
             <div class="badge-hero reveal">
                 <span class="badge-tag">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
                     Open Badge 3.0 국제표준 인증
                 </span>
-                <h2 class="badge-hero-title">
-                    14시간의 혁신 여정,<br>
-                    <span class="gradient-text">글로벌 표준 디지털 배지로 증명하십시오.</span>
-                </h2>
-                <p class="section-subtitle" style="margin-top:24px;max-width:680px;margin-left:auto;margin-right:auto">
-                    서랍 속에 잠드는 종이 수료증의 시대는 지났습니다.<br class="br-pc">14시간을 완주한 분들께 글로벌 기업들이 채택한 차세대 인증 방식,<br class="br-pc">
-                    <strong style="color:var(--color-cyan-glow)">디지털 크레덴셜(Digital Credential)</strong>을 수여합니다.
+                <p class="section-subtitle" style="margin-top:18px;max-width:700px;margin-left:auto;margin-right:auto">
+                    서랍 속에 잠드는 종이 수료증의 시대는 지났습니다.<br class="br-pc">
+                    수료 즉시 발급되는 <strong style="color:var(--color-cyan-glow)">디지털 크레덴셜</strong>은 링크드인 프로필과 이력서에 원클릭으로 연동되고,<br class="br-pc">
+                    고유 링크 하나로 발급기관과 이수 내역이 실시간 검증됩니다.
                 </p>
-            </div>
-
-            <!-- Digital Badge Showcase -->
-            <div class="badge-showcase reveal">
-                <div class="badge-showcase-glow" aria-hidden="true"></div>
-                <div class="badge-tilt" data-tilt>
-                    <img src="img/digital-badge.png" alt="AX Discovery 디지털 배지 — THE WHHY LAB 발급" class="badge-showcase-img">
-                </div>
-            </div>
-
-            <div class="badge-features">
-                <article class="glass-card badge-feat tilt-card reveal">
-                    <div class="badge-feat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 V17 L12 22 L4 17 V7 Z"/><path d="M12 22 V12"/><path d="M20 7 L12 12 L4 7"/></svg>
-                    </div>
-                    <h3 class="badge-feat-title">리딩 기업들의 선택,<br class="br-mobile">글로벌 스탠다드</h3>
-                    <p class="badge-feat-desc">국내 주요 대기업과 글로벌 혁신 기업들이 도입 중인 최신 역량 인증 시스템입니다. 국제표준(Open Badge 3.0)을 완벽히 충족하여 전 세계 어디서든 당신의 성취가 인정받습니다.</p>
-                </article>
-
-                <article class="glass-card badge-feat tilt-card reveal reveal-delay-1">
-                    <div class="badge-feat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                    </div>
-                    <h3 class="badge-feat-title">링크드인 및 이력서<br class="br-mobile">원클릭 연동</h3>
-                    <p class="badge-feat-desc">발급받은 배지는 링크드인 프로필, 개인 이력서에 단 한 번의 클릭으로 삽입됩니다. 텍스트 한 줄로 남던 수료 이력을 시각적이고 전문적인 배지로 세련되게 연동해 보세요.</p>
-                </article>
-
-                <article class="glass-card badge-feat tilt-card reveal reveal-delay-2">
-                    <div class="badge-feat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.68.94 6.36 2.64"/></svg>
-                    </div>
-                    <h3 class="badge-feat-title">1초 만에 확인되는<br class="br-mobile">투명한 검증</h3>
-                    <p class="badge-feat-desc">채용 담당자나 비즈니스 파트너가<br class="br-pc">배지의 고유 링크를 클릭하기만 하면<br class="br-pc">발급 기관과 14시간의 이수 내역이<br class="br-pc">실시간으로 투명하게 검증됩니다.</p>
-                </article>
-            </div>
-
-            <div class="glass-card badge-note reveal">
-                "복잡한 가입 절차는 필요 없습니다.<br>14시간 과정 수료 즉시, 당신의 전문성을 빛내줄 디지털 배지가 이메일로 발급됩니다."
             </div>
         </div>
     </section>
 
     <!-- ===========================
-         INSTRUCTOR
+         11. 강사
     ============================ -->
     <section class="section" id="instructor">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// INSTRUCTOR</span>
                 <h2 class="section-title">강사 소개</h2>
             </div>
 
             <div class="glass-card instructor-card reveal">
                 <div class="instructor-photo">
-                    <!-- 사진 자리: img/instructor.jpg 로 교체 -->
-                    <img src="img/instructor.jpg" alt="김홍태 강사" onerror="this.style.display='none';this.parentElement.querySelector('.instructor-photo-placeholder').style.display='block';">
-                    <div class="instructor-photo-placeholder" style="display:none">
-                        강사 사진<br>
-                        <small style="opacity:0.6">img/instructor.jpg</small>
-                    </div>
+                    <img src="img/instructor.jpg" alt="김홍태 강사" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.querySelector('.instructor-photo-placeholder').style.display='block';">
+                    <div class="instructor-photo-placeholder" style="display:none">강사 사진<br><small style="opacity:0.6">img/instructor.jpg</small></div>
                 </div>
                 <div>
                     <h3 class="instructor-name">김홍태</h3>
                     <div class="instructor-role">AX 전략기획 전문가</div>
                     <p class="instructor-current">現) (주)더와이랩 대표이사</p>
 
-                    <h4 class="instructor-section-title">경력</h4>
+                    <h4 class="instructor-section-title">경력 · 학력</h4>
                     <ul class="instructor-list">
-                        <li>前) 삼성엔지니어링 인재개발팀</li>
-                        <li>前) 삼성전자 반도체총괄 설비구매팀</li>
-                    </ul>
-
-                    <h4 class="instructor-section-title">학력</h4>
-                    <ul class="instructor-list">
+                        <li>前) 삼성엔지니어링 인재개발팀 / 삼성전자 반도체총괄 설비구매팀</li>
                         <li>고려대학교 기술경영전문대학원 기술경영학 박사 수료</li>
-                        <li>국민대학교 글로벌창업벤처대학원 창업학 석사</li>
-                        <li>고려대학교 신소재공학부 학사</li>
-                    </ul>
-
-                    <h4 class="instructor-section-title">자격</h4>
-                    <ul class="instructor-list">
-                        <li>AI전략기획 민간 자격증 개발기관 대표 (주무부처: 과학기술정보통신부, 2026-003156)</li>
-                        <li>Foster Innovation 과정 수료 (Columbia University)</li>
-                        <li>Introduction to Innovation 수료 (THE GEORGE WASHINGTON UNIVERSITY)</li>
-                        <li>The Experiential Classroom-Entrepreneurship Education 수료 (University of Florida)</li>
-                        <li>Planning the Entrepreneurial Venture 수료 (미국 KAFFMAN Foundation)</li>
+                        <li>국민대학교 글로벌창업벤처대학원 창업학 석사 · 고려대학교 신소재공학부 학사</li>
+                        <li>AI전략기획 민간자격 개발기관 대표 (주무부처 : 과학기술정보통신부, 2026-003156)</li>
                     </ul>
 
                     <h4 class="instructor-section-title">주요 AX 강의이력</h4>
                     <ul class="instructor-list">
+                        <li><strong>[S기업]</strong> AX Discovery</li>
                         <li><strong>[S그룹 금융사]</strong> AI 전략과정 (4년 연속)</li>
-                        <li><strong>[C그룹 계열사]</strong> AX Discovery (4차수) - AX전략 및 현업 AX과제 발굴 워크숍</li>
+                        <li><strong>[C그룹 계열사]</strong> AX Discovery (4차수) — AX전략 및 현업 AX과제 발굴 워크숍</li>
                         <li><strong>[H그룹]</strong> 사내 MBA과정 중 AX경영 과목 교수</li>
                         <li><strong>[글로벌 빅테크 M사]</strong> AI School 커리어 멘토링 사업 기획</li>
-                        <li><strong>[S그룹 계열사]</strong> AX워크숍 - AI도입에 따른 기존업무 프로세스 재정의 및 워킹 플로우 재설계 워크숍</li>
+                        <li><strong>[S그룹 계열사]</strong> AX워크숍 — AI 도입에 따른 업무 프로세스 재정의 및 워킹 플로우 재설계</li>
                         <li><strong>[W그룹]</strong> AI 기술 확산에 따른 계열사 사업영역별 영향분석과 대응전략 수립</li>
                         <li><strong>[I금융사]</strong> DX기반 아이디어 발굴 워크숍</li>
                     </ul>
@@ -979,108 +849,109 @@
         </div>
     </section>
 
-    <!-- ★ 중간 CTA #2 -->
-    <section class="mid-cta-section">
-        <div class="container">
-            <div class="mid-cta featured reveal">
-                <div class="mid-cta-text">
-                    <div class="mid-cta-eyebrow"><span class="pulse-dot"></span>선착순 마감</div>
-                    <h3 class="mid-cta-title">100만 원. 단 14시간.<br><em>도구가 아닌 설계 역량</em>을 가져갑니다.</h3>
-                    <p class="mid-cta-desc">정가 160만 원 → 특별 할인가 100만 원 · 응시료 10만 원 포함</p>
-                </div>
-                <a href="#register" class="btn btn-primary btn-large btn-magnetic">
-                    지금 신청하기
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- ===========================
-         REGISTRATION
+         12. 수강 신청
     ============================ -->
     <section class="section" id="register">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// REGISTRATION</span>
-                <h2 class="section-title">수강 신청</h2>
+                <h2 class="section-title">4기 수강 신청</h2>
+                <p class="section-subtitle">선착순 <strong style="color:var(--color-cyan-glow)">12명</strong> 마감.</p>
             </div>
 
-            <div class="register-grid register-grid--2col">
-                <!-- 2기 (모집중) -->
-                <article class="glass-card register-card featured reveal reveal-delay-1">
-                    <span class="register-card-tag register-card-tag--open">2기 모집중</span>
-                    <h3 class="register-card-title">AX 전략기획 전문가<br>2급 자격증 과정 — 2기</h3>
+            <!-- 가격 타임라인 -->
+            <div class="ptl reveal" id="priceTimeline">
+                <div class="ptl-cols">
+                    <div class="ptl-col" data-tier="super">
+                        <span class="ptl-tag">슈퍼 얼리버드</span>
+                        <span class="ptl-amt">120<i>만원</i></span>
+                        <span class="ptl-period">8/11 ~ 9/11</span>
+                    </div>
+                    <div class="ptl-col" data-tier="early">
+                        <span class="ptl-tag">얼리버드</span>
+                        <span class="ptl-amt">140<i>만원</i></span>
+                        <span class="ptl-period">9/12 ~ 10/5</span>
+                    </div>
+                    <div class="ptl-col" data-tier="normal">
+                        <span class="ptl-tag">일반 수강료</span>
+                        <span class="ptl-amt">160<i>만원</i></span>
+                        <span class="ptl-period">10/6 ~ 10/13</span>
+                    </div>
+                </div>
+
+                <div class="ptl-bar">
+                    <div class="ptl-bar-fill" id="ptlFill"></div>
+                    <span class="ptl-node" style="left:0%"></span>
+                    <span class="ptl-node" style="left:33.333%"></span>
+                    <span class="ptl-node" style="left:66.667%"></span>
+                    <span class="ptl-node ptl-node--end" style="left:100%"></span>
+                    <span class="ptl-train" id="ptlTrain"><b id="ptlTrainLabel">TODAY</b></span>
+                </div>
+
+            </div>
+
+            <!-- 신청 카드 -->
+            <div class="register-grid register-grid--single">
+                <article class="glass-card register-card featured reveal">
+                    <span class="register-card-tag" id="registerTag">4기 모집중</span>
+                    <span class="register-card-scarcity">선착순 12명 한정</span>
+                    <h3 class="register-card-title">AX 전략기획 전문가<br>2급 자격증 과정 — 4기</h3>
 
                     <div class="register-card-price register-card-price--compact">
-                        <span class="register-card-price-original">정가 1,600,000원</span>
-                        <span class="register-card-price-current">1,000,000원</span>
-                        <span class="register-card-price-note">2기 특별 할인가 (VAT·응시료 포함)</span>
+                        <div class="price-anchor" id="priceAnchor">
+                            <span class="price-was">정상가 1,600,000원</span>
+                            <span class="price-save" id="priceSave">40만 원 SAVE</span>
+                        </div>
+                        <span class="register-card-price-current" id="registerPrice">1,200,000원</span>
+                        <span class="register-card-price-note" id="registerPriceNote">현재 슈퍼 얼리버드 적용가 (VAT · 응시료 포함)</span>
                     </div>
 
                     <div class="register-info">
                         <div class="register-info-row">
-                            <span class="register-info-label">모집 기한</span>
-                            <span class="register-info-value">5/14(목) ~ 7/10(금)</span>
+                            <span class="register-info-label">교육 일정</span>
+                            <span class="register-info-value">10/15(목) – 10/16(금)<small>10:00 ~ 18:00 · 총 14시간</small></span>
                         </div>
                         <div class="register-info-row">
-                            <span class="register-info-label">교육 일정</span>
-                            <span class="register-info-value">7/18(토)-7/19(일) 10:00~18:00<small>13H 교육 + 1H 온라인 자격시험</small></span>
+                            <span class="register-info-label" id="registerDeadlineLabel">슈퍼 얼리버드 마감</span>
+                            <span class="register-info-value"><span id="registerDeadline">2026. 9. 11 (금) 23:59</span><small id="registerDeadlineNote">이후 얼리버드 1,400,000원 적용</small></span>
                         </div>
                         <div class="register-info-row">
                             <span class="register-info-label">교육 장소</span>
-                            <span class="register-info-value">더와이랩 (성동구 성수일로99, 1004호)</span>
+                            <span class="register-info-value">더와이랩<small>성동구 성수일로99, 1004호</small></span>
                         </div>
                         <div class="register-info-row">
-                            <span class="register-info-label">자격 시험 결과 발표</span>
-                            <span class="register-info-value">7/27(월) ~ 7/31(금)</span>
+                            <span class="register-info-label">준비물</span>
+                            <span class="register-info-value">개인 노트북<small>실습 및 온라인 시험 응시용</small></span>
                         </div>
                     </div>
 
-                    <a href="https://event-us.kr/thewhhylab/event/126212" target="_blank" rel="noopener noreferrer" class="btn btn-primary register-btn register-btn--hero">
-                        2기 수강 신청하기
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    <a href="https://event-us.kr/axdiscovery/event/132508" target="_blank" rel="noopener" class="btn btn-primary btn-large btn-magnetic register-btn--hero" data-apply-btn>
+                        수강 신청하기
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                </article>
-
-                <!-- 3기 (모집중) -->
-                <article class="glass-card register-card featured reveal reveal-delay-2">
-                    <span class="register-card-tag register-card-tag--open">3기 모집중</span>
-                    <h3 class="register-card-title">AX 전략기획 전문가<br>2급 자격증 과정 — 3기</h3>
-
-                    <div class="register-card-price register-card-price--compact">
-                        <span class="register-card-price-original">정가 1,600,000원</span>
-                        <span class="register-card-price-current">1,000,000원</span>
-                        <span class="register-card-price-note">3기 특별 할인가 (VAT·응시료 포함)</span>
-                    </div>
-
-                    <div class="register-info">
-                        <div class="register-info-row">
-                            <span class="register-info-label">모집 기한</span>
-                            <span class="register-info-value">6/30(화) ~ 7/31(금)</span>
-                        </div>
-                        <div class="register-info-row">
-                            <span class="register-info-label">교육 일정</span>
-                            <span class="register-info-value">8/8(토)-8/9(일) 10:00~18:00<small>13H 교육 + 1H 온라인 자격시험</small></span>
-                        </div>
-                        <div class="register-info-row">
-                            <span class="register-info-label">교육 장소</span>
-                            <span class="register-info-value">더와이랩 (성동구 성수일로99, 1004호)</span>
-                        </div>
-                        <div class="register-info-row">
-                            <span class="register-info-label">자격 시험 결과 발표</span>
-                            <span class="register-info-value">8/17(월) ~ 8/21(금)</span>
-                        </div>
-                    </div>
-
-                    <a href="https://event-us.kr/thewhhylab/event/129532" target="_blank" rel="noopener noreferrer" class="btn btn-primary register-btn register-btn--hero">
-                        3기 수강 신청하기
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <p class="register-apply-note">이벤터스 신청 페이지로 이동합니다</p>
                 </article>
             </div>
 
-            <!-- 사외교육 참가신청서 다운로드 -->
+            <!-- 기업 문의 -->
+            <div class="contact-box reveal">
+                <div class="contact-box-main">
+                    <h3 class="contact-box-title">기업 단체 파견 · 사내 교육 문의</h3>
+                    <p class="contact-box-desc">부서 단위 파견은 물론, 사내 워크숍 형태의 커스터마이징 과정도 운영합니다. 인원과 목표를 알려주시면 커리큘럼을 조정해 제안드립니다.</p>
+                </div>
+                <div class="contact-box-actions">
+                    <a href="mailto:k0ng815@naver.com" class="btn btn-primary contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+                        k0ng815@naver.com
+                    </a>
+                    <a href="tel:02-468-3555" class="btn btn-outline contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        02-468-3555
+                    </a>
+                </div>
+            </div>
+
+            <!-- 사외교육 참가신청서 -->
             <div class="appform-box reveal">
                 <div class="appform-box-info">
                     <div class="appform-box-icon" aria-hidden="true">
@@ -1088,7 +959,7 @@
                     </div>
                     <div>
                         <h3 class="appform-box-title">사외교육 참가신청서</h3>
-                        <p class="appform-box-desc">회사 결재·품의용 양식입니다. 워드 파일로 받거나 바로 인쇄(PDF 저장)하실 수 있습니다.</p>
+                        <p class="appform-box-desc">회사 결재 · 품의용 양식입니다.</p>
                     </div>
                 </div>
                 <div class="appform-box-actions">
@@ -1106,161 +977,11 @@
     </section>
 
     <!-- ===========================
-         AX EVENT (이벤트 / 도서 증정 · 과정 입과 기회)
-    ============================ -->
-    <section class="section event-section" id="event">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-eyebrow">// AX EVENT</span>
-                <h2 class="section-title">우리 조직의 AX,<br class="br-mobile">어디서부터 시작해야 할까요?</h2>
-                <p class="section-subtitle">AX 전환을 고민하는 담당자들을 위한 <strong style="color:var(--color-cyan-glow)">실무 지원 이벤트</strong>입니다.</p>
-            </div>
-
-            <!-- 담당자의 고민 -->
-            <div class="event-concerns reveal">
-                <h3 class="event-block-title">AX가 필요하다는 건 알지만,<br class="br-mobile">막상 시작하려면 막막합니다</h3>
-                <ul class="event-concern-list">
-                    <li class="event-concern">
-                        <span class="event-concern-num">01</span>
-                        <span class="event-concern-text">AI 교육은 했지만 직원별 활용 격차가 큽니다</span>
-                    </li>
-                    <li class="event-concern">
-                        <span class="event-concern-num">02</span>
-                        <span class="event-concern-text">AX 전략을 세우라는데, 기준과 순서가 막막합니다</span>
-                    </li>
-                    <li class="event-concern">
-                        <span class="event-concern-num">03</span>
-                        <span class="event-concern-text">임직원 교육과 실행 과제를 어떻게 연결할지 고민됩니다</span>
-                    </li>
-                    <li class="event-concern">
-                        <span class="event-concern-num">04</span>
-                        <span class="event-concern-text">GPT, Claude는 쓰고 있지만 조직 변화로 이어지지 않습니다</span>
-                    </li>
-                </ul>
-                <p class="event-concern-note">
-                    『AX DISCOVERY』는 AI 활용을 조직의 실행 과제로 연결하는 <strong style="color:var(--color-cyan-glow)">AX 설계 가이드</strong>입니다.<br class="br-pc">
-                    책 속 10개의 캔버스를 따라 우리 조직의 AX 첫걸음을 구체화합니다.
-                </p>
-            </div>
-
-            <!-- 두 가지 이벤트 -->
-            <div class="event-benefits">
-                <article class="glass-card event-benefit reveal">
-                    <span class="event-benefit-label">이벤트 1 · 선착순</span>
-                    <div class="event-benefit-media">
-                        <img src="img/ax-book-cover.png" alt="AX DISCOVERY 도서 — AI에서 AX로, 전환을 설계하다" class="event-benefit-book" loading="lazy">
-                    </div>
-                    <h3 class="event-benefit-title">선착순 『AX DISCOVERY』 도서 증정<br class="br-mobile"><span class="event-benefit-worth">3만원 상당</span></h3>
-                    <p class="event-benefit-desc">
-                        AX를 막연하게 이해하는 데서 끝나지 않고, 우리 조직의 실행 과제로 연결할 수 있도록
-                        <strong style="color:var(--color-cyan-glow)">10개의 AX 캔버스</strong>로 기준과 방향을 정리해 드립니다.
-                    </p>
-                </article>
-
-                <article class="glass-card event-benefit reveal reveal-delay-1">
-                    <span class="event-benefit-label">이벤트 2 · 선정 제공</span>
-                    <div class="event-benefit-media">
-                        <div class="event-badge-glow" aria-hidden="true"></div>
-                        <img src="img/digital-badge.png" alt="AX 전략기획 전문가 과정 인증 배지 — THE WHHY LAB" class="event-benefit-badge" loading="lazy">
-                    </div>
-                    <h3 class="event-benefit-title">AX 전략기획 전문가 과정 제공<br class="br-mobile"><span class="event-benefit-worth">160만원 상당</span></h3>
-                    <p class="event-benefit-desc">
-                        우리 조직의 AX 고민을 남겨주세요. 사연을 남겨주신 <strong style="color:var(--color-cyan-glow)">중견·중소·스타트업 담당자</strong> 중
-                        선정된 분께 AX 전략기획 전문가 과정 입과 기회를 드립니다!
-                    </p>
-                </article>
-            </div>
-
-            <!-- 현업 담당자 리뷰 -->
-            <div class="event-reviews">
-                <div class="event-review-head reveal">
-                    <span class="event-review-eyebrow">REVIEW</span>
-                    <h3 class="event-block-title">현업 담당자의 한 줄 리뷰</h3>
-                    <p class="event-review-sub">AX 전환 교육 현장에서 먼저 검증된 메시지</p>
-                </div>
-                <div class="event-review-list">
-                    <figure class="event-review event-review--left reveal">
-                        <img src="img/review1.png" alt="&quot;막연하게만 알던 AX가 한 장으로 정리됐습니다&quot; — K기관 AI 전환 사업 참가 기업" loading="lazy">
-                    </figure>
-                    <figure class="event-review event-review--right reveal reveal-delay-1">
-                        <img src="img/review2.png" alt="&quot;실무에 바로 써볼 수 있겠다는 확신이 생겼습니다&quot; — O기업 미디어운영팀" loading="lazy">
-                    </figure>
-                    <figure class="event-review event-review--left reveal reveal-delay-1">
-                        <img src="img/review3.png" alt="&quot;AX는 도구 도입이 아니라 일 자체를 다시 정의하는 일이었습니다&quot; — H기업 경영혁신팀" loading="lazy">
-                    </figure>
-                    <figure class="event-review event-review--right reveal reveal-delay-2">
-                        <img src="img/review4.png" alt="&quot;복잡하게만 보이던 에이전트도 작은 Task로 나누니 길이 보였습니다&quot; — T기업 IT기획팀" loading="lazy">
-                    </figure>
-                </div>
-            </div>
-
-            <!-- 클로징 CTA (이벤트 1 · 이벤트 2 각각 신청) -->
-            <div class="event-cta glass-card reveal">
-                <h3 class="event-cta-title">우리 조직의 AX,<br class="br-mobile"><span class="gradient-text">지금 시작해보세요</span></h3>
-
-                <div class="event-cta-grid">
-                    <!-- 이벤트 1 · 선착순 도서 증정 -->
-                    <div class="event-cta-col">
-                        <div class="event-cta-col-media" aria-hidden="true">
-                            <img src="img/ax-book-cover.png" alt="" class="event-cta-book" loading="lazy">
-                        </div>
-                        <span class="event-cta-col-label">이벤트 1 · 선착순 도서 증정 <em class="event-cta-col-worth">3만원 상당</em></span>
-                        <div class="event-cta-info">
-                            <div class="register-info-row">
-                                <span class="register-info-label">대상</span>
-                                <span class="register-info-value">기업·기관 AX 및 교육 담당자</span>
-                            </div>
-                            <div class="register-info-row">
-                                <span class="register-info-label">안내</span>
-                                <span class="register-info-value">선착순 마감<small>※ 선정자는 개별 안내 예정</small></span>
-                            </div>
-                        </div>
-                        <!-- 이벤트 1(도서 증정) 신청 폼 -->
-                        <a href="https://forms.gle/Xe5VrCiUiw9rcHct8" target="_blank" rel="noopener noreferrer" class="btn btn-primary register-btn register-btn--hero event-cta-btn">
-                            『AX DISCOVERY』 도서 증정 신청
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-
-                    <!-- 이벤트 2 · 전략기획 전문가 과정 -->
-                    <div class="event-cta-col">
-                        <div class="event-cta-col-media" aria-hidden="true">
-                            <div class="event-badge-glow"></div>
-                            <img src="img/digital-badge.png" alt="" class="event-cta-badge" loading="lazy">
-                        </div>
-                        <span class="event-cta-col-label">이벤트 2 · 전략기획 전문가 과정 <em class="event-cta-col-worth">160만원 상당</em></span>
-                        <div class="event-cta-info">
-                            <div class="register-info-row">
-                                <span class="register-info-label">대상</span>
-                                <span class="register-info-value">중견·중소·스타트업 교육 담당자</span>
-                            </div>
-                            <div class="register-info-row">
-                                <span class="register-info-label">안내</span>
-                                <span class="register-info-value">사연 선정 후 개별 안내</span>
-                            </div>
-                        </div>
-                        <!-- TODO: 이벤트 2(과정 입과) 신청 폼 URL로 교체 -->
-                        <a href="https://www.thewhhylab.com/ax-event/" target="_blank" rel="noopener noreferrer" class="btn btn-primary register-btn register-btn--hero event-cta-btn">
-                            우리 조직 AX 고민 남기러 가기
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <p class="event-cta-method">
-                    <strong>참여 방법</strong> 도서 증정과 AX 전략기획 전문가 과정 입과는 <strong style="color:var(--color-cyan-glow)">각각 별도 신청</strong>으로 진행됩니다.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         FAQ
+         13. FAQ
     ============================ -->
     <section class="section" id="faq">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-eyebrow">// FAQ</span>
                 <h2 class="section-title">자주 묻는 질문</h2>
             </div>
 
@@ -1270,29 +991,23 @@
                         <span>Q. 코딩을 전혀 모르는데 따라갈 수 있나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 네, 코딩 지식은 전혀 필요하지 않습니다. AX Discovery는 "AI를 어떻게 만드는가"가 아니라 "AI에게 무엇을 맡길지를 어떻게 설계하는가"를 다룹니다. 기획·마케팅·HR·영업·법무 등 비개발 직무 분들이 더 잘 따라옵니다. 본인의 업무를 가장 잘 아는 사람이 최고의 AX 설계자가 됩니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 네, 코딩 지식은 전혀 필요하지 않습니다. “AI를 어떻게 만드는가”가 아니라 “AI에게 무엇을 맡길지를 어떻게 설계하는가”를 다룹니다. 기획 · 마케팅 · HR · 영업 · 법무 등 비개발 직무 분들이 오히려 더 잘 따라오십니다. 본인의 업무를 가장 잘 아는 사람이 최고의 AX 설계자입니다.</div></div>
                 </article>
 
                 <article class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>Q. 기존 ChatGPT·생성형 AI 강의와 무엇이 다른가요?</span>
+                        <span>Q. 기존 ChatGPT · 생성형 AI 강의와 무엇이 다른가요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 기존 강의는 "도구 사용법"입니다. 프롬프트 작성법, 메뉴 조작법, 일반적 사례 소개가 중심이며, 6개월만 지나도 다시 들어야 합니다. AX Discovery는 "워크플로우 설계 방법론"입니다. 내 업무의 페인포인트를 분해하고(HTA), 데이터 기반으로 우선순위를 정하고(IFV 매트릭스), 사람과 AI의 협업 구조를 설계합니다(HITL). 도구가 바뀌어도 통하는 역량입니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 기존 강의는 도구 사용법입니다. 프롬프트 작성법과 메뉴 조작이 중심이라 도구가 바뀌면 다시 들어야 합니다. AX Discovery는 워크플로우 설계 방법론입니다. 내 업무의 페인포인트를 분해하고(HTA), 데이터 기반으로 우선순위를 정하고(IFV), 사람과 AI의 협업 구조를 설계합니다(HITL).</div></div>
                 </article>
 
                 <article class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>Q. 회사가 아닌 개인이 신청해도 되나요?</span>
+                        <span>Q. 기업에서 여러 명을 보내려면 어떻게 하나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 물론입니다. 오히려 개인 수강생이 더 큰 변화를 경험합니다. AX는 조직 차원의 전략인 동시에 개인 차원의 역량입니다. 같은 직무, 같은 연차에서도 AI를 제대로 활용하는 사람의 결과물이 측정 가능한 차이로 앞서갑니다(HBS·BCG 758명 연구). 자격증과 디지털 배지는 그대로 본인 커리어에 남습니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 정기 과정(4기)에 부서 인원을 함께 신청하실 수 있고, 인원이 많은 경우 사내 워크숍 형태로 별도 운영도 가능합니다. 커리큘럼과 실습 과제를 귀사의 업무 상황에 맞춰 조정해 제안드립니다. k0ng815@naver.com 또는 02-468-3555로 문의 주세요. 결재용 사외교육 참가신청서는 이 페이지에서 바로 내려받으실 수 있습니다.</div></div>
                 </article>
 
                 <article class="faq-item">
@@ -1300,9 +1015,38 @@
                         <span>Q. 14시간 만에 정말 현장 적용이 가능한가요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 가능합니다. 본 과정은 일반론 강의가 아니라, 본인의 실제 업무를 캔버스에 올려놓고 작업하는 워크숍 형태입니다. 1일차에 문제정의서를, 2일차에 TO-BE 워크플로우와 AI 에이전트 매뉴얼을 직접 완성합니다. 이 3종의 산출물이 곧 월요일 아침부터 사용 가능한 실행 자료입니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 일반론 강의가 아니라 본인의 실제 업무를 캔버스에 올려놓고 작업하는 워크숍입니다. 1일차에 문제정의서를, 2일차에 TO-BE 워크플로우와 AI 에이전트 매뉴얼을 완성합니다. 이 3종이 곧 월요일 아침부터 쓸 수 있는 실행 자료입니다.</div></div>
+                </article>
+
+                <article class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Q. 결재가 늦어져서 얼리버드 기간을 넘기면 어떻게 되나요?</span>
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 수강료는 신청 · 결제가 완료된 시점의 단가가 적용됩니다. 사내 결재 일정 때문에 기한을 맞추기 어려운 경우, 마감 전에 미리 k0ng815@naver.com 또는 02-468-3555로 연락 주시면 일정을 함께 조율해 드리겠습니다.</div></div>
+                </article>
+
+                <article class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Q. 세금계산서 발행이 되나요?</span>
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 네, 발행됩니다. k0ng815@naver.com으로 메일 주시면 상세 안내드리겠습니다.</div></div>
+                </article>
+
+                <article class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Q. 환불 규정은 어떻게 되나요?</span>
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 아래 환불 규정을 반드시 확인해 주시기 바랍니다.
+
+<b>[4기 환불 규정]</b> (교육 시작일 : 2026년 10월 15일)
+· 2026년 10월 5일(월)까지 : 전액 환불 가능
+· 2026년 10월 6일(화)부터 : 환불 불가 (※ 일부 환불도 불가)
+
+※ 교육 참석이 어려우신 경우 대체 참석자로 변경 신청은 가능하며, 관련 문의는 반드시 더와이랩 운영사무국 공식 이메일(k0ng815@naver.com)로 주시기 바랍니다.
+※ 귀하는 위 환불 규정에 대한 동의를 거부할 권리가 있습니다. 다만 동의를 거부하실 경우 교육 수강 신청 및 참여가 제한됩니다.</div></div>
                 </article>
 
                 <article class="faq-item">
@@ -1310,29 +1054,15 @@
                         <span>Q. 자격시험은 어떻게 진행되나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 시험은 2일차 17시~18시(1H)에 진행됩니다. 수강생이 개별 지참한 노트북을 활용하여 온라인으로 실시되며, 총 60분 동안 객관식 50문항을 풀이하게 됩니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 2일차 17시~18시에 진행됩니다. 개인 노트북으로 온라인 응시하며, 60분 동안 객관식 50문항을 풀이합니다. 100점 만점에 60점 이상이면 합격입니다.</div></div>
                 </article>
 
                 <article class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>Q. 교육 및 시험 참석 시 준비물이 있나요?</span>
+                        <span>Q. 준비물과 편의 지원은 어떻게 되나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 원활한 실습 및 온라인 시험 응시를 위해 개인 노트북을 반드시 지참하셔야 합니다. 또한, 응시자 본인 확인을 위한 신분증도 꼭 챙겨주시기 바랍니다.</div>
-                    </div>
-                </article>
-
-                <article class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Q. 점심 식사 및 주차는 지원되나요?</span>
-                        <span class="faq-toggle" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 점심 식사는 별도로 제공되지 않습니다. 주차의 경우 건물 내 유료 주차장(30분당 1,500원)을 이용하실 수 있으나, 주차 비용이 발생하고 공간이 협소할 수 있으므로 가급적 대중교통 이용을 적극 권장해 드립니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 실습과 온라인 시험 응시를 위해 개인 노트북을 반드시 지참해 주세요. 교재가 제공되며 중식과 주차, 커피 · 다과도 지원됩니다.</div></div>
                 </article>
 
                 <article class="faq-item">
@@ -1340,11 +1070,7 @@
                         <span>Q. 1급과 2급 자격증의 차이는 무엇인가요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 2급 (실무자 과정): 실무 단위의 워크플로우를 구조화하고, AI 도구를 활용해 실제 업무 효율화를 실행할 수 있는 능력을 검정합니다.
-
-1급 (최고 전문가 과정): 2급 취득 후 응시 가능합니다. 전사적 차원의 AX(AI 전환) 마스터플랜을 수립하고, AI 프로젝트를 총괄(PM)할 수 있는 최고 전문가 수준의 역량을 검정합니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 2급은 실무자 과정입니다. 실무 단위의 워크플로우를 구조화하고 AI를 활용해 업무 효율화를 실행하는 능력을 검정합니다. 1급은 2급 취득 후 응시 가능한 최고 전문가 과정으로, 전사 차원의 AX 마스터플랜 수립과 프로젝트 총괄(PM) 역량을 검정합니다.</div></div>
                 </article>
 
                 <article class="faq-item">
@@ -1352,19 +1078,15 @@
                         <span>Q. 시험 중 부정행위 적발 시 어떤 불이익이 있나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 시험 중 부정행위가 적발될 경우, 해당 검정은 즉시 중지 및 무효 처리됩니다. 아울러 적발된 시점으로부터 향후 3년간 본 자격검정 시험에 대한 응시 자격이 엄격히 정지됩니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 해당 검정은 즉시 중지 및 무효 처리되며, 적발 시점으로부터 3년간 본 자격검정 응시 자격이 정지됩니다.</div></div>
                 </article>
 
                 <article class="faq-item">
                     <button class="faq-question" aria-expanded="false">
-                        <span>Q. 기타 문의 사항은 어디로 연락하면 되나요?</span>
+                        <span>Q. 기타 문의는 어디로 연락하면 되나요?</span>
                         <span class="faq-toggle" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">A. 이메일(k0ng815@naver.com)로 문의 내용을 남겨주시면 담당자가 확인 후, 영업일 기준 1~2일 내로 상세히 답변해 드리겠습니다.</div>
-                    </div>
+                    <div class="faq-answer"><div class="faq-answer-inner">A. 이메일 k0ng815@naver.com 또는 전화 02-468-3555로 연락 주시면 담당자가 안내해 드립니다.</div></div>
                 </article>
             </div>
         </div>
@@ -1383,11 +1105,10 @@
                 <div class="footer-col">
                     <h4>SITEMAP</h4>
                     <ul>
-                        <li><a href="#features">과정 특장점</a></li>
-                        <li><a href="#curriculum">커리큘럼</a></li>
-                        <li><a href="#instructor">강사 소개</a></li>
+                        <li><a href="#twodays">커리큘럼</a></li>
+                        <li><a href="#outcomes">이 과정을 마치면</a></li>
+                        <li><a href="#reviews-top">수강생 후기</a></li>
                         <li><a href="#register">수강 신청</a></li>
-                        <li><a href="#event">AX 이벤트</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
@@ -1395,8 +1116,9 @@
                     <h4>CONTACT</h4>
                     <ul>
                         <li>주식회사 더와이랩</li>
-                        <li>성동구 성수일로99, 1004호</li>
+                        <li>서울 성동구 성수일로99, 1004호</li>
                         <li><a href="mailto:k0ng815@naver.com">k0ng815@naver.com</a></li>
+                        <li><a href="tel:02-468-3555">02-468-3555</a></li>
                     </ul>
                 </div>
             </div>
@@ -1406,6 +1128,15 @@
         </div>
     </footer>
 
+    <!-- 모바일 고정 CTA -->
+    <div class="mcta" id="mcta" hidden>
+        <div class="mcta-info">
+            <b class="mcta-price" id="mctaPrice">1,200,000원</b>
+            <span class="mcta-meta" id="mctaMeta">슈퍼 얼리버드</span>
+        </div>
+        <a href="https://event-us.kr/axdiscovery/event/132508" target="_blank" rel="noopener" class="mcta-btn" data-apply-btn>수강 신청</a>
+    </div>
+
     <!-- Scroll to Top -->
     <button class="to-top" aria-label="맨 위로 가기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -1413,7 +1144,8 @@
 
     <!-- JavaScript -->
     <script src="js/enhancements.js"></script>
-    <script src="js/appform.js"></script>
     <script src="js/dday.js"></script>
+    <script src="js/appform.js"></script>
+    <script src="js/renewal.js"></script>
 </body>
 </html>

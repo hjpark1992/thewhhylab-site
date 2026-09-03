@@ -74,6 +74,7 @@
         if (!counters.length) return;
 
         function animateCounter(el) {
+            el.dataset.counted = '1';
             const target = parseFloat(el.dataset.target);
             const decimals = parseInt(el.dataset.decimals || '0', 10);
             const suffix = el.dataset.suffix || '';
@@ -119,6 +120,22 @@
                 });
             }, { threshold: 0.5 });
             counters.forEach(function (el) { io.observe(el); });
+
+            /* Safety net: 3.5초 후에도 애니메이션이 시작되지 않은 카운터는
+               최종값으로 즉시 표시 (전체 페이지 캡쳐 · 크롤러 대응) */
+            setTimeout(function () {
+                counters.forEach(function (el) {
+                    if (el.dataset.counted === '1') return;
+                    el.dataset.counted = '1';
+                    var target = parseFloat(el.dataset.target) || 0;
+                    var decimals = parseInt(el.dataset.decimals || '0', 10);
+                    var prefix = el.dataset.prefix || '';
+                    var suffix = el.dataset.suffix || '';
+                    el.textContent = prefix + (decimals > 0 ? target.toFixed(decimals) : target.toLocaleString('en-US')) + suffix;
+                    var wrap = el.closest('.counter-wrap');
+                    if (wrap) wrap.classList.add('counted');
+                });
+            }, 3500);
         } else {
             counters.forEach(function (el) {
                 const decimals = parseInt(el.dataset.decimals || '0', 10);
