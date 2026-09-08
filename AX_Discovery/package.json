@@ -1,0 +1,15 @@
+{
+  "name": "thewhylab-ax-promotion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "export:pdf": "node scripts/export-pdf.js",
+    "qa:web": "node scripts/qa-render.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0",
+    "serve": "^14.2.4"
+  }
+}
