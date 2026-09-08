@@ -139,7 +139,7 @@ thewhhylab 폴더에서 작업 이어서 할게.
 
 ---
 
-## ▶ 다음 세션 시작점 (2026-06-08 저장 — 여기서 이어서)
+## ▶ 이전 세션 시작점 (2026-06-08 — 관리자 페이지 배포건. 최신 시작점은 문서 맨 끝)
 
 **상태:** 코드·문서 전부 커밋(작업트리 깨끗, HEAD `4935b9a`). 집 PC에 PHP 8.3 설치돼 있어 로컬 검증 가능(새 터미널에서 `php` 바로 됨).
 
@@ -155,3 +155,76 @@ thewhhylab 폴더에서 작업 이어서 할게.
 - 컬럼 정렬 + 페이지네이션(현재 최근 300건만 표시)
 
 **결정/보류:** 로그인 잠금파일은 `/tmp` 자동만료(10분)가 업계 표준이라 **위치 이동 안 하기로 결정**(IP기준이라 진짜 관리자 DoS 위험도 낮음). 잠기면 10분 대기.
+
+---
+
+## 작업 기록 (2026-09-08) — AX_Discovery 상세페이지 내재화 + 메뉴 개편
+
+> 다른 직원이 별도 프로젝트로 만든 `AX_Discovery/`(웹+A4 PDF 겸용 1파일 구조)를
+> 회사 사이트 하위페이지 결에 맞추고, 메인 사이트의 외부링크를 내부 페이지로 전환.
+> **서버 배포까지 완료. 라이브 검증 통과.**
+
+### 무엇을 했나
+- **상·하단 교체** (`AX_Discovery/index.html`): 자체 헤더(로고+앵커nav+PDF버튼) → 회사 공통 `.nav` + 전체화면 `.menu-overlay`, 히어로에 `.p-crumb` 브레드크럼, 하단에 공통 `.site-foot` 추가. `shared/css/site.css`는 **`media="screen"`**, `shared/js/site.js` 연결. 새 요소 전부 `web-only` → **PDF 출력 경로 무손상**.
+- **PDF 저장**: 촌스러운 검정 버튼 대신 브레드크럼 줄 오른쪽 끝의 조용한 텍스트 액션(`.pdf-save`). `scripts/main.js`가 존재하지 않는 `#print-button`을 찾던 기존 버그를 `[data-print-button]`으로 교정(원래 눌러도 동작 안 했음).
+- **메뉴 개편** (25개 페이지 = 메인 24 + AX 자체): AI HRD 열이
+  `AX 프로그램`(내부 `/AX_Discovery/`) → `AX 전략기획 전문가 2급 자격증 과정`(외부 `https://www.thewhhylab.ai.kr/AX_Discovery/` ↗) 순. 푸터 '프로그램' 열도 동일. 총 50곳.
+
+### ⚠️ 가장 중요 — `shared/css/site.css`의 전역 자간 리셋 함정
+`site.css` **2525행**에 `*, *::before, *::after { letter-spacing: 0 !important; }` 가 있다.
+`!important` + 전체선택자라 **자체 자간 설계를 가진 하위 프로젝트를 통째로 망가뜨린다.**
+AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `AI로 일하는 방식` / `을` 로 줄이 밀렸다.
+
+- **처음엔 site.css를 고쳤다가 되돌렸다.** (`:not(.document, .document *)` 예외) → 공유 CSS를 반드시 업로드해야만 동작해서, 실제로 AX 폴더만 올라간 상태에서 라이브가 깨졌다.
+- **최종 해법 = AX 자체 CSS 안에서 해결** (`styles/screen.css` 상단 보정 블록):
+  1. `.document *, .document *::before/after { letter-spacing: inherit !important; }` — 전역 리셋이 `<span>` 등 자식을 **직접** 잡아 상속을 끊으므로 상속부터 복구
+  2. AX 자체 선언 **35개**를 원래 값 그대로 `!important` 재선언
+  - **`shared/css/site.css`는 손대지 않은 원본 그대로**(서버와 해시 일치 확인). 하위 프로젝트가 자기 안에서 자립하는 구조.
+
+### 그 외 site.css ↔ AX CSS 충돌 (전부 `styles/screen.css` 보정 블록에서 처리)
+- `h1,h2,h3 { text-wrap: balance }` → AX 제목의 의도된 `<br>` 줄바꿈이 깨짐 → `.document h1~h3 { text-wrap: wrap }`
+- `.eyebrow` / `.section-heading` **클래스 동명 충돌** — site.css가 장식 의사요소(대시선·파란 바)와 여백을 덧씌워 '차별성' 섹션이 +144px 늘어남 → AX가 직접 선언 안 한 속성만 되돌림(`::before { content: none }` 포함)
+- `body` 전역 타이포 — AX는 Pretendard **Variable**(CDN dynamic-subset)인데 site.css가 static `Pretendard`로 덮어써 폰트 폴백 위험 → body 폰트 스택 복원 + `.document { line-height: normal; font-feature-settings: normal }`
+
+### ⚠️ 소스 서식 관례가 다르다 (붙여넣기 사고 주의)
+- **메인 사이트 html**: CRLF + 한 줄 압축 서식(메뉴 오버레이가 통째로 한 줄)
+- **AX_Discovery**: LF + 2칸 중첩 들여쓰기, 최장 줄 307자
+- 회사 헤더/푸터를 그대로 복사해 넣었더니 **2,374자짜리 한 줄**이 생겨 에디터에서 "폭이 다르고 다 밀려 보인다"는 지적을 받았다. → AX 관례대로 재서식(한 요소 한 줄, 2칸 중첩, `<br />` 표기). **렌더링 무변화는 실측으로 확인.**
+- 전역 치환/삽입 후엔 **BOM·CRLF 혼합 점검 필수**(site.css에 LF 3줄 섞였던 것 발견·수정).
+
+### 검증 방법 (재사용 권장)
+- **원본 대비 기하 대조가 핵심.** `index.html.bak`을 임시로 되돌려 렌더 → 현재본 렌더 → `.document *` 전 요소의 `x/width/height/줄수`를 문자열로 뽑아 1:1 비교. 히어로 외 차이 0이면 안전.
+- 웹 9개 폭(390·768·1024·1280·1366·1512·1600·1920·2560) + `emulateMedia({media:'print'})` 인쇄 기하 + `page.pdf()` 페이지 수(11p)까지 비교.
+- **Playwright 경로 주의**: `AX_Discovery/node_modules`는 pnpm 심볼릭 링크가 깨져 있어 `require('playwright')` 실패.
+  `AX_Discovery/node_modules/.pnpm/playwright-core@1.62.1/node_modules/playwright-core` 를 **직접 경로로** require 할 것. 브라우저는 `~/AppData/Local/ms-playwright`에 이미 설치돼 있음.
+- 로컬 서버: `py -m http.server 8766 --bind 127.0.0.1`
+
+### 배포 (완료)
+- **`_Upload/` 폴더 방식** — 서버 루트(`/www/`) 구조 그대로 필요한 파일만 담아 드래그앤드랍. `.gitignore`에 등록(파생 산출물).
+  - ⚠️ `_Upload`는 **반드시 프로젝트 루트에** 둘 것. 처음에 `AX_Discovery/` 안에 만들었다가, 그 폴더째 올릴 때 사이트 사본이 딸려 올라가는 위험이 있어 옮겼다.
+- 최종 37개 / 1.89MB = AX_Discovery 13개(참조되는 asset 8개만; fonts·qr·source는 미사용) + 메인 html 24개. **`shared/css/site.css`는 불필요**(서버와 동일).
+- **덮어쓰기 안전성 확인법**: 서버에서 `curl`로 받아 `git show HEAD:파일`과 해시 대조 → 서버에만 있는 변경이 없음을 증명한 뒤 올렸다. (24개 중 23개 완전 일치, index.html은 이미 올린 내 수정본)
+- **라이브 검증 통과**: 37개 파일 서버=로컬 바이트 일치, AX 페이지 h1 3줄·자간 `-4.1472px`, 25개 페이지 AX 링크 4개(내부2+외부2) 정상, 가로오버플로 0, JS오류·404 0건.
+
+### 결정 사항 / 남은 것
+- **ai.kr은 계속 살린다** — 메뉴에서 `AX 전략기획 전문가 2급 자격증 과정`으로 별도 노출. (해당 페이지 실제 title도 "AX Discovery | AX 전략기획 전문가 2급 자격증 과정")
+- **미적용(사용자 판단 대기)**:
+  1. 홈 CTA 2곳이 아직 구 주소(`thewhhylab.ai.kr`, www 없음) — [index.html:338] 4기 배너 "수강 신청하기"(신청 폼이 ai.kr에 있어 보류), [index.html:482] `03 · AX DISCOVERY` 타일(내부로 보내는 게 자연스러움)
+  2. AX 브레드크럼이 `Home / AI HRD / AX DISCOVERY` — 메뉴는 "AX 프로그램"이라 불일치
+  3. `references/index.html` 본문의 "AX Discovery" 문구(메뉴 아니라 유지)
+  4. AX 페이지에 canonical/OG/sitemap 등재 없음(favicon만 추가함)
+  5. AX 마지막 섹션 문의처(`thewhhylab@naver.com`)와 공통 푸터(`master@thewhhylab.com`) 불일치
+- **`AX_Discovery/` 폴더 정리 필요**: 중첩 `.git`(91M), `node_modules`(25M), `tmp`(34M), `output`(4.4M) — 배포 대상 아님. 중첩 `.git`은 메인 저장소 커밋 시 문제됨.
+- 서버 구버전 잔재(`HANDOVER.md` 등 25개) 삭제 여부 미확인 → `thewhhylab.com/AX_Discovery/HANDOVER.md` 로 확인 가능.
+
+---
+
+## ▶ 다음 세션 시작점 (2026-09-08 저장 — 여기서 이어서)
+
+**상태:** AX_Discovery 작업 **배포까지 완료, 라이브 검증 통과**. 단 **아직 커밋 안 함**(작업트리에 25개 html + .gitignore 변경분이 그대로 있음).
+
+**바로 할 수 있는 것:**
+1. **커밋** — `git add` 후 커밋. 변경분: AX_Discovery/index.html·styles/screen.css·scripts/main.js, 메인 24개 html, .gitignore, CLAUDE.md. (`_Upload/`는 ignore됨)
+2. **백업본 정리** — `AX_Discovery/index.html.bak`, `AX_Discovery/styles/screen.css.bak`, `shared/css/site.css.bak`, `CLAUDE.md.bak`. (`*.bak`은 ignore라 커밋엔 안 들어감)
+3. 위 "미적용" 1~5번 중 사용자가 고르는 것.
+4. `AX_Discovery/` 폴더 정리(중첩 `.git`·`node_modules`·`tmp`·`output`).
