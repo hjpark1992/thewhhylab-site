@@ -239,7 +239,7 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - **9/11 배포분 사후 커밋** `552d148` — 홈 히어로 슬라이드 6개 개편·exp-banner CSS 제거·site.js 체류시간. 실서버와 바이트 일치 확인 후 그대로 기록(작업트리만 있고 커밋이 빠져 있었음).
 - **`ax-programs/` 프로젝트 루트에 추가**(7파일 125KB, LF 관례 유지). 직원분 파일이 AX_Discovery 선례(site.css `media=screen`, 자간 리셋 `!important` 방어, `text-wrap:initial`, Pretendard Variable)를 그대로 따르고 있어 공유 CSS/JS 수정 없이 붙음.
   - 수정한 것: 자기 명칭 "AX 전체 프로그램"→**"AX 프로그램"**(title·메뉴·브레드크럼·푸터), title 꼬리 "| THE WHHY LAB"→"· 더와이랩", **내부 링크 `target=_blank` 제거**(Alignment/Discovery/AX 프로그램 버튼, app.js의 Discovery 상세보기 — 외부 ai.kr은 유지), AX_Alignment 페이지의 구버전 메뉴·푸터 동기화(탐구 위인 테스트·Naver blog·러니즈 추가), `styles.css` `.ax-dot{animation:none}`(홈 배너용 site.css 깜빡임 상속 차단).
-- **AI HRD 메뉴 개편 — 26개 html**(메인 24 + 홈 + AX_Discovery): `AX 프로그램(→/AX_Discovery/)` 1줄을 **`AX 프로그램(/ax-programs/) → AX Alignment(/ax-programs/AX_Alignment/) → AX Discovery(/AX_Discovery/)`** 3줄로. 푸터 프로그램 열도 동일 3줄. 자격증 과정(ai.kr ↗)은 그 아래 그대로. Node 문자열 치환(`scratchpad/apply-menu.js`)으로 CRLF/BOM 보존, 파일별 기대 횟수 assert.
+- **AI HRD 메뉴 개편 — 26개 html**(메인 24 + 홈 + AX_Discovery): 메뉴 오버레이는 `AX 프로그램(/ax-programs/) → AX Discovery(/AX_Discovery/)` **2줄**(1차엔 AX Alignment 포함 3줄이었다가 아래 결정대로 메뉴에서만 제거). 푸터 '프로그램' 열은 `AX 프로그램 → AX Alignment → AX Discovery` **3줄 유지**. 자격증 과정(ai.kr ↗)은 그 아래 그대로. Node 문자열 치환(`scratchpad/apply-menu.js` → `remove-alignment-menu.js`)으로 CRLF/BOM 보존, 파일별 기대 횟수 assert.
 - **홈 히어로 슬라이드 1은 미변경** — 화면 문구가 이미 "AX DISCOVERY · 기업 교육 프로그램"이고 CTA가 /AX_Discovery/라 그대로 맞음(HTML 주석만 "AX 프로그램").
 
 ### 검증(전부 PASS)
@@ -253,7 +253,7 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - 직원 README의 확인 주소 `thewhhylab.ai.kr/ax-programs/`는 **오기** — 메인은 `www.thewhhylab.com`.
 
 ### 결정 사항
-- AX Alignment는 GNB에 포함(직원 의도대로). 순서: AX 프로그램 → AX Alignment → AX Discovery → 자격증.
+- **AX Alignment는 GNB(메뉴)에서 제외, 푸터에는 유지** — 같은 날 직원과 통화로 확정. 직원 README의 "메뉴에 AX Alignment 추가" 안내는 오기였고, 실제 의도는 "내용이 짧아 메뉴를 늘리지 않고 AX 프로그램 페이지 안 버튼으로만 진입". 메뉴 순서: AX 프로그램 → AX Discovery → 자격증. Alignment 페이지 메뉴에선 상위 'AX 프로그램'을 current 표시. (사용자가 제안한 팝업/이탈률 아이디어는 직원이 보류.)
 - 내부 링크는 같은 탭(사이트 관례). 되돌리려면 `target="_blank" rel="noopener"` 다시 붙이면 됨.
 - canonical/OG/sitemap 등재는 AX_Discovery와 같이 보류.
 
