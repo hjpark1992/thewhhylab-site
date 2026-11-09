@@ -62,7 +62,7 @@ renewal/
 
 - 이미지·로고는 기존 `/shared/img/`를 **절대경로로 참조**(복사 없음). 실배포 시에도 그대로 동작.
 - 폰트: Pretendard Variable(jsdelivr dynamic-subset) — `ax-programs`와 동일 방식.
-- 줄바꿈 CRLF(기존 메인 페이지와 동일). BOM 없음.
+- 줄바꿈 LF(AX_Discovery·ax-programs와 동일). BOM 없음. 기존 메인 페이지(CRLF)로 이식할 때는 치환 스크립트가 원본 줄바꿈을 따르므로 별도 변환 불필요.
 
 ## 6. 검토 포인트 / 다음 단계
 

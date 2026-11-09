@@ -278,7 +278,7 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - **기존 사이트 파일 무변경.** `renewal/` 안에서 완결: `README.md`(진단·벤치마킹·원칙·구조·다음 단계), `index.html`(홈), `ai-hrd/index.html`(서브페이지 템플릿), `assets/css/renewal.css`, `assets/js/renewal.js`.
 - 벤치마킹: Section AI(문제 제기형 히어로·전환 레이어), Elice(신뢰 수치 선배치), Maven(형식별 카드), Colorlib 기업교육 29선(로고 마퀴·프로세스·듀얼 CTA), 2026 트렌드(벤토·볼드 타이포·절제 모션·접근성).
 - 홈 구조: 공지바 → 데스크톱 노출 메뉴+전체 메뉴 → 히어로("AI는 도입했는데, 일은 왜 그대로일까요?" + 증거 벤토) → 고객사 마퀴 → 조직지능 3단계(Alignment→Discovery→조직지능) → 사업 벤토 → AX Discovery 다크 피처 → 성장 차트(CSS 막대) → 레퍼런스 가로 스냅 → 후기 → 학교 → CEO → CTA → 푸터.
-- 기술: 이미지는 `/shared/img/` 절대경로 재사용(복사 없음), Pretendard Variable, `html.js`일 때만 리빌 숨김(무JS 시 전부 노출), reduced-motion 전부 OFF, 메뉴 포커스 트랩·ESC, `noindex`. CRLF 줄바꿈(메인과 동일).
+- 기술: 이미지는 `/shared/img/` 절대경로 재사용(복사 없음), Pretendard Variable, `html.js`일 때만 리빌 숨김(무JS 시 전부 노출), reduced-motion 전부 OFF, 메뉴 포커스 트랩·ESC, `noindex`. LF 줄바꿈(ax-programs와 동일; Git Bash `grep -c $'\r$'`가 LF 파일에서 전체 줄 수를 돌려주는 오탐이 있었음 → 판정은 `xxd`/`file`로).
 - 검증: 홈·서브 1280/390/1920 콘솔오류 0·404 0·가로오버플로 0, 로컬 참조 190개 깨짐 0, 메뉴 열기/ESC 닫기 정상, 리빌 19/19.
 - ⚠️ Playwright로 스크린샷 찍을 때 `html{scroll-behavior:smooth}` 때문에 `scrollTo` 직후 캡처가 밀린다 → `addStyleTag("html{scroll-behavior:auto!important}")` 먼저.
 - 다음: 사용자 검토 → 카피 확정 → 서브페이지 템플릿 확산(AX 프로그램·진로탐구) → 이미지 webp 최적화 → 24페이지 이식(Node 치환).
