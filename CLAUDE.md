@@ -266,6 +266,10 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 ### 2026-11-09 — 홈 SEO 문구 변경
 - 구글 검색 결과 제목이 `<title>`에서 오므로 `index.html` **title·og:title·og:description·twitter:title·twitter:description 5곳**의
   "더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다." → **"AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다."** 로 교체. `meta description`·JSON-LD는 미변경.
-- `_Upload/` = `index.html` 1개. **실서버 미반영** → `/www/index.html` 덮어쓰기. 반영 후 구글 재수집은 수일 소요, Search Console "URL 검사 → 색인 생성 요청"으로 앞당길 수 있음.
+- title 변경분은 **사용자가 업로드 완료**(서버 title 확인). 구글 검색 결과는 재수집 전이라 구 문구 표시 중 — 수일 소요, Search Console "URL 검사 → 색인 생성 요청"으로 앞당길 수 있음(소유권 미등록 상태로 보임).
+- **검색 설명문(snippet) 통제** — 구글이 홈 본문 "주요 사업 레퍼런스"의 진천 K-IP 카드 문장을 설명문으로 쓰고 있었음. 사용자 요청 "AI 관련 내용만 나오게, 나머지는 차단" →
+  `data-nosnippet` 9곳: HRD BPO+GROWTH 섹션(759), 레퍼런스 카드 5장(SSAFY·드림클래스·학교컨설팅·진천K-IP·프로스포츠; **AX Discovery 카드만 제외**), CLIENTS(896)·REVIEWS(939)·ONE TEAM PROMISE(987) 섹션. 화면 표시는 그대로, 구글 설명문·AI 개요 인용 후보에서만 빠짐.
+  `meta description`도 AI 중심으로 교체: "AX 조직지능 전문 기업 더와이랩. 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다. AI HRD · AX Discovery · AI 진로탐구 · AI 디자인씽킹."
+  `_Upload/` = `index.html` 1개 → `/www/index.html` 덮어쓰기(**실서버 미반영**). 사이트링크(AI HRD/Open K 등 하위 목록)는 구글 자동 선정이라 직접 통제 불가.
 - 남은 선택: ax-programs canonical/OG/sitemap, `_data/`(7월 참고 이미지, 미추적) 정리 여부.
 
