@@ -273,3 +273,13 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
   `_Upload/` = `index.html` 1개 → `/www/index.html` 덮어쓰기(**실서버 미반영**). 사이트링크(AI HRD/Open K 등 하위 목록)는 구글 자동 선정이라 직접 통제 불가.
 - 남은 선택: ax-programs canonical/OG/sitemap, `_data/`(7월 참고 이미지, 미추적) 정리 여부.
 
+### 2026-11-09 — 리뉴얼 프로토타입 `renewal/` (내부 검토용, 미배포)
+- 사용자 요청: "다른 교육회사 벤치마킹해서 트렌디하게, 별도 폴더에서 내부 검토 후 배포. 자체 판단으로 만들어봐."
+- **기존 사이트 파일 무변경.** `renewal/` 안에서 완결: `README.md`(진단·벤치마킹·원칙·구조·다음 단계), `index.html`(홈), `ai-hrd/index.html`(서브페이지 템플릿), `assets/css/renewal.css`, `assets/js/renewal.js`.
+- 벤치마킹: Section AI(문제 제기형 히어로·전환 레이어), Elice(신뢰 수치 선배치), Maven(형식별 카드), Colorlib 기업교육 29선(로고 마퀴·프로세스·듀얼 CTA), 2026 트렌드(벤토·볼드 타이포·절제 모션·접근성).
+- 홈 구조: 공지바 → 데스크톱 노출 메뉴+전체 메뉴 → 히어로("AI는 도입했는데, 일은 왜 그대로일까요?" + 증거 벤토) → 고객사 마퀴 → 조직지능 3단계(Alignment→Discovery→조직지능) → 사업 벤토 → AX Discovery 다크 피처 → 성장 차트(CSS 막대) → 레퍼런스 가로 스냅 → 후기 → 학교 → CEO → CTA → 푸터.
+- 기술: 이미지는 `/shared/img/` 절대경로 재사용(복사 없음), Pretendard Variable, `html.js`일 때만 리빌 숨김(무JS 시 전부 노출), reduced-motion 전부 OFF, 메뉴 포커스 트랩·ESC, `noindex`. CRLF 줄바꿈(메인과 동일).
+- 검증: 홈·서브 1280/390/1920 콘솔오류 0·404 0·가로오버플로 0, 로컬 참조 190개 깨짐 0, 메뉴 열기/ESC 닫기 정상, 리빌 19/19.
+- ⚠️ Playwright로 스크린샷 찍을 때 `html{scroll-behavior:smooth}` 때문에 `scrollTo` 직후 캡처가 밀린다 → `addStyleTag("html{scroll-behavior:auto!important}")` 먼저.
+- 다음: 사용자 검토 → 카피 확정 → 서브페이지 템플릿 확산(AX 프로그램·진로탐구) → 이미지 webp 최적화 → 24페이지 이식(Node 치환).
+
