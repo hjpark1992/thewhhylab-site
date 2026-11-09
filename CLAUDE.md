@@ -274,6 +274,7 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - 남은 선택: ax-programs canonical/OG/sitemap, `_data/`(7월 참고 이미지, 미추적) 정리 여부.
 
 ### 2026-11-09 — 리뉴얼 프로토타입 `renewal/` (내부 검토용, 미배포)
+- ⚠️ **같은 날 범위 확대 → 저장소 밖 `C:/Users/parkh/claude-projects/thewhhylab-renewal/`(별도 git)로 이전.** 이 저장소의 `renewal/`은 제거(커밋). 전체 페이지 리뉴얼·webp 변환·서버 파일 포함 자립형 사이트. 상세는 그 폴더의 `README.md`.
 - 사용자 요청: "다른 교육회사 벤치마킹해서 트렌디하게, 별도 폴더에서 내부 검토 후 배포. 자체 판단으로 만들어봐."
 - **기존 사이트 파일 무변경.** `renewal/` 안에서 완결: `README.md`(진단·벤치마킹·원칙·구조·다음 단계), `index.html`(홈), `ai-hrd/index.html`(서브페이지 템플릿), `assets/css/renewal.css`, `assets/js/renewal.js`.
 - 벤치마킹: Section AI(문제 제기형 히어로·전환 레이어), Elice(신뢰 수치 선배치), Maven(형식별 카드), Colorlib 기업교육 29선(로고 마퀴·프로세스·듀얼 CTA), 2026 트렌드(벤토·볼드 타이포·절제 모션·접근성).
