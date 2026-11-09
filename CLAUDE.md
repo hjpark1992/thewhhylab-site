@@ -261,8 +261,11 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 
 ## ▶ 다음 세션 시작점 (2026-10-28 저장 — 여기서 이어서)
 
-**상태:** 코드·검증·`_Upload/` 세트 완료, 커밋됨. **실서버 미반영.**
-1. 사용자가 `_Upload/` 32파일을 FTP로 `/www/`에 업로드.
-2. 업로드 후 **www.thewhhylab.com 라이브 비교 검증**(사용자 요청): `/ax-programs/`·`/ax-programs/AX_Alignment/` 200, 32파일 서버=로컬 바이트 일치, 27페이지 메뉴 순서, 콘솔오류·404 0.
-3. 이후 선택: ax-programs canonical/OG/sitemap, `_data/`(7월 참고 이미지, 미추적) 정리 여부.
+**상태(2026-11-09 갱신):** 10/28 AX 세트는 **사용자가 업로드 완료** — `/ax-programs/` 200, 32파일 서버=커밋본 일치 확인(curl 해시 대조).
+
+### 2026-11-09 — 홈 SEO 문구 변경
+- 구글 검색 결과 제목이 `<title>`에서 오므로 `index.html` **title·og:title·og:description·twitter:title·twitter:description 5곳**의
+  "더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다." → **"AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다."** 로 교체. `meta description`·JSON-LD는 미변경.
+- `_Upload/` = `index.html` 1개. **실서버 미반영** → `/www/index.html` 덮어쓰기. 반영 후 구글 재수집은 수일 소요, Search Console "URL 검사 → 색인 생성 요청"으로 앞당길 수 있음.
+- 남은 선택: ax-programs canonical/OG/sitemap, `_data/`(7월 참고 이미지, 미추적) 정리 여부.
 
