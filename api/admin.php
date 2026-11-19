@@ -273,7 +273,7 @@ function detail_sections($view, $r) {
     return [[ 'title' => '인적사항', 'items' => [
         ['성함', $r['name']], ['연락처', $r['phone']], ['성별', $r['gender']], ['출생년도', $r['birth_year']], ['거주지역', $r['region']] ]],
       [ 'title' => '경력 · 강의', 'items' => [
-        ['경력기간', $r['career_years']], ['강의분야', $r['fields']], ['강의스타일', $r['styles']], ['출강기관', $r['client_types']], ['최소섭외비', $r['min_fee']], ['신청경로', $r['referral']],
+        ['경력기간', $r['career_years'], 'wide'], ['강의분야', $r['fields'], 'wide'], ['강의스타일', $r['styles'], 'wide'], ['출강기관', $r['client_types'], 'wide'], ['최소섭외비', $r['min_fee'], 'wide'], ['신청경로', $r['referral'], 'wide'],
         ['주요경력', $r['prev_career'], true], ['소개', $r['intro'], true], ['첨부파일', $file, 'file'] ]],
     ];
   }
@@ -301,7 +301,7 @@ if (($_GET['action'] ?? '') === 'detail') {
   foreach (detail_sections($view, $r) as $s) {
     $items = [];
     foreach ($s['items'] as $it) {
-      $items[] = ['label' => $it[0], 'value' => $it[1], 'long' => (($it[2] ?? false) === true), 'file' => (($it[2] ?? '') === 'file')];
+      $items[] = ['label' => $it[0], 'value' => $it[1], 'long' => (($it[2] ?? false) === true), 'wide' => (($it[2] ?? '') === 'wide'), 'file' => (($it[2] ?? '') === 'file')];
     }
     $secs[] = ['title' => $s['title'], 'items' => $items];
   }
@@ -504,7 +504,7 @@ header('Content-Type: text/html; charset=UTF-8');
 </head><body data-view="<?= h($view) ?>" data-csrf="<?= h($CSRF) ?>">
 <div class="app">
   <aside class="side" id="side">
-    <div class="side-brand"><span class="side-logo">W</span><span>더와이랩 관리자</span></div>
+    <div class="side-brand"><img class="side-wordmark" src="/shared/img/logo-blue.png" alt="THE WHHY LAB"><div class="side-brand-row"><img class="side-symbol" src="/shared/img/favicon.png" alt=""><span>더와이랩 관리자</span></div></div>
     <nav class="side-nav" aria-label="운영자 메뉴">
       <div class="side-group">운영자 메뉴</div>
       <a href="?view=dash" class="<?= $view === 'dash' ? 'on' : '' ?>"><i class="ico ico-dash"></i>대시보드<?php if ($newTotal): ?><b class="nd"><?= $newTotal ?></b><?php endif; ?></a>

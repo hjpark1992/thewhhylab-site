@@ -124,7 +124,7 @@
         var v;
         if (it.file) v = it.value ? '<a class="filelink" href="' + esc(it.value.url) + '">⬇ ' + esc(it.value.label) + '</a>' : '<span class="muted">없음</span>';
         else v = (it.value === null || it.value === '' || it.value === undefined) ? '<span class="muted">-</span>' : esc(it.value);
-        html += '<div class="d-item' + (it.long ? ' long' : '') + '"><dt>' + esc(it.label) + '</dt><dd>' + v + '</dd></div>';
+        html += '<div class="d-item' + (it.long ? ' long' : it.wide ? ' wide' : '') + '"><dt>' + esc(it.label) + '</dt><dd>' + v + '</dd></div>';
       });
       html += '</dl></section>';
     });
@@ -164,6 +164,7 @@
     });
   }
   $$('[data-open]').forEach(function (el) { el.addEventListener('click', function (e) { e.preventDefault(); openDrawer(parseInt(el.getAttribute('data-open'), 10)); }); });
+  $$('tr.row').forEach(function (row) { row.addEventListener('click', function (e) { if (e.target.closest('input,select,button,a,label')) return; openDrawer(parseInt(row.dataset.id, 10)); }); });
   if (dBack) dBack.addEventListener('click', closeDrawer);
   var dClose = $('#drawerClose'); if (dClose) dClose.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer && !drawer.hidden) closeDrawer(); });

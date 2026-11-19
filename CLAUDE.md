@@ -295,3 +295,8 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - 보안: 기존 로그인 잠금·세션 타임아웃 유지 + **CSRF 토큰(모든 POST)** 추가. JSON 액션 파라미터가 `table`→`view`(inq/event/app)로 바뀜.
 - 검증: SQLite 스텁(`scratchpad/admin-test`, pdo_sqlite 확장 로드)으로 php -S 기동 → Playwright 21항목 PASS(로그인 잠금 안내·KPI 필터·검색·인라인 상태·자동 메모·메모 추가/삭제·패널 저장·ESC·일괄 변경·분리 목록·페이지네이션·CSV·모바일 메뉴·오버플로 0·CSRF 거부·콘솔오류 0). 버그 2건 수정: `.drawer{display:flex}`가 `hidden`을 덮어 클릭 가로챔 → `[hidden]{display:none!important}`; 대시보드 최근 접수 쿼리 컬럼 누락 경고 → `SELECT *`.
 - ⚠️ 배포: `_Upload/api/` 3파일을 `/www/api/`에 업로드(**admin.css·admin.js 신규 — 함께 올려야 화면이 나옴**). `/admin` 리라이트에서도 CSS/JS는 `/api/` 기준으로 로드됨(SCRIPT_NAME 기반). config.php 변경 없음. 서버 MySQL에서 `SHOW COLUMNS`·`ALTER`는 기존과 동일 경로.
+### 2026-11-19 (후속) — 배포 완료 + 어드민 v2 피드백 반영 + AX INSIGHT LAB 링크
+- **FTP 자동 배포 확립**: 자격 정보는 `../AX-Discovery/_private/ftp.netrc`(thewhhylab.com, 로그인 디렉터리 = /www). 스크립트 `_private/deploy_*.sh`(gitignore): 서버 백업 → 서버==HEAD 해시 대조(서버만의 변경 없음 확인) → 업로드 → 되받아 바이트 대조 → HTTP 사후 확인 → 실패 시 롤백. **비밀번호는 절대 출력·커밋하지 않는다.**
+- 어드민 v2 라이브 배포(`/api/admin.php·css·js`) 완료, 사용자 확인 "잘된 것 같다". 라이브 로그인 자동 점검은 로컬 config.php의 admin_pass가 서버와 달라 실패(남은 시도 4회 소모) → 라이브 검증은 사용자 화면 확인으로 대체.
+- 피드백 반영(`_private/admin-v2-tweaks.js`): 사이드바에 회사 워드마크(흰색 반전)+심볼(favicon.png) / 접수번호·지원자 열 190px 고정, 내용 열 확대 / 행 아무 데나 클릭 → 상세(입력 요소 제외) / 상세 패널 560→860px, 3열 / 강사지원 '경력·강의' 6항목 한 줄씩(`wide`). 로컬 21항목 회귀 + 신규 6항목 PASS 후 재배포.
+- **AX INSIGHT LAB**(https://ax-insight-lab.beehiiv.com/) 외부 링크를 메뉴 Library 열(워크숍 도구 다음)·푸터 Connect 열(맨 위)에 추가 — 운영 27페이지 + 리뉴얼본 파셜·27페이지(`_private/add-insight-lab.js`, 파일별 2회 assert). 운영분 배포 완료(27개 서버==HEAD 대조 후).
