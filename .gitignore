@@ -21,3 +21,4 @@ Thumbs.db
 
 # 배포용 임시 산출물(파생 파일)
 _Upload/
+_private/
