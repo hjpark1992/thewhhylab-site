@@ -30,8 +30,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./
-          # FTP 로그인 위치가 곧 웹루트다(기존 배포 스크립트 기준: ftp://thewhhylab.com/<경로>).
-          server-dir: ./
+          # 이 도구는 FTP 루트 기준 절대 경로를 쓴다. cafe24 로그인 디렉터리(웹루트) = /www
+          server-dir: /www/
           state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
