@@ -22,19 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: FTP 진단 (러너에서 보이는 디렉터리, 이름만)
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          umask 077; printf 'machine %s login %s password %s\n' "$FTP_SERVER" "$FTP_USERNAME" "$FTP_PASSWORD" > "$HOME/.nrc"
-          echo "== PWD / FEAT"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -Q PWD -Q FEAT "ftp://$FTP_SERVER/" -o /dev/null -v 2>&1 | grep -E '^< (257|550|211|230)' | head -5
-          echo "== login dir listing"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -l "ftp://$FTP_SERVER/" | head -15
-          echo "== root listing"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -l "ftp://$FTP_SERVER//" | head -15
-          rm -f "$HOME/.nrc"
-        continue-on-error: true
-
       - name: FTP 배포
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -43,11 +30,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./
-          # 이 도구는 FTP 루트(/)로 이동한 뒤 상대 경로로 들어간다. cafe24 웹루트 = /www → www/
-          server-dir: www/
+          # cafe24 FTP 로그인 디렉터리(/www)가 곧 웹루트. 해외 IP 차단이 걸려 있으면 로그인만 되고 전부 거부된다(2026-11-20 해제).
+          server-dir: ./
           state-name: .ftp-deploy-sync-state.json
-          log-level: verbose
-          dry-run: true
           exclude: |
             **/.git*
             **/.git*/**
