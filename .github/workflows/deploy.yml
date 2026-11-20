@@ -33,6 +33,7 @@ jobs:
           # 이 도구는 FTP 루트 기준 절대 경로를 쓴다. cafe24 로그인 디렉터리(웹루트) = /www
           server-dir: /www/
           state-name: .ftp-deploy-sync-state.json
+          log-level: verbose
           exclude: |
             **/.git*
             **/.git*/**
