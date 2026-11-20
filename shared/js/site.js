@@ -121,8 +121,8 @@
 
     var index = 0;
     // 슬라이드별 머무는 시간(ms) — 텍스트 양에 맞춰 배분
-    // 1 AX(간결) / 2 강사(보통) / 3 스쿨(보통) / 4 책(많음)
-    var DURATIONS = [6000, 5500, 6500, 6500, 7000, 6500];
+    // 1 AX 프로그램 / 2 AX 이벤트 / 3 책 / 4 자격증 / 5 강사 / 6 스쿨
+    var DURATIONS = [7000, 6000, 5500, 6500, 6500, 7000];
     var DEFAULT_DURATION = 6000;
     var timer = null;
     var autoplaying = false;

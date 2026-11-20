@@ -1,0 +1,4 @@
+node_modules/
+tmp/
+
+# 최종 PDF는 납품 산출물이므로 output/pdf에 유지합니다.

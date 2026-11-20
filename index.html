@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다.</title>
+  <title>AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다.</title>
 <meta name="theme-color" content="#0a0b0d"/>
 <link rel="canonical" href="https://www.thewhhylab.com/"/>
 <link rel="icon" type="image/png" href="shared/img/favicon.png"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다."/>
-<meta property="og:description" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
+<meta property="og:title" content="AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다."/>
+<meta property="og:description" content="AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
 <meta property="og:url" content="https://www.thewhhylab.com/"/>
 <meta property="og:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
 <meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
 <meta property="og:locale" content="ko_KR"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다."/>
-<meta name="twitter:description" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
+<meta name="twitter:title" content="AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다."/>
+<meta name="twitter:description" content="AX 조직지능 전문 기업 더와이랩, 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
 <meta name="twitter:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
 }
 </script>
 
-  <meta name="description" content="학습에서 실행까지 AI 활용의 전 과정을 연결합니다. AI HRD · AI 진로탐구 · AI 디자인씽킹. 누적 교육 1,250개, 5만 명 달성." />
+  <meta name="description" content="AX 조직지능 전문 기업 더와이랩. 조직의 지식과 경험을 AI로 연결해 성과를 만듭니다. AI HRD · AX Discovery · AI 진로탐구 · AI 디자인씽킹." />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
 <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
@@ -120,6 +120,206 @@
     .core-tile.accent { background: linear-gradient(150deg, #0f766e 0%, #115e59 100%); color: #fff; }
     .core-tile.accent .core-arrow { background: rgba(255,255,255,0.2); }
     .core-tile.accent:hover .core-arrow { background: #fff; color: #115e59; }
+
+    /* === 히어로 슬라이드 1: AX 프로그램 (AX_Discovery 상세페이지 히어로 톤) === */
+    .axp-banner {
+      --axp-blue: #2864f0;
+      --axp-ink: #101116;
+      --axp-grad: linear-gradient(112deg, #2864f0 0%, #46a5ff 52%, #20cfcc 100%);
+      position: absolute; inset: 0; display: block; overflow: hidden;
+      background:
+        radial-gradient(34% 70% at 80% 30%, rgba(27,199,211,0.13) 0%, transparent 62%),
+        radial-gradient(44% 80% at 70% 62%, rgba(40,100,240,0.10) 0%, transparent 64%),
+        linear-gradient(120deg, #ffffff 0%, #f8fbff 50%, #eef4ff 100%);
+    }
+    .axp-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(31,79,215,0.16) 1px, transparent 1px);
+      background-size: 18px 18px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 38%, #000 100%);
+      mask-image: linear-gradient(90deg, transparent 38%, #000 100%);
+    }
+
+    /* 왼쪽 카피 */
+    .axp-content {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 6;
+      /* 좌우 화살표(16px + 44px)를 비켜 가도록 최소 76px, 카드와도 겹치지 않게 폭 제한 */
+      left: max(76px, 5.3vw, calc((100vw - var(--max-w)) / 2 + 28px));
+      width: min(52vw, 700px, calc(68vw - 162px)); display: flex; flex-direction: column;
+    }
+    .axp-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6vw; align-self: flex-start;
+      padding: 0.4vw 1vw 0.4vw 0.45vw; border-radius: 999px; margin-bottom: 1.1vw;
+      background: #fff; border: 1px solid rgba(40,100,240,0.22);
+      box-shadow: 0 0.4vw 1.2vw -0.4vw rgba(36,77,174,0.28);
+      font-size: min(1.05vw, 14px); font-weight: 700; color: var(--axp-blue);
+    }
+    .axp-new {
+      padding: 0.2vw 0.65vw; border-radius: 999px; background: var(--axp-grad);
+      color: #fff; font-size: 0.8em; font-weight: 800;
+    }
+    .axp-title {
+      font-size: min(3.2vw, 44px); font-weight: 800; line-height: 1.14;
+      color: var(--axp-ink); margin-bottom: 1vw; word-break: keep-all;
+    }
+    .axp-title b {
+      font-weight: 800; background: var(--axp-grad);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .axp-sub {
+      font-size: min(1.35vw, 18px); font-weight: 500; line-height: 1.5;
+      color: #606671; margin-bottom: 1.5vw; word-break: keep-all;
+    }
+    .axp-sub i { font-style: normal; font-weight: 700; color: var(--axp-ink); }
+
+    .axp-facts { display: flex; align-items: stretch; gap: 1.5vw; margin-bottom: 1.8vw; }
+    .axp-fact { display: flex; flex-direction: column; gap: 0.45vw; }
+    .axp-fact b {
+      align-self: flex-start; font-size: min(2.2vw, 30px); font-weight: 800; line-height: 1;
+      background: var(--axp-grad); -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .axp-fact b i {
+      font-style: normal; font-size: 0.55em; margin-left: 0.1em;
+      color: var(--axp-ink); -webkit-text-fill-color: var(--axp-ink);
+    }
+    .axp-fact em { font-style: normal; font-size: min(0.95vw, 13px); font-weight: 600; color: #6b7280; white-space: nowrap; }
+    .axp-fact-div { width: 1px; background: #dfe3ec; }
+
+    .axp-bottom { display: flex; align-items: center; gap: 1.8vw; }
+    .axp-cta {
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; gap: min(1.5vw, 22px);
+      padding: min(0.7vw, 10px) min(0.7vw, 10px) min(0.7vw, 10px) min(1.7vw, 24px);
+      border-radius: 999px; background: #111318; color: #fff; text-decoration: none;
+      font-size: min(1.2vw, 16px); font-weight: 700;
+      box-shadow: 0 0.9vw 2vw -0.8vw rgba(17,19,24,0.5);
+      transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+    }
+    .axp-cta-ic {
+      display: grid; place-items: center; flex: none;
+      width: min(2.2vw, 30px); height: min(2.2vw, 30px); border-radius: 50%;
+      background: #fff; color: #111318; line-height: 1;
+      transition: transform var(--t-fast) var(--ease);
+    }
+    .axp-cta:hover, .axp-cta:focus-visible { background: var(--axp-blue); transform: translateY(-2px); }
+    .axp-cta:hover .axp-cta-ic, .axp-cta:focus-visible .axp-cta-ic { transform: translateX(2px); }
+    .axp-cta::after {
+      content: ''; position: absolute; top: 0; left: -60%; width: 45%; height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-18deg); animation: axpSweep 4.2s ease-in-out infinite;
+    }
+    .axp-link {
+      padding: 0.45vw 0; border-bottom: 1px solid #b9bec8; text-decoration: none;
+      color: #4a505b; font-size: min(1.05vw, 14px); font-weight: 700;
+      transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+    }
+    .axp-link:hover, .axp-link:focus-visible { color: var(--axp-blue); border-color: var(--axp-blue); }
+
+    /* 오른쪽 비주얼 — 상세페이지 히어로 카드(교재 + 웹 워크시트 + 자격 배지) 축소판 */
+    .axp-card {
+      position: absolute; top: 0; bottom: 0; margin: auto 0; z-index: 4;
+      right: max(76px, 6vw, calc((100vw - var(--max-w)) / 2 + 64px));
+      height: min(84%, 430px); aspect-ratio: 1.22;
+      border: 1px solid rgba(255,255,255,0.8); border-radius: min(2.6vw, 38px);
+      background: linear-gradient(145deg, rgba(255,255,255,0.78), rgba(234,241,255,0.86));
+      box-shadow: 0 2.4vw 5vw -1vw rgba(36,77,174,0.22);
+      overflow: hidden;
+    }
+    .axp-orb {
+      position: absolute; top: -24%; right: -10%; width: 58%; aspect-ratio: 1; border-radius: 50%;
+      background: linear-gradient(135deg, #5de4e0, #2864f0 72%); opacity: 0.86;
+    }
+    .axp-kicker {
+      position: absolute; top: 7.5%; left: 6.5%; z-index: 3;
+      font-size: min(0.95vw, 14px); font-weight: 800; color: var(--axp-blue);
+    }
+    .axp-cred {
+      position: absolute; top: 11%; right: 5%; z-index: 5;
+      display: flex; align-items: center; min-height: min(3vw, 42px);
+      padding: 0.45vw 1.1vw 0.45vw min(3.3vw, 48px);
+      border: 1px solid rgba(255,255,255,0.75); border-radius: 999px;
+      background: rgba(255,255,255,0.82); box-shadow: 0 1vw 2vw -0.6vw rgba(28,48,92,0.22);
+      color: #2a303c; font-size: min(0.85vw, 12px); font-weight: 700; white-space: nowrap;
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    }
+    .axp-cred img {
+      position: absolute; top: 50%; left: max(-1.6vw, -24px); width: min(4.6vw, 66px); max-width: none;
+      transform: translateY(-50%); filter: drop-shadow(0 0.4vw 0.6vw rgba(0,0,0,0.28));
+    }
+    .axp-window {
+      position: absolute; right: 4.5%; bottom: 10%; width: 63%; z-index: 2;
+      border: 1px solid #dce1eb; border-radius: min(1vw, 14px); background: #fff; overflow: hidden;
+      box-shadow: 0 1.6vw 3vw -0.6vw rgba(30,50,97,0.24);
+    }
+    .axp-window-bar {
+      display: flex; align-items: center; gap: 0.3vw; height: min(1.7vw, 24px); padding: 0 0.7vw;
+      border-bottom: 1px solid #edf0f5; color: #9ba0aa; font-size: min(0.62vw, 9px); font-weight: 800;
+    }
+    .axp-window-bar i { width: min(0.35vw, 5px); height: min(0.35vw, 5px); border-radius: 50%; background: #d5d9e1; }
+    .axp-window-bar em { font-style: normal; margin-left: 0.3vw; }
+    .axp-window img { display: block; width: 100%; height: auto; aspect-ratio: 1712 / 722; }
+    .axp-book {
+      position: absolute; left: 4.5%; top: 20%; width: 53%; height: auto; z-index: 4;
+      filter: drop-shadow(0 1.4vw 1.1vw rgba(11,17,35,0.28)); transform: rotate(-3deg);
+    }
+
+    /* 애니메이션 — 카피 순차 등장 + 카드 요소 은은한 부유 */
+    @keyframes axpSweep { 0% { left: -60%; } 55%, 100% { left: 135%; } }
+    @keyframes axpRise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes axpCardIn { from { opacity: 0; transform: translateX(2.4vw); } to { opacity: 1; transform: none; } }
+    @keyframes axpBook { 0%, 100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(-2deg) translateY(-0.7vw); } }
+    @keyframes axpFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.5vw); } }
+    @keyframes axpOrb { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+    .axp-book { animation: axpBook 6s ease-in-out infinite; }
+    .axp-window { animation: axpFloat 7s ease-in-out infinite 0.8s; }
+    .axp-cred { animation: axpFloat 5s ease-in-out infinite 0.4s; }
+    .axp-orb { animation: axpOrb 9s ease-in-out infinite; }
+
+    .axp-content > * { opacity: 0; transform: translateY(1.6vw); }
+    .hb-slide--axp.is-shown .axp-content > * { animation: axpRise 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .hb-slide--axp.is-shown .axp-eyebrow { animation-delay: 0.05s; }
+    .hb-slide--axp.is-shown .axp-title   { animation-delay: 0.15s; }
+    .hb-slide--axp.is-shown .axp-sub     { animation-delay: 0.28s; }
+    .hb-slide--axp.is-shown .axp-facts   { animation-delay: 0.40s; }
+    .hb-slide--axp.is-shown .axp-bottom  { animation-delay: 0.52s; }
+    .axp-card { opacity: 0; }
+    .hb-slide--axp.is-shown .axp-card { animation: axpCardIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s forwards; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .axp-book, .axp-window, .axp-cred, .axp-orb, .axp-cta::after { animation: none !important; }
+      .axp-content > *, .axp-card { opacity: 1 !important; transform: none !important; animation: none !important; }
+    }
+
+    /* 태블릿(601~820px): 가운데 인디케이터 점과 카드 모서리가 겹치지 않게 카드 높이 축소 */
+    @media (min-width: 601px) and (max-width: 820px) {
+      .axp-card { height: 66%; }
+      .axp-kicker { display: none; } /* 좁은 카드에서 자격 배지 칩과 겹침 방지 */
+    }
+
+    /* 모바일: 슬라이드가 16:11로 바뀌므로 카피 폭을 넓히고 카드는 교재·워크시트만 남겨 축소 */
+    @media (max-width: 600px) {
+      .axp-content { left: 5vw; width: 54vw; }
+      .axp-eyebrow { font-size: 2vw; gap: 1vw; padding: 0.7vw 1.8vw 0.7vw 0.8vw; margin-bottom: 2vw; }
+      .axp-new { padding: 0.3vw 1.1vw; }
+      .axp-title { font-size: 4.4vw; margin-bottom: 1.8vw; }
+      .axp-sub { font-size: 2.4vw; margin-bottom: 2.4vw; }
+      .axp-facts { gap: 2.2vw; margin-bottom: 3vw; }
+      .axp-fact { gap: 0.8vw; }
+      .axp-fact b { font-size: 4vw; }
+      .axp-fact em { font-size: 1.8vw; }
+      .axp-bottom { gap: 3vw; }
+      .axp-cta { font-size: 2.6vw; gap: 2vw; padding: 1vw 1vw 1vw 3.2vw; }
+      .axp-cta-ic { width: 4.6vw; height: 4.6vw; }
+      .axp-link { font-size: 2.3vw; padding: 0.8vw 0; }
+      .axp-card { right: 3vw; height: 42%; border-radius: 4vw; }
+      .axp-kicker, .axp-cred { display: none; }
+      .axp-window-bar { height: 3vw; padding: 0 1.2vw; gap: 0.6vw; }
+      .axp-window-bar i { width: 0.8vw; height: 0.8vw; }
+      .axp-window-bar em { display: none; }
+      .axp-book { top: 12%; }
+    }
   </style>
 </head>
 <body data-page="home" class="has-hero">
@@ -148,7 +348,7 @@
         </div>
         <div class="menu-col">
           <h4>AI HRD</h4>
-          <a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a>
+          <a href="ax-programs/index.html">AX 프로그램</a><a href="AX_Discovery/index.html">AX Discovery</a><a href="https://www.thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX 전략기획 전문가 2급 자격증 과정<span class="ext">↗</span></a>
           <a href="ai-hrd/index.html">AI HRD</a>
           <a href="ai-design-thinking/index.html">AI 디자인씽킹</a>
           <a href="work-hack-ai/index.html">Work Hack AI</a>
@@ -168,6 +368,7 @@
           <a href="references/index.html">레퍼런스</a>
           <a href="instructors/index.html">열정강사</a>
           <a href="workshop-tools/index.html">워크숍 도구</a>
+          <a href="https://ax-insight-lab.beehiiv.com/" target="_blank" rel="noopener">AX INSIGHT LAB<span class="ext">↗</span></a>
           <a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a>
           <a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a>
         </div>
@@ -230,8 +431,43 @@
       <!-- 배너 콘텐츠는 추후 코딩본(이미지 또는 HTML)으로 교체. 현재는 빈 골격. -->
       <div class="hero-banner" aria-roledescription="배너 슬라이드" aria-label="홍보 배너">
         <div class="hb-track" id="hbTrack">
+          <!-- 슬라이드 1 — AX 프로그램 (AX_Discovery 상세페이지 홍보) -->
+          <div class="hb-slide hb-slide--axp" role="group" aria-roledescription="슬라이드" aria-label="1 / 6">
+            <div class="axp-banner">
+              <span class="axp-dots" aria-hidden="true"></span>
+
+              <span class="axp-card" aria-hidden="true">
+                <span class="axp-orb"></span>
+                <span class="axp-kicker">하나로 연결된 AX 학습 시스템</span>
+                <span class="axp-cred"><img loading="eager" src="shared/img/banners/digital-badge.png" alt="" />자격 취득 가능</span>
+                <span class="axp-window">
+                  <span class="axp-window-bar"><i></i><i></i><i></i><em>AX 웹 워크시트</em></span>
+                  <img loading="eager" src="AX_Discovery/assets/images/ax-discovery/worksheet-priority.png" alt="" />
+                </span>
+                <img loading="eager" class="axp-book" src="AX_Discovery/assets/images/ax-discovery/book-cover.png" alt="" />
+              </span>
+
+              <span class="axp-content">
+                <span class="axp-eyebrow"><span class="axp-new">NEW</span>AX DISCOVERY · 기업 교육 프로그램</span>
+                <span class="axp-title">현업의 일을 해체하고,<br><b>AI와 함께 다시 설계합니다.</b></span>
+                <span class="axp-sub">교재 · 웹 실습툴 · 자격 검정까지 하나로 연결된 <i>실전형 AX 프로그램</i></span>
+                <span class="axp-facts">
+                  <span class="axp-fact"><b>10<i>개</i></b><em>구조화된 캔버스</em></span>
+                  <span class="axp-fact-div"></span>
+                  <span class="axp-fact"><b>6<i>종</i></b><em>현업 실행 산출물</em></span>
+                  <span class="axp-fact-div"></span>
+                  <span class="axp-fact"><b>3R</b><em>줄이기·재배치·가치창출</em></span>
+                </span>
+                <span class="axp-bottom">
+                  <a class="axp-cta" href="AX_Discovery/index.html">프로그램 살펴보기<span class="axp-cta-ic" aria-hidden="true">→</span></a>
+                  <a class="axp-link" href="AX_Discovery/index.html#deliverables">산출물 먼저 보기</a>
+                </span>
+              </span>
+            </div>
+          </div>
+
           <!-- 슬라이드 1 — AX 전환 응원 이벤트 (2개) -->
-          <div class="hb-slide hb-slide--event" role="group" aria-roledescription="슬라이드" aria-label="1 / 6">
+          <div class="hb-slide hb-slide--event" role="group" aria-roledescription="슬라이드" aria-label="2 / 6">
             <div class="evt-banner">
               <span class="evt-glow1" aria-hidden="true"></span>
               <span class="evt-glow2" aria-hidden="true"></span>
@@ -277,7 +513,7 @@
           </div>
 
           <!-- 슬라이드 2 — AX DISCOVERY 책 발간 -->
-          <div class="hb-slide hb-slide--book" role="group" aria-roledescription="슬라이드" aria-label="2 / 6">
+          <div class="hb-slide hb-slide--book" role="group" aria-roledescription="슬라이드" aria-label="3 / 6">
             <div class="book-banner">
               <span class="book-glow1" aria-hidden="true"></span>
               <span class="book-glow2" aria-hidden="true"></span>
@@ -309,7 +545,7 @@
 
 
           <!-- 슬라이드 2 — AX Discovery 자격증 과정 -->
-          <div class="hb-slide hb-slide--ax" role="group" aria-roledescription="슬라이드" aria-label="3 / 6">
+          <div class="hb-slide hb-slide--ax" role="group" aria-roledescription="슬라이드" aria-label="4 / 6">
             <div class="ax-banner">
               <span class="ax-bg-glow1" aria-hidden="true"></span>
               <span class="ax-bg-glow2" aria-hidden="true"></span>
@@ -333,7 +569,7 @@
                 <span class="ax-bottom">
                   <span class="ax-price">
                     <span class="ax-price-orig">정가 1,600,000원</span>
-                    <span class="ax-price-row"><b>1,000,000원</b><span class="ax-price-tag">2·3기 한정</span></span>
+                    <span class="ax-price-row"><b>1,200,000원</b><span class="ax-price-tag">4기 · 9/11까지</span></span>
                   </span>
                   <a class="ax-cta" href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">수강 신청하기 <span class="ax-arr">→</span></a>
                 </span>
@@ -342,7 +578,7 @@
           </div>
 
           <!-- 슬라이드 4 — 교육멤버(강사) 모집 -->
-          <div class="hb-slide hb-slide--edu" role="group" aria-roledescription="슬라이드" aria-label="4 / 6">
+          <div class="hb-slide hb-slide--edu" role="group" aria-roledescription="슬라이드" aria-label="5 / 6">
             <div class="edu-banner">
               <span class="edu-blob edu-blob1" aria-hidden="true"></span>
               <span class="edu-blob edu-blob2" aria-hidden="true"></span>
@@ -375,7 +611,7 @@
           </div>
 
           <!-- 슬라이드 3 — 스쿨임팩트랩 -->
-          <div class="hb-slide hb-slide--sil" role="group" aria-roledescription="슬라이드" aria-label="5 / 6">
+          <div class="hb-slide hb-slide--sil" role="group" aria-roledescription="슬라이드" aria-label="6 / 6">
             <div class="sil-banner">
               <span class="sil-glow1" aria-hidden="true"></span>
               <span class="sil-glow2" aria-hidden="true"></span>
@@ -400,36 +636,6 @@
                 <span class="sil-bottom">
                   <a class="sil-cta" href="school-impact-lab/index.html">자세히 보기 <span class="sil-arr">→</span></a>
                   <span class="sil-note">학교 도입 상담 · 맞춤 설계 제공</span>
-                </span>
-              </span>
-            </div>
-          </div>
-
-          <!-- 슬라이드 5 — 탐구 위인 테스트 -->
-          <div class="hb-slide hb-slide--exp" role="group" aria-roledescription="슬라이드" aria-label="6 / 6">
-            <div class="exp-banner">
-              <span class="exp-glow1" aria-hidden="true"></span>
-              <span class="exp-glow2" aria-hidden="true"></span>
-              <span class="exp-stars" aria-hidden="true"></span>
-
-              <span class="exp-chars" aria-hidden="true">
-                <img loading="lazy" class="exp-char exp-char--1" src="shared/img/banners/explorer-char-2.png" alt="" />
-                <img loading="lazy" class="exp-char exp-char--2" src="shared/img/banners/explorer-char-1.png" alt="" />
-                <img loading="lazy" class="exp-char exp-char--3" src="shared/img/banners/explorer-char-3.png" alt="" />
-              </span>
-
-              <span class="exp-content">
-                <span class="exp-eyebrow"><span class="exp-dot"></span>WHHY EXPLORER TEST · 중·고생 진로 탐구</span>
-                <span class="exp-title">나와 닮은<br><b>탐구 위인은 누구?</b></span>
-                <span class="exp-sub">단 <i>5분</i>, 16개의 질문으로 찾는 나의 탐구 유형.<br/>아인슈타인부터 마리 퀴리까지 — 강의 시작 전 아이스브레이킹.</span>
-                <span class="exp-tags">
-                  <span class="exp-tag">🔬 위인 16종</span>
-                  <span class="exp-tag">⚡ 약 5분</span>
-                  <span class="exp-tag">📱 설치 없이 바로</span>
-                </span>
-                <span class="exp-bottom">
-                  <a class="exp-cta exp-cta--main" href="https://www.thewhhylab.com/career-test/" target="_blank" rel="noopener">테스트 시작하기 <span class="exp-arr">→</span></a>
-                  <a class="exp-cta exp-cta--ghost" href="whhy-explorer/index.html">자세히 보기</a>
                 </span>
               </span>
             </div>
@@ -551,7 +757,7 @@
     </section>
 
     <!-- ================ BPO STATS ================ -->
-    <section class="section soft reveal">
+    <section class="section soft reveal" data-nosnippet>
       <div class="section-wrap">
         <div class="section-head split">
           <div>
@@ -618,7 +824,7 @@
         </div>
 
         <div class="refs">
-          <article class="ref-card">
+          <article class="ref-card" data-nosnippet>
             <div class="ref-top">
               <div class="ref-logo square"><img loading="lazy" src="shared/img/client-logos/ref-ssafy.jpg" alt="삼성 청년 SW·AI 아카데미 SSAFY" /></div>
               <span class="tag">9년 연속</span>
@@ -629,7 +835,7 @@
             <div class="ref-meta">SOFTWARE · YOUTH</div>
           </article>
 
-          <article class="ref-card">
+          <article class="ref-card" data-nosnippet>
             <div class="ref-top">
               <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-dreamclass.png" alt="삼성드림클래스" /></div>
               <span class="tag">2022~2026</span>
@@ -640,7 +846,7 @@
             <div class="ref-meta">DREAM CLASS · MENTOR DEV</div>
           </article>
 
-          <article class="ref-card">
+          <article class="ref-card" data-nosnippet>
             <div class="ref-top">
               <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-school-consulting.png" alt="찾아가는 학교 컨설팅" /></div>
               <span class="tag">전국 100개교</span>
@@ -651,7 +857,7 @@
             <div class="ref-meta">PUBLIC EDU · CONSULTING</div>
           </article>
 
-          <article class="ref-card">
+          <article class="ref-card" data-nosnippet>
             <div class="ref-top">
               <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-kstory.png" alt="진천 K스토리창작클러스터" /></div>
               <span class="tag">K-IP</span>
@@ -673,7 +879,7 @@
             <div class="ref-meta">AX DISCOVERY · STRATEGY</div>
           </article>
 
-          <article class="ref-card">
+          <article class="ref-card" data-nosnippet>
             <div class="ref-top">
               <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-kpsa.png" alt="한국프로스포츠협회 KPSA" /></div>
               <span class="tag">2022~2025</span>
@@ -688,7 +894,7 @@
     </section>
 
     <!-- ================ CLIENTS ================ -->
-    <section id="clients" class="section reveal">
+    <section id="clients" class="section reveal" data-nosnippet>
       <div class="section-wrap">
         <div class="section-head split">
           <div>
@@ -731,7 +937,7 @@
     </section>
 
     <!-- ================ REVIEWS ================ -->
-    <section class="section soft reveal">
+    <section class="section soft reveal" data-nosnippet>
       <div class="section-wrap">
         <div class="section-head split">
           <div>
@@ -779,7 +985,7 @@
     </section>
 
     <!-- ================ ONE TEAM PROMISE ================ -->
-    <section class="promise reveal">
+    <section class="promise reveal" data-nosnippet>
       <div class="promise-inner">
         <span class="eyebrow" style="justify-self: center; color: rgba(255,255,255,0.6);">08 · ONE TEAM PROMISE</span>
         <h2>고객과 <span class="pill">하나의 팀</span>이 되어<br/>최적의 가치를 제공할 것을 약속합니다.</h2>
@@ -866,9 +1072,10 @@
         <li><a href="ai-hrd/index.html">AI HRD</a></li>
         <li><a href="ai-program/index.html">AI 교육 프로그램</a></li>
         <li><a href="ai-starter-lab/index.html">AI스타터랩</a></li>
-        <li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li>
+        <li><a href="ax-programs/index.html">AX 프로그램</a></li><li><a href="ax-programs/AX_Alignment/index.html">AX Alignment</a></li><li><a href="AX_Discovery/index.html">AX Discovery</a></li><li><a href="https://www.thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX 전략기획 전문가 2급 자격증 과정</a></li>
       </ul></div>
       <div><h5>Connect</h5><ul>
+        <li><a href="https://ax-insight-lab.beehiiv.com/" target="_blank" rel="noopener">AX INSIGHT LAB</a></li>
         <li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li>
         <li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li>

@@ -1,0 +1,991 @@
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+html,
+body {
+  width: 297mm;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+}
+
+body {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+.web-only {
+  display: none !important;
+}
+
+.print-only {
+  display: flex !important;
+}
+
+.document {
+  display: block;
+  width: 297mm;
+  margin: 0;
+  padding: 0;
+}
+
+.pdf-page {
+  width: 297mm !important;
+  height: 210mm !important;
+  min-height: 210mm !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  break-after: page;
+  page-break-after: always;
+}
+
+.pdf-page:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+.page-inner {
+  width: 100%;
+  height: 100%;
+  padding: 11mm 15mm 13mm;
+}
+
+.page-brand {
+  height: 6mm;
+  font-size: 10pt;
+}
+
+.page-brand img,
+.page-brand-dark img {
+  width: 27mm;
+}
+
+.page-footer {
+  right: 15mm;
+  bottom: 5mm;
+  left: 15mm;
+  font-size: 2mm;
+}
+
+.section-number,
+.eyebrow {
+  font-size: 10pt;
+}
+
+/* Chromium PDF에서 그라데이션 텍스트 가장자리에 선이 생기지 않도록
+   인쇄본은 대비가 높은 단색 강조로 출력합니다. */
+.hero-copy h1 span {
+  display: inline;
+  color: #2f7df4;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.deliverables-heading h2 span {
+  display: inline;
+  color: #216bd6;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.hero-facts strong em {
+  color: #2f7df4;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Hero landscape layout */
+.hero-layout {
+  grid-template-columns: 1fr 1.1fr;
+  gap: 13mm;
+  height: 124mm;
+  margin-top: 9mm;
+}
+
+.hero-copy h1 {
+  margin-top: 4mm;
+  font-size: 10.2mm;
+  line-height: 1.08;
+}
+
+.hero-description {
+  width: 113mm;
+  margin-top: 5mm;
+  font-size: 14pt;
+  line-height: 1.48;
+}
+
+.audience-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5mm;
+  margin-top: 5mm;
+}
+
+.audience-panel strong {
+  padding-top: 1.6mm;
+  font-size: 10pt;
+}
+
+.audience-panel ul {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 1.2mm;
+}
+
+.audience-panel li {
+  padding: 1.4mm 2.1mm;
+  font-size: 10pt;
+}
+
+.hero-visual {
+  height: 116mm;
+  border-radius: 8mm;
+}
+
+.product-kicker {
+  top: 6mm;
+  left: 7mm;
+  font-size: 10pt;
+}
+
+.worksheet-window {
+  top: 60mm;
+  right: 6mm;
+  bottom: auto;
+  width: 62%;
+  border-radius: 3mm;
+}
+
+.window-bar {
+  height: 8mm;
+  padding: 0 2mm;
+  font-size: 10pt;
+}
+
+.hero-book {
+  top: 20mm;
+  bottom: auto;
+  left: 5mm;
+  width: 52%;
+}
+
+.credential-float {
+  top: 13mm;
+  right: 7mm;
+  bottom: auto;
+  min-height: 9mm;
+  padding: 1.5mm 3.5mm 1.5mm 10mm;
+  border-radius: 999px;
+  font-size: 10pt;
+}
+
+.credential-float img {
+  left: -5.5mm;
+  width: 15mm;
+}
+
+.hero-visual figcaption {
+  right: 6mm;
+  bottom: 4mm;
+  left: 6mm;
+  padding-top: 2.5mm;
+  font-size: 12pt;
+}
+
+.hero-facts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 267mm;
+  margin-top: 5mm;
+}
+
+.hero-facts article {
+  padding: 4mm 2mm;
+}
+
+.hero-facts strong {
+  font-size: 14pt;
+}
+
+.hero-facts strong em {
+  font-size: 6.6mm;
+}
+
+.hero-facts p {
+  margin-top: 0.8mm;
+  font-size: 12pt;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+
+/* Difference landscape layout */
+.difference-showcase::after {
+  top: 5mm;
+  right: 8mm;
+  width: 38mm;
+  height: 38mm;
+  border-width: 9mm;
+}
+
+.section-heading {
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 12mm;
+}
+
+.section-heading h2 {
+  margin-top: 3mm;
+  font-size: 8.6mm;
+  line-height: 1.08;
+}
+
+.difference-showcase .section-heading h2 {
+  width: 220mm;
+}
+
+.difference-showcase .section-number {
+  font-size: 20pt;
+}
+
+.section-lead {
+  width: 95mm;
+  padding-bottom: 1mm;
+  font-size: 14pt;
+  line-height: 1.45;
+}
+
+.difference-grid {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 127mm;
+  gap: 4mm;
+  height: 127mm;
+  margin-top: 8mm;
+}
+
+.difference-card,
+.book-card {
+  grid-row: auto;
+  padding: 6mm;
+  border-radius: 6mm;
+}
+
+.card-label {
+  font-size: 10pt;
+}
+
+.card-label span {
+  width: 6mm;
+  height: 6mm;
+  margin-right: 1mm;
+  font-size: 10pt;
+}
+
+.difference-card h3 {
+  margin-top: 4mm;
+  font-size: 5mm;
+  line-height: 1.25;
+}
+
+.difference-card > p {
+  margin-top: 2.2mm;
+  font-size: 12pt;
+  line-height: 1.42;
+}
+
+.book-visual {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2mm;
+  width: 100%;
+  margin-top: 4mm;
+  transform: translateY(3mm);
+}
+
+.book-cover {
+  width: 75%;
+  transform: none;
+}
+
+.canvas {
+  width: 66%;
+}
+
+.canvas-two {
+  transform: none;
+}
+
+.worksheet-visual {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5mm;
+  width: 100%;
+  margin-top: 4mm;
+}
+
+.worksheet-visual img {
+  width: 100%;
+  border-radius: 2mm;
+}
+
+.worksheet-visual img:first-child {
+  transform: none;
+}
+
+.worksheet-visual img:last-child {
+  transform: none;
+}
+
+.badge-visual {
+  right: 0;
+  bottom: 4mm;
+  left: 0;
+  width: auto;
+  height: 72mm;
+}
+
+.badge-main {
+  top: auto;
+  right: 3mm;
+  bottom: 12mm;
+  left: auto;
+  width: 58%;
+}
+
+.badge-sub {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 4mm;
+  width: 54%;
+}
+
+/* Deliverables landscape layout */
+.deliverables-heading {
+  width: 255mm;
+  margin-top: 7mm;
+}
+
+.deliverables-showcase .section-number {
+  font-size: 20pt;
+}
+
+.deliverables-heading h2 {
+  margin-top: 3mm;
+  font-size: 8.7mm;
+  line-height: 1.08;
+}
+
+.deliverables-heading > p:last-child {
+  margin-top: 3mm;
+  font-size: 14pt;
+  line-height: 1.45;
+}
+
+.deliverables-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3mm;
+  margin-top: 7mm;
+}
+
+.deliverable-card {
+  min-height: 50mm;
+  padding: 3.5mm 4mm;
+  border-radius: 4mm;
+}
+
+.deliverable-index {
+  font-size: 10pt;
+}
+
+.deliverable-card h3 {
+  margin-top: 5mm;
+  font-size: 14pt;
+  line-height: 1.2;
+}
+
+.deliverable-card p {
+  margin-top: 1.5mm;
+  font-size: 12pt;
+  line-height: 1.35;
+}
+
+.deliverables-note {
+  gap: 8mm;
+  margin-top: 4mm;
+  padding-top: 3mm;
+}
+
+.deliverables-note p {
+  font-size: 12pt;
+}
+
+/* Pages 04–10: A4 landscape layouts */
+.content-heading {
+  margin-top: 7mm;
+}
+
+.content-heading h2 {
+  margin-top: 3mm;
+  font-size: 8.4mm;
+  line-height: 1.08;
+}
+
+.content-heading .section-number {
+  font-size: 20pt;
+  line-height: 1.2;
+}
+
+.content-heading h2 span {
+  display: inline;
+  color: #2f7df4;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.content-heading > p:last-child {
+  margin-top: 3mm;
+  font-size: 14pt;
+  line-height: 1.45;
+}
+
+.content-heading-dark h2 span {
+  color: #65d8de;
+}
+
+.deliverables-showcase .deliverables-heading h2 span {
+  color: #216bd6;
+}
+
+.problem-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4mm;
+  margin-top: 8mm;
+}
+
+.problem-card {
+  height: 66mm;
+  padding: 6mm;
+  border-radius: 5mm;
+}
+
+.problem-index {
+  font-size: 10pt;
+}
+
+.problem-card h3 {
+  margin-top: 5mm;
+  font-size: 18pt;
+  line-height: 1.23;
+}
+
+.problem-card p {
+  margin-top: 4mm;
+  font-size: 12pt;
+  line-height: 1.45;
+}
+
+.problem-conclusion {
+  gap: 8mm;
+  margin-top: 5mm;
+  padding: 5mm 7mm;
+  border-radius: 4mm;
+}
+
+.problem-conclusion span {
+  font-size: 14pt;
+}
+
+.problem-conclusion strong {
+  font-size: 18pt;
+}
+
+.perspective-layout {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5mm;
+  margin-top: 8mm;
+}
+
+.approach-panel,
+.sequence-panel {
+  height: 112mm;
+  padding: 6mm;
+  border-radius: 5mm;
+}
+
+.panel-heading span {
+  font-size: 10pt;
+}
+
+.panel-heading h3 {
+  margin-top: 2mm;
+  font-size: 18pt;
+  line-height: 1.25;
+}
+
+.approach-panel ul,
+.sequence-panel ol {
+  margin-top: 4mm;
+}
+
+.approach-panel li {
+  grid-template-columns: 36mm 1fr;
+  gap: 4mm;
+  padding: 3.6mm 0;
+}
+
+.approach-panel li strong,
+.sequence-panel li strong {
+  font-size: 14pt;
+}
+
+.approach-panel li span,
+.sequence-panel li span {
+  font-size: 14pt;
+  line-height: 1.38;
+}
+
+.sequence-panel li {
+  gap: 4mm;
+  padding: 4mm 0;
+}
+
+.sequence-panel li em {
+  width: 9mm;
+  height: 9mm;
+  font-size: 10pt;
+}
+
+.sequence-panel li div {
+  gap: 1mm;
+}
+
+.research-note {
+  margin-top: 4mm;
+  font-size: 10pt;
+  line-height: 1.35;
+}
+
+.value-equation {
+  gap: 3mm;
+  margin-top: 6mm;
+  padding: 2.5mm;
+  border-radius: 5mm;
+}
+
+.value-equation > div {
+  gap: 1mm;
+  padding: 3mm;
+}
+
+.value-equation strong {
+  font-size: 24pt;
+}
+
+.value-equation span {
+  font-size: 12pt;
+}
+
+.value-equation > b {
+  font-size: 16pt;
+}
+
+.principle-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4mm;
+  margin-top: 4mm;
+}
+
+.principle-card {
+  height: 78mm;
+  padding: 5mm;
+  border-radius: 5mm;
+}
+
+.principle-card > span {
+  font-size: 12pt;
+}
+
+.principle-card h3 {
+  margin-top: 3mm;
+  font-size: 19pt;
+  line-height: 1.15;
+}
+
+.principle-card h3 b {
+  margin-bottom: 1.5mm;
+  font-size: 12pt;
+}
+
+.principle-card > strong {
+  margin-top: 4mm;
+  font-size: 14pt;
+  line-height: 1.35;
+}
+
+.principle-card ul {
+  margin-top: 3mm;
+}
+
+.principle-card li {
+  padding-left: 3.5mm;
+  font-size: 14pt;
+  line-height: 1.48;
+}
+
+.principle-card li::before,
+.curriculum-card li::before,
+.closing-value-card li::before {
+  top: 0.68em;
+  width: 1.2mm;
+  height: 1.2mm;
+}
+
+.duration-band {
+  gap: 4mm;
+  width: 100%;
+  margin: 4mm 0 0;
+}
+
+.duration-track {
+  gap: 3mm;
+  min-height: 14mm;
+  padding: 3mm 5mm;
+}
+
+.duration-track strong {
+  font-size: 13pt;
+}
+
+.duration-track span {
+  font-size: 12pt;
+}
+
+.process-flow {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3mm;
+  margin-top: 10mm;
+}
+
+.process-flow--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4mm;
+}
+
+.process-flow--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3.5mm;
+}
+
+.process-flow::before {
+  top: 10mm;
+  right: 8%;
+  left: 8%;
+}
+
+.process-flow li {
+  height: 93mm;
+  padding: 5mm;
+  border-radius: 5mm;
+}
+
+.process-flow li > span {
+  width: 11mm;
+  height: 11mm;
+  font-size: 10pt;
+}
+
+.process-flow h3 {
+  margin-top: 6mm;
+  font-size: 17pt;
+}
+
+.process-flow p {
+  margin-top: 4mm;
+  font-size: 12pt;
+  line-height: 1.45;
+}
+
+.process-flow strong {
+  padding-top: 4mm;
+  font-size: 10pt;
+  line-height: 1.35;
+}
+
+.curriculum-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4mm;
+  margin-top: 8mm;
+}
+
+.curriculum-card {
+  height: 99mm;
+  padding: 5mm;
+  border-radius: 5mm;
+}
+
+.curriculum-label {
+  column-gap: 3mm;
+}
+
+.curriculum-label span {
+  width: 10mm;
+  height: 10mm;
+  font-size: 10pt;
+}
+
+.curriculum-label strong {
+  font-size: 10pt;
+}
+
+.curriculum-label em {
+  font-size: 16pt;
+}
+
+.curriculum-card > p {
+  margin-top: 5mm;
+  font-size: 12pt;
+  line-height: 1.42;
+}
+
+.curriculum-card ul {
+  margin-top: 4mm;
+}
+
+.curriculum-card li {
+  padding-left: 3.5mm;
+  font-size: 12pt;
+  line-height: 1.55;
+}
+
+.curriculum-card > div:last-child {
+  margin-top: 5mm;
+  padding-top: 4mm;
+}
+
+.curriculum-card > div:last-child b {
+  font-size: 10pt;
+}
+
+.curriculum-card > div:last-child span {
+  margin-top: 1.5mm;
+  font-size: 12pt;
+  line-height: 1.38;
+}
+
+.curriculum-time {
+  gap: 5mm;
+  width: max-content;
+  margin: 4mm auto 0;
+  padding: 3mm 7mm;
+  font-size: 12pt;
+}
+
+.curriculum-time i {
+  height: 6mm;
+  margin: 0 2mm;
+}
+
+.curriculum-detail-showcase .content-heading {
+  margin-top: 5mm;
+}
+
+.curriculum-detail-showcase .content-heading h2 {
+  font-size: 7.7mm;
+}
+
+.curriculum-detail-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4mm;
+  margin-top: 6mm;
+}
+
+.curriculum-detail-card {
+  height: 136mm;
+  border-radius: 5mm;
+}
+
+.curriculum-detail-card > header {
+  padding: 4mm 5mm;
+}
+
+.curriculum-detail-card > header span,
+.curriculum-detail-card > header strong {
+  font-size: 10pt;
+}
+
+.curriculum-detail-card > header strong {
+  margin-top: 1.5mm;
+}
+
+.curriculum-detail-card h3 {
+  margin-top: 0.8mm;
+  font-size: 17pt;
+  line-height: 1.15;
+}
+
+.module-list li {
+  padding: 2.7mm 4mm;
+}
+
+.module-list li > div {
+  gap: 2.5mm;
+}
+
+.module-list b {
+  width: 7mm;
+  height: 7mm;
+  font-size: 10pt;
+}
+
+.module-list strong {
+  font-size: 12pt;
+}
+
+.module-list p {
+  margin-top: 1.2mm;
+  padding-left: 9.5mm;
+  font-size: 12pt;
+  line-height: 1.32;
+}
+
+.evidence-showcase .content-heading {
+  margin-top: 5mm;
+}
+
+.evidence-showcase .content-heading h2 {
+  font-size: 7.2mm;
+}
+
+.evidence-showcase .content-heading > p:last-child {
+  margin-top: 2mm;
+  font-size: 12pt;
+}
+
+.evidence-stats {
+  gap: 3mm;
+  margin-top: 5mm;
+}
+
+.evidence-stats > div {
+  height: 28mm;
+  padding: 3mm;
+  border-radius: 4mm;
+}
+
+.evidence-stats dt {
+  margin-top: 1mm;
+  font-size: 12pt;
+}
+
+.evidence-stats dd {
+  font-size: 22pt;
+}
+
+.evidence-stats dd span {
+  font-size: 14pt;
+}
+
+.testimonial-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3mm;
+  margin-top: 4mm;
+}
+
+.testimonial-grid blockquote {
+  height: 41mm;
+  padding: 4mm 5mm;
+  border-radius: 0 4mm 4mm 0;
+}
+
+.testimonial-grid blockquote > span {
+  font-size: 10pt;
+}
+
+.testimonial-grid blockquote strong {
+  margin-top: 1.5mm;
+  font-size: 14pt;
+  line-height: 1.35;
+}
+
+.testimonial-grid blockquote p {
+  margin-top: 2mm;
+  font-size: 12pt;
+  line-height: 1.4;
+}
+
+.closing-showcase .content-heading {
+  margin-top: 5mm;
+}
+
+.closing-value-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4mm;
+  margin-top: 7mm;
+}
+
+.closing-value-card {
+  height: 62mm;
+  padding: 5mm 6mm;
+  border-radius: 5mm;
+}
+
+.closing-value-card > span {
+  font-size: 10pt;
+}
+
+.closing-value-card h3 {
+  margin-top: 3mm;
+  font-size: 18pt;
+  line-height: 1.25;
+}
+
+.closing-value-card ul {
+  margin-top: 4mm;
+}
+
+.closing-value-card li {
+  padding-left: 3.5mm;
+  font-size: 12pt;
+  line-height: 1.55;
+}
+
+.contact-panel {
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 9mm;
+  margin-top: 4mm;
+  padding: 5mm 7mm;
+  border-radius: 5mm;
+}
+
+.contact-panel p {
+  font-size: 10pt;
+}
+
+.contact-panel h3 {
+  margin-top: 2mm;
+  font-size: 18pt;
+  line-height: 1.25;
+}
+
+.contact-panel dl > div {
+  grid-template-columns: 24mm 1fr;
+  gap: 3mm;
+  padding: 2mm 0;
+}
+
+.contact-panel dt,
+.contact-panel dd {
+  font-size: 12pt;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
