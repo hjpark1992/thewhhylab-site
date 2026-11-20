@@ -44,6 +44,7 @@ jobs:
             AGENTS.md
             .claude/**
             _template/**
+            AX_Discovery/assets/source/**
             .gitignore
             docs/**
             test/**
