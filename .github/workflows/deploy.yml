@@ -31,8 +31,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./
-          # cafe24 FTP에 로그인했을 때 웹루트 폴더 이름. FileZilla 오른쪽 창에서 확인.
-          server-dir: www/
+          # FTP 로그인 위치가 곧 웹루트다(기존 배포 스크립트 기준: ftp://thewhhylab.com/<경로>).
+          server-dir: ./
           state-name: .ftp-deploy-sync-state.json
           dry-run: true
           exclude: |
