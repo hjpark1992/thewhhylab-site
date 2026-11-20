@@ -3,8 +3,7 @@
 #   FTP_SERVER   예) ftp.thewhhylab.com 또는 cafe24가 알려준 호스트
 #   FTP_USERNAME cafe24 FTP 아이디
 #   FTP_PASSWORD cafe24 FTP 비밀번호
-# 처음에는 dry-run: true 로 두고 Actions 탭에서 수동 실행해 계획만 본다.
-# 계획이 맞으면 dry-run 줄을 지우고 커밋한다.
+# 2026-11-20 dry-run 확인 후 실배포 전환. 계획만 보려면 with: 에 dry-run: true 를 임시로 넣는다.
 
 name: deploy-to-cafe24
 
@@ -34,7 +33,6 @@ jobs:
           # FTP 로그인 위치가 곧 웹루트다(기존 배포 스크립트 기준: ftp://thewhhylab.com/<경로>).
           server-dir: ./
           state-name: .ftp-deploy-sync-state.json
-          dry-run: true
           exclude: |
             **/.git*
             **/.git*/**
