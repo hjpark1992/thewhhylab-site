@@ -28,8 +28,7 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          umask 077; printf 'machine %s login %s password %s
-' "$FTP_SERVER" "$FTP_USERNAME" "$FTP_PASSWORD" > "$HOME/.nrc"
+          umask 077; printf 'machine %s login %s password %s\n' "$FTP_SERVER" "$FTP_USERNAME" "$FTP_PASSWORD" > "$HOME/.nrc"
           echo "== PWD / FEAT"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -Q PWD -Q FEAT "ftp://$FTP_SERVER/" -o /dev/null -v 2>&1 | grep -E '^< (257|550|211|230)' | head -5
           echo "== login dir listing"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -l "ftp://$FTP_SERVER/" | head -15
           echo "== root listing"; curl -sS --netrc-file "$HOME/.nrc" --ftp-pasv --max-time 40 -l "ftp://$FTP_SERVER//" | head -15
