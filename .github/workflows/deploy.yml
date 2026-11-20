@@ -41,6 +41,9 @@ jobs:
             .github/**
             README.md
             CLAUDE.md
+            AGENTS.md
+            .claude/**
+            _template/**
             .gitignore
             docs/**
             test/**
