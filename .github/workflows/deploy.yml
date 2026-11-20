@@ -30,8 +30,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./
-          # 이 도구는 FTP 루트 기준 절대 경로를 쓴다. cafe24 로그인 디렉터리(웹루트) = /www
-          server-dir: /www/
+          # 이 도구는 FTP 루트(/)로 이동한 뒤 상대 경로로 들어간다. cafe24 웹루트 = /www → www/
+          server-dir: www/
           state-name: .ftp-deploy-sync-state.json
           log-level: verbose
           exclude: |
