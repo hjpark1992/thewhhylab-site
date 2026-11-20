@@ -1,0 +1,14 @@
+# 서버 전용. 저장소에 넣지 않는다.
+api/config.php
+api/uploads/
+# 다른 저장소에서 관리하는 앱
+axd/
+PathOn/
+sil/
+# 잡파일
+Thumbs.db
+desktop.ini
+~$*
+*.bak
+_private/
+_backup/

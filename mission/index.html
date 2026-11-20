@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mission · 더와이랩</title>
+<meta name="theme-color" content="#0a0b0d"/>
+<link rel="canonical" href="https://www.thewhhylab.com/mission/"/>
+<link rel="icon" type="image/svg+xml" href="../shared/img/favicon.svg"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Mission · 더와이랩"/>
+<meta property="og:description" content="더와이랩의 미션·비전·연혁. AI 시대, 사람 중심 교육으로 일하는 방식을 바꿉니다."/>
+<meta property="og:url" content="https://www.thewhhylab.com/mission/"/>
+<meta property="og:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+<meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Mission · 더와이랩"/>
+<meta name="twitter:description" content="더와이랩의 미션·비전·연혁. AI 시대, 사람 중심 교육으로 일하는 방식을 바꿉니다."/>
+<meta name="twitter:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+
+<meta name="description" content="고객과 하나의 팀이 되어 최적의 가치를 제공합니다. 더와이랩의 미션·비전·핵심가치, 그리고 2016년부터 이어온 10년의 발자취."/>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
+<link rel="stylesheet" href="../shared/css/site.css"/>
+<style>
+  :root {
+    --m-1: #2563ff; --m-1-soft: #e8efff; --m-1-ink: #122a73;
+    --m-2: #7c5aff; --m-2-soft: #ece6ff; --m-2-ink: #3a2a8a;
+    --m-3: #ff6b8a; --m-3-soft: #ffe4eb; --m-3-ink: #8a2240;
+  }
+
+  /* HERO */
+  .m-hero {
+    position: relative;
+    padding: calc(var(--nav-h) + 72px) 28px 96px;
+    background:
+      radial-gradient(58% 58% at 88% 18%, rgba(37,99,255,0.12) 0%, transparent 62%),
+      radial-gradient(50% 50% at 12% 78%, rgba(255,107,138,0.10) 0%, transparent 60%),
+      radial-gradient(40% 50% at 50% 100%, rgba(124,90,255,0.08) 0%, transparent 60%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .m-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(10,11,13,0.06) 1px, transparent 1px);
+    background-size: 26px 26px; opacity: 0.5; pointer-events: none;
+  }
+  .m-hero-inner { position: relative; max-width: var(--max); margin: 0 auto; }
+  .m-crumb {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--f-mono); font-size: 11.5px; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px;
+  }
+  .m-crumb a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .m-crumb a:hover { color: var(--ink); }
+  .m-crumb .sep { opacity: 0.4; }
+  .m-tag {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 7px 14px 7px 11px; border-radius: 999px;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(10,11,13,0.06);
+    backdrop-filter: blur(10px);
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--ink); margin-bottom: 24px;
+    box-shadow: 0 4px 16px -8px rgba(10,11,13,0.08);
+  }
+  .m-tag .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--m-1); animation: m-pulse 2s infinite; }
+  @keyframes m-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37,99,255,0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(37,99,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(37,99,255,0); }
+  }
+  .m-hero h1 {
+    margin: 0 0 28px;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.04em;
+    max-width: 22ch;
+  }
+  .m-hero h1 .rain {
+    background: linear-gradient(95deg, var(--m-1) 0%, var(--m-2) 50%, var(--m-3) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-hero .lede {
+    max-width: 56ch; margin: 0 0 56px;
+    font-size: clamp(16px, 1.5vw, 19px); line-height: 1.7; color: var(--ink-2);
+  }
+  .m-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(10,11,13,0.10);
+    border-bottom: 1px solid rgba(10,11,13,0.10);
+    padding: 32px 0;
+  }
+  .m-stat { padding: 0 24px; border-right: 1px solid rgba(10,11,13,0.06); }
+  .m-stat:last-child { border-right: 0; }
+  .m-stat dt {
+    font-family: var(--f-mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .m-stat dd {
+    margin: 0; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1; color: var(--ink);
+  }
+  .m-stat dd .unit { font-size: 0.5em; color: var(--muted); font-weight: 600; margin-left: 4px; }
+  @media (max-width: 760px) {
+    .m-hero { padding: calc(var(--nav-h) + 48px) 20px 56px; }
+    .m-stats { grid-template-columns: 1fr 1fr; gap: 24px; padding: 24px 0; }
+    .m-stat { border-right: 0; padding: 0; }
+  }
+
+  /* common section heads */
+  .m-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--f-mono); font-size: 11px; color: var(--ink);
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .m-eyebrow::before { content: ""; width: 32px; height: 1.5px; background: var(--ink); }
+  .m-sec-title {
+    margin: 0 0 24px;
+    font-size: clamp(34px, 5vw, 64px); font-weight: 800;
+    letter-spacing: -0.035em; line-height: 1.05; max-width: 18ch;
+  }
+  .m-sec-title em {
+    font-style: normal;
+    background: linear-gradient(95deg, var(--m-1) 0%, var(--m-2) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-sec-lede {
+    margin: 0 0 64px; max-width: 56ch;
+    font-size: clamp(15px, 1.3vw, 17px); line-height: 1.7; color: var(--ink-2);
+  }
+
+  /* MVV */
+  .m-mvv {
+    position: relative;
+    padding: 140px 28px 120px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .m-mvv::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(70% 50% at 50% 0%, rgba(37,99,255,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .m-mvv-inner { position: relative; max-width: var(--max); margin: 0 auto; }
+  .m-trio {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; align-items: start;
+  }
+  @media (max-width: 900px) { .m-trio { grid-template-columns: 1fr; } }
+  .m-trio-card {
+    position: relative;
+    padding: 44px 36px 40px;
+    border-radius: 28px; overflow: hidden;
+    transition: transform .4s var(--ease);
+    min-height: 340px;
+    display: flex; flex-direction: column;
+  }
+  .m-trio-card:hover { transform: translateY(-8px); }
+  .m-trio-card.mission { background: linear-gradient(155deg, var(--m-1-soft) 0%, #d6e3ff 100%); }
+  .m-trio-card.vision  { background: linear-gradient(155deg, var(--m-2-soft) 0%, #ddd1ff 100%); }
+  .m-trio-card.value   { background: linear-gradient(155deg, var(--m-3-soft) 0%, #ffd0db 100%); }
+  @media (min-width: 901px) {
+    .m-trio-card.vision { transform: translateY(-24px); }
+    .m-trio-card.vision:hover { transform: translateY(-32px); }
+  }
+  .m-trio-orn {
+    position: absolute; pointer-events: none;
+    border-radius: 50%; filter: blur(40px); opacity: 0.5;
+  }
+  .m-trio-card.mission .m-trio-orn { top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(37,99,255,0.4); }
+  .m-trio-card.vision  .m-trio-orn { bottom: -50px; left: -50px; width: 220px; height: 220px; background: rgba(124,90,255,0.4); }
+  .m-trio-card.value   .m-trio-orn { top: 30%; right: -60px; width: 200px; height: 200px; background: rgba(255,107,138,0.4); }
+  .m-trio-tag {
+    align-self: flex-start;
+    padding: 5px 12px; border-radius: 999px;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 32px;
+  }
+  .m-trio-card.mission .m-trio-tag { color: var(--m-1-ink); }
+  .m-trio-card.vision  .m-trio-tag { color: var(--m-2-ink); }
+  .m-trio-card.value   .m-trio-tag { color: var(--m-3-ink); }
+  .m-trio-card h3 {
+    margin: 0 0 16px;
+    font-size: clamp(22px, 2.4vw, 28px); font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.2;
+  }
+  .m-trio-card.mission h3 { color: var(--m-1-ink); }
+  .m-trio-card.vision  h3 { color: var(--m-2-ink); }
+  .m-trio-card.value   h3 { color: var(--m-3-ink); }
+  .m-trio-card .en {
+    display: block;
+    font-family: var(--f-mono); font-size: 12px;
+    letter-spacing: 0.04em; opacity: 0.55; margin-bottom: 20px;
+  }
+  .m-trio-card p {
+    margin: auto 0 0;
+    font-size: 14.5px; line-height: 1.7; color: var(--ink-2);
+  }
+
+  /* core values */
+  .m-values {
+    margin-top: 96px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.2fr);
+    gap: 80px; align-items: start;
+  }
+  @media (max-width: 960px) { .m-values { grid-template-columns: 1fr; gap: 40px; } }
+  .m-values-aside { position: sticky; top: calc(var(--nav-h) + 32px); }
+  .m-values-aside h3 {
+    margin: 0 0 20px;
+    font-size: clamp(30px, 3.6vw, 44px); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.08;
+  }
+  .m-values-aside h3 em {
+    font-style: normal;
+    background: linear-gradient(95deg, var(--m-2), var(--m-1));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-values-aside p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+  .m-value-list { display: grid; gap: 14px; }
+  .m-value-row {
+    display: grid; grid-template-columns: 64px 1fr; gap: 28px;
+    padding: 32px 36px;
+    background: #fff;
+    border: 1px solid rgba(10,11,13,0.05);
+    border-radius: 24px; align-items: start;
+    transition: all .3s var(--ease);
+  }
+  .m-value-row:hover {
+    transform: translateX(6px);
+    border-color: rgba(37,99,255,0.3);
+    box-shadow: 0 30px 60px -32px rgba(37,99,255,0.25);
+  }
+  .m-value-num {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-mono); font-weight: 800; font-size: 15px;
+    color: #fff; letter-spacing: -0.02em;
+  }
+  .m-value-row:nth-child(1) .m-value-num { background: linear-gradient(135deg, var(--m-1), color-mix(in srgb, var(--m-1) 60%, #fff)); }
+  .m-value-row:nth-child(2) .m-value-num { background: linear-gradient(135deg, var(--m-2), color-mix(in srgb, var(--m-2) 60%, #fff)); }
+  .m-value-row:nth-child(3) .m-value-num { background: linear-gradient(135deg, var(--m-3), color-mix(in srgb, var(--m-3) 60%, #fff)); }
+  .m-value-row h4 {
+    margin: 8px 0 6px; font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
+  }
+  .m-value-row .en {
+    display: block; font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .m-value-row p { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--ink-2); }
+
+  /* PROMISE */
+  .m-promise {
+    position: relative;
+    padding: 160px 28px;
+    background: #0a0b0d; color: #fff; overflow: hidden;
+  }
+  .m-promise::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(50% 50% at 88% 22%, rgba(37,99,255,0.25) 0%, transparent 60%),
+      radial-gradient(40% 40% at 12% 78%, rgba(124,90,255,0.20) 0%, transparent 60%),
+      radial-gradient(40% 40% at 50% 100%, rgba(255,107,138,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .m-promise::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 26px 26px; pointer-events: none;
+  }
+  .m-promise-inner { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
+  .m-promise .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+    color: rgba(255,255,255,0.55); margin-bottom: 32px;
+  }
+  .m-promise .eyebrow::before, .m-promise .eyebrow::after {
+    content: ""; width: 32px; height: 1.5px; background: rgba(255,255,255,0.20);
+  }
+  .m-promise h2 {
+    margin: 0 0 36px;
+    font-size: clamp(30px, 4.2vw, 60px); font-weight: 800;
+    line-height: 1.15; letter-spacing: -0.03em; color: #fff;
+    text-wrap: balance;
+  }
+  .m-promise h2 em {
+    font-style: normal;
+    background: linear-gradient(95deg, #5b8eff 0%, #b793ff 50%, #ff8da3 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-promise .en {
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: clamp(13px, 1.1vw, 16px); letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5); line-height: 1.8;
+  }
+
+  /* HISTORY */
+  .m-history {
+    padding: 140px 28px;
+    background: var(--bg-soft);
+    position: relative; overflow: hidden;
+  }
+  .m-history::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(50% 40% at 90% 10%, rgba(37,99,255,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .m-history-inner { position: relative; max-width: var(--max); margin: 0 auto; }
+  .m-history-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 80px; align-items: end;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 960px) { .m-history-head { grid-template-columns: 1fr; gap: 40px; } }
+  .m-history-head h2 {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 52px); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.1;
+    text-wrap: balance;
+  }
+  .m-history-head h2 em {
+    font-style: normal;
+    background: linear-gradient(95deg, var(--m-1) 0%, var(--m-2) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-history-meta {
+    display: grid; grid-template-columns: repeat(3, auto);
+    gap: 32px; align-items: end;
+  }
+  .m-history-meta > div { line-height: 1; }
+  .m-history-meta .big {
+    display: block; font-size: clamp(32px, 3.4vw, 44px); font-weight: 800;
+    letter-spacing: -0.03em; color: var(--ink);
+  }
+  .m-history-meta .big .unit { font-size: 0.45em; color: var(--muted); font-weight: 600; margin-left: 2px; }
+  .m-history-meta .lbl {
+    display: block; margin-top: 10px;
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .m-history-body { position: relative; padding-left: 36px; }
+  @media (max-width: 600px) { .m-history-body { padding-left: 20px; } }
+  .m-history-body::before {
+    content: ""; position: absolute; left: 7px; top: 20px; bottom: 20px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--m-1) 0%, var(--m-2) 50%, var(--m-3) 100%);
+    opacity: 0.3;
+  }
+  .m-event { position: relative; margin-bottom: 16px; transition: transform .3s var(--ease); }
+  .m-event::before {
+    content: ""; position: absolute;
+    left: -36px; top: 38px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg-soft); border: 3px solid var(--m-1);
+    transition: all .3s var(--ease); z-index: 1;
+  }
+  @media (max-width: 600px) { .m-event::before { left: -20px; width: 12px; height: 12px; border-width: 2.5px; } }
+  .m-event:hover { transform: translateX(6px); }
+  .m-event:hover::before { transform: scale(1.15); }
+  .m-event.featured::before { background: var(--m-1); border-color: var(--m-1); }
+  .m-event.start::before { background: var(--m-3); border-color: var(--m-3); }
+  .m-event-card {
+    padding: 32px 36px;
+    background: #fff;
+    border: 1px solid rgba(10,11,13,0.05);
+    border-radius: 20px; transition: all .3s var(--ease);
+  }
+  .m-event:hover .m-event-card {
+    border-color: rgba(37,99,255,0.25);
+    box-shadow: 0 30px 60px -32px rgba(37,99,255,0.2);
+  }
+  .m-event.featured .m-event-card {
+    background: linear-gradient(135deg, #0a0b0d 0%, #1a1d23 100%);
+    border-color: transparent; color: rgba(255,255,255,0.86);
+  }
+  .m-event-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+  .m-event-year {
+    font-family: var(--f-mono);
+    font-size: clamp(28px, 3vw, 38px); font-weight: 800;
+    letter-spacing: -0.04em; line-height: 1; color: var(--ink);
+  }
+  .m-event.featured .m-event-year { color: #fff; }
+  .m-event.featured .m-event-year.gradient {
+    background: linear-gradient(95deg, #5b8eff 0%, #b793ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-event.start .m-event-year { color: var(--m-3-ink); }
+  .m-event-badge {
+    display: inline-block; padding: 4px 11px; border-radius: 999px;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+  }
+  .m-event-badge.now { background: var(--m-1); color: #fff; }
+  .m-event-badge.origin { background: var(--m-3); color: #fff; }
+  .m-event-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .m-event-list li {
+    position: relative; padding-left: 22px;
+    font-size: 14.5px; line-height: 1.65; color: var(--ink-2);
+  }
+  .m-event.featured .m-event-list li { color: rgba(255,255,255,0.72); }
+  .m-event-list li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--m-1); opacity: 0.5;
+  }
+  .m-event.featured .m-event-list li::before { background: rgba(255,255,255,0.4); opacity: 1; }
+  .m-event.start .m-event-list li::before { background: var(--m-3); opacity: 0.7; }
+
+  /* APPROACH */
+  .m-approach { padding: 140px 28px; background: var(--bg); }
+  .m-approach-inner { max-width: var(--max); margin: 0 auto; }
+  .m-approach-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; counter-reset: ap-step;
+  }
+  @media (max-width: 960px) { .m-approach-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .m-approach-grid { grid-template-columns: 1fr; } }
+  .m-step {
+    position: relative;
+    padding: 36px 32px 40px;
+    background: #fff;
+    border: 1px solid rgba(10,11,13,0.05);
+    border-radius: 24px; counter-increment: ap-step;
+    overflow: hidden; transition: all .3s var(--ease);
+  }
+  .m-step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -32px rgba(0,0,0,0.12);
+  }
+  .m-step::before {
+    content: "0" counter(ap-step);
+    position: absolute; top: 26px; right: 30px;
+    font-family: var(--f-mono); font-size: 13px;
+    color: var(--m-1); font-weight: 700; letter-spacing: 0.06em;
+  }
+  .m-step .ic {
+    width: 52px; height: 52px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 36px;
+  }
+  .m-step:nth-child(1) .ic { background: linear-gradient(135deg, var(--m-1-soft), #d6e3ff); color: var(--m-1-ink); }
+  .m-step:nth-child(2) .ic { background: linear-gradient(135deg, var(--m-2-soft), #ddd1ff); color: var(--m-2-ink); }
+  .m-step:nth-child(3) .ic { background: linear-gradient(135deg, var(--m-3-soft), #ffd0db); color: var(--m-3-ink); }
+  .m-step:nth-child(4) .ic { background: linear-gradient(135deg, #0a0b0d, #1a1d23); color: #fff; }
+  .m-step:nth-child(4)::before { color: #7c5aff; }
+  .m-step .ic svg { width: 24px; height: 24px; }
+  .m-step h4 { margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -0.025em; }
+  .m-step .en {
+    display: block; font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .m-step p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+
+  /* CTA */
+  .m-cta { padding: 100px 28px 120px; }
+  .m-cta-inner { max-width: var(--max); margin: 0 auto; }
+  .m-cta-box {
+    position: relative;
+    padding: 88px 64px; border-radius: 36px;
+    background: linear-gradient(135deg, #0a0b0d 0%, #1a1d23 100%);
+    color: #fff; overflow: hidden;
+    display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 760px) { .m-cta-box { padding: 56px 32px; grid-template-columns: 1fr; gap: 32px; border-radius: 24px; } }
+  .m-cta-box::before {
+    content: ""; position: absolute; top: -30%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37,99,255,0.30) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .m-cta-box h3 {
+    position: relative; margin: 0 0 16px;
+    font-size: clamp(24px, 3vw, 38px); font-weight: 800;
+    line-height: 1.2; letter-spacing: -0.025em; color: #fff;
+    text-wrap: balance;
+  }
+  .m-cta-box h3 em {
+    font-style: normal;
+    background: linear-gradient(95deg, #5b8eff 0%, #b793ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .m-cta-box p {
+    position: relative; margin: 0;
+    font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.65);
+  }
+  .m-cta-actions { position: relative; display: flex; flex-direction: column; gap: 14px; }
+  .m-cta-btn {
+    display: inline-flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 22px 30px;
+    background: #fff; color: #0a0b0d; text-decoration: none;
+    border-radius: 999px; font-weight: 700; font-size: 15px;
+    letter-spacing: -0.01em; transition: transform var(--t-fast) var(--ease);
+  }
+  .m-cta-btn:hover { transform: translateX(4px); }
+  .m-cta-btn .arr {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--m-1); color: #fff;
+  }
+  .m-cta-contact {
+    display: flex; gap: 24px; padding-left: 28px;
+    font-family: var(--f-mono); font-size: 12px;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.04em;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body data-page="mission">
+
+<header class="nav"><div class="nav-inner"><a class="brand" href="../index.html"><img src="../shared/img/logo-blue.png" alt="더와이랩"/></a>
+<button id="menuTrigger" class="menu-trigger" type="button" aria-expanded="false" aria-controls="menuOverlay"><span class="menu-lines"><span></span><span></span></span>Menu</button></div></header>
+
+<button id="menuClose" class="menu-close" type="button" aria-label="메뉴 닫기">닫기 ✕</button>
+<aside id="menuOverlay" class="menu-overlay" aria-label="전체 메뉴"><div class="menu-inner"><div class="menu-eyebrow">THE WHHY LAB · 전체 메뉴</div><div class="menu-grid"><div class="menu-col active"><h4>회사 소개</h4><a href="../culture/index.html">Culture</a><a href="../mission/index.html" class="current">Mission</a><a href="../media/index.html">Media</a><a href="../learnies/index.html">러니즈</a></div><div class="menu-col"><h4>AI HRD</h4><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a><a href="../ai-hrd/index.html">AI HRD</a><a href="../ai-design-thinking/index.html">AI 디자인씽킹</a><a href="../work-hack-ai/index.html">Work Hack AI</a><a href="../open-k/index.html">Open K</a></div><div class="menu-col"><h4>AI 진로·탐구</h4><a href="../ai-program/index.html">AI 교육 프로그램</a><a href="../school-impact-lab/index.html">스쿨임팩트랩</a><a href="../highfly/index.html">하이플라이</a><a href="../ai-starter-lab/index.html">AI스타터랩</a><a href="../pathon-program/index.html">PathOn</a><a href="../reviews/index.html">교실 후기</a><a href="../whhy-explorer/index.html">탐구 위인 테스트</a></div><div class="menu-col"><h4>Library</h4><a href="../references/index.html">레퍼런스</a><a href="../instructors/index.html">열정강사</a><a href="../workshop-tools/index.html">워크숍 도구</a><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a></div><div class="menu-col"><h4>Join 더와이랩</h4><a href="../members-edu/index.html">교육멤버</a><a href="../members-seongsu/index.html">성수멤버</a></div></div><div class="menu-foot"><div class="menu-foot-left"><p>학습에서 실행까지, AI 전 과정을 연결합니다.</p><strong>지금 더와이랩과 함께 시작하세요.</strong></div><a class="menu-cta" href="../contact/">교육 문의 →</a><div class="menu-social"><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></div></div></div></aside>
+
+<main id="top">
+  <section class="m-hero">
+    <div class="m-hero-inner">
+      <div class="m-crumb"><a href="../index.html">Home</a><span class="sep">/</span><span>Company</span><span class="sep">/</span><span>Mission</span></div>
+      <div class="m-tag"><span class="pulse"></span>MISSION · VISION · CORE VALUE</div>
+      <h1>고객의 <span class="rain">다음 한 걸음</span>을 함께 설계합니다.</h1>
+      <p class="lede">사람 중심 교육, AI와 내일을 잇다.<br/>더와이랩은 강소 HRD 부티크 교육컨설팅 기업입니다. 10년간 1,250+개의 프로젝트를 통해 만들어온 약속을 이 페이지에 담았습니다.</p>
+      <dl class="m-stats">
+        <div class="m-stat"><dt>Founded</dt><dd>2016</dd></div>
+        <div class="m-stat"><dt>누적 프로젝트</dt><dd>1,250<span class="unit">+</span></dd></div>
+        <div class="m-stat"><dt>누적 교육인원</dt><dd>5<span class="unit">만+</span></dd></div>
+        <div class="m-stat"><dt>2026 Goal</dt><dd>1,500<span class="unit"> PJT</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="m-mvv">
+    <div class="m-mvv-inner">
+      <div class="m-eyebrow">01 — Mission · Vision · Value</div>
+      <h2 class="m-sec-title">우리의 약속, <em>세 가지 문장.</em></h2>
+      <p class="m-sec-lede">우리가 어디로 가는지, 어떻게 일하는지, 그리고 무엇을 가장 소중히 여기는지, 세 개의 문장으로 정리했습니다.</p>
+
+      <div class="m-trio">
+        <article class="m-trio-card mission">
+          <span class="m-trio-orn"></span>
+          <span class="m-trio-tag">M · MISSION</span>
+          <h3>고객과 하나의 팀이 되어 최적의 가치를 제공한다.</h3>
+          <span class="en">Team up with the customer.</span>
+          <p>'For You'가 아닌 'With You'로 일합니다. 우리는 고객의 문제를 함께 푸는 동료가 되겠습니다.</p>
+        </article>
+        <article class="m-trio-card vision">
+          <span class="m-trio-orn"></span>
+          <span class="m-trio-tag">V · VISION</span>
+          <h3>고객의 성공을 함께 만드는 최고의 HRD 파트너.</h3>
+          <span class="en">The Best HRD Partner.</span>
+          <p>단발성 강의 공급자가 아닌, 조직의 성장 곡선을 함께 그리는 장기 파트너로 자리매김하는 것이 목표입니다.</p>
+        </article>
+        <article class="m-trio-card value">
+          <span class="m-trio-orn"></span>
+          <span class="m-trio-tag">CV · CORE VALUE</span>
+          <h3>세 가지 정신으로 일합니다.</h3>
+          <span class="en">Three Mindsets.</span>
+          <p>하나의 팀 정신 · 선택과 집중 · 맞춤형 BPO 서비스. 우리가 어떻게 일하는지 결정하는 세 가지 원칙입니다.</p>
+        </article>
+      </div>
+
+      <div class="m-values">
+        <aside class="m-values-aside">
+          <h3>핵심가치 <em>세 가지.</em></h3>
+          <p>표준 패키지를 팔지 않습니다. 정성껏 함께할 수 있는 프로젝트만 선택하고, 끝까지 책임집니다.</p>
+        </aside>
+        <div class="m-value-list">
+          <article class="m-value-row">
+            <div class="m-value-num">01</div>
+            <div>
+              <h4>하나의 팀 정신</h4>
+              <span class="en">One Team Spirit</span>
+              <p>고객과 하나의 팀이 되어 함께 목표를 이루는 동반자 정신. 클라이언트와 벤더의 관계가 아닌 동료의 관계로 일합니다.</p>
+            </div>
+          </article>
+          <article class="m-value-row">
+            <div class="m-value-num">02</div>
+            <div>
+              <h4>선택과 집중</h4>
+              <span class="en">Focused Selection</span>
+              <p>정성 있게 함께할 수 있는 프로젝트만을 선택하여 최선을 다합니다. 양보다 깊이를 택합니다.</p>
+            </div>
+          </article>
+          <article class="m-value-row">
+            <div class="m-value-num">03</div>
+            <div>
+              <h4>맞춤형 BPO 서비스</h4>
+              <span class="en">Tailored BPO Service</span>
+              <p>기획부터 운영·평가까지 HRD 전 영역을 고객 요구에 맞춰 제공합니다. 표준 패키지를 팔지 않습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-promise">
+    <div class="m-promise-inner">
+      <div class="eyebrow">02 — One Team Promise</div>
+      <h2>고객과 하나의 팀이 되어<br/><em>최적의 가치</em>를 제공할 것을 약속합니다.</h2>
+      <p class="en">Team up with the customer. — We promise to provide optimal value.</p>
+    </div>
+  </section>
+
+  <section class="m-history">
+    <div class="m-history-inner">
+      <div class="m-eyebrow">03 — History since 2016</div>
+      <div class="m-history-head">
+        <h2>10년의 발자취,<br/><em>THE WHHY LAB Story.</em></h2>
+        <div>
+          <p style="margin:0 0 28px;font-size:16px;line-height:1.7;color:var(--ink-2);">2016년 안랩 핵심가치 내재화 교육에서 시작해, 2026년 1,500개 PJT 목표까지, 더와이랩이 걸어온 길.</p>
+          <div class="m-history-meta">
+            <div><span class="big">10<span class="unit">년</span></span><span class="lbl">SINCE 2016</span></div>
+            <div><span class="big">1,250<span class="unit">+</span></span><span class="lbl">ACCUM. PJT</span></div>
+            <div><span class="big">5<span class="unit">만+</span></span><span class="lbl">LEARNERS</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-history-body">
+        <article class="m-event featured">
+          <div class="m-event-card">
+            <div class="m-event-head"><span class="m-event-year gradient">2026</span><span class="m-event-badge now">Now</span></div>
+            <ul class="m-event-list">
+              <li>삼성 드림클래스 임직원 멘토링 / 대학생 멘토 캠프 운영 (2022~2026 5년 연속)</li>
+              <li>삼성청년 SW아카데미 스타트캠프 위탁 운영 (2019~2026 8년 연속, 1~15기)</li>
+              <li>교육부·17개 시도교육청·한국과학창의재단 공동 주관 '찾아가는 학교 컨설팅' 사업 완료 (전국 초·중·고 100개교)</li>
+              <li>충북과학기술혁신원 K스토리 사업화 비즈매칭 (2년 연속)</li>
+              <li>AI 네이티브 세대 중·고등 진로탐구 사업: 속초양양·인제교육지원청·중랑구청·인천 동구·자율형공립고 등</li>
+              <li>AX Discovery 런칭: 민간자격 / 과학기술정보통신부 (등록번호 2026-003156)</li>
+              <li>누적 교육 1,250개 PJT 달성 · 2026 목표 1,500개 PJT</li>
+            </ul>
+          </div>
+        </article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2025</span></div><ul class="m-event-list"><li>삼성청년 SW아카데미 스타트캠프 위탁 운영 (7년 연속, 1~13기)</li><li>삼성 드림클래스 임직원 멘토링 1·2학기 운영 (4년 연속)</li><li>삼성전자·현대자동차·포스코 등 누적 1,000+개 HRD 프로젝트 운영</li><li>'찾아가는 학교 컨설팅' 사업 완료 (전국 초중고 100개)</li><li>충북과학기술혁신원 K스토리 사업화 비즈매칭 / 몽골 부총리실 K연수 / 한국프로스포츠협회 신규 프로젝트</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2024</span></div><ul class="m-event-list"><li>삼성청년 SW아카데미 스타트캠프 (6년 연속, 1~12기)</li><li>드림클래스 임직원 멘토링 운영 (3년 연속)</li><li>삼성·SK·LG 등 누적 900+개 HRD 프로젝트 운영</li><li>교육부·17개 시도교육청·한국과학창의재단 '찾아가는 학교 컨설팅' 선정</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2023</span></div><ul class="m-event-list"><li>중소기업벤처부 창업도약패키지 최종 선정</li><li>CSTART (교육의뢰플랫폼) 출시</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2022</span></div><ul class="m-event-list"><li>신한희망금융재단 특성화고 취업지원 커리어온 (2년 연속)</li><li>신한희망금융재단 청년 취업지원 커리어업 (2기 연속)</li><li>성남산업진흥원 ICT 인턴십 프로그램 위탁 운영</li><li>비대면 스타트업 육성사업 에듀테크분야 선정 (성과평가 우수)</li><li>삼성복지재단 청소년 삼성 드림클래스 2.0 개편 참여</li><li>삼성 드림클래스 임직원 멘토링 1·2학기 운영 시작</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2021</span></div><ul class="m-event-list"><li>청년취업아카데미 하계/동계 IT 취업워크숍 위탁 운영 (5년 연속)</li><li>서울시청년활동지원센터 4년 연속 위탁 운영</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2020</span></div><ul class="m-event-list"><li>서울시청년활동지원센터 청년 진로·취업 프로그램 위탁운영 (4년 연속)</li><li>4차산업혁명 선도인력 양성 IT 취업 프로그램 위탁 운영 (4년 연속)</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2019</span></div><ul class="m-event-list"><li>가톨릭대학교 산학공동기술개발과제 수행 (취업진로 상담용 AI 챗봇 데이터세트)</li><li>코멘토 AI 자기소개서 역량분석기 알고리즘 검증 연구</li><li>삼성청년 SW아카데미(SSAFY) 스타트캠프 위탁 운영 시작</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2018</span></div><ul class="m-event-list"><li>현대자동차·SK하이닉스 등 누적 130개 HRD 프로그램 운영</li><li>경기컨텐츠진흥원·전북대학교·한밭대학교 등 대학교육 사업 운영</li><li>서울시청년활동지원센터 청년 진로·취업 프로그램 위탁 운영 시작</li></ul></div></article>
+        <article class="m-event"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2017</span></div><ul class="m-event-list"><li>청년취업아카데미 하계/동계 IT 취업워크숍 위탁 운영 시작</li><li>창업 멘토링·창업 캠프·창업 아이디어 경진대회 등 창업 프로그램 운영</li><li>이베이코리아 교육 과정 개발</li></ul></div></article>
+        <article class="m-event start"><div class="m-event-card"><div class="m-event-head"><span class="m-event-year">2016</span><span class="m-event-badge origin">Origin</span></div><ul class="m-event-list"><li>안랩 핵심가치 내재화 전사교육</li><li>더와이랩 설립: 강소 HRD 부티크(boutique) 교육 컨설팅 기업으로 시작</li></ul></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-approach">
+    <div class="m-approach-inner">
+      <div class="m-eyebrow">04 — Our Approach</div>
+      <h2 class="m-sec-title">고객의 문제를 푸는 <em>네 단계.</em></h2>
+      <p class="m-sec-lede">표준 패키지가 아닌, 처음부터 설계합니다. 한 명의 PM이 사전 설계부터 운영·마감까지 책임집니다.</p>
+      <div class="m-approach-grid">
+        <article class="m-step">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+          <h4>경청</h4><span class="en">Listen</span>
+          <p>고객의 진짜 문제를 듣습니다. 표면적 요청보다 그 뒤의 맥락을 파악합니다.</p>
+        </article>
+        <article class="m-step">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/></svg></div>
+          <h4>설계</h4><span class="en">Design</span>
+          <p>문제에 맞는 커리큘럼을 처음부터 설계합니다. 검증된 모듈을 재조합하지 않습니다.</p>
+        </article>
+        <article class="m-step">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h4>실행</h4><span class="en">Operate</span>
+          <p>전담 PM과 강사가 끝까지 운영합니다. 매 차수 피드백을 반영해 개선합니다.</p>
+        </article>
+        <article class="m-step">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <h4>증명</h4><span class="en">Prove</span>
+          <p>NPS·만족도·실무 적용도까지 측정합니다. 다음 차수의 근거를 만듭니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-cta">
+    <div class="m-cta-inner">
+      <div class="m-cta-box">
+        <div>
+          <h3>더와이랩과 함께<br/><em>다음 한 걸음</em>을 시작하세요.</h3>
+          <p>교육 문의·기획 상담 모두 환영합니다. 한 번의 거래가 아닌 장기 파트너로 만나뵙고 싶습니다.</p>
+        </div>
+        <div class="m-cta-actions">
+          <a class="m-cta-btn" href="../contact/">교육 문의 <span class="arr">→</span></a>
+          <div class="m-cta-contact"><span>TEL · 02-468-3555</span><span>master@thewhhylab.com</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+<div class="foot-hero"><h2>학습에서 실행까지<br/>AI 활용의 전 과정을 연결합니다.</h2>
+<div class="right"><p>기업 교육부터 학생 진로·탐구까지,<br/>사람 중심 AI 교육의 표준을 만듭니다.</p>
+<a class="btn" style="background:#fff;color:#0a0b0d;" href="../contact/">교육 문의 <span class="arr">→</span></a></div></div>
+<div class="foot">
+<div><div class="foot-brand"><img src="../shared/img/logo-blue.png" alt="더와이랩" /></div>
+<p>THE WHHY LAB, 사람 중심 AI 교육 기업.</p>
+<address class="foot-biz">
+<span>주식회사 더와이랩 (The Whhy Lab Inc.) · 대표 김홍태</span>
+<span>사업자등록번호 446-87-00395</span>
+<span>서울특별시 성동구 성수일로99, 서울숲AK밸리 1510호</span>
+<span>T. <a href="tel:0224683555">02-468-3555</a> · E. <a href="mailto:master@thewhhylab.com">master@thewhhylab.com</a></span>
+</address>
+</div>
+<div><h5>회사 소개</h5><ul><li><a href="../culture/index.html">Culture</a></li><li><a href="../mission/index.html">Mission</a></li><li><a href="../media/index.html">Media</a></li><li><a href="../learnies/index.html">러니즈</a></li></ul></div>
+<div><h5>프로그램</h5><ul><li><a href="../ai-hrd/index.html">AI HRD</a></li><li><a href="../ai-program/index.html">AI 교육 프로그램</a></li><li><a href="../ai-starter-lab/index.html">AI스타터랩</a></li><li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li></ul></div>
+<div><h5>Connect</h5><ul><li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li><li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li><li><a href="../members-edu/index.html">교육멤버</a></li></ul></div></div>
+<div class="copyright"><span>© 2016—2026 THE WHHY LAB</span><span>www.thewhhylab.com · 02-468-3555 · master@thewhhylab.com</span></div></footer>
+
+<script src="../shared/js/site.js" defer></script>
+</body>
+</html>
+

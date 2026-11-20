@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다.</title>
+<meta name="theme-color" content="#0a0b0d"/>
+<link rel="canonical" href="https://www.thewhhylab.com/"/>
+<link rel="icon" type="image/png" href="shared/img/favicon.png"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다."/>
+<meta property="og:description" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
+<meta property="og:url" content="https://www.thewhhylab.com/"/>
+<meta property="og:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+<meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다."/>
+<meta name="twitter:description" content="더와이랩 THE WHHY LAB — AI로 일하는 방식이 바뀝니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다."/>
+<meta name="twitter:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.thewhhylab.com/#organization",
+      "name": "더와이랩",
+      "alternateName": "THE WHHY LAB",
+      "url": "https://www.thewhhylab.com/",
+      "logo": "https://www.thewhhylab.com/shared/img/logo-blue.png",
+      "description": "학습에서 실행까지 AI 활용의 전 과정을 연결하는 AI 교육 기업. AI HRD · AI 진로탐구 · AI 디자인씽킹."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.thewhhylab.com/#website",
+      "url": "https://www.thewhhylab.com/",
+      "name": "더와이랩 THE WHHY LAB",
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://www.thewhhylab.com/#organization" }
+    }
+  ]
+}
+</script>
+
+  <meta name="description" content="학습에서 실행까지 AI 활용의 전 과정을 연결합니다. AI HRD · AI 진로탐구 · AI 디자인씽킹. 누적 교육 1,250개, 5만 명 달성." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
+  <link rel="stylesheet" href="shared/css/site.css" />
+  <style>
+    /* === Core Business Tiles (메인 핵심 3사업) === */
+    .core-tiles {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 860px) {
+      .core-tiles { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    }
+    .core-tile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      text-align: left;
+      min-height: 300px;
+      padding: 30px 28px;
+      border-radius: 20px;
+      background: var(--bg-soft);
+      color: var(--ink);
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform var(--t-base, .4s) var(--ease, ease), box-shadow var(--t-base, .4s) var(--ease, ease);
+    }
+    .core-tile:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(10,11,13,0.12); }
+    .core-eyebrow {
+      align-self: flex-start;
+      font-family: var(--f-mono, monospace);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin: 0 0 auto 0;
+    }
+    .core-title {
+      margin: 0 0 12px;
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .core-desc {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.65;
+      opacity: 0.8;
+    }
+    .core-arrow {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 16px;
+      background: rgba(10,11,13,0.08);
+      transition: background var(--t-fast, .2s) var(--ease, ease), transform var(--t-fast, .2s) var(--ease, ease);
+    }
+    .core-tile:hover .core-arrow { transform: rotate(45deg) scale(1.05); }
+    /* brand (파랑) */
+    .core-tile.brand { background: var(--brand); color: #fff; }
+    .core-tile.brand .core-arrow { background: rgba(255,255,255,0.2); }
+    .core-tile.brand:hover .core-arrow { background: #fff; color: var(--brand); }
+    /* dark (먹) */
+    .core-tile.dark { background: var(--bg-dark); color: #fff; }
+    .core-tile.dark .core-arrow { background: rgba(255,255,255,0.16); }
+    .core-tile.dark:hover .core-arrow { background: #fff; color: var(--bg-dark); }
+    /* accent (AX 시그니처 - 딥그린/틸 계열로 차별화) */
+    .core-tile.accent { background: linear-gradient(150deg, #0f766e 0%, #115e59 100%); color: #fff; }
+    .core-tile.accent .core-arrow { background: rgba(255,255,255,0.2); }
+    .core-tile.accent:hover .core-arrow { background: #fff; color: #115e59; }
+  </style>
+</head>
+<body data-page="home" class="has-hero">
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="./index.html" aria-label="더와이랩 홈">
+        <img src="shared/img/logo-blue.png" alt="더와이랩 THE WHHY LAB" />
+      </a>
+      <button id="menuTrigger" class="menu-trigger" type="button" aria-expanded="false" aria-controls="menuOverlay"><span class="menu-lines"><span></span><span></span></span>Menu</button>
+    </div>
+  </header>
+
+  <button id="menuClose" class="menu-close" type="button" aria-label="메뉴 닫기">닫기 ✕</button>
+
+  <aside id="menuOverlay" class="menu-overlay" aria-label="전체 메뉴">
+    <div class="menu-inner">
+      <div class="menu-eyebrow">THE WHHY LAB · 전체 메뉴</div>
+      <div class="menu-grid">
+        <div class="menu-col">
+          <h4>회사 소개</h4>
+          <a href="culture/index.html">Culture</a>
+          <a href="mission/index.html">Mission</a>
+          <a href="media/index.html">Media</a>
+          <a href="learnies/index.html">러니즈</a>
+        </div>
+        <div class="menu-col">
+          <h4>AI HRD</h4>
+          <a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a>
+          <a href="ai-hrd/index.html">AI HRD</a>
+          <a href="ai-design-thinking/index.html">AI 디자인씽킹</a>
+          <a href="work-hack-ai/index.html">Work Hack AI</a>
+          <a href="open-k/index.html">Open K</a>
+        </div>
+        <div class="menu-col">
+          <h4>AI 진로·탐구</h4>
+          <a href="ai-program/index.html">AI 교육 프로그램</a>
+          <a href="school-impact-lab/index.html">스쿨임팩트랩</a>
+          <a href="highfly/index.html">하이플라이</a>
+          <a href="ai-starter-lab/index.html">AI스타터랩</a>
+          <a href="pathon-program/index.html">PathOn</a>
+          <a href="reviews/index.html">교실 후기</a><a href="whhy-explorer/index.html">탐구 위인 테스트</a>
+        </div>
+        <div class="menu-col">
+          <h4>Library</h4>
+          <a href="references/index.html">레퍼런스</a>
+          <a href="instructors/index.html">열정강사</a>
+          <a href="workshop-tools/index.html">워크숍 도구</a>
+          <a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a>
+          <a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a>
+        </div>
+        <div class="menu-col">
+          <h4>Join 더와이랩</h4>
+          <a href="members-edu/index.html">교육멤버</a>
+          <a href="members-seongsu/index.html">성수멤버</a>
+        </div>
+      </div>
+      <div class="menu-foot">
+        <div class="menu-foot-left">
+          <p>학습에서 실행까지, AI 전 과정을 연결합니다.</p>
+          <strong>지금 더와이랩과 함께 시작하세요.</strong>
+        </div>
+        <a class="menu-cta" href="contact/">교육 문의 →</a>
+        <div class="menu-social">
+          <a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a>
+          <a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="top">
+
+    <!-- ================ HERO ================ -->
+    <section class="hero">
+      <div class="hero-editorial">
+        <div class="hero-meta">
+          <span class="pulse" aria-hidden="true"></span>
+          <span>사람 중심 AI 교육 · THE WHHY LAB</span>
+        </div>
+        <h1 class="hero-title">
+          AI로 <span class="word">일하는 방식</span>이<br/>
+          바뀝니다.<em>더와이랩이 바꿉니다.</em>
+        </h1>
+        <p class="hero-sub">학습에서 실행까지, AI 활용의 전 과정을 연결합니다. 기업 교육부터 학생 진로·탐구까지, 사람 중심 AI 교육의 표준을 만듭니다.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="contact/">교육 문의하기 <span class="arr">→</span></a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num"><em>1,250</em><span style="font-size:.65em">개 +</span></div>
+            <div class="label">누적 교육 프로젝트</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num"><em>5</em><span style="font-size:.65em">만 명</span></div>
+            <div class="label">누적 교육 인원</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">15<span style="font-size:.65em">년+</span></div>
+            <div class="label">기업·기관 운영 경험</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================ HERO BANNER (자동 슬라이드 · 3개) ================ -->
+      <!-- 배너 콘텐츠는 추후 코딩본(이미지 또는 HTML)으로 교체. 현재는 빈 골격. -->
+      <div class="hero-banner" aria-roledescription="배너 슬라이드" aria-label="홍보 배너">
+        <div class="hb-track" id="hbTrack">
+          <!-- 슬라이드 1 — AX 전환 응원 이벤트 (2개) -->
+          <div class="hb-slide hb-slide--event" role="group" aria-roledescription="슬라이드" aria-label="1 / 6">
+            <div class="evt-banner">
+              <span class="evt-glow1" aria-hidden="true"></span>
+              <span class="evt-glow2" aria-hidden="true"></span>
+              <span class="evt-glow3" aria-hidden="true"></span>
+              <span class="evt-grid" aria-hidden="true"></span>
+
+              <span class="evt-visual" aria-hidden="true">
+                <span class="evt-ring"></span>
+                <img loading="eager" class="evt-book" src="shared/img/banners/ax-book-cover.png" alt="" />
+                <img loading="eager" class="evt-badge" src="shared/img/banners/digital-badge.png" alt="" />
+                <span class="evt-spark evt-spark1"></span>
+                <span class="evt-spark evt-spark2"></span>
+                <span class="evt-spark evt-spark3"></span>
+              </span>
+
+              <span class="evt-content">
+                <span class="evt-eyebrow"><span class="evt-pulse"></span>AX 전환 실무자 응원 이벤트<span class="evt-hot">선착순 · 한정</span></span>
+                <span class="evt-title">우리 조직 AX 첫걸음,<br><b>두 가지 혜택</b>으로 응원합니다</span>
+
+                <span class="evt-cards">
+                  <span class="evt-card evt-card--book">
+                    <img class="evt-card-prop" src="shared/img/banners/evt-gift.png" alt="" aria-hidden="true" loading="lazy" />
+                    <span class="evt-card-body">
+                      <span class="evt-card-tag">EVENT 1 · 선착순 증정</span>
+                      <span class="evt-card-h">『AX DISCOVERY』 도서 무료 증정</span>
+                      <span class="evt-card-d">기업·기관 AX / 교육 담당자 대상</span>
+                    </span>
+                    <a class="evt-cta evt-cta--ghost" href="https://forms.gle/Xe5VrCiUiw9rcHct8" target="_blank" rel="noopener">책 신청<span class="evt-arr" aria-hidden="true">→</span></a>
+                  </span>
+
+                  <span class="evt-card evt-card--cert">
+                    <img class="evt-card-prop evt-card-prop--mega" src="shared/img/banners/evt-megaphone.png" alt="" aria-hidden="true" loading="lazy" />
+                    <span class="evt-card-body">
+                      <span class="evt-card-tag">EVENT 2 · 사연 심사 선정</span>
+                      <span class="evt-card-h">전문가 자격과정 입과 기회<span class="evt-worth">160만원 상당</span></span>
+                      <span class="evt-card-d">AX 고민 사연 남긴 중견·중소·스타트업 담당자</span>
+                    </span>
+                    <a class="evt-cta" href="ax-event/index.html">사연 남기기<span class="evt-arr" aria-hidden="true">→</span></a>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 슬라이드 2 — AX DISCOVERY 책 발간 -->
+          <div class="hb-slide hb-slide--book" role="group" aria-roledescription="슬라이드" aria-label="2 / 6">
+            <div class="book-banner">
+              <span class="book-glow1" aria-hidden="true"></span>
+              <span class="book-glow2" aria-hidden="true"></span>
+              <span class="book-dots" aria-hidden="true"></span>
+
+              <span class="book-cover-wrap" aria-hidden="true">
+                <img loading="eager" class="book-img book-img--single" src="shared/img/banners/ax-book-cover.png" alt="" />
+              </span>
+
+              <span class="book-content">
+                <span class="book-eyebrow"><span class="book-pulse"></span>NEW BOOK · 2026년 6월 발간</span>
+                <span class="book-title">AI를 도입하지 말고,<br><b>일하는 방식을 다시 설계하라.</b></span>
+                <span class="book-sub">도구 사용법이 아니라 <i>워크플로우 설계 역량</i>,<br/>AX 전환의 본질을 담은 단 한 권.</span>
+                <span class="book-points">
+                  <span class="book-point"><b>10x</b> 레버리지 전략</span>
+                  <span class="book-point-div"></span>
+                  <span class="book-point"><b>1인 100 에이전트</b> 시대</span>
+                  <span class="book-point-div"></span>
+                  <span class="book-point">내일 당장 쓰는 <b>실전 방법론</b></span>
+                </span>
+                <span class="book-bottom">
+                  <a class="book-cta" href="https://smartstore.naver.com/thewhhylab/products/13641082509#ZOOM" target="_blank" rel="noopener">네이버 스토어<span class="book-arr" aria-hidden="true">→</span></a>
+                  <a class="book-cta book-cta--line" href="https://www.yes24.com/product/goods/192723934" target="_blank" rel="noopener">예스24<span class="book-arr" aria-hidden="true">→</span></a>
+                  <span class="book-note"><b>『AX DISCOVERY』</b> · (주)더와이랩</span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+
+          <!-- 슬라이드 2 — AX Discovery 자격증 과정 -->
+          <div class="hb-slide hb-slide--ax" role="group" aria-roledescription="슬라이드" aria-label="3 / 6">
+            <div class="ax-banner">
+              <span class="ax-bg-glow1" aria-hidden="true"></span>
+              <span class="ax-bg-glow2" aria-hidden="true"></span>
+              <span class="ax-grid" aria-hidden="true"></span>
+              <span class="ax-visual" aria-hidden="true">
+                <img loading="lazy" src="shared/img/banners/ax-cover-crop.jpg" alt="" />
+                <span class="ax-embers">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </span>
+              </span>
+              <span class="ax-content">
+                <span class="ax-eyebrow"><span class="ax-dot"></span>AX Discovery · AX 전략기획 전문가 2급 자격증 과정</span>
+                <span class="ax-title">AI 도구만 배우다 끝낼 것인가,<br><b>비즈니스를 혁신할 것인가?</b></span>
+                <span class="ax-sub">AI 도구 강의는 끝났습니다. 이제 <i>AI 워크플로우 설계</i>를 배웁니다.</span>
+                <span class="ax-chips">
+                  <span class="ax-chip">14시간 · 2일 완성</span>
+                  <span class="ax-chip">과기정통부 등록 민간자격</span>
+                  <span class="ax-chip">코딩 지식 불필요</span>
+                </span>
+                <span class="ax-bottom">
+                  <span class="ax-price">
+                    <span class="ax-price-orig">정가 1,600,000원</span>
+                    <span class="ax-price-row"><b>1,000,000원</b><span class="ax-price-tag">2·3기 한정</span></span>
+                  </span>
+                  <a class="ax-cta" href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">수강 신청하기 <span class="ax-arr">→</span></a>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 슬라이드 4 — 교육멤버(강사) 모집 -->
+          <div class="hb-slide hb-slide--edu" role="group" aria-roledescription="슬라이드" aria-label="4 / 6">
+            <div class="edu-banner">
+              <span class="edu-blob edu-blob1" aria-hidden="true"></span>
+              <span class="edu-blob edu-blob2" aria-hidden="true"></span>
+              <span class="edu-blob edu-blob3" aria-hidden="true"></span>
+              <span class="edu-dots" aria-hidden="true"></span>
+
+              <span class="edu-chars" aria-hidden="true">
+                <img loading="lazy" class="edu-char edu-char--bizny" src="shared/img/banners/bizny-front.png" alt="" />
+                <img loading="lazy" class="edu-char edu-char--growny" src="shared/img/banners/growny-front.png" alt="" />
+                <img loading="lazy" class="edu-char edu-char--learny" src="shared/img/banners/learny-jump.png" alt="" />
+              </span>
+
+              <span class="edu-content">
+                <span class="edu-eyebrow"><span class="edu-pulse"></span>JOIN US · 더와이랩 교육멤버(강사) 모집</span>
+                <span class="edu-title">레퍼런스는 <b class="c-blue">더 넓게</b>,<br>전문성은 <b class="c-coral">더 깊게</b>.</span>
+                <span class="edu-sub">HRD 강사로 준비된 당신이 늘 아쉬워했던 <i>한 뼘의 성장</i>, 더와이랩에서 함께 채웁니다.</span>
+                <span class="edu-stats">
+                  <span class="edu-stat"><b>1,000<i>+</i></b><em>HRD 프로젝트</em></span>
+                  <span class="edu-stat-div"></span>
+                  <span class="edu-stat"><b>40<i>억+</i></b><em>누적 강사비</em></span>
+                  <span class="edu-stat-div"></span>
+                  <span class="edu-stat"><b>170<i>명+</i></b><em>Family 멤버</em></span>
+                </span>
+                <span class="edu-bottom">
+                  <a class="edu-cta" href="members-edu/index.html">인재풀 등록하기 <span class="edu-arr">→</span></a>
+                  <span class="edu-note">매월 <b>마지막 금요일</b> 강사비 정기 지급</span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 슬라이드 3 — 스쿨임팩트랩 -->
+          <div class="hb-slide hb-slide--sil" role="group" aria-roledescription="슬라이드" aria-label="5 / 6">
+            <div class="sil-banner">
+              <span class="sil-glow1" aria-hidden="true"></span>
+              <span class="sil-glow2" aria-hidden="true"></span>
+              <span class="sil-grid" aria-hidden="true"></span>
+
+              <span class="sil-photos" aria-hidden="true">
+                <span class="sil-photo sil-photo--1"><img loading="lazy" src="shared/img/banners/sil-1.jpg" alt="" /></span>
+                <span class="sil-photo sil-photo--2"><img loading="lazy" src="shared/img/banners/sil-2.jpg" alt="" /></span>
+                <span class="sil-photo sil-photo--3"><img loading="lazy" src="shared/img/banners/sil-3.jpg" alt="" /></span>
+              </span>
+
+              <span class="sil-content">
+                <span class="sil-eyebrow"><span class="sil-dot"></span>SCHOOL IMPACT LAB · 고1—고3 대상</span>
+                <span class="sil-title">고등학생이 직접 푸는<br><b>세상의 진짜 문제.</b></span>
+                <span class="sil-sub">글로벌 사례 분석부터 AI 시뮬레이션 검증까지,<br/><i>연구자 수준의 심화 탐구</i>를 완결형 포트폴리오로.</span>
+                <span class="sil-tags">
+                  <span class="sil-tag">글로벌 30개국 사례</span>
+                  <span class="sil-tag">4대 학술 데이터</span>
+                  <span class="sil-tag">AI 시뮬레이션</span>
+                  <span class="sil-tag">완결형 포트폴리오</span>
+                </span>
+                <span class="sil-bottom">
+                  <a class="sil-cta" href="school-impact-lab/index.html">자세히 보기 <span class="sil-arr">→</span></a>
+                  <span class="sil-note">학교 도입 상담 · 맞춤 설계 제공</span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 슬라이드 5 — 탐구 위인 테스트 -->
+          <div class="hb-slide hb-slide--exp" role="group" aria-roledescription="슬라이드" aria-label="6 / 6">
+            <div class="exp-banner">
+              <span class="exp-glow1" aria-hidden="true"></span>
+              <span class="exp-glow2" aria-hidden="true"></span>
+              <span class="exp-stars" aria-hidden="true"></span>
+
+              <span class="exp-chars" aria-hidden="true">
+                <img loading="lazy" class="exp-char exp-char--1" src="shared/img/banners/explorer-char-2.png" alt="" />
+                <img loading="lazy" class="exp-char exp-char--2" src="shared/img/banners/explorer-char-1.png" alt="" />
+                <img loading="lazy" class="exp-char exp-char--3" src="shared/img/banners/explorer-char-3.png" alt="" />
+              </span>
+
+              <span class="exp-content">
+                <span class="exp-eyebrow"><span class="exp-dot"></span>WHHY EXPLORER TEST · 중·고생 진로 탐구</span>
+                <span class="exp-title">나와 닮은<br><b>탐구 위인은 누구?</b></span>
+                <span class="exp-sub">단 <i>5분</i>, 16개의 질문으로 찾는 나의 탐구 유형.<br/>아인슈타인부터 마리 퀴리까지 — 강의 시작 전 아이스브레이킹.</span>
+                <span class="exp-tags">
+                  <span class="exp-tag">🔬 위인 16종</span>
+                  <span class="exp-tag">⚡ 약 5분</span>
+                  <span class="exp-tag">📱 설치 없이 바로</span>
+                </span>
+                <span class="exp-bottom">
+                  <a class="exp-cta exp-cta--main" href="https://www.thewhhylab.com/career-test/" target="_blank" rel="noopener">테스트 시작하기 <span class="exp-arr">→</span></a>
+                  <a class="exp-cta exp-cta--ghost" href="whhy-explorer/index.html">자세히 보기</a>
+                </span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="hb-arrow hb-prev" type="button" aria-label="이전 배너">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="hb-arrow hb-next" type="button" aria-label="다음 배너">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+
+        <div class="hb-dots" id="hbDots" role="tablist" aria-label="배너 선택">
+          <button class="hb-dot is-active" type="button" role="tab" aria-selected="true" aria-label="배너 1로 이동"></button>
+          <button class="hb-dot" type="button" role="tab" aria-selected="false" aria-label="배너 2로 이동"></button>
+          <button class="hb-dot" type="button" role="tab" aria-selected="false" aria-label="배너 3로 이동"></button>
+          <button class="hb-dot" type="button" role="tab" aria-selected="false" aria-label="배너 4로 이동"></button>
+          <button class="hb-dot" type="button" role="tab" aria-selected="false" aria-label="배너 5로 이동"></button>
+          <button class="hb-dot" type="button" role="tab" aria-selected="false" aria-label="배너 6로 이동"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ CORE BUSINESS (핵심 3사업 · 배너 직후) ================ -->
+    <section class="section reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">01 · OUR BUSINESS</span>
+            <h2 class="section-title">더와이랩의 <em>핵심 사업</em>.</h2>
+          </div>
+          <p class="section-lede">기업 인재개발부터 학생 진로·탐구, AX 전략기획까지<br/>가장 자신 있는 세 가지 영역입니다.</p>
+        </div>
+
+        <div class="core-tiles">
+          <a class="core-tile brand" href="ai-hrd/index.html">
+            <span class="core-eyebrow">01 · AI HRD</span>
+            <span class="core-arrow" aria-hidden="true">↗</span>
+            <h3 class="core-title">AI 시대의<br/>인재개발 솔루션.</h3>
+            <p class="core-desc">기업·기관의 AI 전환을 이끄는 임직원 역량 강화 교육을 설계·운영합니다.</p>
+          </a>
+          <a class="core-tile dark" href="ai-program/index.html">
+            <span class="core-eyebrow">02 · AI PROGRAM</span>
+            <span class="core-arrow" aria-hidden="true">↗</span>
+            <h3 class="core-title">중·고등학교<br/>진로탐구를 위한 AI 교육.</h3>
+            <p class="core-desc">청소년이 AI로 스스로 탐구하고 진로를 설계하도록 돕는 학교 맞춤형 프로그램입니다.</p>
+          </a>
+          <a class="core-tile accent" href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">
+            <span class="core-eyebrow">03 · AX DISCOVERY</span>
+            <span class="core-arrow" aria-hidden="true">↗</span>
+            <h3 class="core-title">AX 전략기획<br/>전문가 양성 과정.</h3>
+            <p class="core-desc">AI를 업무에 적용해 성과를 만드는 AX 전략기획 전문가를 양성하는 더와이랩의 시그니처 과정입니다.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ WHAT WE DO ================ -->
+    <section class="section reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">02 · WHAT WE DO</span>
+            <h2 class="section-title">네 가지 사업 영역으로<br/><em>일과 학습</em>을 연결합니다.</h2>
+          </div>
+          <p class="section-lede">각 영역별 열정과 능력을 갖춘 강사진과 긴밀하게 협력하며, 고객 맞춤 커리큘럼을 구성·운영합니다.</p>
+        </div>
+
+        <div class="services">
+          <div class="service-card accent">
+            <div class="service-num">01</div>
+            <h3 class="service-name">AI 기반 교육</h3>
+            <p class="service-desc">AI 역량강화부터 AI 활용 교육까지, 실무에서 바로 쓰는 AI 기술을 가르칩니다.</p>
+            <span class="service-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08 4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08 4.24-4.24"/>
+              </svg>
+            </span>
+          </div>
+          <div class="service-card">
+            <div class="service-num">02</div>
+            <h3 class="service-name">기업 맞춤형 교육</h3>
+            <p class="service-desc">신입사원 교육부터 임원 교육까지, 조직의 단계와 목표에 맞춘 맞춤형 직무 교육.</p>
+            <span class="service-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7l9-4 9 4-9 4-9-4z"/>
+                <path d="M3 7v10l9 4 9-4V7"/>
+              </svg>
+            </span>
+          </div>
+          <div class="service-card">
+            <div class="service-num">03</div>
+            <h3 class="service-name">에듀코어 사업</h3>
+            <p class="service-desc">공교육 패러다임 변화에 맞춰 학교별 맞춤화 교육 솔루션을 제안하고 운영합니다.</p>
+            <span class="service-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V5a1 1 0 0 1 1-1h12l3 3v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>
+                <path d="M9 9h6M9 13h6M9 17h4"/>
+              </svg>
+            </span>
+          </div>
+          <div class="service-card accent">
+            <div class="service-num">04</div>
+            <h3 class="service-name">창업역량 강화</h3>
+            <p class="service-desc">창업경진대회, 창업 컨설팅, 기업가 정신 교육으로 미래 창업가를 길러냅니다.</p>
+            <span class="service-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ BPO STATS ================ -->
+    <section class="section soft reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">03 · HRD BPO</span>
+            <h2 class="section-title">HRD BPO 운영의 <em>강점</em>.</h2>
+          </div>
+          <p class="section-lede">운영 BPO 전문 운영조직이 안정적으로 프로젝트를 수행합니다. 리스크와 변수 속에서도 신뢰를 기반으로 결과를 만듭니다.</p>
+        </div>
+
+        <div class="bpo-grid">
+          <article class="bpo-card primary">
+            <div class="label">운영 BPO</div>
+            <div class="value">전문<br/>운영조직</div>
+            <p class="desc">교육 운영에 특화된 전담 조직이 리스크와 변수 속에서도 신뢰를 기반으로 프로젝트를 완수합니다.</p>
+          </article>
+          <article class="bpo-card">
+            <div class="label">운영 BPO 프로젝트</div>
+            <div class="value">1,250<span class="unit">개 +</span></div>
+            <p class="desc">더와이랩을 모르는 고객사는 있어도, 한 번에 그치는 고객사는 없습니다. 다수의 기업 대상 맞춤 운영 경험.</p>
+          </article>
+          <article class="bpo-card">
+            <div class="label">누적 교육인원</div>
+            <div class="value">5<span class="unit">만 명</span></div>
+            <p class="desc">전국 다양한 산업군과 직급을 아우르는 맞춤형 교육 운영 경험을 보유하고 있습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ GROWTH CHART ================ -->
+    <section class="section reveal">
+      <div class="section-wrap">
+        <span class="eyebrow">04 · GROWTH</span>
+        <div class="growth" style="margin-top: 20px;">
+          <div class="growth-copy">
+            <h3>더와이랩은<br/><em>올해도 폭발적 성장</em> 중<span class="rocket">🚀</span></h3>
+            <p>고객의 신뢰가 만든 성과</p>
+            <strong>누적 교육 <em>1,250개</em> 달성 · 2026 목표 <em>1,500개</em></strong>
+          </div>
+
+          <div class="chart" id="growthChart" style="grid-template-columns: repeat(7, 1fr);">
+            <div class="chart-bar" data-pct="22"><div class="col"></div><span class="num">340</span><span class="chart-year">2020</span></div>
+            <div class="chart-bar" data-pct="32"><div class="col"></div><span class="num">500</span><span class="chart-year">2021</span></div>
+            <div class="chart-bar" data-pct="44"><div class="col"></div><span class="num">680</span><span class="chart-year">2022</span></div>
+            <div class="chart-bar" data-pct="55"><div class="col"></div><span class="num">850</span><span class="chart-year">2023</span></div>
+            <div class="chart-bar" data-pct="68"><div class="col"></div><span class="num">1,050</span><span class="chart-year">2024</span></div>
+            <div class="chart-bar" data-pct="80"><div class="col"></div><span class="num">1,250</span><span class="chart-year">2025</span></div>
+            <div class="chart-bar target" data-pct="96"><div class="col"></div><span class="num">1,500 목표</span><span class="chart-year">2026</span></div>
+          </div>
+        </div>
+        <p class="chart-foot">* 누적 교육 기준 (단위: 건)</p>
+      </div>
+    </section>
+
+    <!-- ================ MAIN REFERENCES ================ -->
+    <section class="section soft reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">05 · REFERENCES</span>
+            <h2 class="section-title"><em>주요 사업</em> 레퍼런스.</h2>
+          </div>
+          <p class="section-lede">다양한 산업과 영역에서, 더와이랩이 만들어 온 임팩트의 일부입니다.</p>
+        </div>
+
+        <div class="refs">
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo square"><img loading="lazy" src="shared/img/client-logos/ref-ssafy.jpg" alt="삼성 청년 SW·AI 아카데미 SSAFY" /></div>
+              <span class="tag">9년 연속</span>
+            </div>
+            <div class="ref-org">삼성청년SW·AI아카데미 (SSAFY)</div>
+            <h3 class="ref-title">SSAFY 스타트캠프 · 1~15기 누적 위탁 운영</h3>
+            <p class="ref-desc">2019년부터 2026년까지 9년 연속, 한국 최대 청년 SW 교육 사업의 스타트캠프 운영 파트너로 함께해 왔습니다.</p>
+            <div class="ref-meta">SOFTWARE · YOUTH</div>
+          </article>
+
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-dreamclass.png" alt="삼성드림클래스" /></div>
+              <span class="tag">2022~2026</span>
+            </div>
+            <div class="ref-org">삼성복지재단 · 드림클래스</div>
+            <h3 class="ref-title">임직원 멘토링 · 대학생 멘토 캠프 통합 운영</h3>
+            <p class="ref-desc">정기연수와 멘토 캠프를 4년 연속 운영하며, 청소년 사회공헌 프로그램의 2.0 개편 설계에도 동행했습니다.</p>
+            <div class="ref-meta">DREAM CLASS · MENTOR DEV</div>
+          </article>
+
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-school-consulting.png" alt="찾아가는 학교 컨설팅" /></div>
+              <span class="tag">전국 100개교</span>
+            </div>
+            <div class="ref-org">교육부 · 17개 시도교육청 · 한국과학창의재단</div>
+            <h3 class="ref-title">'찾아가는 학교 컨설팅' 사업 운영사</h3>
+            <p class="ref-desc">전국 초·중·고 100개교 대상 학교 단위 맞춤 컨설팅을 완수, 공교육 현장 변화를 지원했습니다.</p>
+            <div class="ref-meta">PUBLIC EDU · CONSULTING</div>
+          </article>
+
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-kstory.png" alt="진천 K스토리창작클러스터" /></div>
+              <span class="tag">K-IP</span>
+            </div>
+            <div class="ref-org">진천 K스토리창작클러스터</div>
+            <h3 class="ref-title">충북 진천에서 시작된 K-IP 사업화</h3>
+            <p class="ref-desc">충북과학기술혁신원과의 2년 연속 비즈매칭 프로젝트로 지역 IP 발굴부터 라이선스 매칭, DDP 쇼케이스까지 한 흐름으로 운영합니다.</p>
+            <div class="ref-meta">IP DISCOVERY · B2B · SHOWCASE</div>
+          </article>
+
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-gnccei.png" alt="경남창조경제혁신센터" /></div>
+              <span class="tag">AX 전문가</span>
+            </div>
+            <div class="ref-org">경남창조경제혁신센터</div>
+            <h3 class="ref-title">AX 전략기획 전문가 과정 · AX Discovery</h3>
+            <p class="ref-desc">지역 산업의 AI 전환을 이끌 핵심 인재를 위한 전략기획 전문가 양성 과정을 함께 설계·운영했습니다.</p>
+            <div class="ref-meta">AX DISCOVERY · STRATEGY</div>
+          </article>
+
+          <article class="ref-card">
+            <div class="ref-top">
+              <div class="ref-logo"><img loading="lazy" src="shared/img/client-logos/ref-kpsa.png" alt="한국프로스포츠협회 KPSA" /></div>
+              <span class="tag">2022~2025</span>
+            </div>
+            <div class="ref-org">한국프로스포츠협회</div>
+            <h3 class="ref-title">프로스포츠 부정행위 방지교육 강사 양성 및 역량 강화</h3>
+            <p class="ref-desc">4년 연속 강사 양성·재교육 운영으로 스포츠 윤리 교육의 표준을 함께 만들어 가고 있습니다.</p>
+            <div class="ref-meta">SPORTS ETHICS · FACILITATOR</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ CLIENTS ================ -->
+    <section id="clients" class="section reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">06 · CLIENTS</span>
+            <h2 class="section-title">더와이랩을 모르는 고객사는 있어도,<br/><em>한 번에</em> 그치는 고객사는 없습니다.</h2>
+          </div>
+          <p class="section-lede">대기업·금융·공공·대학교 등 다양한 산업과 영역의 파트너와 함께해 왔습니다.</p>
+        </div>
+
+        <div class="clients-grid">
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/1.png" alt="Samsung" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/2.png" alt="LG" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/3.png" alt="Hyundai" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/4.png" alt="POSCO" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/5.png" alt="SK" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/6.png" alt="CJ" /></div>
+
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/7.png" alt="kakao" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/8.png" alt="DAESANG" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/9.png" alt="신한금융그룹" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/10.png" alt="DB" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/11.png" alt="KPSA 한국프로스포츠협회" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/12.png" alt="AhnLab" /></div>
+
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/13.png" alt="성남산업진흥재단" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/14.png" alt="KMA 한국능률협회" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/15.png" alt="multicampus" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/16.png" alt="신세계 I&amp;C" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/17.png" alt="서울시청년활동지원센터" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/18.png" alt="K-data" /></div>
+
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/19.png" alt="안양대학교" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/20.png" alt="건양대학교" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/21.png" alt="성신여자대학교" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/22.png" alt="이화여자대학교" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/23.png" alt="강릉원주대학교" /></div>
+          <div class="client-cell"><img loading="lazy" src="shared/img/client-logos/24.png" alt="전북대학교" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ REVIEWS ================ -->
+    <section class="section soft reveal">
+      <div class="section-wrap">
+        <div class="section-head split">
+          <div>
+            <span class="eyebrow">07 · REVIEWS</span>
+            <h2 class="section-title">고객이 검증한 <em>더와이랩</em>.</h2>
+          </div>
+          <p class="section-lede">실질적 결과를 도출하는 데 최적화된 교육, 고객사 담당자의 이야기를 직접 들어보세요.</p>
+        </div>
+
+        <div class="reviews">
+          <article class="review">
+            <div class="review-stars" aria-label="별점 5점">
+              ★ ★ ★ ★ ★ <span class="score">5.0</span>
+            </div>
+            <p class="review-body">실질적인 결과를 가장 효율적, 효과적으로 도출하는 데 최적화되어 있습니다. 교육 니즈에 맞춘 적합한 툴이 반영된 훌륭한 교육 콘텐츠는 NPS(Net Promoter Score : 순수 고객 추천지수)가 그 어떤 교육보다 높게 나왔습니다.</p>
+            <div class="review-who">
+              <strong>전사 15차수 교육 위탁</strong>
+              A사 인사팀 담당자
+            </div>
+          </article>
+
+          <article class="review">
+            <div class="review-stars" aria-label="별점 5점">
+              ★ ★ ★ ★ ★ <span class="score">5.0</span>
+            </div>
+            <p class="review-body">가장 큰 강점은 커스터마이징입니다. 니즈에 맞게 과정설계를 잘 해주었습니다. 차수마다 리뷰 미팅을 진행하여 피드백을 잘 반영해 개선시켜 주었습니다. 교육 만족도는 물론 HR에서 의도한 교육 목적을 달성했습니다.</p>
+            <div class="review-who">
+              <strong>커스터마이징 강점</strong>
+              S사 HR팀 임원
+            </div>
+          </article>
+
+          <article class="review">
+            <div class="review-stars" aria-label="별점 5점">
+              ★ ★ ★ ★ ★ <span class="score">5.0</span>
+            </div>
+            <p class="review-body">이번 교육도 교육생들에게 정말 뜻 깊고 좋았던 시간이었습니다. 교육 만족도 조사 결과에서도 여실히 나타났습니다. 장기 차수 교육이라 걱정도 되고 막막했지만 더와이랩 덕분에 잘 런칭되었습니다. 동시에 여러 개 반을 진행함에도 강사진 모두 훌륭했습니다.</p>
+            <div class="review-who">
+              <strong>20개 분반 동시 교육 위탁</strong>
+              M사 교육 담당자
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ ONE TEAM PROMISE ================ -->
+    <section class="promise reveal">
+      <div class="promise-inner">
+        <span class="eyebrow" style="justify-self: center; color: rgba(255,255,255,0.6);">08 · ONE TEAM PROMISE</span>
+        <h2>고객과 <span class="pill">하나의 팀</span>이 되어<br/>최적의 가치를 제공할 것을 약속합니다.</h2>
+        <p class="eng">Team up with the customer — We promise to provide optimal value.</p>
+        <p class="kr">더와이랩은 고객의 성공을 위한 비즈니스 파트너로서, 언제나 최선의 가치를 함께 만들어가겠습니다.</p>
+      </div>
+    </section>
+
+    <!-- ================ INTRO VIDEO (풀폭) ================ -->
+    <section class="hero-video reveal">
+      <video
+        id="heroVideo"
+        data-src="shared/video/intro.mp4"
+        autoplay muted loop playsinline
+        preload="none"
+        aria-label="더와이랩 소개 영상"></video>
+
+      <button id="muteToggle" class="video-mute" type="button" aria-pressed="true" aria-label="소리 켜기">
+        <svg class="ico ico-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H2v6h4l5 4z"/>
+          <line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>
+        </svg>
+        <svg class="ico ico-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H2v6h4l5 4z"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+        <span class="video-mute-label">소리 켜기</span>
+      </button>
+    </section>
+
+    <!-- ================ CEO ================ -->
+    <section class="ceo-section reveal">
+      <div class="ceo-inner">
+        <div class="ceo-photo">
+          <img src="shared/img/ceo-kim.jpg" alt="더와이랩 김홍태 대표" />
+        </div>
+        <div class="ceo-body">
+          <span class="eyebrow">09 · MESSAGE FROM CEO</span>
+          <h2 class="ceo-quote">고객의 가치를 높이는 일,<br/><em>하나의 팀 정신</em>으로 함께합니다.</h2>
+          <p class="ceo-msg">AI 시대의 교육은 단순한 도구 사용법을 넘어, 일하는 방식 자체를 다시 설계하는 일입니다. 학습에서 실행까지, 우리는 그 전 과정을 연결합니다.</p>
+          <div class="ceo-sig">
+            <div class="ceo-sig-name">
+              <span>CEO</span>
+              <strong>김홍태 <small>Kim Hong Tae</small></strong>
+            </div>
+            <img class="ceo-signature" src="shared/img/ceo-signature.png" alt="Kim Hong Tae 서명" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <div class="foot-hero">
+      <h2>학습에서 실행까지<br/>AI 활용의 전 과정을 연결합니다.</h2>
+      <div class="right">
+        <p>기업 교육부터 학생 진로·탐구까지,<br/>사람 중심 AI 교육의 표준을 만듭니다.</p>
+        <a class="btn" style="background:#fff;color:#0a0b0d;" href="contact/">교육 문의 <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <div>
+        <div class="foot-brand">
+          <img src="shared/img/logo-blue.png" alt="더와이랩" />
+        </div>
+        <p>THE WHHY LAB, 사람 중심 AI 교육 기업.</p>
+        <address class="foot-biz">
+          <span>주식회사 더와이랩 (The Whhy Lab Inc.) · 대표 김홍태</span>
+          <span>사업자등록번호 446-87-00395</span>
+          <span>서울특별시 성동구 성수일로99, 서울숲AK밸리 1510호</span>
+          <span>T. <a href="tel:0224683555">02-468-3555</a> · E. <a href="mailto:master@thewhhylab.com">master@thewhhylab.com</a></span>
+        </address>
+        
+      </div>
+      <div><h5>회사 소개</h5><ul>
+        <li><a href="culture/index.html">Culture</a></li>
+        <li><a href="mission/index.html">Mission</a></li>
+        <li><a href="media/index.html">Media</a></li>
+        <li><a href="learnies/index.html">러니즈</a></li>
+      </ul></div>
+      <div><h5>프로그램</h5><ul>
+        <li><a href="ai-hrd/index.html">AI HRD</a></li>
+        <li><a href="ai-program/index.html">AI 교육 프로그램</a></li>
+        <li><a href="ai-starter-lab/index.html">AI스타터랩</a></li>
+        <li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li>
+      </ul></div>
+      <div><h5>Connect</h5><ul>
+        <li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li>
+        <li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="members-edu/index.html">교육멤버</a></li>
+      </ul></div>
+    </div>
+    <div class="copyright">
+      <span>© 2016—2026 THE WHHY LAB</span>
+      <span>www.thewhhylab.com</span>
+    </div>
+  </footer>
+
+  <script src="shared/js/site.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+■ 위인별 캐릭터 이미지 넣는 법
+  아래 파일명으로 이 images 폴더에 저장하면 결과지에 자동 표시됩니다.
+  파일이 없으면 _sample.png 가 임시로 보입니다.
+  권장: 정사각형 PNG / 배경 투명 / 512px 이상
+  ※ 만들 캐릭터는 총 15종 (ISTJ는 ESFJ의 멘델 이미지를 공유)
+
+ENFP  → ENFP_스티브 잡스.png
+INFP  → INFP_파인만.png
+ENFJ  → ENFJ_마리 퀴리.png
+INFJ  → INFJ_닐스 보어.png
+ENTP  → ENTP_일론 머스크.png
+INTP  → INTP_아인슈타인.png
+ENTJ  → ENTJ_빌 게이츠.png
+INTJ  → INTJ_다윈.png
+ESFP  → ESFP_폰 노이만.png
+ISFP  → ISFP_제인 구달.png
+ESFJ  → ESFJ_멘델.png
+ISFJ  → ISFJ_장영실.png
+ESTP  → ESTP_에디슨.png
+ISTP  → ISTP_앨런 튜링.png
+ESTJ  → ESTJ_세종대왕.png
+ISTJ  → ESFJ_멘델.png  (ESFJ와 동일 이미지 공유 — 따로 안 만들어도 됨)

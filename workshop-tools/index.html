@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>웹툰툴킷 · 더와이랩</title>
+<meta name="description" content="웹툰 툴킷으로 푸는 핵심가치 워크숍. 핵심가치·일하는 방식·온보딩 등 어떤 교육에도 어우러지는 교육 도구."/>
+<meta name="theme-color" content="#0a0b0d"/>
+<link rel="canonical" href="https://www.thewhhylab.com/workshop-tools/"/>
+<link rel="icon" type="image/svg+xml" href="../shared/img/favicon.svg"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="웹툰툴킷 · 더와이랩"/>
+<meta property="og:description" content="웹툰 툴킷으로 푸는 핵심가치 워크숍. 핵심가치·일하는 방식·온보딩 등 어떤 교육에도 어우러지는 교육 도구."/>
+<meta property="og:url" content="https://www.thewhhylab.com/workshop-tools/"/>
+<meta property="og:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+<meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="웹툰툴킷 · 더와이랩"/>
+<meta name="twitter:description" content="웹툰 툴킷으로 푸는 핵심가치 워크숍. 핵심가치·일하는 방식·온보딩 등 어떤 교육에도 어우러지는 교육 도구."/>
+<meta name="twitter:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
+<link rel="stylesheet" href="../shared/css/site.css"/>
+<style>
+[data-page="workshop-tools"] {
+  --p-1: #8b5cf6; --p-1-soft: #ede9fe; --p-1-ink: #5b21b6;
+  --p-2: #ec4899; --p-2-soft: #fce7f3; --p-2-ink: #831843;
+  --p-3: #06b6d4; --p-3-soft: #cffafe; --p-3-ink: #164e63;
+}
+/* Webtoon toolkit galleries */
+.wt-beforeafter { display:grid; grid-template-columns:1fr 1fr; gap:0; max-width:760px; margin:32px auto 0; border-radius:16px; overflow:hidden; border:1px solid var(--line); }
+.wt-beforeafter figure { margin:0; position:relative; background:#fff; }
+.wt-beforeafter img { display:block; width:100%; height:auto; }
+.wt-beforeafter .lbl { position:absolute; top:12px; left:12px; font-size:11px; font-weight:700; letter-spacing:0.08em; padding:5px 12px; border-radius:999px; background:rgba(15,16,20,0.06); color:var(--ink); }
+.wt-beforeafter figure:last-child .lbl { background:var(--p-1); color:#fff; }
+
+.wt-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
+.wt-step { background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+.wt-step .wt-img { aspect-ratio:4/3; overflow:hidden; background:var(--bg-soft); }
+.wt-step .wt-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.wt-step .wt-body { padding:18px 20px; }
+.wt-step .wt-num { font-family:var(--f-mono); font-size:12px; font-weight:700; color:var(--p-1); letter-spacing:0.06em; }
+.wt-step h4 { margin:6px 0 6px; font-size:16px; }
+.wt-step p { margin:0; font-size:14px; line-height:1.6; color:var(--ink-2); }
+
+.wt-gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:28px; }
+.wt-work { border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; }
+.wt-work.wide { grid-column:1 / -1; }
+.wt-work img { width:100%; height:auto; display:block; }
+/* Non-wide cards: crop images to a uniform height so cards line up */
+.wt-work:not(.wide) img { height:340px; object-fit:cover; object-position:top; }
+.wt-work figcaption { padding:14px 18px; font-size:13.5px; color:var(--ink-2); line-height:1.55; }
+.wt-work figcaption strong { color:var(--ink); font-size:14.5px; }
+
+.wt-bubbles { margin-top:28px; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; }
+.wt-bubbles img { width:100%; height:auto; display:block; }
+.wt-bubbles .cap { padding:14px 20px; font-size:13.5px; color:var(--ink-2); }
+
+.wt-source-pair { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:32px; flex-wrap:nowrap; }
+.wt-source-item { flex:1 1 0; min-width:0; margin:0; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; position:relative; }
+.wt-source-item img { width:100%; height:auto; display:block; }
+.wt-source-badge { position:absolute; top:12px; left:12px; z-index:2; display:inline-block; padding:6px 12px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:0.02em; background:rgba(255,255,255,0.92); color:var(--ink-2); border:1px solid var(--line); backdrop-filter:blur(4px); }
+.wt-source-badge.filled { background:var(--p-1, #2563eb); color:#fff; border-color:transparent; }
+.wt-source-arrow { flex:0 0 auto; font-size:34px; font-weight:800; color:var(--p-1, #2563eb); line-height:1; }
+.wt-source-cap { max-width:860px; margin:18px auto 0; text-align:center; font-size:13.5px; line-height:1.7; color:var(--ink-2); }
+@media (max-width:680px){
+  .wt-source-pair { flex-direction:column; gap:14px; }
+  .wt-source-arrow { transform:rotate(90deg); font-size:28px; }
+}
+
+/* === Preview (히어로 직후 맛보기) === */
+.wt-preview-sec { background:linear-gradient(180deg, var(--p-1-soft, #ede9fe) 0%, #fff 100%); }
+.wt-preview { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:30px; }
+.wt-preview-item { margin:0; border-radius:18px; overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:0 10px 30px rgba(91,33,182,0.08); transition:transform .35s ease, box-shadow .35s ease; }
+.wt-preview-item:hover { transform:translateY(-6px); box-shadow:0 18px 44px rgba(91,33,182,0.16); }
+.wt-preview-item img { width:100%; height:auto; display:block; }
+.wt-preview-item figcaption { padding:18px 22px; }
+.wt-preview-item figcaption strong { display:block; font-size:16px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; }
+.wt-preview-item figcaption span { display:block; margin-top:5px; font-size:13px; color:var(--ink-2); }
+.wt-preview-note { margin-top:26px; text-align:center; font-size:14.5px; font-weight:700; color:var(--p-1-ink, #5b21b6); letter-spacing:-0.01em; }
+@media (max-width:680px){
+  .wt-preview { grid-template-columns:1fr; gap:16px; }
+}
+
+.wt-cases { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:28px; }
+.wt-case { background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 28px; }
+.wt-case .wt-case-tag { display:inline-block; font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; background:var(--p-1-soft); color:var(--p-1-ink); margin-bottom:14px; }
+.wt-case h4 { margin:0 0 6px; font-size:16px; }
+.wt-case .wt-case-stat { font-size:13.5px; color:var(--ink-2); line-height:1.7; margin:0 0 14px; }
+.wt-case .wt-quote { font-size:13.5px; color:var(--ink-2); line-height:1.65; padding-left:14px; border-left:2px solid var(--p-1); margin:0; }
+
+@media (max-width: 860px) {
+  .wt-steps { grid-template-columns:1fr; }
+  .wt-gallery, .wt-cases { grid-template-columns:1fr; }
+  .wt-work:not(.wide) img { height:auto; object-fit:contain; }
+}
+/* Curriculum table */
+.wt-curri { width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin-top:28px; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:14px; }
+.wt-curri th, .wt-curri td { padding:16px 18px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top; line-height:1.65; word-break:keep-all; }
+.wt-curri thead th { background:var(--bg-soft); font-weight:700; color:var(--ink); font-size:13.5px; }
+.wt-curri th:nth-child(1), .wt-curri td:nth-child(1) { width:22%; font-weight:700; color:var(--p-1); }
+.wt-curri th:nth-child(3), .wt-curri td:nth-child(3) { width:14%; }
+.wt-curri tbody tr:last-child td { border-bottom:0; }
+.wt-curri-note { margin-top:14px; font-size:13px; color:var(--p-1-ink); font-weight:600; }
+.wt-outcomes { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
+@media (max-width: 860px) {
+  .wt-curri { font-size:13px; }
+  .wt-curri th, .wt-curri td { padding:12px 12px; }
+  .wt-outcomes { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body data-page="workshop-tools">
+
+<header class="nav"><div class="nav-inner"><a class="brand" href="../index.html"><img src="../shared/img/logo-blue.png" alt="더와이랩"/></a>
+<button id="menuTrigger" class="menu-trigger" type="button" aria-expanded="false" aria-controls="menuOverlay"><span class="menu-lines"><span></span><span></span></span>Menu</button></div></header>
+
+<button id="menuClose" class="menu-close" type="button" aria-label="메뉴 닫기">닫기 ✕</button><aside id="menuOverlay" class="menu-overlay" aria-label="전체 메뉴"><div class="menu-inner"><div class="menu-eyebrow">THE WHHY LAB · 전체 메뉴</div><div class="menu-grid"><div class="menu-col"><h4>회사 소개</h4><a href="../culture/index.html">Culture</a><a href="../mission/index.html">Mission</a><a href="../media/index.html">Media</a><a href="../learnies/index.html">러니즈</a></div><div class="menu-col"><h4>AI HRD</h4><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a><a href="../ai-hrd/index.html">AI HRD</a><a href="../ai-design-thinking/index.html">AI 디자인씽킹</a><a href="../work-hack-ai/index.html">Work Hack AI</a><a href="../open-k/index.html">Open K</a></div><div class="menu-col"><h4>AI 진로·탐구</h4><a href="../ai-program/index.html">AI 교육 프로그램</a><a href="../school-impact-lab/index.html">스쿨임팩트랩</a><a href="../highfly/index.html">하이플라이</a><a href="../ai-starter-lab/index.html">AI스타터랩</a><a href="../pathon-program/index.html">PathOn</a><a href="../reviews/index.html">교실 후기</a><a href="../whhy-explorer/index.html">탐구 위인 테스트</a></div><div class="menu-col active"><h4>Library</h4><a href="../references/index.html">레퍼런스</a><a href="../instructors/index.html">열정강사</a><a href="../workshop-tools/index.html" class="current">워크숍 도구</a><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a></div><div class="menu-col"><h4>Join 더와이랩</h4><a href="../members-edu/index.html">교육멤버</a><a href="../members-seongsu/index.html">성수멤버</a></div></div><div class="menu-foot"><div class="menu-foot-left"><p>학습에서 실행까지, AI 전 과정을 연결합니다.</p><strong>지금 더와이랩과 함께 시작하세요.</strong></div><a class="menu-cta" href="../contact/">교육 문의 →</a><div class="menu-social"><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></div></div></div></aside>
+
+<main id="top">
+
+<section class="p-hero">
+  <div class="p-hero-inner">
+    <div class="p-crumb"><a href="../index.html">Home</a><span class="sep">/</span><span>Library</span><span class="sep">/</span><span>웹툰툴킷</span></div>
+    <div class="p-tag"><span class="pulse"></span>WEBTOON TOOLKIT · 핵심가치 워크숍</div>
+    <h1>웹툰으로 푸는<br/><span class="rain">핵심가치 워크숍.</span></h1>
+    <p class="lede">조직의 핵심가치를 한 권의 웹툰으로 시각화하고, 공감과 실천을 끌어내는 워크숍 툴킷. 추상적 가치가 구체적 행동으로 연결됩니다. 핵심가치는 물론, '일하는 방식'·신입 온보딩·조직문화 등 어떤 주제와도 자연스럽게 어우러집니다.</p>
+    <dl class="p-stats cols-3">
+      <div class="p-stat"><dt>Format</dt><dd>웹툰 ＋ 워크숍 (4H)</dd></div>
+      <div class="p-stat"><dt>Use Case</dt><dd>핵심가치 · 일하는 방식 · 온보딩</dd></div>
+      <div class="p-stat"><dt>Outcome</dt><dd>공감 ＋ 실천</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="p-sec wt-preview-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">A glimpse · 결과물 미리보기</div>
+    <h2 class="p-title">4시간 뒤, <em>이런 웹툰이 완성됩니다.</em></h2>
+    <p class="p-lede">설명보다 결과물이 먼저입니다. 그림 실력과 무관하게, 참가자들이 직접 만든 핵심가치 웹툰을 먼저 보세요. 어떤 프로그램인지는 그다음에 이야기하겠습니다.</p>
+    <div class="wt-preview">
+      <figure class="wt-preview-item">
+        <img src="img/toolkit/sample-haengji.jpg" alt="'슬기로운 행지생활' 핵심가치 웹툰 완성 작품"/>
+        <figcaption><strong>"슬기로운 행지생활"</strong><span>한 팀이 완성한 핵심가치 웹툰 전지</span></figcaption>
+      </figure>
+      <figure class="wt-preview-item">
+        <img src="img/toolkit/sample-mz.jpg" alt="'MZ 문주임의 건보 적응기' 신입 온보딩 웹툰 완성 작품"/>
+        <figcaption><strong>"MZ 문주임의 건보 적응기"</strong><span>신입 온보딩을 위트있게 풀어낸 작품</span></figcaption>
+      </figure>
+    </div>
+    <p class="wt-preview-note">↓ 그래서 이 워크숍이 무엇인지, 지금부터 알려드립니다.</p>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">01 — Problems</div>
+    <h2 class="p-title">핵심가치 교육의 <em>세 가지 한계.</em></h2>
+    <div class="p-cards cols-3">
+      <article class="p-card">
+        <div class="num">01</div>
+        <h4>해석의 어려움</h4><span class="en">Interpretation</span>
+        <p>'도전', '신뢰' 같은 추상어를 각자 다르게 해석합니다. 결국 같은 단어를 두고 다른 행동이 나옵니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">02</div>
+        <h4>소통의 단절</h4><span class="en">Disconnection</span>
+        <p>경영진의 의도와 현장의 인식이 어긋납니다. "또 그 얘기"가 되어 메시지가 휘발됩니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">03</div>
+        <h4>실천으로 연결 안 됨</h4><span class="en">Action Gap</span>
+        <p>교육은 끝났는데 일터에서는 변하지 않습니다. 가치와 행동 사이의 격차가 좁혀지지 않습니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec soft">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">02 — Concept</div>
+    <h2 class="p-title">웹툰으로 <em>가치를 그리다.</em></h2>
+    <p class="p-lede">핵심가치는 풍랑 속에서 방향을 알려주는 조직의 나침반입니다. 제대로 내재화되면 구성원이 일관된 행동을 하게 되어 성과로 이어집니다. 웹툰은 추상을 구체로, 텍스트를 시각으로, 일방향을 양방향으로 바꾸는 세 가지 흐름으로 그 내재화를 돕습니다.</p>
+    <div class="p-cards cols-3">
+      <article class="p-card">
+        <div class="num">FLOW 01</div>
+        <h4>자연스러운 가치 전달</h4><span class="en">Natural Story</span>
+        <p>이야기 형식이라 거부감이 적고, 한 번 보면 기억에 남습니다.</p>
+      </article>
+      <article class="p-card gradient">
+        <div class="num">FLOW 02</div>
+        <h4>공감 기반 학습</h4><span class="en">Empathy Learning</span>
+        <p>주인공의 갈등에 공감하며 가치의 맥락을 자기 일처럼 받아들입니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">FLOW 03</div>
+        <h4>몰입과 실천</h4><span class="en">Engagement</span>
+        <p>워크숍 활동으로 자신의 사례를 그리며, 보는 것에서 실천으로 넘어갑니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">03 — Features</div>
+    <h2 class="p-title">툴킷 <em>핵심 기능 네 가지.</em></h2>
+    <div class="p-cards cols-4">
+      <article class="p-card">
+        <div class="num">01</div>
+        <h4>맞춤 시나리오</h4><span class="en">Custom Script</span>
+        <p>조직의 핵심가치와 실제 일터 맥락을 반영한 맞춤 시나리오 제작.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">02</div>
+        <h4>비주얼 자산</h4><span class="en">Visuals</span>
+        <p>웹툰 컷·캐릭터·배경을 워크숍·교재·내부 채널에 재활용할 수 있는 자산으로 제공.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">03</div>
+        <h4>양방향 소통</h4><span class="en">Two-way</span>
+        <p>구성원이 댓글로 해석을 남기고 함께 의미를 만들어가는 소통 도구.</p>
+      </article>
+      <article class="p-card gradient">
+        <div class="num">04</div>
+        <h4>누구나 제작</h4><span class="en">For Everyone</span>
+        <p>비전공자도 만들 수 있는 템플릿 ＋ 가이드로, 부서별 자체 제작이 가능합니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec dark">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">04 — Use Cases</div>
+    <h2 class="p-title">이런 곳에 <em>씁니다.</em></h2>
+    <p class="p-lede">핵심가치를 바탕으로 '일하는 방식'으로 연계하거나, 주제를 바꿔 어떤 교육에도 맞춤 적용할 수 있습니다.</p>
+    <div class="p-cards cols-4">
+      <article class="p-card">
+        <div class="num">CASE 01</div>
+        <h4>핵심가치 워크숍</h4><span class="en">Core Value</span>
+        <p>전사 차원의 핵심가치 내재화 교육. 한 권의 웹툰이 1년 짜리 캠페인이 됩니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">CASE 02</div>
+        <h4>일하는 방식</h4><span class="en">Way of Working</span>
+        <p>그라운드 룰·일하는 방식을 사례로 풀어, 현장에 바로 적용할 행동 원칙으로 연결합니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">CASE 03</div>
+        <h4>신입 온보딩</h4><span class="en">Onboarding</span>
+        <p>신입사원이 조직 문화를 빠르게 습득하도록 돕는 양방향 입사 가이드.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">CASE 04</div>
+        <h4>변화 관리</h4><span class="en">Change Mgmt</span>
+        <p>조직 개편·신규 정책 도입 시, 메시지를 부드럽게 전하는 변화관리 도구.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec soft">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">05 — Storytelling Guide</div>
+    <h2 class="p-title">툰으로 <em>스토리 만들기.</em></h2>
+    <p class="p-lede">제공된 툰 툴킷을 활용해 2~4개 컷 분량의 스토리를 조별 토의로 완성합니다. 시나리오 양식에 따라 세 단계로 진행하세요.</p>
+    <div class="p-cards cols-3">
+      <article class="p-card">
+        <div class="num">STEP 01</div>
+        <h4>등장인물 및 상황 설정</h4><span class="en">Setup</span>
+        <p>주인공과 등장인물(2~4명), 업무 또는 비즈니스 상황을 구체적으로 정합니다. 캐릭터명까지 설정하면 더 좋습니다.</p>
+      </article>
+      <article class="p-card gradient">
+        <div class="num">STEP 02</div>
+        <h4>스토리텔링</h4><span class="en">Story</span>
+        <p>주제에 맞게 2~4개 컷 분량으로 스토리를 작성합니다. 각 컷의 흐름이 자연스럽게 이어지도록 구성하세요.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">STEP 03</div>
+        <h4>마무리</h4><span class="en">Closing</span>
+        <p>마지막 컷에는 스토리의 결말 또는 정리하는 메시지, 결심, 기대효과 등을 담아 마무리합니다.</p>
+      </article>
+    </div>
+    <p class="p-lede" style="margin-top:28px;">
+      <strong>이미지 선택 TIP.</strong> 컷 스토리를 잘 표현할 수 있는 캐릭터나 장면을 제공된 툴킷에서 찾아 매칭하세요. 예를 들어 매출 달성을 위한 토의 장면이라면, 회의하는 인물과 그래프 배경을 골라 조합하면 됩니다.
+    </p>
+    <figure class="wt-bubbles" style="margin-top:32px;">
+      <img src="img/toolkit/before-after.jpg" alt="툴킷 아웃라인 캐릭터가 채색을 거쳐 완성되는 과정"/>
+      <div class="cap"><strong>아웃라인 → 채색 완성.</strong> 툴킷이 제공하는 아웃라인 캐릭터에 머리·의상·배경을 채색하면 한 컷의 장면이 완성됩니다.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">06 — How It Works</div>
+    <h2 class="p-title">툴킷으로 <em>이렇게 만듭니다.</em></h2>
+    <p class="p-lede">웹툰 제작 경험이 없어도, 제공되는 웹툰툴킷을 활용하면 세 단계로 쉽게 완성할 수 있습니다.</p>
+    <div class="wt-steps">
+      <article class="wt-step">
+        <div class="wt-img"><img src="img/toolkit/source-2.jpg" alt="스토리에 맞는 컷을 툴킷에서 찾아 매칭"/></div>
+        <div class="wt-body">
+          <div class="wt-num">STEP 1</div>
+          <h4>컷 매칭</h4>
+          <p>스토리에 적합한 컷을 툴킷에서 찾아 매칭합니다.</p>
+        </div>
+      </article>
+      <article class="wt-step">
+        <div class="wt-img"><img src="img/toolkit/cut-bg.jpg" alt="선택한 컷 이미지를 배열하고 레이아웃 설정"/></div>
+        <div class="wt-body">
+          <div class="wt-num">STEP 2</div>
+          <h4>배열 &amp; 레이아웃</h4>
+          <p>선택한 컷을 배열하고 컷 분할·말풍선으로 레이아웃을 설정합니다.</p>
+        </div>
+      </article>
+      <article class="wt-step">
+        <div class="wt-img"><img src="img/toolkit/painting-scene.jpg" alt="참가자들이 웹툰 컷에 색을 입혀 완성하는 현장"/></div>
+        <div class="wt-body">
+          <div class="wt-num">STEP 3</div>
+          <h4>채색 완성</h4>
+          <p>인물·배경·디테일에 색을 입혀 한 편의 웹툰을 완성합니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec soft">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">07 — Production Tips</div>
+    <h2 class="p-title">완성도 있는 <em>툰 제작.</em></h2>
+    <p class="p-lede">툴킷은 아웃라인만 그려져 있어, 상상력과 창의력으로 남녀노소 다양한 캐릭터를 만들 수 있습니다. 네 가지만 기억하세요.</p>
+    <div class="p-cards cols-4">
+      <article class="p-card">
+        <div class="num">TIP 01</div>
+        <h4>캐릭터 만들기</h4><span class="en">Character</span>
+        <p>머리스타일과 의상으로 캐릭터를 표현합니다. 목·상반신은 라운드카라나 V넥으로, 허리선은 벨트나 상의선으로 구분하면 더 실감납니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">TIP 02</div>
+        <h4>메시지 표현</h4><span class="en">Message</span>
+        <p>상황이나 부연 설명은 매직 등으로 정확한 글씨를 써서 메시지를 전달합니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">TIP 03</div>
+        <h4>배경 요소</h4><span class="en">Background</span>
+        <p>필요에 따라 배경 요소를 직접 그려 넣어 장면의 맥락을 풍부하게 만듭니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">TIP 04</div>
+        <h4>오려 붙이기</h4><span class="en">Cut &amp; Paste</span>
+        <p>완성한 인물은 가위로 아웃라인을 따라 오려 작품에 붙입니다. 말풍선으로 혼잣말·대화·감정도 표현할 수 있습니다.</p>
+      </article>
+    </div>
+    <div class="wt-source-pair">
+      <figure class="wt-source-item">
+        <span class="wt-source-badge">STEP 1 · 아웃라인</span>
+        <img src="img/toolkit/character-sources-outline.png" alt="회의·통화·발표 등 다양한 상황과 포즈의 캐릭터 소스 아웃라인"/>
+      </figure>
+      <span class="wt-source-arrow" aria-hidden="true">→</span>
+      <figure class="wt-source-item">
+        <span class="wt-source-badge filled">STEP 2 · 채색 완성</span>
+        <img src="img/toolkit/character-sources-color.png" alt="아웃라인 캐릭터에 색을 입혀 완성한 채색 예시"/>
+      </figure>
+    </div>
+    <div class="wt-source-cap"><strong>캐릭터 소스 예시.</strong> 회의·통화·발표·악수·이동 등 업무 현장에서 자주 마주하는 상황과 포즈를 아웃라인으로 제공합니다. 스토리에 맞는 컷을 골라 채색하기만 하면 한 장면이 완성됩니다.</div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">08 — Gallery</div>
+    <h2 class="p-title">참가자들이 만든 <em>작품 예시.</em></h2>
+    <p class="p-lede">실제 워크숍에서 참가자들이 툴킷으로 완성한 핵심가치 웹툰입니다. 그림 실력과 무관하게 누구나 한 편의 이야기를 완성합니다.</p>
+    <div class="wt-gallery">
+      <figure class="wt-work wide">
+        <img src="img/toolkit/sample-haengji.jpg" alt="'슬기로운 행지생활' 핵심가치 웹툰 완성 작품 전지"/>
+        <figcaption><strong>"슬기로운 행지생활"</strong><br/>한 팀이 완성한 핵심가치 웹툰 전지. 신입의 적응, 회의실 소통, 교육 현장 등 실제 업무 상황을 여러 컷으로 엮어 조직의 가치를 한 편의 이야기로 담아냈습니다.</figcaption>
+      </figure>
+      <figure class="wt-work">
+        <img src="img/toolkit/sample-lunchmate.jpg" alt="'소통과 배려가 제일 쉬웠어요 - 런치메2트' 완성 작품"/>
+        <figcaption><strong>"소통과 배려가 제일 쉬웠어요 · 런치메2트"</strong><br/>왜 소통이 어려운지에 대한 질문에서 출발해, 함께 점심을 먹는 '런치메이트'로 소통과 배려를 실천하기까지의 과정을 8컷으로 풀어낸 작품.</figcaption>
+      </figure>
+      <figure class="wt-work">
+        <img src="img/toolkit/sample-mz.jpg" alt="'MZ 문주임의 건보 적응기' 신입 적응 스토리 완성 작품"/>
+        <figcaption><strong>"MZ 문주임의 건보 적응기"</strong><br/>입사 첫날부터 완벽 적응까지, 신입 주임의 성장 여정을 담은 작품. 점심 소통, 팀워크, 업무 적응 등 온보딩 과정을 위트 있게 풀어냈습니다.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec soft">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">09 — Track Record</div>
+    <h2 class="p-title">현장에서 <em>검증된 프로그램.</em></h2>
+    <p class="p-lede">대기업 현장직부터 신입사원 대규모 교육까지, 다양한 조직에서 핵심가치 내재화 웹툰 프로그램을 운영해 왔습니다.</p>
+    <div class="wt-cases">
+      <article class="wt-case">
+        <span class="wt-case-tag">A사 · 현장직</span>
+        <h4>조직문화·일하는 방식 개선</h4>
+        <p class="wt-case-stat">내부 강사 육성 파일럿 → 리더급으로 확대 시행 · 총 3개월 과정 운영. 단위 조직별 그라운드 룰 사례를 발굴해 전사로 전파.</p>
+        <p class="wt-quote">"비슷한 현장의 문제를 함께 해결해 나가는 과정이라 그룹 관리에 큰 도움이 됐습니다. 소통과 화합의 힘을 다시 느꼈어요."</p>
+      </article>
+      <article class="wt-case">
+        <span class="wt-case-tag">B사 · 신입사원</span>
+        <h4>신입사원 핵심가치 내재화</h4>
+        <p class="wt-case-stat">약 500명 · 10개 반 분반 동시 진행 · 약 60개 사례를 바탕으로 핵심가치 웹툰 제작.</p>
+        <p class="wt-quote">"어렵게만 느껴졌던 핵심가치를 직접 활동으로 풀어보니 재밌고 오래 기억될 것 같습니다. 조원들과 소통·배려를 직접 경험했어요."</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">10 — Curriculum</div>
+    <h2 class="p-title">4시간 <em>커리큘럼.</em></h2>
+    <p class="p-lede">핵심가치 이해부터 웹툰 제작, 작품 공유와 실천 다짐까지 3개 모듈로 진행됩니다. 핵심가치를 바탕으로 '일하는 방식' 등 다른 주제로 연계·변경하여 운영할 수도 있습니다.</p>
+    <table class="wt-curri">
+      <thead><tr><th>모듈</th><th>주요 내용</th><th>시간</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Module 1<br/>핵심가치와 사례 이해</td>
+          <td>우리 회사의 핵심가치에 대한 이해(핵심가치 소개와 사례 공유). 기업별 핵심가치에 맞춰 내용을 구성하고 맞춤화하여 진행합니다.</td>
+          <td>강의 1H</td>
+        </tr>
+        <tr>
+          <td>Module 2<br/>웹툰 제작</td>
+          <td>팀별 브레인스토밍으로 가치에 맞는 이야기를 구상하고, 장면 구성과 대사를 설계합니다. 웹툰툴킷으로 컷을 매칭·배열하고 채색하여 작품을 완성합니다.</td>
+          <td>강의·실습 2H</td>
+        </tr>
+        <tr>
+          <td>Module 3<br/>작품 공유 &amp; 다짐</td>
+          <td>작품 상세 설명을 작성하고, 갤러리 워크로 조별 작품을 공유합니다. 핵심가치에 따른 행동 원칙과 실천 다짐을 함께 정리합니다.</td>
+          <td>강의·실습 1H</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="wt-curri-note">※ 핵심가치를 바탕으로 '일하는 방식'으로 연계하거나 주제를 변경하여 진행할 수 있습니다.</p>
+  </div>
+</section>
+
+<section class="p-sec dark">
+  <div class="p-sec-inner">
+    <div class="p-eyebrow">11 — Expected Outcomes</div>
+    <h2 class="p-title">이런 변화를 <em>기대할 수 있습니다.</em></h2>
+    <div class="p-cards cols-3">
+      <article class="p-card">
+        <div class="num">01</div>
+        <h4>핵심가치 인식 증진</h4><span class="en">Awareness</span>
+        <p>구성원이 핵심가치를 명확하게 이해하고, 그 중요성을 인식하게 됩니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">02</div>
+        <h4>행동 변화 유도</h4><span class="en">Behavior</span>
+        <p>핵심가치를 실천하는 행동을 일상 업무에서 자연스럽게 하도록 유도합니다.</p>
+      </article>
+      <article class="p-card">
+        <div class="num">03</div>
+        <h4>실천 문화 확산</h4><span class="en">Culture</span>
+        <p>핵심가치를 전사적으로 실천하는 문화를 형성하고, 조직 전체로 확산시킵니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="p-cta">
+  <div class="p-cta-inner">
+    <div class="p-cta-box">
+      <div>
+        <h3>웹툰툴킷, <em>지금 미팅을<br/>예약하세요.</em></h3>
+        <p>샘플 시연과 맞춤 견적, 한 번에 받아보실 수 있습니다.</p>
+      </div>
+      <div class="p-cta-actions">
+        <a class="p-cta-btn" href="../contact/">샘플 시연 신청 <span class="arr">→</span></a>
+        <div class="p-cta-contact"><span>TEL · 02-468-3555</span><span>master@thewhhylab.com</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+<div class="foot-hero"><h2>학습에서 실행까지<br/>AI 활용의 전 과정을 연결합니다.</h2>
+<div class="right"><p>기업 교육부터 학생 진로·탐구까지,<br/>사람 중심 AI 교육의 표준을 만듭니다.</p>
+<a class="btn" style="background:#fff;color:#0a0b0d;" href="../contact/">교육 문의 <span class="arr">→</span></a></div></div>
+<div class="foot">
+<div><div class="foot-brand"><img src="../shared/img/logo-blue.png" alt="더와이랩" /></div>
+<p>THE WHHY LAB, 사람 중심 AI 교육 기업.</p>
+<address class="foot-biz">
+<span>주식회사 더와이랩 (The Whhy Lab Inc.) · 대표 김홍태</span>
+<span>사업자등록번호 446-87-00395</span>
+<span>서울특별시 성동구 성수일로99, 서울숲AK밸리 1510호</span>
+<span>T. <a href="tel:0224683555">02-468-3555</a> · E. <a href="mailto:master@thewhhylab.com">master@thewhhylab.com</a></span>
+</address>
+</div>
+<div><h5>회사 소개</h5><ul><li><a href="../culture/index.html">Culture</a></li><li><a href="../mission/index.html">Mission</a></li><li><a href="../media/index.html">Media</a></li><li><a href="../learnies/index.html">러니즈</a></li></ul></div>
+<div><h5>프로그램</h5><ul><li><a href="../ai-hrd/index.html">AI HRD</a></li><li><a href="../ai-program/index.html">AI 교육 프로그램</a></li><li><a href="../ai-starter-lab/index.html">AI스타터랩</a></li><li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li></ul></div>
+<div><h5>Connect</h5><ul><li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li><li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li><li><a href="../members-edu/index.html">교육멤버</a></li></ul></div></div>
+<div class="copyright"><span>© 2016—2026 THE WHHY LAB</span><span>www.thewhhylab.com · 02-468-3555 · master@thewhhylab.com</span></div></footer>
+
+<script src="../shared/js/site.js" defer></script>
+</body>
+</html>
+

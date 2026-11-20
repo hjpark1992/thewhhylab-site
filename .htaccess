@@ -1,0 +1,81 @@
+# ============================================================
+# 더와이랩 — Apache(.htaccess) · Cafe24 웹호스팅 대응
+# 모든 블록은 <IfModule> 로 가드되어 해당 모듈이 없으면 조용히 무시됩니다.
+# (모듈 미탑재로 인한 500 방지). HTTPS 강제(5번)는 SSL 발급 완료로 활성화됨(mod_rewrite 가드 유지).
+# ============================================================
+
+# 기본 문서 (디렉토리 접근 시 index.html)
+DirectoryIndex index.html
+
+# ------------------------------------------------------------
+# 1) 보안 — 민감/불필요 파일 외부 직접 접근 차단
+#    config.php(DB 비밀값), *.bak(작업백업), *.sql(스키마),
+#    *.ini/.user.ini(서버설정), 점(.)으로 시작하는 파일(.gitignore 등)
+# ------------------------------------------------------------
+<FilesMatch "(^\.|\.(bak|sql|ini|log|md|sh)$|^config\.php$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ------------------------------------------------------------
+# 2) 성능 — gzip 압축 (텍스트 자원)
+# ------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ------------------------------------------------------------
+# 3) 성능 — 정적 자원 캐시 만료
+# ------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # 이미지·폰트: 1년
+  ExpiresByType image/jpeg            "access plus 1 year"
+  ExpiresByType image/png             "access plus 1 year"
+  ExpiresByType image/gif             "access plus 1 year"
+  ExpiresByType image/webp            "access plus 1 year"
+  ExpiresByType image/svg+xml         "access plus 1 year"
+  ExpiresByType image/x-icon          "access plus 1 year"
+  ExpiresByType font/woff2            "access plus 1 year"
+  ExpiresByType font/woff             "access plus 1 year"
+  # CSS·JS: 1개월
+  ExpiresByType text/css              "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  # HTML: 매번 재검증(콘텐츠 갱신 즉시 반영)
+  ExpiresByType text/html             "access plus 0 seconds"
+</IfModule>
+
+# ------------------------------------------------------------
+# 4) 보안 헤더 (mod_headers 있을 때만)
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # 캐시된 정적 자원은 immutable 힌트
+  <FilesMatch "\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------
+# 5) HTTPS 강제 + 관리자 단축 경로(/admin → /api/admin.php)
+#    HTTPS: Cafe24 무료 SSL(Let's Encrypt) 발급 완료(2026-06-06) → 활성화됨
+#    /admin: 주소창은 /admin 유지하며 내부적으로 api/admin.php 실행
+# ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  RewriteRule ^admin/?$ api/admin.php [L]
+</IfModule>

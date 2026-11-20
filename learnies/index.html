@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>러니즈 Learnies · 더와이랩</title>
+<meta name="theme-color" content="#0a0b0d"/>
+<link rel="canonical" href="https://www.thewhhylab.com/learnies/"/>
+<link rel="icon" type="image/svg+xml" href="../shared/img/favicon.svg"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="러니즈 Learnies · 더와이랩"/>
+<meta property="og:description" content="러니즈 Learnies — 더와이랩이 발견한 학습과 일의 인사이트."/>
+<meta property="og:url" content="https://www.thewhhylab.com/learnies/"/>
+<meta property="og:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+<meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="러니즈 Learnies · 더와이랩"/>
+<meta name="twitter:description" content="러니즈 Learnies — 더와이랩이 발견한 학습과 일의 인사이트."/>
+<meta name="twitter:image" content="https://www.thewhhylab.com/shared/img/logo-blue.png"/>
+
+  <meta name="description" content="강사로 성장하는 유니콘 3인방, 러니즈를 소개합니다. 러니(Learny) · 그로니(Growny) · 비즈니(Bizny) — 더와이랩의 마스코트이자 모든 강사의 성장 여정." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
+  <link rel="stylesheet" href="../shared/css/site.css" />
+  <style>
+    /* ============================================
+       러니즈 — 캐릭터 페이지 전용 스타일
+       ============================================ */
+    :root {
+      --learny:        #3a8dde;
+      --learny-soft:   #e6f1ff;
+      --learny-ink:    #1d4f8a;
+      --growny:        #ee5566;
+      --growny-soft:   #ffe9ec;
+      --growny-ink:    #a8273a;
+      --bizny:         #6b7dd6;
+      --bizny-soft:    #ecefff;
+      --bizny-ink:     #3a4ba8;
+    }
+
+    /* hero */
+    .learnies-hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 72px) 28px 80px;
+      background:
+        radial-gradient(60% 60% at 88% 18%, rgba(58,141,222,0.10) 0%, transparent 62%),
+        radial-gradient(50% 50% at 12% 78%, rgba(238,85,102,0.08) 0%, transparent 60%),
+        radial-gradient(40% 50% at 50% 100%, rgba(107,125,214,0.08) 0%, transparent 60%),
+        var(--bg);
+      overflow: hidden;
+    }
+    .learnies-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(10,11,13,0.06) 1px, transparent 1px);
+      background-size: 26px 26px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .learnies-hero-inner {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .learnies-hero-inner { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 64px; }
+    }
+    .learnies-hero h1 {
+      margin: 16px 0 18px;
+      font-size: clamp(30px, 4.4vw, 56px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+    .learnies-hero h1 em {
+      font-style: normal;
+      display: block;
+      font-size: clamp(22px, 2.6vw, 32px);
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 12px;
+      letter-spacing: -0.02em;
+    }
+    .learnies-hero .h1-rainbow {
+      background: linear-gradient(95deg, var(--learny) 0%, var(--growny) 50%, var(--bizny) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .learnies-hero .lede {
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-width: 52ch;
+      margin: 0 0 28px;
+    }
+    .learnies-trio {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: end;
+    }
+    .learnies-trio .trio-item {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform var(--t-base) var(--ease);
+    }
+    .learnies-trio .trio-item:hover { transform: translateY(-6px); }
+    .learnies-trio .trio-item.learny  { background: var(--learny-soft); }
+    .learnies-trio .trio-item.growny  { background: var(--growny-soft); transform: translateY(-18px); }
+    .learnies-trio .trio-item.bizny   { background: var(--bizny-soft); }
+    .learnies-trio .trio-item.growny:hover { transform: translateY(-24px); }
+    .learnies-trio img {
+      width: 92%; height: 92%;
+      object-fit: contain;
+    }
+    .learnies-trio .trio-tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-family: var(--f-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .trio-item.learny .trio-tag { color: var(--learny-ink); }
+    .trio-item.growny .trio-tag { color: var(--growny-ink); }
+    .trio-item.bizny  .trio-tag { color: var(--bizny-ink); }
+
+    /* intro stats */
+    .learnies-meta {
+      display: flex; flex-wrap: wrap;
+      gap: 28px 40px;
+      padding-top: 36px;
+      margin-top: 36px;
+      border-top: 1px solid var(--line);
+    }
+    .meta-item .meta-num {
+      font-size: clamp(28px, 3.2vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .meta-item .meta-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      letter-spacing: -0.005em;
+    }
+
+    /* ============================================
+       why section — "혼자 성장하기는 어렵습니다"
+       ============================================ */
+    .learnies-why {
+      padding: 96px 28px;
+      background: var(--bg-soft);
+    }
+    .why-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .why-inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 72px; }
+    }
+    .why-text h2 {
+      margin: 12px 0 22px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .why-text h2 em {
+      font-style: normal;
+      color: var(--learny);
+    }
+    .why-text p {
+      font-size: clamp(15px, 1.3vw, 17px);
+      color: var(--ink-2);
+      line-height: 1.75;
+      margin: 0 0 14px;
+    }
+    .why-image {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--learny-soft) 0%, #d9e8ff 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .why-image img {
+      width: 88%; height: 88%;
+      object-fit: contain;
+    }
+    .why-image::after {
+      content: "Learny @ Work";
+      position: absolute;
+      bottom: 18px; right: 24px;
+      font-family: var(--f-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--learny-ink);
+      background: rgba(255,255,255,0.85);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* ============================================
+       character card — 각 캐릭터 상세
+       ============================================ */
+    .char {
+      padding: 110px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .char.learny  { background: linear-gradient(180deg, #fff 0%, #f3f8ff 100%); }
+    .char.growny  { background: linear-gradient(180deg, #fff 0%, #fff5f7 100%); }
+    .char.bizny   { background: linear-gradient(180deg, #fff 0%, #f5f7ff 100%); }
+    .char-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .char-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; }
+      .char.reverse .char-inner { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+      .char.reverse .char-visual { order: 2; }
+      .char.reverse .char-content { order: 1; }
+    }
+    /* big visual area */
+    .char-visual {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 32px;
+      padding: 28px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .char.learny .char-visual { background: var(--learny-soft); }
+    .char.growny .char-visual { background: var(--growny-soft); }
+    .char.bizny  .char-visual { background: var(--bizny-soft); }
+
+    .char-visual::before {
+      content: "";
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 80%; height: 80%;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      filter: blur(60px);
+    }
+    .char-visual img {
+      position: relative;
+      width: 92%; height: 92%;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.08));
+      transition: transform var(--t-slow) var(--ease);
+    }
+    .char-visual:hover img { transform: translateY(-6px) scale(1.02); }
+    .char-visual .char-emblem {
+      position: absolute;
+      top: 22px; left: 22px;
+      display: inline-flex;
+      align-items: center; gap: 8px;
+      padding: 8px 14px 8px 10px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 999px;
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .char-visual .char-emblem .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .char.learny .char-emblem .dot { background: var(--learny); }
+    .char.growny .char-emblem .dot { background: var(--growny); }
+    .char.bizny  .char-emblem .dot { background: var(--bizny); }
+    .char.learny .char-emblem      { color: var(--learny-ink); }
+    .char.growny .char-emblem      { color: var(--growny-ink); }
+    .char.bizny  .char-emblem      { color: var(--bizny-ink); }
+
+    /* content */
+    .char-eyebrow {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .char.learny .char-eyebrow { color: var(--learny); }
+    .char.growny .char-eyebrow { color: var(--growny); }
+    .char.bizny  .char-eyebrow { color: var(--bizny); }
+
+    .char-name {
+      margin: 0 0 8px;
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1;
+    }
+    .char.learny .char-name { color: var(--learny); }
+    .char.growny .char-name { color: var(--growny); }
+    .char.bizny  .char-name { color: var(--bizny); }
+    .char-name .en {
+      font-weight: 700;
+      opacity: 0.7;
+      font-size: 0.7em;
+      margin-left: 4px;
+    }
+
+    .char-role {
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 4px 0 22px;
+      letter-spacing: -0.02em;
+    }
+    .char-desc {
+      font-size: clamp(15px, 1.2vw, 17px);
+      line-height: 1.78;
+      color: var(--ink-2);
+      margin: 0 0 18px;
+      max-width: 50ch;
+    }
+    .char-desc .accent {
+      font-weight: 700;
+    }
+    .char.learny .char-desc .accent { color: var(--learny); }
+    .char.growny .char-desc .accent { color: var(--growny); }
+    .char.bizny  .char-desc .accent { color: var(--bizny); }
+
+    .char-quote {
+      position: relative;
+      padding: 18px 0 18px 22px;
+      margin: 22px 0 28px;
+      border-left: 3px solid;
+      font-size: clamp(15px, 1.2vw, 17px);
+      line-height: 1.7;
+      color: var(--ink);
+      font-style: italic;
+      font-weight: 500;
+    }
+    .char.learny .char-quote { border-color: var(--learny); }
+    .char.growny .char-quote { border-color: var(--growny); }
+    .char.bizny  .char-quote { border-color: var(--bizny); }
+
+    .char-tags {
+      display: flex; flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .char-tags .tag {
+      display: inline-flex;
+      align-items: center; gap: 6px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.005em;
+      transition: transform var(--t-fast) var(--ease);
+    }
+    .char-tags .tag:hover { transform: translateY(-2px); }
+    .char.learny .tag { background: var(--learny); }
+    .char.growny .tag { background: var(--growny); }
+    .char.bizny  .tag { background: var(--bizny); }
+
+    /* three-view strip */
+    .char-views {
+      margin-top: 28px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: end;
+    }
+    .char-view {
+      text-align: center;
+    }
+    .char-view-img {
+      aspect-ratio: 3/4;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 8px 4px 0;
+    }
+    .char-view-img img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
+    }
+    .char-view-label {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ============================================
+       journey section
+       ============================================ */
+    .journey {
+      padding: 110px 28px;
+      background: var(--bg-dark);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .journey::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(40% 50% at 20% 30%, rgba(58,141,222,0.18) 0%, transparent 60%),
+        radial-gradient(40% 50% at 80% 70%, rgba(238,85,102,0.16) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .journey-inner {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .journey-head {
+      margin-bottom: 56px;
+      max-width: 800px;
+    }
+    .journey-head .eyebrow {
+      color: rgba(255,255,255,0.6);
+    }
+    .journey-head h2 {
+      margin: 12px 0 18px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .journey-head h2 em {
+      font-style: normal;
+      background: linear-gradient(95deg, #6db4ff 0%, #ff8a99 50%, #9aabff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .journey-head p {
+      color: rgba(255,255,255,0.7);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+    .journey-track {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      position: relative;
+    }
+    @media (min-width: 800px) {
+      .journey-track {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .journey-track::before {
+        content: "";
+        position: absolute;
+        top: 50px; left: 8%; right: 8%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--learny) 0%, var(--growny) 50%, var(--bizny) 100%);
+        opacity: 0.3;
+        z-index: 0;
+      }
+    }
+    .journey-step {
+      position: relative;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      border-radius: 24px;
+      padding: 36px 28px 32px;
+      transition: transform var(--t-base) var(--ease), background var(--t-base) var(--ease);
+    }
+    .journey-step:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.08);
+    }
+    .journey-num {
+      position: relative;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-mono);
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 22px;
+      z-index: 1;
+    }
+    .journey-step.learny .journey-num { background: var(--learny); box-shadow: 0 0 0 6px rgba(58,141,222,0.18); }
+    .journey-step.growny .journey-num { background: var(--growny); box-shadow: 0 0 0 6px rgba(238,85,102,0.18); }
+    .journey-step.bizny  .journey-num { background: var(--bizny);  box-shadow: 0 0 0 6px rgba(107,125,214,0.18); }
+    .journey-step h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .journey-step .who {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .journey-step.learny .who { color: #6db4ff; }
+    .journey-step.growny .who { color: #ff8a99; }
+    .journey-step.bizny  .who { color: #9aabff; }
+    .journey-step p {
+      color: rgba(255,255,255,0.78);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ============================================
+       cta — 마지막 메시지
+       ============================================ */
+    .learnies-cta {
+      padding: 110px 28px;
+      background:
+        radial-gradient(60% 80% at 50% 0%, rgba(37,99,255,0.08) 0%, transparent 65%),
+        var(--bg);
+      text-align: center;
+    }
+    .learnies-cta-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .learnies-cta h2 {
+      margin: 0 0 22px;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+    .learnies-cta h2 em {
+      font-style: normal;
+      background: linear-gradient(95deg, var(--learny) 0%, var(--growny) 50%, var(--bizny) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .learnies-cta p {
+      color: var(--ink-2);
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+
+    /* sub-hero crumb */
+    .page-crumb {
+      display: inline-flex; flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--f-mono);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .page-crumb a { color: var(--muted); }
+    .page-crumb a:hover { color: var(--ink); }
+    .page-crumb .sep { opacity: 0.4; }
+
+    @media (max-width: 700px) {
+      .char-views { padding: 14px; }
+      .char-view-label { font-size: 9px; }
+    }
+  </style>
+  <style>
+    .learnies-hero {
+      padding-top: calc(var(--nav-h) + 88px);
+      background:
+        radial-gradient(58% 68% at 85% 18%, rgba(58,141,222,0.14), transparent 62%),
+        radial-gradient(45% 48% at 12% 82%, rgba(238,85,102,0.10), transparent 60%),
+        linear-gradient(180deg, #f8faff 0%, #fff 100%);
+    }
+    .learnies-hero h1 {
+      letter-spacing: 0 !important;
+      font-weight: 900;
+    }
+    .learnies-trio .trio-item,
+    .char,
+    .journey-step {
+      border-radius: 8px;
+      border: 1px solid rgba(10,11,13,0.08);
+      box-shadow: 0 26px 80px -60px rgba(10,11,13,0.46);
+    }
+    .learnies-trio .trio-item:hover,
+    .journey-step:hover {
+      box-shadow: 0 30px 90px -62px rgba(37,99,255,0.42);
+    }
+    .char-inner {
+      gap: clamp(34px, 6vw, 82px);
+    }
+    .char-visual,
+    .char-view-img {
+      border-radius: 8px;
+    }
+    .char-name {
+      letter-spacing: 0 !important;
+      font-weight: 900;
+    }
+    .char-quote,
+    .char-tags .tag {
+      border-radius: 999px;
+    }
+    .journey {
+      background:
+        radial-gradient(50% 60% at 90% 10%, rgba(110,140,255,0.14), transparent 58%),
+        #0a0b0d;
+    }
+    .learnies-cta {
+      background:
+        radial-gradient(60% 80% at 100% 0%, rgba(110,140,255,0.22), transparent 58%),
+        #0a0b0d;
+    }
+    .learnies-cta h2 {
+      letter-spacing: 0 !important;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body data-page="learnies">
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../index.html" aria-label="더와이랩 홈">
+        <img src="../shared/img/logo-blue.png" alt="더와이랩 THE WHHY LAB" />
+      </a>
+      <button id="menuTrigger" class="menu-trigger" type="button" aria-expanded="false" aria-controls="menuOverlay"><span class="menu-lines"><span></span><span></span></span>Menu</button>
+    </div>
+  </header>
+  <button id="menuClose" class="menu-close" type="button" aria-label="메뉴 닫기">닫기 ✕</button>
+  <aside id="menuOverlay" class="menu-overlay" aria-label="전체 메뉴"><div class="menu-inner"><div class="menu-eyebrow">THE WHHY LAB · 전체 메뉴</div><div class="menu-grid"><div class="menu-col active"><h4>회사 소개</h4><a href="../culture/index.html">Culture</a><a href="../mission/index.html">Mission</a><a href="../media/index.html">Media</a><a href="../learnies/index.html" class="current">러니즈</a></div><div class="menu-col"><h4>AI HRD</h4><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a><a href="../ai-hrd/index.html">AI HRD</a><a href="../ai-design-thinking/index.html">AI 디자인씽킹</a><a href="../work-hack-ai/index.html">Work Hack AI</a><a href="../open-k/index.html">Open K</a></div><div class="menu-col"><h4>AI 진로·탐구</h4><a href="../ai-program/index.html">AI 교육 프로그램</a><a href="../school-impact-lab/index.html">스쿨임팩트랩</a><a href="../highfly/index.html">하이플라이</a><a href="../ai-starter-lab/index.html">AI스타터랩</a><a href="../pathon-program/index.html">PathOn</a><a href="../reviews/index.html">교실 후기</a><a href="../whhy-explorer/index.html">탐구 위인 테스트</a></div><div class="menu-col"><h4>Library</h4><a href="../references/index.html">레퍼런스</a><a href="../instructors/index.html">열정강사</a><a href="../workshop-tools/index.html">워크숍 도구</a><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a></div><div class="menu-col"><h4>Join 더와이랩</h4><a href="../members-edu/index.html">교육멤버</a><a href="../members-seongsu/index.html">성수멤버</a></div></div><div class="menu-foot"><div class="menu-foot-left"><p>학습에서 실행까지, AI 전 과정을 연결합니다.</p><strong>지금 더와이랩과 함께 시작하세요.</strong></div><a class="menu-cta" href="../contact/">교육 문의 →</a><div class="menu-social"><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></div></div></div></aside>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="learnies-hero">
+      <div class="learnies-hero-inner">
+        <div>
+          <div class="page-crumb">
+            <a href="../index.html">홈</a>
+            <span class="sep">·</span><span>회사 소개</span>
+            <span class="sep">·</span><span>러니즈</span>
+          </div>
+          <h1>
+            우리의 교육 여정을 함께하는
+            <em><span class="h1-rainbow">러니즈 Learnies</span>를 소개합니다.</em>
+          </h1>
+          <p class="lede">강사로 성장하는 유니콘 3인방, <strong>러니 · 그로니 · 비즈니</strong>는 더와이랩의 마스코트이자, 모든 강사가 거쳐가는 성장 여정 자체입니다. 한 사람의 강사가 어떻게 콘텐츠 크리에이터로, 또 비즈니스 리더로 성장해 가는지, 그 길을 함께 그려갑니다.</p>
+
+          <div class="learnies-meta">
+            <div class="meta-item">
+              <div class="meta-num">3</div>
+              <div class="meta-label">캐릭터 · 성장 단계</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-num">15<span style="font-size:0.6em;">년+</span></div>
+              <div class="meta-label">강사 양성 노하우</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-num">∞</div>
+              <div class="meta-label">함께 성장하는 동료</div>
+            </div>
+          </div>
+        </div>
+        <div class="learnies-trio">
+          <div class="trio-item learny">
+            <span class="trio-tag">LEARNY</span>
+            <img src="img/learny-face.png" alt="러니" />
+          </div>
+          <div class="trio-item growny">
+            <span class="trio-tag">GROWNY</span>
+            <img src="img/growny-front.png" alt="그로니" />
+          </div>
+          <div class="trio-item bizny">
+            <span class="trio-tag">BIZNY</span>
+            <img src="img/bizny-front.png" alt="비즈니" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="learnies-why">
+      <div class="why-inner">
+        <div class="why-text">
+          <span class="eyebrow">01 · WHY LEARNIES</span>
+          <h2>강사의 성장에도 <em>단계</em>가 있습니다.</h2>
+          <p>처음 강의를 시작할 때의 설렘과 두려움. 어느 정도 익숙해진 뒤의 정체. 그리고 콘텐츠를 넘어 비즈니스를 고민해야 하는 순간까지, 모든 강사가 비슷한 길을 걷습니다.</p>
+          <p>러니즈는 그 여정의 세 단계를 캐릭터로 풀어낸 더와이랩의 마스코트입니다. <strong>러니, 그로니, 비즈니</strong> 세 친구는 각자의 위치에서 마주하는 고민과, 그 다음 걸음을 함께 그려갑니다.</p>
+        </div>
+        <div class="why-image">
+          <img src="img/learny-laptop.png" alt="러니가 노트북으로 작업하는 모습" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTER 1 - LEARNY -->
+    <section class="char learny">
+      <div class="char-inner">
+        <div class="char-visual">
+          <span class="char-emblem"><span class="dot"></span>CHARACTER 01</span>
+          <img src="img/learny-jump.png" alt="러니 (Learny)" />
+        </div>
+        <div class="char-content">
+          <div class="char-eyebrow">01 · GROWING STAGE</div>
+          <h2 class="char-name">러니 <span class="en">Learny</span></h2>
+          <p class="char-role">기초는 익혔고, 이젠 <strong>더 잘하고 싶은</strong> 성장러</p>
+          <p class="char-desc">러니는 강의 경력 <span class="accent">3~4년차의 성장형 강사</span>입니다. 수년간 현장에서 쌓은 경험 덕분에 웬만한 강의는 무리 없이 진행할 수 있지만, "더 잘하고 싶다"는 갈증은 여전히 큽니다.</p>
+          <p class="char-quote">"내 강의가 단순히 익숙한 게 아니라, 정말 좋은 강의일까?"</p>
+          <div class="char-tags">
+            <span class="tag">#실력 업그레이드</span>
+            <span class="tag">#강의 구조화</span>
+            <span class="tag">#커뮤니티</span>
+          </div>
+
+          <div class="char-views">
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/learny-face.png" alt="러니 정면" /></div>
+              <div class="char-view-label">FRONT</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/learny-jump.png" alt="러니 다이나믹" /></div>
+              <div class="char-view-label">ACTION</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/learny-laptop.png" alt="러니 작업" /></div>
+              <div class="char-view-label">@ WORK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTER 2 - GROWNY -->
+    <section class="char growny reverse">
+      <div class="char-inner">
+        <div class="char-content">
+          <div class="char-eyebrow">02 · SENIOR STAGE</div>
+          <h2 class="char-name">그로니 <span class="en">Growny</span></h2>
+          <p class="char-role">강의를 넘어, <strong>영향력</strong>을 고민하는 시니어 강사</p>
+          <p class="char-desc">그로니는 경험도 많고, 강의에 대한 평가도 나쁘지 않습니다. 하지만 늘 마음속에 질문 하나가 남아 있습니다.</p>
+          <p class="char-quote">"나는 과연 <span class="accent">좋은 강사</span>일까, 아니면 그냥 오래한 강사일까?"</p>
+          <p class="char-desc">자신만의 콘텐츠와 정체성을 구축하고 싶지만, 매일의 강의를 쳐내다 보면 그 작업은 늘 뒤로 밀립니다. 그로니에게 필요한 건 <span class="accent">멈춰 서서 자신을 정리할 시간</span>과 그 작업을 함께해 줄 동료입니다.</p>
+          <div class="char-tags">
+            <span class="tag">#콘텐츠 차별화</span>
+            <span class="tag">#브랜드 정체성</span>
+            <span class="tag">#커뮤니티</span>
+          </div>
+
+          <div class="char-views">
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/growny-front.png" alt="그로니 정면" /></div>
+              <div class="char-view-label">FRONT</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/growny-side.png" alt="그로니 옆모습" /></div>
+              <div class="char-view-label">SIDE</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/growny-coffee.png" alt="그로니 커피" /></div>
+              <div class="char-view-label">COFFEE</div>
+            </div>
+          </div>
+        </div>
+        <div class="char-visual">
+          <span class="char-emblem"><span class="dot"></span>CHARACTER 02</span>
+          <img src="img/growny-coffee.png" alt="그로니 (Growny)" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTER 3 - BIZNY -->
+    <section class="char bizny">
+      <div class="char-inner">
+        <div class="char-visual">
+          <span class="char-emblem"><span class="dot"></span>CHARACTER 03</span>
+          <img src="img/bizny-front.png" alt="비즈니 (Bizny)" />
+        </div>
+        <div class="char-content">
+          <div class="char-eyebrow">03 · BUSINESS STAGE</div>
+          <h2 class="char-name">비즈니 <span class="en">Bizny</span></h2>
+          <p class="char-role">콘텐츠를 넘어 <strong>비즈니스</strong>로 확장하는 대표 강사</p>
+          <p class="char-desc">비즈니는 단순히 '강의를 잘하는 사람'이 아닙니다. 자신의 철학을 콘텐츠로 풀어내고, 그 콘텐츠를 브랜드로 설계하며, 강의를 <span class="accent">지속 가능한 비즈니스</span>로 운영하는 대표 강사입니다.</p>
+          <p class="char-quote">"내 강의가 1회성 이벤트가 아니라, 계속 이어지는 흐름이 되려면?"</p>
+          <p class="char-desc">비즈니의 고민은 한 번의 좋은 강의를 넘어, 그것을 둘러싼 <span class="accent">생태계</span>를 어떻게 디자인할 것인가에 있습니다. 콘텐츠 IP, 고객 관계, 수익 모델 모두 비즈니의 영역입니다.</p>
+          <div class="char-tags">
+            <span class="tag">#콘텐츠 확장</span>
+            <span class="tag">#수익 구조화</span>
+            <span class="tag">#고객 관리</span>
+          </div>
+
+          <div class="char-views">
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/bizny-front.png" alt="비즈니 정면" /></div>
+              <div class="char-view-label">FRONT</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/bizny-side.png" alt="비즈니 옆모습" /></div>
+              <div class="char-view-label">SIDE</div>
+            </div>
+            <div class="char-view">
+              <div class="char-view-img"><img src="img/bizny-back.png" alt="비즈니 뒷모습" /></div>
+              <div class="char-view-label">BACK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="journey">
+      <div class="journey-inner">
+        <div class="journey-head">
+          <span class="eyebrow">04 · GROWTH JOURNEY</span>
+          <h2>모든 강사는 <em>러니에서 시작해, 비즈니로 향합니다.</em></h2>
+          <p>러니즈는 단순한 캐릭터가 아닙니다. 더와이랩이 강사 양성·코칭에서 발견한 강사 성장 여정의 세 단계, 그 자체입니다.</p>
+        </div>
+        <div class="journey-track">
+          <article class="journey-step learny">
+            <div class="journey-num">01</div>
+            <div class="who">LEARNY · 3~4년차</div>
+            <h3>실력을 다지는 단계</h3>
+            <p>강의에는 익숙해졌지만, 더 정교한 구조와 콘텐츠 설계가 필요한 시기. 또래 강사들과 함께 학습하며 빠르게 성장합니다.</p>
+          </article>
+          <article class="journey-step growny">
+            <div class="journey-num">02</div>
+            <div class="who">GROWNY · 5~10년차</div>
+            <h3>차별화를 만드는 단계</h3>
+            <p>'좋은 강사'를 넘어, '나만의 강의'를 만드는 단계. 콘텐츠 차별화와 개인 브랜드 정체성을 정리하는 데 집중합니다.</p>
+          </article>
+          <article class="journey-step bizny">
+            <div class="journey-num">03</div>
+            <div class="who">BIZNY · 10년차+</div>
+            <h3>비즈니스를 만드는 단계</h3>
+            <p>강의를 넘어 콘텐츠 IP·고객 관계·수익 모델을 설계하는 단계. 강사가 운영하는 작은 비즈니스를 함께 만듭니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="learnies-cta">
+      <div class="learnies-cta-inner">
+        <h2>당신은 지금 <em>러니즈의 어느 단계</em>에 있나요?</h2>
+        <p>러니즈는 더와이랩의 마스코트이자, 함께 성장하는 강사 동료들의 이름입니다.<br/>당신의 성장 단계가 어디든, 다음 한 걸음을 함께 그려갑니다.</p>
+        <div style="display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+          <a class="btn btn-primary" href="../members-edu/index.html">교육 문의 <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="../instructors/index.html">열정강사 보기 <span class="arr">→</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <div class="foot-hero">
+      <h2>학습에서 실행까지<br/>AI 활용의 전 과정을 연결합니다.</h2>
+      <div class="right">
+        <p>기업 교육부터 학생 진로·탐구까지,<br/>사람 중심 AI 교육의 표준을 만듭니다.</p>
+        <a class="btn" style="background:#fff;color:#0a0b0d;" href="../members-edu/index.html">교육 문의 <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <div>
+        <div class="foot-brand"><img src="../shared/img/logo-blue.png" alt="더와이랩" /></div>
+        <p>THE WHHY LAB, 사람 중심 AI 교육 기업.</p>
+        <address class="foot-biz">
+<span>주식회사 더와이랩 (The Whhy Lab Inc.) · 대표 김홍태</span>
+<span>사업자등록번호 446-87-00395</span>
+<span>서울특별시 성동구 성수일로99, 서울숲AK밸리 1510호</span>
+<span>T. <a href="tel:0224683555">02-468-3555</a> · E. <a href="mailto:master@thewhhylab.com">master@thewhhylab.com</a></span>
+</address>
+
+      </div>
+      <div><h5>회사 소개</h5><ul>
+        <li><a href="../culture/index.html">Culture</a></li>
+        <li><a href="../mission/index.html">Mission</a></li>
+        <li><a href="../media/index.html">Media</a></li>
+        <li><a href="../learnies/index.html">러니즈</a></li>
+      </ul></div>
+      <div><h5>프로그램</h5><ul>
+        <li><a href="../ai-hrd/index.html">AI HRD</a></li>
+        <li><a href="../ai-program/index.html">AI 교육 프로그램</a></li>
+        <li><a href="../ai-starter-lab/index.html">AI스타터랩</a></li>
+        <li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li>
+      </ul></div>
+      <div><h5>Connect</h5><ul>
+        <li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li>
+        <li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="../members-edu/index.html">교육멤버</a></li>
+      </ul></div>
+    </div>
+    <div class="copyright"><span>© 2016—2026 THE WHHY LAB</span><span>www.thewhhylab.com · 02-468-3555 · master@thewhhylab.com</span></div>
+  </footer>
+  <script src="../shared/js/site.js"></script>
+</body>
+</html>
+

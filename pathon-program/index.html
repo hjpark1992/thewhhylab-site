@@ -1,0 +1,210 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>PathOn 패스온 · 더와이랩</title>
+<meta name="description" content="PathOn(패스온) — 고등학생이 대화로 진로를 찾는 AI 진로 탐색 챗봇. 관심 분야부터 직업·전공·선택과목까지, 학교 교육과정에 맞춘 개인별 맞춤 분석 리포트를 제공합니다."/>
+<meta name="theme-color" content="#38855b"/>
+<link rel="canonical" href="https://www.thewhhylab.com/pathon-program/"/>
+<link rel="icon" type="image/svg+xml" href="../shared/img/favicon.svg"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="PathOn 패스온 · 더와이랩"/>
+<meta property="og:description" content="고등학생이 대화로 진로를 찾는 AI 진로 탐색 챗봇. 학교 교육과정에 맞춘 개인별 맞춤 분석 리포트 제공."/>
+<meta property="og:url" content="https://www.thewhhylab.com/pathon-program/"/>
+<meta property="og:image" content="https://www.thewhhylab.com/pathon-program/img/pathon-symbol.png"/>
+<meta property="og:site_name" content="더와이랩 THE WHHY LAB"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="PathOn 패스온 · 더와이랩"/>
+<meta name="twitter:description" content="고등학생이 대화로 진로를 찾는 AI 진로 탐색 챗봇. 학교 교육과정 맞춤 분석 리포트 제공."/>
+<meta name="twitter:image" content="https://www.thewhhylab.com/pathon-program/img/pathon-symbol.png"/>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/></noscript>
+<link rel="stylesheet" href="../shared/css/site.css"/><style>
+[data-page="pathon"] {
+  --p-1: #2c6c49; --p-1-soft: #d7ebe0; --p-1-ink: #19402d;
+  --p-2: #38855b; --p-2-soft: #eef6f1; --p-2-ink: #21533a;
+  --p-3: #54a37c; --p-3-soft: #e9f4ee; --p-3-ink: #2c6c49;
+}
+/* PathOn 로고 마크 (about) */
+.pathon-mark { display:flex; align-items:center; gap:18px; margin-bottom:28px; flex-wrap:wrap; }
+.pathon-mark img { height:46px; width:auto; }
+.pathon-mark .pm-tag { font-size:13px; font-weight:600; color:var(--p-2);
+  background:var(--p-2-soft); border-radius:999px; padding:6px 14px; letter-spacing:.01em; }
+/* 관심 분야 칩 그리드 */
+.field-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+@media (min-width:680px){ .field-grid { grid-template-columns:repeat(2,1fr); } }
+@media (min-width:980px){ .field-grid { grid-template-columns:repeat(3,1fr); } }
+.field-card { border:1px solid var(--line-soft,#e7ece9); border-radius:16px; padding:22px 22px 20px;
+  background:#fff; transition:transform .18s ease, box-shadow .18s ease; }
+.field-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(16,32,26,.10); }
+.field-emoji { font-size:30px; line-height:1; display:block; margin-bottom:12px; }
+.field-name { font-size:17px; font-weight:700; color:var(--ink,#10201a); margin:0 0 6px; }
+.field-desc { font-size:14px; line-height:1.6; color:var(--ink-500,#66756d); margin:0; }
+/* 리포트 미리보기 갤러리 */
+.report-show { display:grid; grid-template-columns:1fr; gap:26px; align-items:start; }
+@media (min-width:920px){ .report-show { grid-template-columns:0.92fr 1.08fr; gap:40px; } }
+.report-cover-wrap { position:relative; }
+.report-cover-wrap img { width:100%; height:auto; border-radius:14px;
+  box-shadow:0 24px 60px rgba(16,32,26,.18); border:1px solid rgba(16,32,26,.06); }
+.report-pages { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-content:start; }
+.report-pages img { width:100%; height:auto; border-radius:10px;
+  box-shadow:0 10px 26px rgba(16,32,26,.12); border:1px solid rgba(16,32,26,.06); }
+.report-note { margin-top:22px; font-size:13px; color:var(--ink-400,#8a9991); }
+.report-points { list-style:none; padding:0; margin:22px 0 0; display:grid; gap:12px; }
+.report-points li { position:relative; padding-left:26px; font-size:15px; line-height:1.6; color:var(--ink-700,#33433b); }
+.report-points li::before { content:""; position:absolute; left:0; top:9px; width:9px; height:9px;
+  border-radius:50%; background:var(--p-2); }
+</style>
+</head>
+<body data-page="pathon"><header class="nav"><div class="nav-inner"><a class="brand" href="../index.html"><img src="../shared/img/logo-blue.png" alt="더와이랩" /></a>
+<button id="menuTrigger" class="menu-trigger" type="button" aria-expanded="false" aria-controls="menuOverlay"><span class="menu-lines"><span></span><span></span></span>Menu</button></div></header>
+<button id="menuClose" class="menu-close" type="button" aria-label="메뉴 닫기">닫기 ✕</button>
+<aside id="menuOverlay" class="menu-overlay" aria-label="전체 메뉴"><div class="menu-inner"><div class="menu-eyebrow">THE WHHY LAB · 전체 메뉴</div><div class="menu-grid"><div class="menu-col"><h4>회사 소개</h4><a href="../culture/index.html">Culture</a><a href="../mission/index.html">Mission</a><a href="../media/index.html">Media</a><a href="../learnies/index.html">러니즈</a></div><div class="menu-col"><h4>AI HRD</h4><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery<span class="ext">↗</span></a><a href="../ai-hrd/index.html">AI HRD</a><a href="../ai-design-thinking/index.html">AI 디자인씽킹</a><a href="../work-hack-ai/index.html">Work Hack AI</a><a href="../open-k/index.html">Open K</a></div><div class="menu-col active"><h4>AI 진로·탐구</h4><a href="../ai-program/index.html">AI 교육 프로그램</a><a href="../school-impact-lab/index.html">스쿨임팩트랩</a><a href="../highfly/index.html">하이플라이</a><a href="../ai-starter-lab/index.html">AI스타터랩</a><a href="../pathon-program/index.html" class="current">PathOn</a><a href="../reviews/index.html">교실 후기</a><a href="../whhy-explorer/index.html">탐구 위인 테스트</a></div><div class="menu-col"><h4>Library</h4><a href="../references/index.html">레퍼런스</a><a href="../instructors/index.html">열정강사</a><a href="../workshop-tools/index.html">워크숍 도구</a><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram<span class="ext">↗</span></a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog<span class="ext">↗</span></a></div><div class="menu-col"><h4>Join 더와이랩</h4><a href="../members-edu/index.html">교육멤버</a><a href="../members-seongsu/index.html">성수멤버</a></div></div><div class="menu-foot"><div class="menu-foot-left"><p>학습에서 실행까지, AI 전 과정을 연결합니다.</p><strong>지금 더와이랩과 함께 시작하세요.</strong></div><a class="menu-cta" href="../contact/">교육 문의 →</a><div class="menu-social"><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></div></div></div></aside><main id="top">
+<section class="p-hero">
+  <div class="p-hero-inner">
+    <div class="p-crumb"><a href="../index.html">Home</a><span class="sep">/</span><span>AI 진로·탐구</span><span class="sep">/</span><span>PathOn</span></div>
+    <div class="p-tag"><span class="pulse"></span>PATHON · 고등학생 AI 진로 탐색</div>
+    <h1>막막한 진로,<br/><span class="rain">대화로 길을 찾다.</span></h1>
+    <p class="lede">PathOn(패스온)은 고등학생이 관심 분야부터 직업·전공·선택과목까지 한 단계씩 짚어가며 스스로 진로를 설계하는 대화형 AI 진로 탐색 챗봇입니다. 탐색이 끝나면 학생 한 명 한 명에게 맞춤 분석 리포트가 제공됩니다.</p>
+    <dl class="p-stats cols-3">
+      <div class="p-stat"><dt>대상</dt><dd>고등학생</dd></div><div class="p-stat"><dt>방식</dt><dd>대화형 AI 챗봇</dd></div><div class="p-stat"><dt>운영</dt><dd>학교 맞춤</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 프로그램 개요 -->
+<section class="section reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">01 · ABOUT</span><h2 class="section-title">대화로 풀어가는 <em>진로 탐색</em></h2></div>
+<div class="pathon-mark">
+  <img src="img/pathon-logo.png" alt="PathOn 패스온" />
+  <span class="pm-tag">AI 진로 탐색 챗봇</span>
+</div>
+<div class="concept-summary" style="text-align:left;">
+PathOn은 고등학생이 <strong>'관심 분야 → 세부 분야 → 직업 → 전공(학과) → 추천 선택과목 → 자유 진로상담'</strong>을 한 단계씩 짚어가며 자기 진로를 설계하도록 돕는 모바일 친화 AI 진로 탐색 챗봇입니다.<br/><br/>
+친근한 대화로 학생의 흥미와 강점을 자연스럽게 끌어내고, 마지막에는 <strong>우리 학교 교육과정에 맞춘 선택과목</strong>까지 연결해 진로 고민이 실제 과목 선택으로 이어지도록 설계했습니다.
+</div>
+</div></section>
+
+<!-- 프로그램 특징 -->
+<section class="section soft reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">02 · FEATURES</span><h2 class="section-title">PathOn이 다른 이유</h2></div>
+<div class="feature-grid cols-3">
+  <article class="feature-card brand">
+    <span class="feature-num">01</span>
+    <h3 class="feature-title">지어내지 않는 AI</h3>
+    <p class="feature-desc">추천 학과·선택과목은 대입 및 교육과정 전문가의 검수를 거친 RAG 방식으로 안내합니다. 존재하지 않는 학과나 과목을 만들어내지 않아, 학생이 잘못된 정보를 받을 일이 없습니다.</p>
+  </article>
+  <article class="feature-card tinted">
+    <span class="feature-num">02</span>
+    <h3 class="feature-title">단계별 탐색 + 자유 대화</h3>
+    <p class="feature-desc">분야부터 과목까지 차근차근 짚어가는 가이드와, 학생의 궁금증에 맞춰 맥락을 이어받아 답하는 자유 상담을 함께 제공합니다.</p>
+  </article>
+  <article class="feature-card tinted">
+    <span class="feature-num">03</span>
+    <h3 class="feature-title">우리 학교 교육과정 연동</h3>
+    <p class="feature-desc">학생이 고른 학과의 추천 선택과목을 우리 학교의 교육과정 편제 안에서만 안내합니다. 진로와 실제 과목 선택이 끊김 없이 이어집니다.</p>
+  </article>
+</div>
+</div></section>
+
+<!-- 탐색 5단계 -->
+<section class="section reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">03 · JOURNEY</span><h2 class="section-title">학생이 걷는 <em>5단계 진로 여정</em></h2>
+<p class="section-lede"><span class="col-tag">대화형 단계 탐색</span> · 모바일에서 누구나 쉽게</p>
+</div>
+<div style="overflow-x:auto;">
+<table class="curri-table">
+  <thead><tr><th>단계</th><th>학생이 하는 것</th><th>얻게 되는 것</th></tr></thead>
+  <tbody>
+    <tr><td class="col-name">관심 분야 선택</td><td>5개 분야 중 설명을 보고 흥미가 가는 분야를 고릅니다.</td><td>막연한 흥미를 진로 탐색의 출발점으로 구체화</td></tr>
+    <tr><td class="col-name">세부 분야 좁히기</td><td>고른 분야 안에서 더 관심 가는 세부 영역으로 들어갑니다.</td><td>흥미의 방향을 한층 또렷하게 정리</td></tr>
+    <tr><td class="col-name">직업 탐색</td><td>직업사전으로 하는 일·전망·대표 분야·관련 학과를 살펴봅니다.</td><td>직업을 '느낌'이 아닌 정보로 이해</td></tr>
+    <tr><td class="col-name">전공·학과 연결</td><td>관심 직업과 이어지는 전공·학과를 확인합니다.</td><td>진로와 진학을 잇는 경로 발견</td></tr>
+    <tr><td class="col-name">선택과목 + 자유상담</td><td>우리 학교 교육과정 기반 추천 과목을 받고 자유롭게 질문합니다.</td><td>당장 실천할 수 있는 과목 선택 가이드</td></tr>
+  </tbody>
+</table>
+</div>
+</div></section>
+
+<!-- 5개 관심 분야 -->
+<section class="section soft reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">04 · FIELDS</span><h2 class="section-title">5개 관심 분야로 시작</h2>
+<p class="section-lede">어려운 진로 검사 대신, 가볍게 흥미를 고르는 것에서 출발합니다.</p>
+</div>
+<div class="field-grid">
+  <div class="field-card"><span class="field-emoji">🧠</span><p class="field-name">인문사회</p><p class="field-desc">말·글·사람·사회·역사 — 사람과 사회에 대한 이야기를 다루는 분야</p></div>
+  <div class="field-card"><span class="field-emoji">💼</span><p class="field-name">경영경제</p><p class="field-desc">돈·회사·전략 — 돈이 어떻게 움직이고 조직을 어떻게 이끄는지 배우는 분야</p></div>
+  <div class="field-card"><span class="field-emoji">🔬</span><p class="field-name">자연과학</p><p class="field-desc">수·자연·생명·실험 — 세상과 자연의 원리를 깊이 파고드는 분야</p></div>
+  <div class="field-card"><span class="field-emoji">⚙️</span><p class="field-name">응용과학</p><p class="field-desc">기술·코딩·기계·의학 — 과학을 실제 기술로 써먹는 분야</p></div>
+  <div class="field-card"><span class="field-emoji">🎨</span><p class="field-name">예체능·뷰티·푸드</p><p class="field-desc">감각·몸·기술로 사람들에게 즐거움과 편리함을 주는 분야</p></div>
+</div>
+</div></section>
+
+<!-- 맞춤 분석 리포트 -->
+<section class="section reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">05 · REPORT</span><h2 class="section-title">학생마다 받는 <em>맞춤 분석 리포트</em></h2>
+<p class="section-lede">대화가 끝나면 끝이 아닙니다. 탐색 과정을 학생별 리포트로 정리해 전달합니다.</p>
+</div>
+<div class="report-show">
+  <div class="report-cover-wrap">
+    <img src="img/report-cover.png" alt="PathOn 개인 맞춤 분석 리포트 표지 예시" loading="lazy" />
+  </div>
+  <div>
+    <p style="font-size:16px;line-height:1.7;color:var(--ink-700,#33433b);margin:0 0 4px;">학생 한 명 한 명의 대화를 바탕으로, 흥미가 어떻게 흘러갔는지부터 추천 직업·학과, 학교 교육과정 기반 추천 과목, 그리고 다음에 무엇을 해보면 좋을지까지 한 권으로 정리해 드립니다.</p>
+    <ul class="report-points">
+      <li>탐색 흐름 요약 — 어떤 분야에서 어떤 관심으로 이어졌는지</li>
+      <li>진로 관심 분석 — 대화에서 드러난 강점과 성향</li>
+      <li>전공·학과별 추천 — 관심 직업과 연결되는 진학 경로</li>
+      <li>학교 교육과정 기반 추천 선택과목</li>
+      <li>맞춤 실천 제안과 응원 메시지</li>
+    </ul>
+    <div class="report-pages" style="margin-top:24px;">
+      <img src="img/report-p1.png" alt="PathOn 분석 리포트 내지 예시 1" loading="lazy" />
+      <img src="img/report-p2.png" alt="PathOn 분석 리포트 내지 예시 2" loading="lazy" />
+      <img src="img/report-p3.png" alt="PathOn 분석 리포트 내지 예시 3" loading="lazy" />
+    </div>
+    <p class="report-note">* 실제 제공 리포트 예시입니다. 학생 개인정보와 상세 내용은 비공개 처리했습니다.</p>
+  </div>
+</div>
+</div></section>
+
+<!-- 운영 정보 -->
+<section class="section soft reveal"><div class="section-wrap">
+<div class="section-head"><span class="eyebrow">06 · OPERATIONS</span><h2 class="section-title">학교 운영을 위한 설계</h2></div>
+<div class="feature-grid cols-2">
+  <article class="feature-card tinted">
+    <h3 class="feature-title">어디서나 접속</h3>
+    <p class="feature-desc">학생의 휴대폰·태블릿·PC 어디서나 웹으로 바로 접속해 말풍선 대화로 진행합니다. '홈 화면에 추가'(PWA)로 앱처럼 쓸 수 있습니다.</p>
+  </article>
+  <article class="feature-card tinted">
+    <h3 class="feature-title">접속 코드로 안전하게</h3>
+    <p class="feature-desc">학교 전용 접속 코드를 입력해야 시작됩니다. 외부 무단 사용을 막고, 코드는 필요할 때 손쉽게 변경할 수 있습니다.</p>
+  </article>
+</div>
+</div></section>
+
+<section class="section soft"><div class="section-wrap"><div class="cta-card">
+<h3>PathOn <em>학교 도입</em>을 문의하세요.</h3>
+<div class="cta-right">
+<p>유료 프로그램으로, 학교 상황에 맞춰 안내해 드립니다.</p>
+<a class="btn" style="background:#fff;color:#0a0b0d;" href="../contact/">문의하기 <span class="arr">→</span></a>
+</div></div></div></section>
+
+</main><footer class="site-foot">
+<div class="foot-hero"><h2>학습에서 실행까지<br/>AI 활용의 전 과정을 연결합니다.</h2>
+<div class="right"><p>기업 교육부터 학생 진로·탐구까지,<br/>사람 중심 AI 교육의 표준을 만듭니다.</p>
+<a class="btn" style="background:#fff;color:#0a0b0d;" href="../contact/">문의하기 <span class="arr">→</span></a></div></div>
+<div class="foot">
+<div><div class="foot-brand"><img src="../shared/img/logo-blue.png" alt="더와이랩" /></div>
+<p>THE WHHY LAB, 사람 중심 AI 교육 기업.</p>
+<address class="foot-biz">
+<span>주식회사 더와이랩 (The Whhy Lab Inc.) · 대표 김홍태</span>
+<span>사업자등록번호 446-87-00395</span>
+<span>서울특별시 성동구 성수일로99, 서울숲AK밸리 1510호</span>
+<span>T. <a href="tel:0224683555">02-468-3555</a> · E. <a href="mailto:master@thewhhylab.com">master@thewhhylab.com</a></span>
+</address>
+</div>
+<div><h5>회사 소개</h5><ul><li><a href="../culture/index.html">Culture</a></li><li><a href="../mission/index.html">Mission</a></li><li><a href="../media/index.html">Media</a></li><li><a href="../learnies/index.html">러니즈</a></li></ul></div>
+<div><h5>프로그램</h5><ul><li><a href="../ai-hrd/index.html">AI HRD</a></li><li><a href="../ai-program/index.html">AI 교육 프로그램</a></li><li><a href="../ai-starter-lab/index.html">AI스타터랩</a></li><li><a href="https://thewhhylab.ai.kr/AX_Discovery/" target="_blank" rel="noopener">AX Discovery</a></li></ul></div>
+<div><h5>Connect</h5><ul><li><a href="https://www.instagram.com/thewhhylab_unicorn/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://blog.naver.com/cstartunicorn" target="_blank" rel="noopener">Naver blog</a></li><li><a href="https://www.youtube.com/@cstart_thewhhylab" target="_blank" rel="noopener">YouTube</a></li><li><a href="../members-edu/index.html">교육멤버</a></li></ul></div></div>
+<div class="copyright"><span>© 2016—2026 THE WHHY LAB</span><span>www.thewhhylab.com · 02-468-3555 · master@thewhhylab.com</span></div></footer>
+<script src="../shared/js/site.js"></script></body></html>
