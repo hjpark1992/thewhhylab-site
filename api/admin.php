@@ -6,7 +6,12 @@
  * 보안: 아이디+비번 로그인, IP별 5회 실패 10분 잠금, 세션 비활성 타임아웃, CSRF 토큰(모든 POST), PDO prepared, 업로드 경로 검증.
  * 파일: admin.php(로직) + admin.css + admin.js. 접속: /admin 또는 /api/admin.php
  */
-if (isset($_GET['debug'])) { ini_set('display_errors', '1'); error_reporting(E_ALL); }
+// 세션 쿠키: 스크립트 접근 차단(httponly), HTTPS 전용(secure), 외부 사이트발 요청에 안 실림(samesite)
+session_set_cookie_params([
+  'httponly' => true,
+  'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+  'samesite' => 'Lax',
+]);
 session_start();
 
 $base = __DIR__;
@@ -14,7 +19,8 @@ $cfgFile = $base . '/config.php';
 if (!is_file($cfgFile)) { http_response_code(500); exit('config.php 가 필요합니다.'); }
 $cfg = require $cfgFile;
 $adminUser = (string)($cfg['admin_user'] ?? '');
-$adminPass = (string)($cfg['admin_pass'] ?? '');
+$adminPass = (string)($cfg['admin_pass'] ?? '');           // 평문(이전 방식). admin_pass_hash 가 있으면 쓰지 않는다
+$adminPassHash = (string)($cfg['admin_pass_hash'] ?? '');  // password_hash() 결과
 $self = strtok($_SERVER['REQUEST_URI'] ?? 'admin.php', '?'); if ($self === '') $self = 'admin.php';
 $assetBase = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/api/admin.php')), '/'); // /admin 리라이트여도 /api 기준으로 css/js 로드
 
@@ -64,9 +70,11 @@ if (isset($_POST['pw'])) {
   if ($loginLocked) {
     $err = "시도가 많아 잠겼습니다. 약 {$loginLockLeft}분 후 다시 시도하세요.";
     usleep(600000);
-  } elseif ($adminUser !== '' && $adminPass !== ''
+  } elseif ($adminUser !== '' && ($adminPassHash !== '' || $adminPass !== '')
             && hash_equals($adminUser, (string)($_POST['user'] ?? ''))
-            && hash_equals($adminPass, (string)$_POST['pw'])) {
+            && ($adminPassHash !== ''
+                ? password_verify((string)$_POST['pw'], $adminPassHash)
+                : hash_equals($adminPass, (string)$_POST['pw']))) {
     login_lock_clear($loginLockFile, $loginKey);
     session_regenerate_id(true);
     $_SESSION['twl_admin'] = true;
@@ -112,7 +120,7 @@ if (!$authed) {
     <label class="login-field"><span>비밀번호</span><input type="password" name="pw" autocomplete="current-password" required></label>
     <button type="submit" class="login-btn"<?= $loginLocked ? ' disabled' : '' ?>>로그인</button>
     <div class="login-err"><?php
-      if ($adminUser === '' || $adminPass === '') echo 'config.php에 admin_user / admin_pass 를 설정하세요.';
+      if ($adminUser === '' || ($adminPassHash === '' && $adminPass === '')) echo 'config.php에 admin_user / admin_pass_hash 를 설정하세요.';
       elseif ($loginLocked) echo h("로그인이 잠겼습니다. 약 {$loginLockLeft}분 후 다시 시도하세요.");
       elseif ($sessionTimedOut) echo '세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요.';
       else echo h($err);
@@ -134,7 +142,7 @@ function json_out($arr) { header('Content-Type: application/json; charset=UTF-8'
 require $base . '/lib/db.php';
 require $base . '/lib/schema.php';
 try { $pdo = db_connect($cfg['db']); }
-catch (Throwable $e) { http_response_code(500); exit('DB 접속 오류: ' . h($e->getMessage())); }
+catch (Throwable $e) { error_log('[admin] DB 접속 오류: ' . $e->getMessage()); http_response_code(500); exit('DB 접속 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'); }
 
 $uploadDir = $cfg['upload_dir'] !== '' ? rtrim($cfg['upload_dir'], '/\\') : ($base . '/uploads');
 
