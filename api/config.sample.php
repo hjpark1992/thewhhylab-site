@@ -8,9 +8,13 @@ return [
     'pass' => 'DB_PASS',
     'charset' => 'utf8mb4',
   ],
-  // 관리자 로그인 (admin.php) — 아이디 + 비밀번호. 실제 값으로 바꾸세요.
-  'admin_user' => 'admin',
-  'admin_pass' => 'CHANGE_ME_강력한비밀번호',
+  // 관리자 로그인 (admin.php) — 아이디 + 비밀번호 해시. 실제 값으로 바꾸세요.
+  // 아이디는 admin 같은 흔한 값을 쓰지 않는다.
+  'admin_user' => 'CHANGE_ME_아이디',
+  // 비밀번호는 평문 대신 해시로 둔다. 만드는 법: php _private/make_admin_hash.php (입력한 비번의 해시를 출력)
+  'admin_pass_hash' => '',
+  // (이전 방식) 평문 비밀번호. admin_pass_hash 를 채우면 무시된다. 해시로 바꾼 뒤 이 줄은 지운다.
+  // 'admin_pass' => '',
   // 자동 로그아웃: 마지막 활동 후 이 초(sec)가 지나면 세션 만료 (기본 1800 = 30분)
   'admin_session_timeout' => 1800,
   // 알림 수신 메일

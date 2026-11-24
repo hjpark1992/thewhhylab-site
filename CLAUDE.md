@@ -300,3 +300,11 @@ AX는 자간이 A4 레이아웃에 직결돼 있어서, 이게 걸리자 h1이 `
 - 어드민 v2 라이브 배포(`/api/admin.php·css·js`) 완료, 사용자 확인 "잘된 것 같다". 라이브 로그인 자동 점검은 로컬 config.php의 admin_pass가 서버와 달라 실패(남은 시도 4회 소모) → 라이브 검증은 사용자 화면 확인으로 대체.
 - 피드백 반영(`_private/admin-v2-tweaks.js`): 사이드바에 회사 워드마크(흰색 반전)+심볼(favicon.png) / 접수번호·지원자 열 190px 고정, 내용 열 확대 / 행 아무 데나 클릭 → 상세(입력 요소 제외) / 상세 패널 560→860px, 3열 / 강사지원 '경력·강의' 6항목 한 줄씩(`wide`). 로컬 21항목 회귀 + 신규 6항목 PASS 후 재배포.
 - **AX INSIGHT LAB**(https://ax-insight-lab.beehiiv.com/) 외부 링크를 메뉴 Library 열(워크숍 도구 다음)·푸터 Connect 열(맨 위)에 추가 — 운영 27페이지 + 리뉴얼본 파셜·27페이지(`_private/add-insight-lab.js`, 파일별 2회 assert). 운영분 배포 완료(27개 서버==HEAD 대조 후).
+### 2026-11-24 — 관리자 페이지 보안 보강 (로컬 완료, 서버 미반영)
+- 사용자 요청(PHP 보안 점검 후 "막아줘/지워줘/설정해줘"). 서버 PHP는 8.4.
+- `api/admin.php`: ① `?debug` 로 오류 표시를 켜던 줄 삭제 ② 세션 쿠키 `httponly`·`samesite=Lax`·HTTPS면 `secure` ③ 비밀번호 해시 지원 — `admin_pass_hash`(password_verify)가 있으면 그것만 쓰고 평문 `admin_pass`는 무시, 해시가 없으면 기존 평문 방식 그대로(전환기 호환) ④ DB 접속 실패 시 예외 원문 대신 일반 문구 + `error_log`.
+- `api/config.sample.php`: `admin_pass_hash` 항목, 아이디 기본값 `admin` 제거.
+- `_private/make_admin_hash.php`(로컬 전용, 비추적): `php _private/make_admin_hash.php` → 비번 입력 → 해시 한 줄 출력.
+- 검증: `php -l` 3파일 통과, 격리 폴더 `php -S` 스모크 13항목 PASS(쿠키 플래그·틀린 비번·해시 있을 때 평문 거부·해시 로그인 302·DB 실패 일반 문구·평문 호환·미설정 안내·해시 도구).
+- 배포 순서: ① 코드 반영(main 보호 → PR → 병합 → 자동 배포) ② 관리자 로그인 확인 ③ `make_admin_hash.php`로 해시 생성 → 서버 `api/config.php`에 `'admin_pass_hash' => '...'` 추가, `'admin_pass'` 줄 삭제 ④ 다시 로그인 확인. ②에서 막히면 코드만 되돌리면 된다(설정은 아직 그대로라).
+- 보안 습관 체크리스트는 `../AX-Discovery/CLAUDE.md` 5절(회사 공통)에 추가했다. 이 저장소 PHP도 같은 기준.
